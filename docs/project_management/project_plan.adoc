@@ -7,21 +7,139 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Einführung
 //Kurze Beschreibung und Überblick zum Dokument.
+Der Projektplan bietet Überblick darüber, wie unser Projekt aufgebaut ist und abläuft. Er hält fest, wie wir im Team zusammenarbeiten, wer welche Aufgaben übernimmt, welche Tools wir verwenden und wie unsere Sprints organisiert sind. 
 
 
 == Projektorganisation
 //Introduce the project team, team members, and roles that they play during this project. If applicable, introduce work areas, domains, or technical work packages that are assigned to team members. Introduce neighboring projects, relationships, and communication channels. If the project is introduced somewhere else, reference that location with a link.
 
+=== Teammitglieder und Rollen
+[cols="1,2,4"]
+|===
+| **Name** | **Rolle** | **Zuständigkeitsbereiche**
+|Florian    |   Architektur | Entwicklung, technische Umsetzung, Qualitätssicherung, Architekturkonzept 
+|Moritz     |   Architektur | Entwicklung, technische Umsetzung, Qualitätssicherung, Architekturkonzept 
+|Pierre     |   User Stories + Product Owner typische Aufgaben | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
+|Nicola     |   User Stories + Product Owner typische Aufgaben + Stellvertretende Projektleitung | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
+|Matthias   |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|Patrick    |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|Han        |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|Kirill     |   Backend + Tests | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|Lara       |   Backend + Scrum Master typische Aufgaben + Projektleitung | Entwicklung, Moderation der Meetings, Koordination, Teamkommunikation, Stakeholder-Kommunikation 
+|Kevin      |   Backend | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|Benjamin   |   Backend | Entwicklung, technische Umsetzung, Qualitätssicherung 
+|===
+
+
+=== Iterationsstruktur
+--
+* **Sprintdauer:** 4 Wochen
+* **Refinement:** Jeweils zu Sprintbeginn, 1 Stunde
+* **Sprint Planning:** Jeweils zu Sprintbeginn, 1 Stunde
+* **Weekly:** Jeden Dienstag, 15 Minuten
+* **Sprint Review:** Jeweils zu Sprintende, 1 Stunde
+* **Sprint Retro:** Jeweils zu Sprintende, 30 Minuten
+--
+
+
+=== Verwendete Tools
+[cols="2,1"]
+|===
+| **Zweck**                 | **Tool**
+| Aufgaben- und Projektkoordination | GitHub Projects  
+| Quellcodeverwaltung               | GitHub            
+| Dokumentation                     | GitHub  
+| Kommunikation                     | Discord 
+| Terminabstimmung & Planung        | Discord    
+|===
+
 
 == Praktiken und Bewertung
 //Describe or reference which management and technical practices will be used in the project, such as iterative development, continuous integration, independent testing and list any changes or particular configuration to the project. Specify how you will track progress in each practice. As an example, for iterative development the team may decide to use iteration assessments and iteration burndown reports and collect metrics such as velocity (completed work item points/ iteration).
 
+Im Projekt kommen verschiedene technische und organisatorische Praktiken zum Einsatz, um Codequalität, Zusammenarbeit und Projektfortschritt sicherzustellen:
+=== Way of working
+==== Aktuell angewandte Praktiken
+--
+* **Inkrementelle Entwicklung:**  
+  Die Umsetzung erfolgt in kleinen, abgeschlossenen Teilinkrementen, die am Ende jedes Sprints funktionsfähig und testbar sind.
+
+* **Meetings:**  
+  Alle Scrum-Meetings wie Sprint Planning, Weekly, Sprint Review und Retro finden regelmäßig mit festgelegter Dauer statt.  
+  Meeting-Notizen werden zentral in GitHub dokumentiert.
+  Die Verwendung von Templates sorgt für eine einheitliche und strukturierte Dokumentation.
+
+* **Quellcodeverwaltung mit GitHub:**  
+  GitHub wird für die Versionierung und das Review von Codeänderungen genutzt.
+
+* **Testing:**  
+  Funktionstests erfolgen durch die Entwickler selbst. Ergebnisse werden im Review vorgestellt.
+
+* **Produkt-Demonstration:**  
+  Funktionierende Teilprodukte werden regelmäßig im Sprint Review demonstriert.
+
+* **Zusammenarbeit und Kommunikation:**  
+  Der Austausch erfolgt hauptsächlich über Discord.
+
+* **Branching-Modell:**
+  Einführung von Branches zur besseren  Qualitätssicherung des Codes. 
+--
+
+==== Geplante Methoden
+Die folgenden Methoden sollen im weiteren Projektverlauf angewendet werden:
+--
+
+--
+
 
 === Definition of Ready
 // Listen Sie hier die Kriterien auf, die ein Product Backlog Item (z.B. User Story) erfüllen muss, damit es bei der Sprint-Planung berücksichtigt werden kann
+--
+1. Beschreibung
+* Die User Story ist klar und verständlich formuliert
+* Ziel des Items sind ersichtlich
+
+2. Akzeptanzkriterien
+* Konkrete und überprüfbare Akzeptanzkriterien sind definiert
+
+3. Abhängigkeiten
+* Abhängigkeiten zu anderen Stories sind dokumentiert
+
+4. Schätzung
+* Das Item ist vom Team geschätzt (Aufwandschätzung)
+* Item ist in einem Sprint realistisch umsetzbar
+
+5. UI/UX 
+* Notwendige Wireframes oder Designvorgaben liegen vor
+
+6. Technische Klarheit
+* Technische Umsetzung ist grob geklärt
+* Keine offenen technischen Blocker
+--
+
 
 === Definition of Done
 // Listen Sie hier alle Kritierien auf, damit die Aufgabe eines bestimmten Typs (z.B. Task, User Story) als abgeschlossen gilt.
+--
+1. Akzeptanzkriterien
+* Alle im Issue definierten Kriterien sind erfüllt
+
+2. Code‑Qualität
+* Coding-Standards eingehalten
+* keine unnötigen Kommentare (z.b: TODO Nachrichten)
+
+3. Testing
+* Keine Bugs offen
+
+4. Dokumentation
+* Vergleich mit User Stories
+* technische Dokumentation vollständig
+
+5. Abnahme
+* in Meeting Review abgenommen
+* Product Owner hat Arbeitsergebnis abgenommen
+* Item auf “Done” verschoben
+--
 
 == Deployment
 //Outline the strategy for deploying the software (and its updates) into the production environment.
