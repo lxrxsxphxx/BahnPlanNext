@@ -26,5 +26,17 @@
     "YAML": {
       "formatter": "prettier"
     }
+  },
+  "lsp": {
+    "oxc": {
+      "initialization_options": {
+        "options": {
+          "configPath": "frontend/.oxlintrc.json",
+          "tsConfigPath": "frontend/tsconfig.json",
+          "unusedDisableDirectives": "warn",
+          "typeAware": false
+        }
+      }
+    }
   }
 }

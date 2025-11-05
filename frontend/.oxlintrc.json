@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "eslint",
+    "oxc",
+    "unicorn",
+    "typescript",
+    "react",
+    "react-perf",
+    "vitest",
+    "import",
+    "promise"
+  ],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn",
+    "pedantic": "warn"
+  },
+  "rules": {
+    "eslint/no-empty-pattern": "warn",
+    "eslint/no-unused-vars": "warn",
+    "import/no-unassigned-import": "off",
+    "react/react-in-jsx-scope": "off"
+  },
+  "settings": {
+    "jsx-a11y": {
+      "polymorphicPropName": null,
+      "components": {}
+    },
+    "react": {
+      "formComponents": ["Form"],
+      "linkComponents": ["Link", "NavLink", "Links"]
+    },
+    "jsdoc": {},
+    "vitest": {
+      "typecheck": false
+    }
+  },
+  "env": {
+    "browser": true,
+    "builtin": true
+  },
+  "globals": {},
+  "ignorePatterns": []
+}
