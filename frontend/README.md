@@ -17,6 +17,8 @@ Die Projektstruktur im Verzeichnis **frontend** orientiert sich an üblichen vit
 - `tsconfig.json` - Typescript Configuration.
 - `vite.config.ts` - Vite config mit Tailwind, React Router und Tsconfig plugins, beinhaltet auch Vitest config unter `test: { ... }`
 - `app` - umfasst den gesamten code der React Router App.
+- `app/routes` - Ordner für Routen.
+- `app/components` - Ordner für Componenten.
 - `app/app.css` - beinhaltet globales css und Tailwind import.
 - `app/root.tsx` - Root Componente mit ErrorBoundary und Layout, welches html Grundstruktur rendert.
 - `app/routes` - exportiert die React Router Routen configuration.
