@@ -1,50 +1,92 @@
-# Welcome to React Router!
+# BahnPlanNext Frontend
 
-A modern, production-ready template for building full-stack React applications using React Router.
+## Projektstruktur
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+Die Projektstruktur im Verzeichnis **frontend** orientiert sich an üblichen vite Projekten.
 
-## Features
+- `.react-router` - ein Ordner mit durch React Router generierten temporären Typescript Dateien.
+- `node_modules` - beinhaltet durch pnpm installierte Packete.
+- `public` - für statische Assets, wie zum Beispiel Fonts.
+- `.oxlintrc.json` - config Datei für Oxlint, Eslint ähnlicher Syntax.
+- `.dockerignore` & `.prettierignore` - Datei und Ordner ignore Dateien für Docker und Prettier.
+- `.prettierrc.json` - config Datei für den Formatter Prettier.
+- `Dockerfile` - Docker image für Frontend server.
+- `package.json` - Pnpm (npm) project config, mit ausführbaren Skripts und Packet Abhängigkeiten.
+- `pnpm-lock.yaml` - Pnpm Packet Abhängigkeiten Installationsplan Datei (sehr groß, aber gut zu mergen).
+- `react-router.config.ts` - React Router spezifische Configuration.
+- `tsconfig.json` - Typescript Configuration.
+- `vite.config.ts` - Vite config mit Tailwind, React Router und Tsconfig plugins, beinhaltet auch Vitest config unter `test: { ... }`
+- `app` - umfasst den gesamten code der React Router App.
+- `app/app.css` - beinhaltet globales css und Tailwind import.
+- `app/root.tsx` - Root Componente mit ErrorBoundary und Layout, welches html Grundstruktur rendert.
+- `app/routes` - exportiert die React Router Routen configuration.
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Links
+
+- [React](https://react.dev/)
+- [Tailwind](https://tailwindcss.com/)
+- [React Router](https://reactrouter.com/)
+- [Prettier](https://prettier.io/)
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html)
+- [Vitest](https://vitest.dev/)
+- [Vite](https://vite.dev/)
 
 ## Getting Started
 
 ### Installation
 
-Install the dependencies:
+Zuerste müssen die Pakete installiert werden:
 
 ```bash
-npm install
+pnpm install
 ```
 
 ### Development
 
-Start the development server with HMR:
+Der Vite Entwicklungsserver kann gestartet werden, um lokale Änderungen direkt auszuprobieren.
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Die App sollte dann bei `http://localhost:5173` verfügbar sein.
 
-## Building for Production
+> Tip: In der Konsole, wo der Befehl `pnpm run dev` ausgeführt wird, gibt es die Möglichkeit `h` zu drücken,
+> um die Tastenkürzel des Vite Dev Servers zu sehen. Mit `o` wird die App im Browser geöffnet und mit `q` wird der Server beendet.
 
-Create a production build:
+## Linter ausführen
 
 ```bash
-npm run build
+pnpm run lint
 ```
 
-## Deployment
+## Formatter ausführen
 
-### Docker Deployment
+```bash
+pnpm run format
+```
+
+## Tests ausführen
+
+```bash
+pnpm run test
+```
+
+Oder im Browser Mode um Tests im Browser inspizieren zu können.
+
+```bash
+pnpm run test:browser
+```
+
+> Da können sogar Componenten und React Tests gerendert betrachtet werden
+
+## Coverage
+
+```bash
+pnpm run coverage
+```
+
+## Docker Deployment
 
 To build and run using Docker:
 
@@ -54,15 +96,6 @@ docker build -t my-app .
 # Run the container
 docker run -p 3000:3000 my-app
 ```
-
-The containerized application can be deployed to any platform that supports Docker, including:
-
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
 
 ### DIY Deployment
 
@@ -77,10 +110,6 @@ Make sure to deploy the output of `npm run build`
 │   ├── client/    # Static assets
 │   └── server/    # Server-side code
 ```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
 
 ---
 
