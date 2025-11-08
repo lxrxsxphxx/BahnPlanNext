@@ -35,6 +35,10 @@ Die Projektstruktur im Verzeichnis **frontend** orientiert sich an üblichen vit
 
 ## Getting Started
 
+### Setup
+
+Ein Setup Guide, um NodeJs und Pnpm zu installieren, gibt es [hier](../docs/deployment/Frontend-setup.md).
+
 ### Installation
 
 Zuerste müssen die Pakete installiert werden:

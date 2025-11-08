@@ -43,7 +43,7 @@
     "vitest-browser-react": "^2.0.2"
   },
   "engines": {
-    "node": ">=22",
+    "node": "22.20.0",
     "pnpm": ">=10"
   }
 }
