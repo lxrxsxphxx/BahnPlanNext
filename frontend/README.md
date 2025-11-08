@@ -43,6 +43,12 @@ Zuerste müssen die Pakete installiert werden:
 pnpm install
 ```
 
+Für Tests muss Playwright die Browser Chromium, Firefox und Webkit installieren.
+
+```bash
+pnpm exec playwright install
+```
+
 ### Development
 
 Der Vite Entwicklungsserver kann gestartet werden, um lokale Änderungen direkt auszuprobieren.
