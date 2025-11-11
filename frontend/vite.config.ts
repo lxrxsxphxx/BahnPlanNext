@@ -12,6 +12,9 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   test: {
+    coverage: {
+      exclude: ['**.css', '**.svg'],
+    },
     browser: {
       enabled: true,
       headless: true,
