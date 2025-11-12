@@ -50,7 +50,7 @@ pnpm install
 Für Tests muss Playwright die Browser Chromium, Firefox und Webkit installieren.
 
 ```bash
-pnpm exec playwright install
+pnpm dlx playwright install
 ```
 
 ### Development
