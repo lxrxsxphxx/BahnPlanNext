@@ -1,4 +1,11 @@
-# Projektstruktur & Dokumente
+# BahnPlanNext
+
+## Projektstruktur
+
+- `docs` - Projekt Dokumentation
+- `frontend` - React Router + Tailwind Projekt
+
+## Dokumente
 
 ```text
 docs
