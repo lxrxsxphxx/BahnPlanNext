@@ -11,11 +11,11 @@ export default function Register() {
 
   return (
     <div className="p-8 max-w-md mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
+      <h1 className="text-2xl font-bold mb-3  justify-center text-center ">Register</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
         <input type="email" placeholder="Email" className="p-2 border rounded" required />
         <input type="password" placeholder="Password" className="p-2 border rounded" required />
-        <button type="submit" className="py-2 bg-blue-600 text-white rounded">Submit</button>
+        <button type="submit" className="py-2 bg-black text-white rounded">Submit</button>
       </form>
 
       <Welcome open={showWelcome} onClose={() => setShowWelcome(false)} />
