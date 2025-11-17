@@ -50,7 +50,7 @@ pnpm install
 Für Tests muss Playwright die Browser Chromium, Firefox und Webkit installieren.
 
 ```bash
-pnpm exec playwright install
+pnpm dlx playwright install
 ```
 
 ### Development
@@ -100,13 +100,13 @@ pnpm run coverage
 
 ## Docker Deployment
 
-To build and run using Docker:
+To build and run using Docker or Podman:
 
 ```bash
-docker build -t my-app .
+docker build -t bahnplan-next .
 
 # Run the container
-docker run -p 3000:3000 my-app
+docker run -p 3000:3000 bahnplan-next
 ```
 
 ### DIY Deployment

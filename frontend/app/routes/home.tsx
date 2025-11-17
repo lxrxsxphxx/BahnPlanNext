@@ -1,8 +1,16 @@
 import { useState } from "react";
 import Welcome from '../components/welcome/welcome';
+import type { Route } from './+types/home';
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: 'New React Router App' },
+    { name: 'description', content: 'Welcome to React Router!' },
+  ];
+}
 
 export default function Home() {
-  const [showWelcome, setShowWelcome] = useState(true); // mặc định hiển thị modal
+  const [showWelcome, setShowWelcome] = useState(true); 
 
   return (
     <div>

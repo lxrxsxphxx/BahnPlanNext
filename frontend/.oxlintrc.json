@@ -42,5 +42,10 @@
     "builtin": true
   },
   "globals": {},
-  "ignorePatterns": []
+  "ignorePatterns": [
+    "node_modules/**",
+    ".react-router/**",
+    "build/**",
+    "coverage/**"
+  ]
 }

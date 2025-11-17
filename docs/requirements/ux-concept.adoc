@@ -35,3 +35,5 @@ Hier können zudem bei Bedarf Teile des Unternehmensmodells (Prozesse, Organigra
 == Wireframes und Wireflow
 // Fügen Sie Wireframes als Bilder oder als Link (z.B. zu einem Miroboard) ein
 // Beziehen Sie ihre Wireframes auf konkrete User Stories oder Epics.
+
+https://www.figma.com/design/MSndQ5PKriB0SM3YeNxjf4/Ohne-Namen?node-id=0-1&p=f&t=55WNZzt3cS1ooSMW-0
