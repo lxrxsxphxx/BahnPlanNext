@@ -84,7 +84,14 @@ export default function Welcome({ open, onClose }: Props) {
         {current === slides.length - 1 && (
           <button
             onClick={onClose}
-            className="w-full px-4 py-2 bg-white rounded text-[16px] text-black hover:bg-gray-400 hover:text-white"
+            className="
+              px-6 py-3 
+              bg-gray-800 text-white font-semibold rounded-lg 
+              shadow-md hover:shadow-xl 
+              transform hover:-translate-y-1 
+              transition-all duration-200 
+              mx-auto block
+            "
           >
             Jetzt start dein eigenes Eisenbahn-Abenteuer!
           </button>
