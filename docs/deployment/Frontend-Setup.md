@@ -40,6 +40,13 @@ Empfohlene Installationsmethoden:
 
 ---
 
+## Editor
+
+Prettier wird von Zed out-of-the-Box unterstützt, während für VSCode eine Extension benötigt wird, welche [hier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) zu finden ist.
+Für Oxlint wird bei beiden eine Extension nötig, welche [hier für VSCode](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) und [für Zed](https://zed.dev/extensions?query=oxc) zu finden sind.
+
+---
+
 ## Nächste Schritte
 
 Sobald **Node.js** und **pnpm** installiert sind, überprüfe die Installation mit:
