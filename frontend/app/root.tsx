@@ -9,7 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-import Navbar from './components/navbar/Navbar';
+import { MainLayout } from '@/components/structure/root-layout';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -24,6 +24,9 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+/**
+ * Root Layout das gesamte App beinhaltet und die HTML Seite mit head und body rendert.
+ */
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -34,8 +37,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navbar />
-        {children}
+        <MainLayout>{children}</MainLayout>
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -43,10 +45,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+/**
+ * App Komponente als 'root' Route, welche in Root Layout gerendert wird.
+ *
+ * Hinweis: Wird bei hier in Root abgefangenen Exceptions nicht gerendert.
+ */
 export default function App() {
   return <Outlet />;
 }
 
+/**
+ * Root Error Boundary um jegliche Exceptions abzufangen und auch Routing Fehler anzuzeigen.
+ * Rendert in Root Layout
+ */
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = 'Oops!';
   let details = 'An unexpected error occurred.';

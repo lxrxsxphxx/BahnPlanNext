@@ -4,6 +4,16 @@
   --font-sans:
     'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* height of header (navbar) */
+  --header-height: --spacing(20); /* --spacing is tailwind specific */
+}
+
+/* everything below the header */
+.layout-content {
+  /* takes atleast all of the remaining screen height */
+  min-height: calc(100vh - var(--header-height));
+  @apply flex w-full;
 }
 
 html,
