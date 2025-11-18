@@ -20,6 +20,14 @@
   "rules": {
     "eslint/no-empty-pattern": "warn",
     "eslint/no-unused-vars": "warn",
+    "eslint/max-lines-per-function": [
+      "warn",
+      {
+        "skipComments": true,
+        "skipBlankLines": true,
+        "max": 200
+      }
+    ],
     "import/no-unassigned-import": "off",
     "react/react-in-jsx-scope": "off"
   },
