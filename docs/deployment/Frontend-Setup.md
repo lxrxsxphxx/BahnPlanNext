@@ -43,6 +43,7 @@ Empfohlene Installationsmethoden:
 ## Editor
 
 Prettier wird von Zed out-of-the-Box unterstützt, während für VSCode eine Extension benötigt wird, welche [hier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode) zu finden ist.
+Mit Tailwind ist es das gleiche Prinzip. Die VSCode Extension ist [hier](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) zu finden.
 Für Oxlint wird bei beiden eine Extension nötig, welche [hier für VSCode](https://marketplace.visualstudio.com/items?itemName=oxc.oxc-vscode) und [für Zed](https://zed.dev/extensions?query=oxc) zu finden sind.
 
 ---
