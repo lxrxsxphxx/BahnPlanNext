@@ -1,4 +1,4 @@
-import { Welcome } from '../components/welcome/welcome';
+import { useState } from "react";
 import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
@@ -9,5 +9,10 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <div>
+      <h1 className="text-2xl font-bold mt-4">Home Page Content</h1>
+      <p>Hier kommt der restliche Inhalt deiner Homepage.</p>
+    </div>
+  );
 }
