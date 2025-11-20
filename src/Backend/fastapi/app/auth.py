@@ -1,5 +1,5 @@
 from passlib.context import CryptContext
-from . import models_and_schemas
+from models.user import User
 from jose import jwt
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
@@ -17,7 +17,7 @@ def create_password_hash(password): # benötigt um auf DB zu speichern
 def verify_password(plain_password, hashed_password): # benötigt wenn query zugreift
     return pwd_context.verify(plain_password, hashed_password)
 
-def create_access_token(user: models_and_schemas.User):
+def create_access_token(user: User):
     claims = {
         "sub": user.username,
         "email": user.email,

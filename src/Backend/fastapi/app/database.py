@@ -2,21 +2,33 @@ from sqlmodel import Session, SQLModel, create_engine
 from pathlib import Path
 import os
 
-SQLModel_DATABASE_URL = "sqlite:///./sql_app.db"
 
-engine = create_engine(SQLModel_DATABASE_URL, connect_args={"check_same_thread": False})
+
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql+psycopg2://admin:admin1234@localhost:5432/BahnPlanNext",
+)
+
+print(">>> EFFECTIVE DATABASE_URL:", repr(DATABASE_URL))  # Debug
+
+engine = create_engine(
+    DATABASE_URL,
+    echo=True, # debug only
+    future=True,
+)
+
 
 def get_db():
+    """gibt session zurück"""
     with Session(engine) as session:
         yield session
 
 
 def create_db_and_tables():
+    """Erstellt Tabellen welche in SQLModel-Klassen definiert"""
     SQLModel.metadata.create_all(engine)
 
 
 def shutdown():
-    #holt sich die .db datei und löscht sie
-    cwd = Path.cwd().resolve()
-    db_file = [file for file in os.listdir() if file.endswith(".db")][0]
-    os.remove(os.path.join(cwd, db_file))
+    """Engine-Pool schließen"""
+    engine.dispose()
