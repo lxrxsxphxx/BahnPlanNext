@@ -32,10 +32,20 @@ def login(db: Session = Depends(database.get_db), form_data: OAuth2PasswordReque
     db_user = crud.get_user_by_username(db=db, username=form_data.username)
     if not db_user:
         raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
+    
+        # User gefunden, Passwort stimmt → jetzt prüfen, ob aktiviert
+    if not db_user.is_active:
+        raise HTTPException(
+            status_code=401,
+            detail="Bitte bestätige zuerst deine Registrierung über den Link in der E-Mail.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
     if auth.verify_password(form_data.password, db_user.hashed_password):
         token = auth.create_access_token(db_user)
         return{"access_token": token, "token_type": "Bearer"}
     raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
+
 
 
 @app.get("/verify/{token}", response_class=HTMLResponse)
