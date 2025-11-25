@@ -11,7 +11,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
 
 from schemas.userSchema import UserSchema
-from . import database, crud, auth, sendmail
+import database, crud, auth, sendmail
 import enums
 import models
 
@@ -33,20 +33,29 @@ def list_users(db: Session = Depends(get_db)):
 
 @app.post("/register")
 def register_user(user: UserSchema, db: Session = Depends(database.get_db)):
-    db_user = crud.create_User(db=db, user=user)
-    token = auth.create_access_token(db_user)
-    sendmail.send_mail(to=user.email, token=token, username=user.username)
-    return db_user
+  db_user = crud.create_User(db=db, user=user)
+  token = auth.create_access_token(db_user)
+  sendmail.send_mail(to=user.email, token=token, username=user.username)
+  return db_user
+
 
 @app.post("/login")
 def login(db: Session = Depends(database.get_db), form_data: OAuth2PasswordRequestForm = Depends()):
-    db_user = crud.get_user_by_username(db=db, username=form_data.username)
-    if not db_user:
-        raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
-    if auth.verify_password(form_data.password, db_user.hashed_password):
-        token = auth.create_access_token(db_user)
-        return{"access_token": token, "token_type": "Bearer"}
+  db_user = crud.get_user_by_username(db=db, username=form_data.username)
+  if not db_user:
     raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
+
+  if not db_user.is_active:
+    raise HTTPException(
+      status_code=401,
+      detail="Bitte bestätige zuerst deine Registrierung über den Link in der E-Mail.",
+      headers={"WWW-Authenticate": "Bearer"},
+    )
+
+  if auth.verify_password(form_data.password, db_user.hashed_password):
+    token = auth.create_access_token(db_user)
+    return {"access_token": token, "token_type": "Bearer"}
+  raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
 
 
 @app.get("/verify/{token}", response_class=HTMLResponse)

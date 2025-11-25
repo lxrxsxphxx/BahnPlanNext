@@ -54,11 +54,33 @@ class Company(SQLModel, table=True):
     link_model=CompanyUserLink
   )
 
-  # Kredite
+  # Loans
   loans: List["Loan"] = Relationship(back_populates="company")
 
-  # Fahrzeuge
+  # Vehicles
   vehicles: List["Vehicle"] = Relationship(back_populates="owner")
 
-  # Ausschreibungen
+  # Tenders
   contracts: List["Contract"] = Relationship(back_populates="company")
+
+class SubsidiaryDetails(SQLModel, table=True):
+    """
+    1:1-Detailtabelle nur für Tochtergesellschaften.
+
+    PK = company_id (gleichzeitig FK auf companies.id)
+    """
+    __tablename__ = "subsidiary_details"
+
+    company_id: int = Field(
+      primary_key=True,
+      foreign_key="companies.id",
+    )
+
+    internal_code: Optional[str] = None
+    risk_category: Optional[str] = None  # "LOW" | "MEDIUM" | "HIGH"
+    notes: Optional[str] = None
+
+    company: Company = Relationship(
+      back_populates="subsidiary_details",
+      sa_relationship_kwargs={"uselist": False},
+    )

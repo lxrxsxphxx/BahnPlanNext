@@ -3,23 +3,23 @@ from typing import Optional, List, TYPE_CHECKING
 from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
-  from .ausschreibung import Ausschreibung
+  from .tender import Tender
   from .company import Company
 
 
 class Contract(SQLModel, table=True):
   """
-  Ergebnis einer Ausschreibung
-  1. Platz: 100 %, 2. Platz: 20 %, 3. Platz: 10 % Subvention.
+  Results of Tender
+  1. Place: 100 %, 2. Place: 20 %, 3. Place: 10 % Subvention.
   """
   __tablename__ = "contracts"
 
   id: Optional[int] = Field(default=None, primary_key=True)
 
-  ausschreibung_id: int = Field(foreign_key="ausschreibungen.id")
+  tebder_id: int = Field(foreign_key="tender.id")
   company_id: int = Field(foreign_key="companies.id")
 
-  ausschreibung: "Ausschreibung" = Relationship(back_populates="contracts")
+  tender: "Tender" = Relationship(back_populates="contracts")
   company: "Company" = Relationship(back_populates="contracts")
 
   rank: int  # 1 2 oder 3

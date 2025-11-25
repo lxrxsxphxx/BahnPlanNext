@@ -1,7 +1,7 @@
 from .user import User, BaseUser, Roles
 from .company import Company, CompanyUserLink
 from .vehicle import Vehicle
-from .ausschreibung import Ausschreibung, AusschreibungGebot
+from .tender import Tender, TenderBid
 from .loan import Loan
 from .contract import Contract
 from .station import Station
@@ -14,8 +14,8 @@ __all__ = [
     "Roles",
     "Company",
     "Vehicle",
-    "Ausschreibung",
-    "AusschreibungGebot",
+    "Tender",
+    "TenderBid",
     "Loan",
     "Contract",
     "Station",

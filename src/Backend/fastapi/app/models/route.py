@@ -3,7 +3,7 @@ from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
   from .station import Station
-  from .ausschreibung import Ausschreibung
+  from .tender import Tender
 
 
 class Route(SQLModel, table=True):
@@ -24,4 +24,4 @@ class Route(SQLModel, table=True):
     back_populates="routes_to",
     sa_relationship_kwargs={"foreign_keys": "[Route.end_station_id]"},
   )
-  ausschreibungen: List["Ausschreibung"] = Relationship(back_populates="route")
+  tender: List["Tender"] = Relationship(back_populates="route")

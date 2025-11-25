@@ -6,18 +6,18 @@ from .company import Company
 from .route import Route
 from .contract import Contract
 
-class Ausschreibung(SQLModel, table=True):
+class Tender(SQLModel, table=True):
   """
   Ausschreibung auf einer Strecke mit Takt-/Bedienzeiten.
   """
-  __tablename__ = "ausschreibungen"
+  __tablename__ = "tenders"
 
   id: Optional[int] = Field(default=None, primary_key=True)
   name: str
   description: Optional[str] = None
 
   route_id: int = Field(foreign_key="routes.id")
-  route: Route = Relationship(back_populates="ausschreibungen")
+  route: Route = Relationship(back_populates="tenders")
 
   # Vertragsdaten (Standard: 1 Jahr)
   contract_start_monday: Optional[date] = None
@@ -27,22 +27,22 @@ class Ausschreibung(SQLModel, table=True):
   takt_description: Optional[str] = None
   service_time_description: Optional[str] = None
 
-  bids: List["AusschreibungGebot"] = Relationship(back_populates="ausschreibung")
-  contracts: List["Contract"] = Relationship(back_populates="ausschreibung")
+  bids: List["TenderBid"] = Relationship(back_populates="tender")
+  contracts: List["Contract"] = Relationship(back_populates="tender")
 
 
-class AusschreibungGebot(SQLModel, table=True):
+class TenderBid(SQLModel, table=True):
   """
   Gebot einer Gesellschaft auf Ausschreibung.
   """
-  __tablename__ = "ausschreibungen_gebote"
+  __tablename__ = "tender_bid"
 
   id: Optional[int] = Field(default=None, primary_key=True)
 
-  ausschreibung_id: int = Field(foreign_key="ausschreibungen.id")
+  tender_id: int = Field(foreign_key="tender.id")
   company_id: int = Field(foreign_key="companies.id")
 
-  ausschreibung: Ausschreibung = Relationship(back_populates="bids")
+  tender: Tender = Relationship(back_populates="bids")
   company: Company = Relationship()
 
   submitted_at: datetime = Field(default_factory=datetime.utcnow)
