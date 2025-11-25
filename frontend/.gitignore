@@ -3,6 +3,9 @@
 /node_modules/
 package-lock.json
 
+# Ensure lockfile is not tracked in the frontend subfolder
+# (we prefer not to commit lockfiles for this subproject)
+
 # React Router
 /.react-router/
 /build/
