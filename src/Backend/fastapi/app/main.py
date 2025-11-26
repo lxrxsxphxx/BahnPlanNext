@@ -58,6 +58,7 @@ def login(db: Session = Depends(database.get_db), form_data: OAuth2PasswordReque
   raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
 
 
+
 @app.get("/verify/{token}", response_class=HTMLResponse)
 def verify_user(token: str, db: Session = Depends(database.get_db)):
     # Token prüfen
