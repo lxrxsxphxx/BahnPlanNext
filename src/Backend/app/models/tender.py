@@ -8,7 +8,7 @@ from .contract import Contract
 
 class Tender(SQLModel, table=True):
   """
-  Ausschreibung auf einer Strecke mit Takt-/Bedienzeiten.
+  Ausschreibung (engl. Tender) auf einer Strecke mit Takt-/Bedienzeiten.
   """
   __tablename__ = "tenders"
 
@@ -39,7 +39,7 @@ class TenderBid(SQLModel, table=True):
 
   id: Optional[int] = Field(default=None, primary_key=True)
 
-  tender_id: int = Field(foreign_key="tender.id")
+  tender_id: int = Field(foreign_key="tenders.id")
   company_id: int = Field(foreign_key="companies.id")
 
   tender: Tender = Relationship(back_populates="bids")

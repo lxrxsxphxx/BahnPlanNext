@@ -12,7 +12,6 @@ from jose import JWTError
 
 from schemas.userSchema import UserSchema
 import database, crud, auth, sendmail
-import enums
 import models
 
 app = FastAPI()

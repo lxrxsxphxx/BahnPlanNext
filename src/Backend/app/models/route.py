@@ -22,6 +22,7 @@ class Route(SQLModel, table=True):
   )
   end_station: "Station" = Relationship(
     back_populates="routes_to",
-    sa_relationship_kwargs={"foreign_keys": "[Route.end_station_id]"},
+    sa_relationship_kwargs={"foreign_keys": "[Route.end_station_id]"}, # refers to specific column
   )
+  # list of Tenders for this specific track (maybe never used, but good for now)
   tender: List["Tender"] = Relationship(back_populates="route")
