@@ -36,6 +36,11 @@ export function Modal({ open, onClose, children }: ModalProps) {
         >
           Close
         </button>
+        <button
+          className="mt-6 w-full py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
+        >
+          Registrieren
+        </button>
       </div>
     </div>
   );
