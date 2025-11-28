@@ -34,6 +34,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordWied, setPasswordWied] = useState("");
+
   
   return (
     <html lang="en">
@@ -55,17 +57,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </button>
 
         <Modal open={open} onClose={() => close()}>
-          <div className='text-black'>
-            modal content here
-          </div>
+         
           <h2 className="text-xl font-bold mb-4">Registrierung</h2>
           <form className="flex flex-col gap-3">
-            <input type="text" placeholder="Name" className="border p-2 rounded" value={name}
-                onChange={(e) => setName(e.target.value)} />
-            <input type="email" placeholder="Email" className="border p-2 rounded" value={email}
-                onChange={(e) => setEmail(e.target.value)} />
-            <input type="password" placeholder="Passwort" className="border p-2 rounded" value={password}
-                onChange={(e) => setPassword(e.target.value)}/>
+            <input type="text" placeholder="Name*" className="border p-2 rounded" value={name}
+                onChange={(e) => setName(e.target.value)} required/>
+            <input type="email" placeholder="Email*" className="border p-2 rounded" value={email}
+                onChange={(e) => setEmail(e.target.value)} required/>
+            <input type="password" placeholder="Passwort*" className="border p-2 rounded" value={password}
+                onChange={(e) => setPassword(e.target.value)} required/>
+            <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
+                onChange={(e) => setPassword(e.target.value)} required/>
             
           </form>
         </Modal>
