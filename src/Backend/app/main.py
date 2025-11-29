@@ -1,13 +1,18 @@
 from dotenv import find_dotenv, load_dotenv
 
+from database import get_db
+
 load_dotenv(find_dotenv())
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import HTMLResponse
-from sqlmodel import Session
-from . import database, models_and_schemas, crud, auth, sendmail
+from sqlmodel import Session, select
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
+
+from schemas.userSchema import UserSchema
+import database, crud, auth, sendmail
+import models
 
 app = FastAPI()
 
@@ -20,31 +25,36 @@ def shutdown_event():
     database.shutdown()
 
 
+@app.get("/users/", response_model=list[models.User])
+def list_users(db: Session = Depends(get_db)):
+    return db.exec(select(models.User)).all()
+
+
 @app.post("/register")
-def register_user(user: models_and_schemas.UserSchema, db: Session = Depends(database.get_db)):
-    db_user = crud.create_User(db=db, user=user)
-    token = auth.create_access_token(db_user)
-    sendmail.send_mail(to=user.email, token=token, username=user.username)
-    return db_user
+def register_user(user: UserSchema, db: Session = Depends(database.get_db)):
+  db_user = crud.create_User(db=db, user=user)
+  token = auth.create_access_token(db_user)
+  sendmail.send_mail(to=user.email, token=token, username=user.username)
+  return db_user
+
 
 @app.post("/login")
 def login(db: Session = Depends(database.get_db), form_data: OAuth2PasswordRequestForm = Depends()):
-    db_user = crud.get_user_by_username(db=db, username=form_data.username)
-    if not db_user:
-        raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
-    
-        # User gefunden, Passwort stimmt → jetzt prüfen, ob aktiviert
-    if not db_user.is_active:
-        raise HTTPException(
-            status_code=401,
-            detail="Bitte bestätige zuerst deine Registrierung über den Link in der E-Mail.",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
-    if auth.verify_password(form_data.password, db_user.hashed_password):
-        token = auth.create_access_token(db_user)
-        return{"access_token": token, "token_type": "Bearer"}
+  db_user = crud.get_user_by_username(db=db, username=form_data.username)
+  if not db_user:
     raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
+
+  if not db_user.is_active:
+    raise HTTPException(
+      status_code=401,
+      detail="Bitte bestätige zuerst deine Registrierung über den Link in der E-Mail.",
+      headers={"WWW-Authenticate": "Bearer"},
+    )
+
+  if auth.verify_password(form_data.password, db_user.hashed_password):
+    token = auth.create_access_token(db_user)
+    return {"access_token": token, "token_type": "Bearer"}
+  raise HTTPException(status_code=401, detail="Anmeldedaten nicht korrekt")
 
 
 

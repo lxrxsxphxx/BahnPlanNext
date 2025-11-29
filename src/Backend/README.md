@@ -19,16 +19,31 @@ Der aktuelle Stand beinhaltet:
 src/
 └── Backend/
 └── fastapi/
-├── app/
-│ ├── auth.py
-│ ├── crud.py
-│ ├── database.py
-│ ├── main.py
-│ ├── models_and_schemas.py
-│ └── sendmail.py
-├── requirements.txt
-├── .env.example (falls vorhanden)
-└── README.md
+├─ app/
+  ├── enums/
+  │   ├── roles.py
+  │   ├── vehicle.py
+  │   └── workshop.py
+  ├── models/
+  │   ├── __init__.py
+  │   ├── company.py
+  │   ├── contract.py
+  │   ├── loan.py
+  │   ├── route.py
+  │   ├── station.py
+  │   ├── tender.py
+  │   ├── user.py
+  │   ├── vehicle.py
+  │   └── workshop.py
+  ├── schemas/
+  │   └── userSchema.py
+  ├── auth.py
+  ├── crud.py
+  ├── database.py
+  ├── init_db.py
+  ├── main.py
+  ├── sendmail.py
+  └── README.md
 ````
 
 ---
@@ -96,7 +111,7 @@ password=DEIN_GMAIL_APPPASSWORT
 ```
 JWT_SECRET=imsersecretkey
 ALGORITHM=HS256
-DATABASE_URL=sqlite:///./sql_app.db
+DATABASE_URL="postgresql+psycopg2://admin:admin1234@localhost:5432/BahnPlanNext"
 ```
 
 5. Backend starten
@@ -111,5 +126,3 @@ Wenn alles läuft:
 API: http://127.0.0.1:8000
 
 Docs (Swagger-UI): http://127.0.0.1:8000/docs
-
-
