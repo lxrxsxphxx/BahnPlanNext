@@ -24,7 +24,8 @@ export function placeholder(count: number): string[] {
  */
 export function usePlaceholder(count: number) {
   const elements = useMemo(
-    () => Array.from<ReactElement>({ length: count }).fill(<p>{text}</p>),
+    () =>
+      Array.from({ length: count }).map((_, key) => <p key={key}>{text}</p>),
     [count],
   );
   return elements;

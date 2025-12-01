@@ -20,6 +20,12 @@
   "rules": {
     "eslint/no-empty-pattern": "warn",
     "eslint/no-unused-vars": "warn",
+    "eslint/max-depth": [
+      "warn",
+      {
+        "max": 8
+      }
+    ],
     "eslint/max-lines-per-function": [
       "warn",
       {
@@ -29,6 +35,10 @@
       }
     ],
     "import/no-unassigned-import": "off",
+    "import/max-dependencies": [
+      "warn",
+      { "ignoreTypeImports": true, "max": 30 }
+    ],
     "react/react-in-jsx-scope": "off"
   },
   "settings": {
@@ -51,6 +61,7 @@
   },
   "globals": {},
   "ignorePatterns": [
+    "**/.js",
     "node_modules/**",
     ".react-router/**",
     "build/**",
