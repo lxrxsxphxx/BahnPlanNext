@@ -1,90 +1,91 @@
 import { memo } from 'react';
 import { NavLink } from 'react-router';
 
+import { TrainFront } from 'lucide-react';
+
 import { LINKS, useIsHomepage } from './links';
+import { Search } from './search';
+import { SidebarTrigger } from './sidebar';
+import { SigninButton } from '@/components/auth/signin';
+import { SignupButton } from '@/components/auth/signup';
+import { ModeToggle } from '@/components/theme/mode-toggle';
+import { Button } from '@/components/ui/button';
+
+/**
+ * Header für Anmelden- & Registrieren Buttons,
+ * oder Nutzerprofil wenn Angemeldet
+ */
+function AuthenticationHeader() {
+  return (
+    <>
+      <SigninButton />
+      <SignupButton />
+    </>
+  );
+}
 
 // Mit memo cachen, damit nicht neu gerendert wird – LINKS ändert sich ja nie.
 const Links = memo(function Links() {
-  return LINKS.filter((l) => l.visibleOnFrontpage).map((l) => (
+  return LINKS.filter((l) => l.hideOnHeader !== true).map((l) => (
     <li key={l.to}>
-      <NavLink
-        to={l.to}
-        end
-        className={({ isActive }: { isActive: boolean }) =>
-          'rounded-md px-3 py-1 text-sm font-medium transition-colors ' +
-          (isActive
-            ? 'bg-white/20 text-white shadow-inner ring-1 ring-white/20'
-            : 'text-white/90 hover:bg-white/10')
-        }
-      >
-        {l.label}
-      </NavLink>
+      <Button variant="ghost" asChild>
+        <NavLink to={l.to} end>
+          {l.label}
+        </NavLink>
+      </Button>
     </li>
   ));
 });
 
-export default function Navbar() {
+export function Navbar() {
   const isHomepage = useIsHomepage();
 
   let middle;
   if (isHomepage) {
+    // Header Navigation Links nur auf Homepage
     middle = (
-      <nav className="flex items-center gap-6">
-        <ul className="hidden items-center gap-2 md:flex">
-          <Links />
-        </ul>
-      </nav>
+      <>
+        <nav className="hidden md:flex 2xl:w-full">
+          <ul className="flex items-center 2xl:w-full 2xl:justify-around">
+            <Links />
+          </ul>
+        </nav>
+        <div className="hidden flex-1 justify-center sm:flex md:hidden!">
+          <Search />
+        </div>
+      </>
     );
   } else {
+    // Sonst wird Suche angezeigt, da Sidebar die Navigation übernimmt
     middle = (
-      <div className="flex flex-1 justify-center">
-        <form className="w-full max-w-md" onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="search"
-            placeholder="Suche: Strecke / ID / Spieler ..."
-            className="w-full rounded-md border border-white/10 bg-white/5 px-3 py-2 text-white placeholder-white/60 focus:ring-2 focus:ring-white/20 focus:outline-none"
-          />
-        </form>
+      <div className="xs:flex hidden flex-1 justify-center">
+        <Search />
       </div>
     );
   }
 
   return (
-    <header className="sticky top-0 flex h-(--header-height) w-full items-center justify-between gap-4 bg-black px-15 py-6 text-white shadow">
-      <NavLink
-        to="/"
-        className="text-xl font-semibold tracking-wide text-white"
-      >
-        BahnPlan
-      </NavLink>
+    <div className="h-(--header-height) w-(--header-width)">
+      <header className="bg-background fixed flex h-(--header-height) w-(--header-width) items-center justify-between gap-4 px-10 py-2">
+        <div className="flex gap-4">
+          <SidebarTrigger className="md:hidden" />
+          {isHomepage ? (
+            <Button variant="link" asChild>
+              <NavLink to="/" className="text-xl font-semibold tracking-wide">
+                <TrainFront />
+                BahnPlan
+              </NavLink>
+            </Button>
+          ) : null}
+        </div>
 
-      {middle}
+        {middle}
 
-      <div className="flex items-center gap-3">
-        <NavLink
-          to="/login"
-          className={({ isActive }: { isActive: boolean }) =>
-            'rounded-md px-3 py-1 text-sm font-medium transition-colors ' +
-            (isActive
-              ? 'bg-white/20 text-white'
-              : 'text-white/90 hover:bg-white/10')
-          }
-        >
-          Anmelden
-        </NavLink>
-
-        <NavLink
-          to="/register"
-          className={({ isActive }: { isActive: boolean }) =>
-            'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors ' +
-            (isActive
-              ? 'bg-white text-black'
-              : 'bg-white/90 text-black/90 hover:bg-white')
-          }
-        >
-          Registrieren
-        </NavLink>
-      </div>
-    </header>
+        <div className="flex items-center gap-3">
+          <AuthenticationHeader />
+          <ModeToggle />
+        </div>
+      </header>
+    </div>
   );
 }

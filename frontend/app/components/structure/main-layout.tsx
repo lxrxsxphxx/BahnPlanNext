@@ -1,8 +1,9 @@
 import { type PropsWithChildren } from 'react';
 import { Outlet } from 'react-router';
 
-import Navbar from './navbar';
-import Sidebar from './sidebar';
+import { Navbar } from './navbar';
+import { AppSidebar, SidebarAnimatedInset } from './sidebar';
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 /**
  * Hauptlayout als Komponente.
@@ -10,13 +11,13 @@ import Sidebar from './sidebar';
  */
 export function MainLayout({ children }: PropsWithChildren) {
   return (
-    <>
-      <Navbar />
-      <div className="layout-content">
-        <Sidebar />
+    <SidebarProvider>
+      <AppSidebar />
+      <SidebarAnimatedInset>
+        <Navbar />
         <main className="flex-auto shrink p-6">{children}</main>
-      </div>
-    </>
+      </SidebarAnimatedInset>
+    </SidebarProvider>
   );
 }
 

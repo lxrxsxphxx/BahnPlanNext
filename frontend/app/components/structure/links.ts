@@ -9,11 +9,14 @@ export interface LinkEntry {
 
 export interface TopLink extends LinkEntry {
   /**
-   * Wenn true, soll der Link auf der Startseite bzw. in einer frontpage-spezifischen Ansicht sichtbar/gehoben angezeigt werden.
-   * Standardverhalten: false (wenn nicht angegeben, nicht speziell auf der Frontpage hervorgehoben).
+   * Wenn true, wird der Link in der Header Navigation nicht angezeigt.
+   * Default: false
    */
-  visibleOnFrontpage?: boolean;
-  /** Wird auf Sidebar versteckt, wenn true. */
+  hideOnHeader?: boolean;
+  /**
+   * Wird auf Sidebar versteckt, wenn true.
+   * Default: false
+   */
   hideOnSidebar?: boolean;
   /** Unterpunkte dieser Gruppe/Links. Wird verwendet, um Unterpunkte dieser Gruppe zuzuordnen. */
   children?: LinkEntry[];
@@ -28,18 +31,12 @@ export const LINKS: TopLink[] = [
   {
     to: '/',
     label: 'Startseite',
-    visibleOnFrontpage: true,
+    hideOnHeader: true,
     hideOnSidebar: true,
-  },
-  {
-    to: '/ausschreibungen',
-    label: 'Ausschreibungen',
-    visibleOnFrontpage: true,
   },
   {
     to: '/betrieb',
     label: 'Betrieb',
-    visibleOnFrontpage: true,
     children: [
       { to: '/fahrplaene', label: 'Umlauf / Fahrpläne' },
       { to: '/beschaffung', label: 'Beschaffung' },
@@ -49,18 +46,50 @@ export const LINKS: TopLink[] = [
   {
     to: '/community',
     label: 'Community',
-    visibleOnFrontpage: true,
     children: [
       { to: '/forum', label: 'Forum' },
       { to: '/chat', label: 'Chat' },
-      {
-        to: '/gesellschaftsbereich',
-        label: 'Gesellschaftsbereich',
-      },
       { to: '/faq', label: 'FAQ' },
     ],
   },
-  { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
+  {
+    to: '/info-zentrale',
+    label: 'Info-Zentrale',
+    children: [
+      { to: '/einstieg', label: 'Der Einstieg' },
+      { to: '/regeln', label: 'Regeln & Fahrpläne' },
+      { to: '/ausschreibungen', label: 'Ausschreibungen' },
+      { to: '/wartungsstandorte', label: 'Wartungsstandorte' },
+      { to: '/trassen', label: 'Trassen' },
+    ],
+  },
+  {
+    to: '/aktuelles',
+    label: 'Aktuelles',
+    children: [
+      { to: '/neuigkeiten', label: 'Neuigkeiten' },
+      { to: '/as-vorschau', label: 'AS-Vorschau' },
+      { to: '/termine', label: 'Termine' },
+    ],
+  },
+  {
+    to: '/gesellschaftsbereich',
+    label: 'Gesellschaftsbereich',
+    children: [
+      { to: '/finanzen', label: 'Finanzen' },
+      { to: '/fahrzeuge', label: 'Fahrzeuge' },
+      { to: '/fahrplaene', label: 'Fahrpläne' },
+    ],
+  },
+  {
+    to: '/shop',
+    label: 'Shop',
+    children: [
+      { to: '/wagen', label: 'Wagen' },
+      { to: '/koks', label: 'Loks' },
+      { to: '/handel', label: 'Handel' },
+    ],
+  },
 ];
 
 /**
