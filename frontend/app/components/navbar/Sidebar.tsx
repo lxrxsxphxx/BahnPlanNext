@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router';
+import type { LinkEntry } from './Navbar';
 /**
  * Typdefinition für einen Navigationseintrag.
  *
@@ -17,13 +18,6 @@ import { NavLink } from 'react-router';
  *   Optional. Verweist auf das label des übergeordneten Eintrags (z. B. 'Betrieb'). Wird verwendet, um Unterpunkte einer Gruppe zuzuordnen.
  *   Erwartung: parentLink entspricht genau dem label des Eintrags mit isParent === true.
  */
-export type LinkEntry = {
-  to: string;
-  label: string;
-  visibleOnFrontpage?: boolean;
-  isParent?: boolean;
-  parentLink?: string;
-};
 
 /**
  * 
