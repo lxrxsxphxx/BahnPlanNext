@@ -67,7 +67,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             <input type="password" placeholder="Passwort*" className="border p-2 rounded" value={password}
                 onChange={(e) => setPassword(e.target.value)} required/>
             <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
-                onChange={(e) => setPassword(e.target.value)} required/>
+                onChange={(e) => setPasswordWied(e.target.value)} required/>
             
           </form>
         </Modal>
