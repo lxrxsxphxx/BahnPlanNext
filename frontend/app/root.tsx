@@ -9,7 +9,12 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
+
 import Navbar from './components/navbar/Navbar';
+
+import { useModal } from './components/modal/useModal';
+import { Modal } from './components/modal/modal';
+
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,6 +30,8 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+  const {open, show, hide, close} = useModal();
   return (
     <html lang="en">
       <head>
@@ -38,6 +45,19 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          onClick={() => show()}>
+          Open Modal
+        </button>
+
+        <Modal open={open} onClose={() => close()}>
+          <div className='text-black'>
+            modal content here
+          </div>
+        </Modal>
+
       </body>
     </html>
   );
