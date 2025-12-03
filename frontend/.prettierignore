@@ -1,0 +1,9 @@
+.DS_Store
+.env
+
+# PNPM
+pnpm-lock.yaml
+
+# React Router
+/.react-router/
+/build/

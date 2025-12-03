@@ -9,17 +9,41 @@ charset = utf-8
 end_of_line = lf
 indent_size = 2
 indent_style = space
+max_line_length = 80
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# Makefile
-[Makefile]
-indent_style = tab
+# JSON, JS, TS, JSX, TSX — prettier recommends 2 spaces
+[*.{js,jsx,ts,tsx,json}]
+indent_style = space
+indent_size = 2
+
+# Python
+[*.py]
+indent_style = space
+indent_size = 4
+max_line_length = 79
+
+# CSS
+[*.{css}]
+indent_style = space
+indent_size = 2
 
 # Markdown
 [*.md]
 trim_trailing_whitespace = false
 
-# Shell script
-[*.sh]
+# YAML
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+# Shell scripts, Dockerfiles
+[*.{sh,bash,Dockerfile}]
+indent_style = space
+indent_size = 2
 switch_case_indent = true
+
+# Makefile
+[Makefile]
+indent_style = tab

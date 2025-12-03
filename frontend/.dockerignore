@@ -1,0 +1,5 @@
+.react-router
+build
+coverage
+node_modules
+README.md

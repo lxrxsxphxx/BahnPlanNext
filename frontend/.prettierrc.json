@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/prettierrc",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "plugins": [
+    "@trivago/prettier-plugin-sort-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "overrides": [
+    {
+      "files": ["*.md"],
+      "options": {
+        "proseWrap": "preserve"
+      }
+    }
+  ],
+  "importOrder": [
+    "^react",
+    "^react-router",
+    "<THIRD_PARTY_MODULES>",
+    "^([.]{1,2}|@)\/"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
