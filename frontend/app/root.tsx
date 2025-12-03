@@ -27,7 +27,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  
+
   const {open, show, hide, close} = useModal();
 
   // Two-way-binding states
@@ -36,7 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [password, setPassword] = useState("");
   const [passwordWied, setPasswordWied] = useState("");
 
-  
+
   return (
     <html lang="en">
       <head>
@@ -57,7 +57,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         </button>
 
         <Modal open={open} onClose={() => close()}>
-         
+
+        <div className="text-black">
           <h2 className="text-xl font-bold mb-4">Registrierung</h2>
           <form className="flex flex-col gap-3">
             <input type="text" placeholder="Name*" className="border p-2 rounded" value={name}
@@ -68,8 +69,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
                 onChange={(e) => setPassword(e.target.value)} required/>
             <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
                 onChange={(e) => setPasswordWied(e.target.value)} required/>
-            
+
           </form>
+        </div>
         </Modal>
 
       </body>
