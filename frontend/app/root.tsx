@@ -9,7 +9,13 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
+
 import Navbar from './components/navbar/Navbar';
+
+import { useModal } from './components/modal/useModal';
+import { Modal } from './components/modal/modal';
+import { useState } from 'react';
+
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,6 +31,16 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+
+  const {open, show, hide, close} = useModal();
+
+  // Two-way-binding states
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordWied, setPasswordWied] = useState("");
+
+
   return (
     <html lang="en">
       <head>
@@ -38,6 +54,31 @@ export function Layout({ children }: { children: React.ReactNode }) {
         {children}
         <ScrollRestoration />
         <Scripts />
+
+        <button
+          className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
+          onClick={() => show()}>
+          Open Modal
+        </button>
+
+        <Modal open={open} onClose={() => close()}>
+
+        <div className="text-black">
+          <h2 className="text-xl font-bold mb-4">Registrierung</h2>
+          <form className="flex flex-col gap-3">
+            <input type="text" placeholder="Name*" className="border p-2 rounded" value={name}
+                onChange={(e) => setName(e.target.value)} required/>
+            <input type="email" placeholder="Email*" className="border p-2 rounded" value={email}
+                onChange={(e) => setEmail(e.target.value)} required/>
+            <input type="password" placeholder="Passwort*" className="border p-2 rounded" value={password}
+                onChange={(e) => setPassword(e.target.value)} required/>
+            <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
+                onChange={(e) => setPasswordWied(e.target.value)} required/>
+
+          </form>
+        </div>
+        </Modal>
+
       </body>
     </html>
   );

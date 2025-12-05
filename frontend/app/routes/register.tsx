@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Welcome from "../components/welcome/welcome";
+// import Welcome from "../components/welcome/welcome";
 
 export default function Register() {
   const [showWelcome, setShowWelcome] = useState(false);
@@ -18,7 +18,7 @@ export default function Register() {
         <button type="submit" className="py-2 bg-black text-white rounded">Submit</button>
       </form>
 
-      <Welcome open={showWelcome} onClose={() => setShowWelcome(false)} />
+      {/* <Welcome open={showWelcome} onClose={() => setShowWelcome(false)} /> */}
     </div>
   );
 }

@@ -7,7 +7,7 @@ interface ModalProps {
   children: ReactNode;
 }
 
-export default function Modal({ open, onClose, children }: ModalProps) {
+export function Modal({ open, onClose, children }: ModalProps) {
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -35,6 +35,11 @@ export default function Modal({ open, onClose, children }: ModalProps) {
           onClick={onClose}
         >
           Close
+        </button>
+        <button
+          className="mt-6 w-full py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
+        >
+          Registrieren
         </button>
       </div>
     </div>
