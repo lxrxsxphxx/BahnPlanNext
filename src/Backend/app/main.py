@@ -1,6 +1,6 @@
 from dotenv import find_dotenv, load_dotenv
 
-from database import get_db
+from .database import get_db
 
 load_dotenv(find_dotenv())
 
@@ -10,9 +10,8 @@ from sqlmodel import Session, select
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
 
-from schemas.userSchema import UserSchema
-import database, crud, auth, sendmail
-import models
+from .schemas.userSchema import UserSchema
+from . import database, crud, auth, sendmail, models
 
 app = FastAPI()
 
@@ -32,11 +31,40 @@ def list_users(db: Session = Depends(get_db)):
 
 @app.post("/register")
 def register_user(user: UserSchema, db: Session = Depends(database.get_db)):
+  if not user.password or user.password.strip() == "":
+    raise HTTPException(status_code=400, detail="Password must not be empty.")
+  try:
+    user.password.encode("ascii")
+  except UnicodeEncodeError:
+    raise HTTPException(status_code=400, detail="Password must contain only ASCII characters.")
+
+
+  # Prüfen, ob E-Mail bereits existiert
+  existing_email_user = db.exec(
+      select(models.User).where(models.User.email == user.email)
+  ).first()
+  if existing_email_user:
+      raise HTTPException(
+          status_code=400,
+          detail="Ein Benutzer mit dieser E-Mail-Adresse existiert bereits."
+      )
+
+  # Prüfen, ob Benutzername bereits existiert
+  existing_username_user = db.exec(
+      select(models.User).where(models.User.username == user.username)
+  ).first()
+  if existing_username_user:
+      raise HTTPException(
+          status_code=400,
+          detail="Ein Benutzer mit diesem Benutzernamen existiert bereits."
+      )
   db_user = crud.create_User(db=db, user=user)
   token = auth.create_access_token(db_user)
   sendmail.send_mail(to=user.email, token=token, username=user.username)
-  return db_user
-
+  return {
+      "message": "User erfolgreich registriert. Bitte E-Mail zur Aktivierung prüfen.",
+      "user_id": db_user.id
+  }
 
 @app.post("/login")
 def login(db: Session = Depends(database.get_db), form_data: OAuth2PasswordRequestForm = Depends()):

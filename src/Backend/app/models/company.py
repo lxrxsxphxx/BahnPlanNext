@@ -63,6 +63,12 @@ class Company(SQLModel, table=True):
   # Tenders
   contracts: List["Contract"] = Relationship(back_populates="company")
 
+  # 1:1 SubsidiaryDetails
+  subsidiary_details: Optional["SubsidiaryDetails"] = Relationship(
+      back_populates="company",
+      sa_relationship_kwargs={"uselist": False},
+  )
+
 class SubsidiaryDetails(SQLModel, table=True):
     """
     1:1-Detailtabelle nur für Tochtergesellschaften.

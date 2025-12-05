@@ -2,8 +2,8 @@ from datetime import datetime
 from typing import Optional
 from sqlmodel import SQLModel, Field, Relationship
 
-from enums.workshop import WorkshopType
-from models import Station, Company
+from ..enums.workshop import WorkshopType
+from ..models import Station, Company
 
 
 class Workshop(SQLModel, table=True):

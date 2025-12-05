@@ -25,4 +25,4 @@ class Route(SQLModel, table=True):
     sa_relationship_kwargs={"foreign_keys": "[Route.end_station_id]"}, # refers to specific column
   )
   # list of Tenders for this specific track (maybe never used, but good for now)
-  tender: List["Tender"] = Relationship(back_populates="route")
+  tenders: List["Tender"] = Relationship(back_populates="route")

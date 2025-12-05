@@ -18,32 +18,32 @@ Der aktuelle Stand beinhaltet:
 ````
 src/
 └── Backend/
-└── fastapi/
-├─ app/
-  ├── enums/
-  │   ├── roles.py
-  │   ├── vehicle.py
-  │   └── workshop.py
-  ├── models/
-  │   ├── __init__.py
-  │   ├── company.py
-  │   ├── contract.py
-  │   ├── loan.py
-  │   ├── route.py
-  │   ├── station.py
-  │   ├── tender.py
-  │   ├── user.py
-  │   ├── vehicle.py
-  │   └── workshop.py
-  ├── schemas/
-  │   └── userSchema.py
-  ├── auth.py
-  ├── crud.py
-  ├── database.py
-  ├── init_db.py
-  ├── main.py
-  ├── sendmail.py
-  └── README.md
+  ├─ requirements.txt
+  ├─ README.md
+  └──app/
+      ├── enums/
+      │   ├── roles.py
+      │   ├── vehicle.py
+      │   └── workshop.py
+      ├── models/
+      │   ├── __init__.py
+      │   ├── company.py
+      │   ├── contract.py
+      │   ├── loan.py
+      │   ├── route.py
+      │   ├── station.py
+      │   ├── tender.py
+      │   ├── user.py
+      │   ├── vehicle.py
+      │   └── workshop.py
+      ├── schemas/
+      │   └── userSchema.py
+      ├── auth.py
+      ├── crud.py
+      ├── database.py
+      ├── init_db.py
+      ├── main.py
+      └── sendmail.py
 ````
 
 ---
@@ -59,7 +59,7 @@ src/
 
 ### In das Backend-Verzeichnis wechseln:
 ```bash
-cd src/Backend/fastapi
+cd src/Backend
 ```
 
 Virtuelle Umgebung erstellen:
@@ -96,7 +96,7 @@ pip install -r requirements.txt
 4. .env Datei anlegen
 
 ```bash
-src/Backend/fastapi/.env
+src/Backend/.env
 ```
 
 Mit folgendem Inhalt:

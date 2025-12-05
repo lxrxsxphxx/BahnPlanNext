@@ -1,4 +1,4 @@
-from models.user import BaseUser
+from app.models.user import BaseUser
 
 
 class UserSchema(BaseUser):

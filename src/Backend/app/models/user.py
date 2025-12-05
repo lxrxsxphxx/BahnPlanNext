@@ -2,7 +2,7 @@ from sqlmodel import SQLModel, Field, Relationship
 from pydantic import EmailStr
 from typing import Optional, List, TYPE_CHECKING
 
-from enums.roles import Roles
+from ..enums.roles import Roles
 from .company import CompanyUserLink, Company
 
 

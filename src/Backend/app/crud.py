@@ -1,7 +1,7 @@
 from sqlmodel import Session
-from schemas.userSchema import UserSchema
-from models.user import User
-import auth
+from .schemas.userSchema import UserSchema
+from .models.user import User
+from . import auth
 
 def create_User(db: Session, user: UserSchema):
     hashed_password = auth.create_password_hash(user.password)

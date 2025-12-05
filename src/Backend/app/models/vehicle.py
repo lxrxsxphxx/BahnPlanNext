@@ -2,7 +2,7 @@ from datetime import datetime, date
 from typing import Optional
 from sqlmodel import SQLModel, Field, Relationship
 
-from enums.vehicle import VehicleKind
+from ..enums.vehicle import VehicleKind
 from .company import Company
 
 
