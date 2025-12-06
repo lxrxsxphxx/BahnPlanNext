@@ -1,5 +1,6 @@
 {
   "format_on_save": "on",
+  "soft_wrap": "bounded",
   "languages": {
     "TypeScript": {
       "formatter": "prettier"
@@ -36,6 +37,11 @@
           "unusedDisableDirectives": "warn",
           "typeAware": false
         }
+      }
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "classFunctions": ["cva", "cx"]
       }
     }
   }

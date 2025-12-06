@@ -1,11 +1,10 @@
-import { useState, useCallback } from "react";
+import { useCallback, useState } from 'react';
 
 interface UseModalOptions {
   onClose?: () => void;
 }
 
-export function useModal(options: UseModalOptions = {}) {
-  const { onClose } = options;
+export function useModal({ onClose }: UseModalOptions = {}) {
   const [open, setOpen] = useState(false);
 
   const show = useCallback(() => setOpen(true), []);
