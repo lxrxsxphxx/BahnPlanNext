@@ -35,7 +35,7 @@ const slides: Slide[] = [
   },
 ];
 
-type Props = {
+export type Props = {
   open: boolean;
   onClose: () => void;
 };

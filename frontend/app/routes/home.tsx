@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Route } from './+types/home';
-import WelcomeModal from "../components/welcome/WelcomeModal";
+import WelcomeModal, { type Props as WelcomeModalProps } from "../components/welcome/WelcomeModal";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -10,10 +10,28 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  const [modalOpen, setModalOpen] = useState(true); // modal mở mặc định
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <div>
+       {/* Button to show modal */}
+      <button
+        onClick={() => setModalOpen(true)}
+        className="
+          fixed top-18 right-4
+          px-4 py-2 
+          border border-black 
+          text-black 
+          bg-white 
+          rounded 
+          transition 
+          hover:bg-black 
+          hover:text-white
+        "
+      >
+        Welcome Modal anzeigen
+      </button>
+
       {/* Welcome Modal */}
       <WelcomeModal open={modalOpen} onClose={() => setModalOpen(false)} />
 
