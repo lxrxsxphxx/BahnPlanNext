@@ -1,11 +1,13 @@
 import { useState } from "react";
 
+// Typdefinition für jeden Slide
 type Slide = {
-  image?: string;
-  title: string;
-  content: string[];
+  image?: string;        // optionales Bild
+  title: string;         // Titel des Slides
+  content: string[];     // Inhalt des Slides
 };
 
+// Array von Slides für das Welcome Modal
 const slides: Slide[] = [
   {
     title: "Willkommen bei BahnPlan!",
@@ -35,67 +37,158 @@ const slides: Slide[] = [
   },
 ];
 
+// Props für das Welcome Modal
 export type Props = {
-  open: boolean;
-  onClose: () => void;
+  open: boolean;       // Steuerung, ob Modal sichtbar ist
+  onClose: () => void; // Funktion zum Schließen des Modals
 };
 
+// WelcomeModal-Komponente
 export default function WelcomeModal({ open, onClose }: Props) {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0); // aktueller Slide-Index
 
+  // Wenn open false ist, nichts rendern
   if (!open) return null;
 
+  // Funktionen zum Wechseln der Slides
   const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
   const prevSlide = () => setCurrent((p) => (p - 1 + slides.length) % slides.length);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-opacity-1 backdrop-blur-sm">
+    <div
+      className="
+        fixed               /* Positioniert das Modal fixiert im Viewport */
+        inset-0             /* Oben, rechts, unten, links auf 0 */
+        flex                /* Flexbox aktivieren */
+        items-center        /* Vertikal zentrieren */
+        justify-center      /* Horizontal zentrieren */
+        z-50                /* Hohe z-Index für Modal */
+        bg-opacity-1        /* Hintergrund-Deckkraft (hier 1 = voll sichtbar) */
+        backdrop-blur-sm    /* Leichter Blur-Effekt auf den Hintergrund */
+      "
+    >
+      {/* Modal Container */}
       <div
-        className="relative w-[550px] h-[600px] flex flex-col rounded-lg shadow-lg overflow-hidden bg-white"
+        className="
+          relative          /* Relativ positioniert für Kinder-Elemente */
+          w-[550px]         /* Breite des Modals */
+          h-[600px]         /* Höhe des Modals */
+          flex
+          flex-col
+          rounded-lg        /* Abgerundete Ecken */
+          shadow-lg         /* Schattenwurf */
+          overflow-hidden   /* Inhalt, der überläuft, wird abgeschnitten */
+          bg-white          /* Hintergrundfarbe weiß */
+        "
         style={{
-          backgroundImage: "url('/bg_welcome.png')",
+          backgroundImage: "url('/bg_welcome.png')", // Hintergrundbild
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="flex-1 flex flex-col items-center justify-center text-center p-6 bg-opacity-25">
+        {/* Slide Inhalt */}
+        <div
+          className="
+            flex-1
+            flex
+            flex-col           /* Richtet die Kinder vertikal an */
+            items-center       /* Zentriert Kinder horizontal */
+            justify-center     /* Zentriert Kinder vertikal */
+            text-center        /* Text zentriert */
+            p-6                /* Innenabstand rundum */
+            bg-opacity-25      /* Leichte Transparenz für den Hintergrund */
+          "
+        >
+          {/* Wenn das aktuelle Slide ein Bild hat, anzeigen */}
           {slides[current].image && (
             <img
               src={slides[current].image}
               alt={slides[current].title}
-              className="mb-4 w-55 h-55 object-contain"
+              className="
+                mb-4              /* Abstand nach unten */
+                w-55              /* Breite des Bildes */
+                h-55              /* Höhe des Bildes */
+                object-contain    /* Bild vollständig sichtbar im Container */
+              "
             />
           )}
-          <h2 className="text-3xl font-bold mb-4 text-black">{slides[current].title}</h2>
-          <ul className="space-y-2 text-[16px] text-gray-500">
+
+          {/* Titel des aktuellen Slides */}
+          <h2
+            className="
+              text-3xl         /* Große Schrift */
+              font-bold        /* Fett */
+              mb-4             /* Abstand nach unten */
+              text-black       /* Schwarze Schriftfarbe */
+            "
+          >
+            {slides[current].title}
+          </h2>
+
+          {/* Liste mit Inhalten/Informationen des Slides */}
+          <ul
+            className="
+              space-y-2         /* Abstand zwischen den Listenelementen */
+              text-[16px]       /* Schriftgröße */
+              text-gray-500     /* Graue Schriftfarbe */
+            "
+          >
             {slides[current].content.map((line, i) => (
               <li key={i}>{line}</li>
             ))}
           </ul>
         </div>
 
+        {/* Button nur beim letzten Slide */}
         {current === slides.length - 1 && (
           <button
             onClick={onClose}
             className="
-              px-6 py-3 
-              bg-gray-800 text-white font-semibold rounded-lg 
-              shadow-md hover:shadow-xl 
-              transform hover:-translate-y-1 
-              transition-all duration-200 
-              mx-auto block
+              px-6 py-3                  /* Innenabstand: 6px horizontal, 3px vertikal */
+              bg-gray-800                /* Hintergrundfarbe dunkelgrau */
+              text-white                 /* Textfarbe weiß */
+              font-semibold              /* Schrift leicht fett */
+              rounded-lg                 /* Abgerundete Ecken */
+              shadow-md                  /* Standard Schatten */
+              hover:shadow-xl            /* Schatten beim Hover vergrößert */
+              transform hover:-translate-y-1 /* Leichte Bewegung beim Hover */
+              transition-all duration-200     /* Animation für alle Veränderungen über 200ms */
+              mx-auto block              /* Zentriert den Button horizontal */
             "
           >
             Jetzt start dein eigenes Eisenbahn-Abenteuer!
           </button>
         )}
 
-        <div className="flex flex-col p-4 relative z-10">
-          <div className="flex justify-between mb-3">
+        {/* Navigation und Pagination */}
+        <div
+          className="
+            flex
+            flex-col
+            p-4                  /* Innenabstand rundum */
+            relative             /* Relative Position für z-index */
+            z-10                 /* Z-Index um über Hintergrund zu liegen */
+          "
+        >
+          {/* Buttons & Dots */}
+          <div
+            className="
+              flex
+              justify-between
+              mb-3                 /* Abstand nach unten */
+            "
+          >
+            {/* Previous Button */}
             {current > 0 ? (
               <button
                 onClick={prevSlide}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                className="
+                  px-3 py-1          /* Padding */
+                  bg-gray-200        /* Hintergrund hellgrau */
+                  rounded            /* Abgerundete Ecken */
+                  hover:bg-gray-300  /* Hover-Effekt */
+                  text-sm            /* Kleine Schrift */
+                "
               >
                 PREV
               </button>
@@ -103,21 +196,31 @@ export default function WelcomeModal({ open, onClose }: Props) {
               <div className="w-[60px]" />
             )}
 
+            {/* Pagination Dots */}
             <div className="flex justify-center mb-3 space-x-2">
               {slides.map((_, i) => (
                 <span
                   key={i}
-                  className={`h-3 w-3 rounded-full ${
-                    i === current ? "bg-white border border-gray-400" : "bg-gray-400"
-                  }`}
+                  className={`
+                    h-3 w-3
+                    rounded-full
+                    ${i === current ? "bg-white border border-gray-400" : "bg-gray-400"}
+                  `}
                 />
               ))}
             </div>
-
+              
+            {/* Next Button */}
             {current < slides.length - 1 ? (
               <button
                 onClick={nextSlide}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm"
+                className="
+                  px-3 py-1
+                  bg-gray-200
+                  rounded
+                  hover:bg-gray-300
+                  text-sm
+                "
               >
                 NEXT
               </button>

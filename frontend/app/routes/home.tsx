@@ -14,7 +14,7 @@ export default function Home() {
 
   return (
     <div>
-       {/* Button to show modal */}
+       {/* Button, um das Welcome Modal anzuzeigen */}
       <button
         onClick={() => setModalOpen(true)}
         className="
@@ -35,7 +35,7 @@ export default function Home() {
       {/* Welcome Modal */}
       <WelcomeModal open={modalOpen} onClose={() => setModalOpen(false)} />
 
-      {/* Home */}
+      {/* Hauptinhalt der Home-Seite */}
       <h1 className="text-2xl font-bold mt-4">Home Page Content</h1>
       <p>Hier kommt der restliche Inhalt deiner Homepage.</p>
     </div>
