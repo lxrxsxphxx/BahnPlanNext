@@ -62,7 +62,7 @@ function LayoutWithoutProvider({
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <PreventFlashOnWrongTheme ssrTheme={ssrTheme} type="data" />
+        <PreventFlashOnWrongTheme ssrTheme={ssrTheme} />
         <Meta />
         <Links />
       </head>

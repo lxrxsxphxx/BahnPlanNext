@@ -4,6 +4,8 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { UserRoundPlus } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 
+import { SignupModal } from '@/components/modal/signup';
+import { useModal } from '@/components/modal/useModal';
 import { Button } from '@/components/ui/button';
 
 const buttonVariants = cva(undefined, {
@@ -24,13 +26,19 @@ export function SignupButton({
   className,
 }: Omit<ComponentProps<typeof Button>, 'variant'> &
   VariantProps<typeof buttonVariants>) {
+  const { open, close, show } = useModal();
+
   return (
-    <Button
-      size={variant === 'homepage' ? 'lg' : undefined}
-      className={twMerge(buttonVariants({ variant, className }))}
-    >
-      <UserRoundPlus />
-      <span className="hidden lg:block">Registrieren</span>
-    </Button>
+    <>
+      <Button
+        size={variant === 'homepage' ? 'lg' : undefined}
+        className={twMerge(buttonVariants({ variant, className }))}
+        onClick={show}
+      >
+        <UserRoundPlus />
+        <span className="hidden lg:block">Registrieren</span>
+      </Button>
+      <SignupModal open={open} onClose={close} />
+    </>
   );
 }
