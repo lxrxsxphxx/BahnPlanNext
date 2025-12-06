@@ -78,10 +78,9 @@ export default function WelcomeModal({ open, onClose }: Props) {
           rounded-lg        /* Abgerundete Ecken */
           shadow-lg         /* Schattenwurf */
           overflow-hidden   /* Inhalt, der überläuft, wird abgeschnitten */
-          bg-white          /* Hintergrundfarbe weiß */
+          bg-radial-[at_50%_40%] from-white/100 via-white/20 to-gray-100 to-70%
         "
         style={{
-          backgroundImage: "url('/bg_welcome.png')", // Hintergrundbild
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
