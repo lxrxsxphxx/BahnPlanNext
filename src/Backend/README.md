@@ -3,14 +3,14 @@
 Dieses Dokument beschreibt, wie das FastAPI-Backend von BahnPlanNext **lokal installiert, gestartet und getestet** wird.  
 Der aktuelle Stand beinhaltet:
 
+Der aktuelle Stand beinhaltet:
 - Benutzerregistrierung (`POST /register`)
 - Login mit JWT-Token (`POST /login`)
 - E-Mail-Verifizierung (`GET /verify/{token}`)
 - Rollen & Berechtigungen (`user`, `admin`)
 - Geschützte Routen (`/secured`, `/adminsonly`)
-- SQLite-Datenbank
+- PostgreSQL-Datenbank (konfigurierbar über `.env`)
 - Automatisches Laden der `.env`-Datei
-
 ---
 
 ## Projektstruktur (Backend)
@@ -93,32 +93,32 @@ bash
 pip install -r requirements.txt
 ```
 
-4. .env Datei anlegen
+4. `.env` anlegen
 
-```bash
-src/Backend/.env
-```
+Im Backend-Verzeichnis (`src/Backend`) eine Datei `.env` erstellen:
 
-Mit folgendem Inhalt:
+```env
+# Mail-Konfiguration (für Registrierung)
+email=MAIL_LOGIN
+password=MAIL_APPPASSWORT
 
-(Je nach mail muss ein APP_Passwort bei Google generiert werden unter "https://myaccount.google.com/apppasswords"... Das dann einfach als Passwort verwenden)
-```
-email=DEIN_GMAIL_LOGIN
-password=DEIN_GMAIL_APPPASSWORT
-```
-
-# Optional(NOCH NÖTIG):
-```
-JWT_SECRET=imsersecretkey
+# JWT & Datenbank – nur lokal, echte Secrets NICHT committen
+JWT_SECRET=<ein_langes_random_secret>
 ALGORITHM=HS256
-DATABASE_URL="postgresql+psycopg2://admin:admin1234@localhost:5432/BahnPlanNext"
+DATABASE_URL=postgresql+psycopg2://<user>:<pass>@<host>:<port>/<dbname>
+```
+
+5. Datenbanktabellen initialisieren
+
+```
+python -m app.init_db
 ```
 
 5. Backend starten
 Im Backend-Verzeichnis:
 
 ```bash
-uvicorn app.main:app --reload
+fastapi dev app/main.py
 ```
 
 Wenn alles läuft:

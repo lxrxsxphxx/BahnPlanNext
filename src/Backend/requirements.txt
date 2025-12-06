@@ -1,4 +1,4 @@
-fastapi==0.121.2
+fastapi[standard]==0.121.2
 uvicorn[standard]==0.38.0
 
 sqlmodel==0.0.27
