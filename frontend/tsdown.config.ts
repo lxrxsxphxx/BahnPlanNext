@@ -12,4 +12,5 @@ export default defineConfig({
   target: 'es6',
   dts: false,
   minify: true,
+  treeshake: true,
 });

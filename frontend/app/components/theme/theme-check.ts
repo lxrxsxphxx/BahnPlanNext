@@ -1,40 +1,34 @@
-import { getThemeCookie } from './cookie-parser';
-
-// this script is build using tsdown: pnpm run buildScripts
+import { Theme, getThemeCookie } from './cookie-parser';
 
 const currentScript = document.currentScript;
 if (!currentScript) {
   throw new Error('Failed to get current script');
 }
 
-const cookieName = currentScript.dataset['cookieName'];
+const preferedTheme = window.matchMedia('(prefers-color-scheme: light)').matches
+  ? Theme.LIGHT
+  : Theme.DARK;
+
+// preferedTheme fallback
+let theme = preferedTheme;
+
+const cookieName = currentScript.dataset.cookieName;
 // console.log(cookieName);
-if (!cookieName) {
-  throw new Error('No cookie name provided');
+if (cookieName) {
+  // overwrite fallback if data-cookie-name was not set
+  theme =
+    getThemeCookie(document.cookie, { name: cookieName }) ?? preferedTheme;
 }
 
-const type = currentScript.dataset.type ?? 'data';
-
-const preferedTheme = window.matchMedia('(prefers-color-scheme: light)').matches
-  ? 'light'
-  : 'dark';
-const theme =
-  getThemeCookie(document.cookie, { name: cookieName }) ?? preferedTheme;
-
-const cl = document.documentElement.classList;
 const dataAttr = document.documentElement.dataset.theme;
 
-console.log(dataAttr);
 if (typeof dataAttr === 'string') {
   const themeAlreadyApplied = dataAttr === 'light' || dataAttr === 'dark';
   if (!themeAlreadyApplied) {
     document.documentElement.dataset.theme = theme;
   }
 } else {
-  const themeAlreadyApplied = cl.contains('light') || cl.contains('dark');
-  if (!themeAlreadyApplied) {
-    cl.add(theme);
-  }
+  document.documentElement.dataset.theme = theme;
 }
 
 const meta = document.querySelector<HTMLMetaElement>('meta[name=color-scheme]');

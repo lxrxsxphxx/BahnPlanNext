@@ -6,14 +6,12 @@ import { unsafeCookie } from './theme-cookie';
 
 type PreventFlashOnWrongThemeProps = {
   ssrTheme: boolean;
-  type: 'class' | 'data';
   nonce?: string;
 };
 
 export function PreventFlashOnWrongTheme({
   ssrTheme,
   nonce,
-  type,
 }: PreventFlashOnWrongThemeProps) {
   const [theme] = useTheme();
 
@@ -37,10 +35,9 @@ export function PreventFlashOnWrongTheme({
           // the script "defer". That doesn't work for us because we need
           // this script to run synchronously before the rest of the document
           // is finished loading.
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+          /* oxlint-disable-next-line jsx-no-new-object-as-prop */
           dangerouslySetInnerHTML={{ __html: script }}
           data-cookie-name={unsafeCookie.name}
-          data-type={type}
           nonce={nonce}
           suppressHydrationWarning
         />
