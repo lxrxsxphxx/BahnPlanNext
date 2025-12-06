@@ -7,11 +7,313 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Zweck
 Dieses Dokument beschreibt wesentliche Entwurfsentscheidungen auf Ebene der Komponenten und Module. Diese dienen als Vorgabe für die Implementierung und erleichtern das Systemverständnis.
- 
+
 == Ausgewählte Sichten
 //Entwurfsklassendiagramme, Sequenzdiagramme
 
 == Schnittstellen
-//Dokumentation oder Verweise auf Schnittstellen, z.B. REST-APIs
+:toc:
+:toclevels: 3
+
+=== GET /users/
+
+* *Summary:* List Users
+
+* *Beschreibung:* Liefert Liste aller User als JSON-Array.
+
+* *Antworten:*
+
+** `200 OK` – JSON-Array von <<schema-User,User>>-Objekten
+
+[source,json]
+----
+[
+  {
+    "id": 1,
+    "email": "user@example.com",
+    "username": "user",
+    "is_active": true,
+    "role": "user",
+    "hashed_password": "..."
+  }
+]
+----
+
+=== POST /register
+
+* *Summary:* Register User
+
+* *Beschreibung:* Registriert einen neuen Benutzer.
+
+* *Request Body:*
+
+** Content-Type: `application/json`
+** Schema: <<schema-UserSchema,UserSchema>>
+
+[source,json]
+----
+{
+  "email": "user@example.com",
+  "username": "user",
+  "password": "password",
+  "role": "user",
+  "is_active": false
+}
+----
+
+* *Antworten:*
+
+** `200 OK` – Erfolgreiche Registrierung (Antwortschema im Code definiert)
+** `422 Unprocessable Entity` – Validierungsfehler, siehe <<schema-HTTPValidationError,HTTPValidationError>>
+
+=== POST /login
+
+* *Summary:* Login
+
+* *Beschreibung:* OAuth2 Password Login. Gibt typischerweise ein Access Token zurück (z. B. JWT).
+
+* *Request Body (Form-Data):*
+
+** Content-Type: `application/x-www-form-urlencoded`
+** Schema: <<schema-Body_login_login_post,Body_login_login_post>>
+
+* *Antworten:*
+
+** `200 OK` – Login erfolgreich (z. B. Access Token)
+** `422 Unprocessable Entity` – Validierungsfehler, siehe <<schema-HTTPValidationError,HTTPValidationError>>
+
+=== GET /verify/{token}
+
+* *Summary:* Verify User
+
+* *Beschreibung:* Verifiziert einen Benutzer anhand eines Tokens (z. B. E-Mail-Bestätigung).
+
+* *Pfadparameter:*
+
+** `token` (string, *required*) – Verifikationstoken
+
+* *Antworten:*
+
+** `200 OK` – HTML-Seite (Content-Type: `text/html`)
+** `422 Unprocessable Entity` – Validierungsfehler, siehe <<schema-HTTPValidationError,HTTPValidationError>>
+
+=== GET /users
+
+* *Summary:* Get All Users
+
+* *Beschreibung:* Liefert alle Benutzer (Alternative zu `/users/`; Details abhängig von der Implementierung).
+
+* *Antworten:*
+
+* `200 OK` – Antwortschema im Code definiert
+
+=== GET /secured
+
+* *Summary:* Get All Users (gesichert)
+
+* *Beschreibung:* Wie `/users`, aber nur für authentifizierte Benutzer.
+Benötigt ein gültiges Bearer-Token im `Authorization`-Header.
+
+* *Security:*
+
+** `OAuth2PasswordBearer` (Password Flow, Token von `POST /login`)
+
+* *Antworten:*
+
+** `200 OK` – Antwortschema im Code definiert
+
+=== GET /adminsonly
+
+* *Summary:* Get All Users (Admin only)
+
+* *Beschreibung:* Nur für Benutzer mit Admin-Rechten gedacht.
+Benötigt ein gültiges Bearer-Token; genaue Rollenprüfung erfolgt serverseitig.
+
+* *Security:*
+
+** `OAuth2PasswordBearer` (Password Flow, Token von `POST /login`)
+
+* *Antworten:*
+
+** `200 OK` – Antwortschema im Code definiert
+
+
+== Schemas
+
+=== [[schema-Roles]] Roles (Enum)
+
+* *Typ:* `string`
+
+* Mögliche Werte:
+
+** `user`
+** `admin`
+
+
+=== [[schema-User]] User
+
+* *Typ:* `object`
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `id`
+| `integer` \| `null`
+| Interne ID des Benutzers.
+
+| `email` (*required*)
+| `string` (E-Mail)
+| E-Mail-Adresse des Benutzers.
+
+| `username` (*required*)
+| `string`
+| Anzeigename / Benutzername.
+
+| `is_active`
+| `boolean` (default: `false`)
+| Gibt an, ob der Benutzer bereits aktiv ist.
+
+| `role` (*required*)
+| <<schema-Roles,Roles>>
+| Rolle des Benutzers (`user` oder `admin`).
+
+| `hashed_password` (*required*)
+| `string`
+| Passwort-Hash des Benutzers.
+|===
+
+
+=== [[schema-UserSchema]] UserSchema (Registration)
+
+* *Typ:* `object`
+
+* Wird für `/register` als Request-Body verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `email` (*required*)
+| `string` (E-Mail)
+| E-Mail-Adresse.
+
+| `username` (*required*)
+| `string`
+| Benutzername.
+
+| `password` (*required*)
+| `string`
+| Klartext-Passwort (wird serverseitig gehasht).
+
+| `role` (*required*)
+| <<schema-Roles,Roles>>
+| Rolle des Benutzers.
+
+| `is_active`
+| `boolean` (default: `false`)
+| Ob der neue Benutzer direkt aktiv sein soll.
+|===
+
+
+=== [[schema-Body_login_login_post]] Body_login_login_post (Login-Form)
+
+* *Typ:* `object`
+
+* Wird für `/login` als Form-Body verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `username` (*required*)
+| `string`
+| Benutzername für den Login.
+
+| `password` (*required*)
+| `string` (password)
+| Passwort für den Login.
+
+| `grant_type`
+| `string` \| `null` (Pattern: `^password$`)
+| Sollte im Normalfall `"password"` sein.
+
+| `scope`
+| `string` (default: `""`)
+| Scopes, z. B. `"read write"`.
+
+| `client_id`
+| `string` \| `null`
+| Optional, Client-ID (falls verwendet).
+
+| `client_secret`
+| `string` \| `null`
+| Optional, Client-Secret (falls verwendet).
+|===
+
+
+=== [[schema-ValidationError]] ValidationError
+
+* *Typ:* `object`
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `loc` (*required*)
+| `array` von `string` \| `integer`
+| Ort des Fehlers (z. B. `["body", "email"]`).
+
+| `msg` (*required*)
+| `string`
+| Fehlermeldung.
+
+| `type` (*required*)
+| `string`
+| Fehler-Typ (z. B. `"value_error"`).
+|===
+
+
+=== [[schema-HTTPValidationError]] HTTPValidationError
+
+* *Typ:* `object`
+
+* Wird bei `422 Unprocessable Entity` als Fehlerantwort verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `detail`
+| array von <<schema-ValidationError,ValidationError>>
+| Liste detaillierter Validierungsfehler.
+|===
+
+
+== Security-Schemes
+
+=== OAuth2PasswordBearer
+
+* *Typ:* `oauth2` (Password Flow)
+
+* *Token-URL:* `POST /login`
+
+* *Scopes:* keine vordefiniert (leeres Objekt `{}` im Schema)
+
+* Wird von folgenden Endpunkten verwendet:
+
+** `GET /secured`
+** `GET /adminsonly`
+
 
 == Datenmodell
