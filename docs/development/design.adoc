@@ -317,3 +317,131 @@ Benötigt ein gültiges Bearer-Token; genaue Rollenprüfung erfolgt serverseitig
 
 
 == Datenmodell
+
+=== Entwurfsklassendiagramm (Code wurde mithilfe von KI erstellt)
+[plantuml, backend-domain-model, png]
+----
+@startuml
+
+' ===== Enumerationen =====
+enum Roles {
+  user
+  admin
+}
+
+' ===== Domain-Klassen =====
+class User {
+  +id: int
+  +email: string
+  +username: string
+  +is_active: bool
+  +role: Roles
+  +hashed_password: string
+}
+
+class Company {
+  +id: int
+  +name: string
+}
+
+class CompanyUserLink {
+  +user_id: int
+  +company_id: int
+  +is_owner: bool
+}
+
+class Vehicle {
+  +id: int
+  +name: string
+}
+
+class Station {
+  +id: int
+  +name: string
+}
+
+class Workshop {
+  +id: int
+  +name: string
+}
+
+class Route {
+  +id: int
+  +name: string
+  +distance_km: float
+}
+
+class Tender {
+  +id: int
+  +name: string
+}
+
+class TenderBid {
+  +id: int
+  +weekly_subsidy_request: int
+}
+
+class Contract {
+  +id: int
+  +rank: int
+}
+
+class Loan {
+  +id: int
+  +principal: int
+}
+
+' ===== Service-/Technik-Klassen =====
+class AuthService {
+  +create_access_token(user: User): string
+  +decode_token(token: string)
+  +verify_password(raw: string, hashed: string): bool
+}
+
+class UserRepository {
+  +create_user(data)
+  +get_user_by_username(username: string): User
+  +get_users(): List<User>
+}
+
+class MailService {
+  +send_registration_mail(to: string, token: string, username: string)
+}
+
+class Database {
+  +create_db_and_tables()
+  +get_db(): Session
+  +shutdown()
+}
+
+' ===== Beziehungen (ohne Multiplikitäten, damit es sicher läuft) =====
+
+User -- CompanyUserLink
+Company -- CompanyUserLink
+
+Company -- Vehicle
+Company -- Loan
+Company -- Contract
+Company -- TenderBid
+
+Station -- Route
+Station -- Workshop
+Workshop -- Vehicle
+
+Route -- Tender
+Tender -- TenderBid
+Tender -- Contract
+
+AuthService ..> User
+AuthService ..> UserRepository
+UserRepository ..> Database
+MailService ..> User
+MailService ..> AuthService
+Database ..> User
+Database ..> Company
+Database ..> Tender
+Database ..> Contract
+Database ..> Loan
+
+@enduml
+----
