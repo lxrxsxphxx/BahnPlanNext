@@ -95,18 +95,7 @@ pip install -r requirements.txt
 
 4. `.env` anlegen
 
-Im Backend-Verzeichnis (`src/Backend`) eine Datei `.env` erstellen:
-
-```env
-# Mail-Konfiguration (für Registrierung)
-email=MAIL_LOGIN
-password=MAIL_APPPASSWORT
-
-# JWT & Datenbank – nur lokal, echte Secrets NICHT committen
-JWT_SECRET=<ein_langes_random_secret>
-ALGORITHM=HS256
-DATABASE_URL=postgresql+psycopg2://<user>:<pass>@<host>:<port>/<dbname>
-```
+Im Backend-Verzeichnis (`src/Backend`) die Datei `.env` anpassen.
 
 5. Datenbanktabellen initialisieren
 
