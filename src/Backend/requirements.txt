@@ -1,0 +1,22 @@
+fastapi[standard]==0.121.2
+uvicorn[standard]==0.38.0
+
+sqlmodel==0.0.27
+SQLAlchemy==2.0.44
+
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.5.0
+python-multipart==0.0.20
+email-validator==2.3.0
+
+python-dotenv==1.2.1
+
+# optional (aber empfohlen, weil die Libs sie nutzen)
+pydantic==2.12.4
+typing_extensions==4.15.0
+uvicorn==0.38.0
+uvloop==0.22.1
+watchfiles==1.1.1
+websockets==15.0.1
+SQLAlchemy==2.0.44
+passlib[bcrypt]==1.7.4
