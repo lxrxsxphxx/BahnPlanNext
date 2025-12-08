@@ -1,8 +1,8 @@
 from dotenv import find_dotenv, load_dotenv
 
-from .database import get_db
-
 load_dotenv(find_dotenv())
+
+from .database import get_db
 
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.responses import HTMLResponse

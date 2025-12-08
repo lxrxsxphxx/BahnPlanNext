@@ -1,13 +1,12 @@
+import os
 from sqlmodel import Session, SQLModel, create_engine
 from pathlib import Path
-import os
 
-
-
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql+psycopg2://admin:admin1234@localhost:5432/BahnPlanNext",
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError(
+        "DATABASE_URL not set. Please configure it in your .env"
+    )
 
 print(">>> EFFECTIVE DATABASE_URL:", repr(DATABASE_URL))  # Debug
 

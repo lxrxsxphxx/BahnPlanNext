@@ -1,3 +1,4 @@
+import os
 from passlib.context import CryptContext
 from .models.user import User
 from jose import jwt
@@ -5,7 +6,7 @@ from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException
 
-JWT_SECRET = "imsersecretkey"
+JWT_SECRET = os.getenv("JWT_SECRET")
 ALGORITHMUS = "HS256"
 
 pwd_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
