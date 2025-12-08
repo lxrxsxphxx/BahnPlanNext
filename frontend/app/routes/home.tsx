@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState } from 'react';
+
+import { type Props, WelcomeModal } from '../components/welcome/WelcomeModal';
 import type { Route } from './+types/home';
-import WelcomeModal, { type Props as WelcomeModalProps } from "../components/welcome/WelcomeModal";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,20 +15,10 @@ export default function Home() {
 
   return (
     <div>
-       {/* Button, um das Welcome Modal anzuzeigen */}
+      {/* Button, um das Welcome Modal anzuzeigen */}
       <button
         onClick={() => setModalOpen(true)}
-        className="
-          fixed top-18 right-4
-          px-4 py-2 
-          border border-black 
-          text-black 
-          bg-white 
-          rounded 
-          transition 
-          hover:bg-black 
-          hover:text-white
-        "
+        className="fixed top-18 right-4 rounded border border-black bg-white px-4 py-2 text-black transition hover:bg-black hover:text-white"
       >
         Welcome Modal anzeigen
       </button>
@@ -36,7 +27,7 @@ export default function Home() {
       <WelcomeModal open={modalOpen} onClose={() => setModalOpen(false)} />
 
       {/* Hauptinhalt der Home-Seite */}
-      <h1 className="text-2xl font-bold mt-4">Home Page Content</h1>
+      <h1 className="mt-4 text-2xl font-bold">Home Page Content</h1>
       <p>Hier kommt der restliche Inhalt deiner Homepage.</p>
     </div>
   );
