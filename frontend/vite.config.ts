@@ -18,6 +18,7 @@ export default defineConfig({
     browser: {
       enabled: true,
       headless: true,
+      screenshotFailures: false,
       provider: playwright(),
       // pnpm exec playwright install
       instances: [{ browser: 'chromium' }, { browser: 'firefox' }],

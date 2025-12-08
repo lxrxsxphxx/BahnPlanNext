@@ -5,89 +5,109 @@ import {
   Scripts,
   ScrollRestoration,
   isRouteErrorResponse,
+  useRouteLoaderData,
 } from 'react-router';
 
+import { ThemeProvider, useTheme } from 'remix-themes';
+
 import type { Route } from './+types/root';
-import './app.css';
-
-import Navbar from './components/navbar/Navbar';
-
-import { useModal } from './components/modal/useModal';
-import { Modal } from './components/modal/modal';
-import { useState } from 'react';
-
+import globalStyleUrl from './app.css?url';
+import { useThemeData } from './components/theme/theme-cookie';
+import { MainLayout } from '@/components/structure/main-layout';
+import { PreventFlashOnWrongTheme } from '@/components/theme/prevent-flash';
+import { themeSessionResolver } from '@/sessions.server';
 
 export const links: Route.LinksFunction = () => [
-  { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {
-    rel: 'preconnect',
-    href: 'https://fonts.gstatic.com',
-    crossOrigin: 'anonymous',
+    // faster stylesheet loading
+    rel: 'preload',
+    href: globalStyleUrl,
+    as: 'style',
   },
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+    href: globalStyleUrl,
   },
+  // { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+  // {
+  //   rel: 'preconnect',
+  //   href: 'https://fonts.gstatic.com',
+  //   crossOrigin: 'anonymous',
+  // },
+  // {
+  //   rel: 'stylesheet',
+  //   href: 'https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap',
+  // },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+// Return the theme from the session storage using the loader
+export async function loader({ request }: Route.LoaderArgs) {
+  const { getTheme } = await themeSessionResolver(request);
+  return {
+    theme: getTheme(),
+  };
+}
 
-  const {open, show, hide, close} = useModal();
-
-  // Two-way-binding states
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordWied, setPasswordWied] = useState("");
-
+function LayoutWithoutProvider({
+  children,
+  ssrTheme,
+}: {
+  children: React.ReactNode;
+  ssrTheme: boolean;
+}) {
+  const [theme] = useTheme();
 
   return (
-    <html lang="en">
+    <html lang="de" data-theme={theme ?? ''} suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <PreventFlashOnWrongTheme ssrTheme={ssrTheme} />
         <Meta />
         <Links />
       </head>
       <body>
-        <Navbar />
-        {children}
+        <MainLayout>{children}</MainLayout>
         <ScrollRestoration />
         <Scripts />
-
-        <button
-          className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
-          onClick={() => show()}>
-          Open Modal
-        </button>
-
-        <Modal open={open} onClose={() => close()}>
-
-        <div className="text-black">
-          <h2 className="text-xl font-bold mb-4">Registrierung</h2>
-          <form className="flex flex-col gap-3">
-            <input type="text" placeholder="Name*" className="border p-2 rounded" value={name}
-                onChange={(e) => setName(e.target.value)} required/>
-            <input type="email" placeholder="Email*" className="border p-2 rounded" value={email}
-                onChange={(e) => setEmail(e.target.value)} required/>
-            <input type="password" placeholder="Passwort*" className="border p-2 rounded" value={password}
-                onChange={(e) => setPassword(e.target.value)} required/>
-            <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
-                onChange={(e) => setPasswordWied(e.target.value)} required/>
-
-          </form>
-        </div>
-        </Modal>
-
       </body>
     </html>
   );
 }
 
-export default function App() {
+/**
+ * Root Layout das gesamte App beinhaltet und die HTML Seite mit head und body rendert.
+ */
+export function Layout({ children }: { children: React.ReactNode }) {
+  const data = useRouteLoaderData<typeof loader>('root');
+  const theme = useThemeData(data?.theme);
+
+  return (
+    <ThemeProvider
+      specifiedTheme={theme}
+      themeAction="/theme"
+      disableTransitionOnThemeChange={true}
+    >
+      <LayoutWithoutProvider ssrTheme={Boolean(data?.theme)}>
+        {children}
+      </LayoutWithoutProvider>
+    </ThemeProvider>
+  );
+}
+
+/**
+ * App Komponente als 'root' Route, welche in Root Layout gerendert wird.
+ *
+ * Hinweis: Wird bei hier in Root abgefangenen Exceptions nicht gerendert.
+ */
+export default function App({}: Route.ComponentProps) {
   return <Outlet />;
 }
 
+/**
+ * Root Error Boundary um jegliche Exceptions abzufangen und auch Routing Fehler anzuzeigen.
+ * Rendert in Root Layout
+ */
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = 'Oops!';
   let details = 'An unexpected error occurred.';
