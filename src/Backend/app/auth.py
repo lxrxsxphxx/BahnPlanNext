@@ -20,7 +20,7 @@ def verify_password(plain_password, hashed_password): # benötigt wenn query zug
 
 def create_access_token(user: User):
     claims = {
-        "sub": user.username,
+        "username": user.username,
         "email": user.email,
         "role":  user.role,
         "active": user.is_active,
