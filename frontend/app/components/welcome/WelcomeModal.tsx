@@ -103,7 +103,7 @@ export function WelcomeModal({ open, onClose }: Props) {
             onClick={onClose}
             className="mx-auto block transform rounded-lg bg-gray-800 px-6 py-3 font-semibold text-white shadow-md transition-all duration-200 hover:-translate-y-1 hover:shadow-xl"
           >
-            Jetzt start dein eigenes Eisenbahn-Abenteuer!
+            Starte jetzt dein eigenes Eisenbahn-Abenteuer!
           </button>
         )}
 
@@ -115,9 +115,9 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current > 0 ? (
               <button
                 onClick={prevSlide}
-                className="rounded bg-white px-3 py-1 text-sm hover:bg-gray-100"
+                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200"
               >
-                PREV
+                ZURÜCK
               </button>
             ) : (
               <div className="w-[60px]" />
@@ -137,9 +137,9 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current < slides.length - 1 ? (
               <button
                 onClick={nextSlide}
-                className="rounded bg-white px-3 py-1 text-sm hover:bg-gray-100"
+                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200"
               >
-                NEXT
+                WEITER
               </button>
             ) : (
               <div className="w-[60px]" />
