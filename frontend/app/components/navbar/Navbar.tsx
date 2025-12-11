@@ -113,7 +113,7 @@ export default function Navbar({
             <div className="flex items-center gap-3">
               <button
                 onClick={() => setIsLoginModalOpen(true)}
-                className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10"
+                className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
               >
                 Anmelden
               </button>
@@ -148,7 +148,7 @@ export default function Navbar({
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
-                  className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10"
+                  className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
                 >
                   Anmelden
                 </button>
@@ -169,7 +169,7 @@ export default function Navbar({
 
       {/* Login Modal */}
       <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <LoginForm />
+        <LoginForm onClose={() => setIsLoginModalOpen(false)}/>
       </Modal>
 
       {/* Register Modal */}

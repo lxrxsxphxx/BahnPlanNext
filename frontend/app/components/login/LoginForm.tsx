@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function LoginForm() {
+export default function LoginForm({ onClose }: { onClose?: () => void }) {
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [username, setUsername] = useState('');
@@ -17,7 +17,16 @@ export default function LoginForm() {
     };
 
     return (
-        <div className="text-gray-900">
+        <div className="relative text-gray-900">
+            <button
+                type="button"
+                aria-label="Modal schließen"
+                className="absolute right-0 top-0 rounded-md px-2 text-lg leading-none text-gray-500 hover:bg-gray-100 hover:text-gray-700 hover:cursor-pointer"
+                onClick={() => onClose?.()}
+            >
+                X
+            </button>
+
             <h2 className="text-2xl font-semibold mb-6 text-center">Anmelden</h2>
             <form className="space-y-4">
                 <div>
