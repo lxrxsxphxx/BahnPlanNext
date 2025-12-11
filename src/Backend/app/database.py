@@ -1,6 +1,10 @@
 import os
+
+from dotenv import load_dotenv, find_dotenv
 from sqlmodel import Session, SQLModel, create_engine
 from pathlib import Path
+
+load_dotenv(find_dotenv())
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
