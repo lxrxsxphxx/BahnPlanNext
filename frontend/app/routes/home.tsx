@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { type Props, WelcomeModal } from '../components/welcome/WelcomeModal';
+import { type Props, WelcomeModal } from '../components/welcome/welcome-modal';
 import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
