@@ -5,6 +5,7 @@ from jose import jwt
 from datetime import datetime, timedelta
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException
+from typing import Optional
 
 JWT_SECRET = os.getenv("JWT_SECRET")
 ALGORITHMUS = "HS256"
@@ -18,19 +19,34 @@ def create_password_hash(password): # benötigt um auf DB zu speichern
 def verify_password(plain_password, hashed_password): # benötigt wenn query zugreift
     return pwd_context.verify(plain_password, hashed_password)
 
-def create_access_token(user: User):
+def create_access_token(user: User, minutes: Optional[int] = None):
     claims = {
         "sub": user.username,
         "email": user.email,
         "role":  user.role,
         "active": user.is_active,
-        "exp": datetime.utcnow() + timedelta(minutes=120)
     }
+    if minutes is not None:
+        claims["exp"] = datetime.utcnow() + timedelta(minutes=minutes)
+
+
     return jwt.encode(claims=claims, key=JWT_SECRET, algorithm=ALGORITHMUS)
 
 def decode_token(token):
-    claims = jwt.decode(token, key=JWT_SECRET)
-    return claims
+    try:
+        return jwt.decode(token, key=JWT_SECRET)
+    except ExpiredSignatureError:
+        raise HTTPException(
+            status_code=401,
+            detail="Token ist abgelaufen. Bitte erneut einloggen.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    except JWTError:
+        raise HTTPException(
+            status_code=401,
+            detail="Ungültiges Token.",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
 
 def check_active(token: str = Depends(oauth2_scheme)):
     claims = decode_token(token)
