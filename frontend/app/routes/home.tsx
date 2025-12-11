@@ -1,3 +1,6 @@
+import { useState } from 'react';
+
+import { type Props, WelcomeModal } from '../components/welcome/welcome-modal';
 import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
@@ -8,5 +11,24 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <></>;
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <div>
+      {/* Button, um das Welcome Modal anzuzeigen */}
+      <button
+        onClick={() => setModalOpen(true)}
+        className="fixed top-18 right-4 rounded border border-black bg-white px-4 py-2 text-black transition hover:bg-black hover:text-white"
+      >
+        Welcome Modal anzeigen
+      </button>
+
+      {/* Welcome Modal */}
+      <WelcomeModal open={modalOpen} onClose={() => setModalOpen(false)} />
+
+      {/* Hauptinhalt der Home-Seite */}
+      <h1 className="mt-4 text-2xl font-bold">Home Page Content</h1>
+      <p>Hier kommt der restliche Inhalt deiner Homepage.</p>
+    </div>
+  );
 }
