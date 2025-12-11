@@ -115,7 +115,7 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current > 0 ? (
               <button
                 onClick={prevSlide}
-                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200"
+                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200 text-black"
               >
                 ZURÜCK
               </button>
@@ -137,7 +137,7 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current < slides.length - 1 ? (
               <button
                 onClick={nextSlide}
-                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200"
+                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200 text-black"
               >
                 WEITER
               </button>
