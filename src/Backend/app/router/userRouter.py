@@ -9,7 +9,7 @@ from app import database
 from app.schemas.userSchema import UserSchema
 from app.services.userService import UserService
 
-router = APIRouter(tags=["users"])
+router = APIRouter(tags=["User"])
 
 def get_user_service(db: Session = Depends(database.get_db)):
     return UserService(db)
