@@ -83,7 +83,7 @@ class UserService:
         db_user = self.create_user(user=user)
 
         # Token erzeugen & Mail schicken
-        token = auth.create_access_token(db_user)
+        token = auth.create_verify_token(db_user)
         sendmail.send_mail(to=user.email, token=token,
                            username=user.username)
 
@@ -116,14 +116,9 @@ class UserService:
 
     # --- /verify/{token} ---
     def verify_user(self, token: str):
-        # Token prüfen
-        try:
-            claims = auth.decode_token(token)
-        except JWTError:
-            raise HTTPException(
-            status_code=400,
-            detail="Der Bestätigungslink ist ungültig oder abgelaufen."
-        )
+        claims = auth.decode_token(token)
+        if claims.get("typ") != "verify":
+                raise HTTPException(status_code=400, detail="Ungültiger Bestätigungs-Token")    
 
         # Nutzer aus Token holen
         username = claims.get("sub")
@@ -149,7 +144,7 @@ class UserService:
         self.db.commit()
         self.db.refresh(db_user)
 
-
+    #deprecated (kann entfernt werden oder wird schon im FE genutzt?)
     def is_user_in_company(self, user_token: str):
         username = self.get_username_by_token(user_token)
         user = self.get_user_by_username(username)
@@ -163,3 +158,14 @@ class UserService:
         else:
             return {"in_company": False, "companies": []}
 
+    def is_user_in_company_by_username(self, username: str):
+        user = self.get_user_by_username(username)
+        if not user:
+            raise HTTPException(status_code=401, detail="User nicht gefunden")
+
+        if user.companies:
+            return {
+                "in_company": True,
+                "companies": [company.id for company in user.companies],
+            }
+        return {"in_company": False, "companies": []}
