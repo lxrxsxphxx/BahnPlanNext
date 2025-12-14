@@ -8,7 +8,6 @@ from app.models.user import User
 from app import database
 from app import auth
 from fastapi import HTTPException
-from fastapi.responses import HTMLResponse
 from sqlmodel import Session, select
 
 class UserService:
@@ -32,7 +31,7 @@ class UserService:
         return db_user
 
     def get_users(self):
-        users = self.db.exec(User).all()
+        users = self.db.exec(select(User)).all()
         return users
 
     def get_user_by_username(self, username: str):
@@ -121,69 +120,35 @@ class UserService:
         try:
             claims = auth.decode_token(token)
         except JWTError:
-            return HTMLResponse(
-                content="""
-                <html>
-                    <head><title>Ungültiger Token</title></head>
-                    <body>
-                        <h2 style="color:red;">Der Bestätigungslink ist ungültig oder abgelaufen.</h2>
-                        <p>Bitte fordere einen neuen Link an.</p>
-                        <a href="https://google.com">Zurück</a>
-                    </body>
-                </html>
-                """,
-                status_code=400
-            )
+            raise HTTPException(
+            status_code=400,
+            detail="Der Bestätigungslink ist ungültig oder abgelaufen."
+        )
 
         # Nutzer aus Token holen
         username = claims.get("sub")
         if not username:
-            return HTMLResponse(
-                content="""
-                <html>
-                    <head><title>Fehler</title></head>
-                    <body>
-                        <h2 style="color:red;">Ungültiger Token: Benutzername fehlt.</h2>
-                        <a href="https://google.com">Zurück</a>
-                    </body>
-                </html>
-                """,
-                status_code=400
+            raise HTTPException(
+                status_code=400,
+                detail="Ungültiger Token: Benutzername fehlt."
             )
 
         # Nutzer in der DB suchen
         db_user = self.get_user_by_username(username)
         if not db_user:
-            return HTMLResponse(
-                content=f"""
-                <html>
-                    <head><title>Fehler</title></head>
-                    <body>
-                        <h2 style="color:red;">Der Benutzer '{username}' wurde nicht gefunden.</h2>
-                        <a href="https://google.com">Zurück</a>
-                    </body>
-                </html>
-                """,
-                status_code=404
+            raise HTTPException(
+                status_code=404,
+                detail=f"Der Benutzer '{username}' wurde nicht gefunden."
             )
+
+        if db_user.is_active:
+            return
 
         # Nutzer aktivieren
         db_user.is_active = True
         self.db.commit()
         self.db.refresh(db_user)
 
-        # Erfolgsseite
-        return f"""
-        <html>
-            <head>
-                <title>Bestätigung der Registrierung</title>
-            </head>
-            <body>
-                <h2>Aktivierung von <b>{username}</b> erfolgreich!</h2>
-                <a href="https://google.com">Zurück</a>
-            </body>
-        </html>
-        """
 
     def is_user_in_company(self, user_token: str):
         username = self.get_username_by_token(user_token)

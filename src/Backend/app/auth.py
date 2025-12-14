@@ -20,6 +20,7 @@ def verify_password(plain_password, hashed_password): # benötigt wenn query zug
 
 def create_access_token(user: User):
     claims = {
+        "sub": user.username,
         "username": user.username,
         "email": user.email,
         "role":  user.role,
@@ -29,7 +30,7 @@ def create_access_token(user: User):
     return jwt.encode(claims=claims, key=JWT_SECRET, algorithm=ALGORITHMUS)
 
 def decode_token(token):
-    claims = jwt.decode(token, key=JWT_SECRET)
+    claims = jwt.decode(token, key=JWT_SECRET, algorithms=[ALGORITHMUS])
     return claims
 
 def check_active(token: str = Depends(oauth2_scheme)):

@@ -1,8 +1,9 @@
 from typing import List
 from fastapi import APIRouter, Depends
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
-from starlette.responses import HTMLResponse
+import os
 
 from app import auth
 from app import database
@@ -34,9 +35,15 @@ def login(
     return service.login(form_data)
 
 
-@router.get("/verify/{token}", response_class=HTMLResponse)
+@router.get("/verify/{token}")
 def verify_user(token: str, service: UserService = Depends(get_user_service)):
-    return service.verify_user(token)
+    service.verify_user(token)
+
+    frontend_base = os.getenv("FRONTEND_BASE_URL", "http://localhost:5173")
+    return RedirectResponse(
+        url=f"{frontend_base}/login?verified=1",
+        status_code=302
+    )
 
 
 @router.get("/secured", dependencies=[Depends(auth.check_active)])
