@@ -5,9 +5,6 @@ from jose import JWTError
 from app import sendmail
 from app.schemas.userSchema import UserSchema
 from app.models.user import User
-from dotenv import find_dotenv, load_dotenv
-
-load_dotenv(find_dotenv())
 from app import database
 from app import auth
 from fastapi import HTTPException
@@ -21,7 +18,7 @@ class UserService:
         """
         self.db = db
 
-    def create_User(self, user: UserSchema):
+    def create_user(self, user: UserSchema):
         hashed_password = auth.create_password_hash(user.password)
         db_user = User(
             email=user.email,
@@ -35,11 +32,11 @@ class UserService:
         return db_user
 
     def get_users(self):
-        users = self.db.query(User).all()
+        users = self.db.exec(User).all()
         return users
 
     def get_user_by_username(self, username: str):
-        user = self.db.query(User).filter(User.username == username).first()
+        user = self.db.exec(select(User).where(User.username == username)).first()
         return user
 
     def get_username_by_token(self, user_token: str):
@@ -84,7 +81,7 @@ class UserService:
             )
 
         # User anlegen
-        db_user = self.create_User(user=user)
+        db_user = self.create_user(user=user)
 
         # Token erzeugen & Mail schicken
         token = auth.create_access_token(db_user)
