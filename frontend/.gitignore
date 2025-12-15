@@ -2,7 +2,12 @@
 .env
 /node_modules/
 
-# React Router
+# React Router, Vite & tsdown
 /.react-router/
 /build/
+/dist/
+.vite/
+
+# vitest
 /coverage/
+__screenshots__
