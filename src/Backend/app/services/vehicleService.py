@@ -1,4 +1,4 @@
-from typing import List, Optional, Sequence
+from typing import List, Optional, Sequence, Dict, Any
 
 from jose import JWTError
 
@@ -8,6 +8,7 @@ from app import auth
 from fastapi import HTTPException
 from fastapi.responses import HTMLResponse
 from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload
 
 
 class VehicleService:
@@ -17,9 +18,48 @@ class VehicleService:
         """
         self.db = db
 
-    def get_all_vehicles(self):
-        vehicles = self.db.exec(select(Vehicle)).all()
+    def get_all_vehicles(self) -> List[Dict[str, Any]]:
+        stmt = select(Vehicle).options(selectinload(Vehicle.type))
+        vehicles = self.db.exec(stmt).all()
+
+        grouped: Dict[str, Dict[str, Any]] = {}
 
         for vehicle in vehicles:
-            pass
+            # Safety: falls type nicht geladen/gesetzt ist
+            if vehicle.type is None:
+                zugart = "UNKNOWN"
+                type_name = None
+                type_id = vehicle.type_id
+            else:
+                zugart = str(vehicle.type.kind)  # Enum -> string
+                type_name = vehicle.type.name
+                type_id = vehicle.type.id
+
+            # Falls Zugart von unseren Enums nicht reicht kann man hier auch noch Logik einbauen oder sogar die DB einbinden, dass sehe ich allerdings hier noch nicht als notwendig.
+            group_label = f"{zugart}"
+            if group_label not in grouped:
+                grouped[group_label] = {
+                    "label": group_label,
+                    "trassen": []
+                }
+
+            grouped[group_label]["trassen"].append({
+                "zugart": zugart,
+                "zugnummer": vehicle.vehicle_number,
+                "label": f"Trasse {type_name}",
+                "Details": {
+                    "vehicle_type_id": type_id,
+                    "vehicle_type_name": type_name,
+                    "owner_company_id": vehicle.owner_company_id,
+                    "condition_percent": vehicle.condition_percent,
+                    "acquired_at": vehicle.acquired_at,
+                    "is_leased": vehicle.is_leased,
+                    "leasing_model": vehicle.leasing_model,
+                    "lease_start": vehicle.lease_start,
+                    "lease_annual_rate_percent": vehicle.lease_annual_rate_percent,
+                    "lease_weekly_rate_percent": vehicle.lease_weekly_rate_percent,
+                },
+            })
+
+        return list(grouped.values())
 
