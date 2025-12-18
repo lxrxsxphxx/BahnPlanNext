@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Optional, List, TYPE_CHECKING
 
+from sqlalchemy import Column, String
 from sqlmodel import SQLModel, Field, Relationship
 
 if TYPE_CHECKING:
@@ -32,7 +33,7 @@ class Company(SQLModel, table=True):
   __tablename__ = "companies"
 
   id: Optional[int] = Field(default=None, primary_key=True)
-  name: str
+  name: str = Field(sa_column=Column(String, unique=True, index=True, nullable=False))
   capital: int = Field(default=4_000_000)  # Startkapital
   created_at: datetime = Field(default_factory=datetime.utcnow)
   last_active_at: datetime = Field(default_factory=datetime.utcnow)
