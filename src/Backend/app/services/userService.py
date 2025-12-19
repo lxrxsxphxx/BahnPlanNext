@@ -137,26 +137,14 @@ class UserService:
             )
 
         if db_user.is_active:
-            return
+            return HTTPException(status_code=409, detail="Account ist bereits aktiviert")
 
         # Nutzer aktivieren
         db_user.is_active = True
         self.db.commit()
         self.db.refresh(db_user)
 
-    #deprecated (kann entfernt werden oder wird schon im FE genutzt?)
-    def is_user_in_company(self, user_token: str):
-        username = self.get_username_by_token(user_token)
-        user = self.get_user_by_username(username)
-        if not user:
-            raise HTTPException(status_code=401,
-                                detail=f"User wurde mit User-Token: {user_token} nicht gefunden.")
-
-        if user.companies:
-            company_ids = [company.id for company in user.companies]
-            return {"in_company": True, "companies": company_ids}
-        else:
-            return {"in_company": False, "companies": []}
+        return {"status":"verified"}
 
     def is_user_in_company_by_username(self, username: str):
         user = self.get_user_by_username(username)

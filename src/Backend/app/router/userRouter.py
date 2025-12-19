@@ -1,7 +1,6 @@
 from typing import List
 from fastapi import APIRouter, Depends, Response
 from fastapi.security import OAuth2PasswordRequestForm
-from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import os
 
@@ -57,14 +56,8 @@ def logout(response: Response):
 
 @router.get("/verify/{token}")
 def verify_user(token: str, service: UserService = Depends(get_user_service)):
-    service.verify_user(token)
-
-    frontend_base = os.getenv("FRONTEND_BASE_URL", "http://localhost:5173")
-    return RedirectResponse(
-        url=f"{frontend_base}/login?verified=1",
-        status_code=302
-    )
-
+    result = service.verify_user(token)
+    return result
 
 @router.get("/secured", dependencies=[Depends(auth.check_active)])
 def get_all_users_secured(service: UserService = Depends(get_user_service)):
@@ -81,13 +74,5 @@ def check_my_company(
     service: UserService = Depends(get_user_service),
 ):
     return service.is_user_in_company_by_username(claims["username"])  
-
-@router.get(
-    "/users/{user_token}/company",
-    deprecated=True,
-    summary="DEPRECATED: use /users/me/company"
-    )
-def check_user_company(user_token: str, service: UserService = Depends(get_user_service)):
-    return service.is_user_in_company(user_token)
 
 

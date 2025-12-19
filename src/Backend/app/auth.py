@@ -5,6 +5,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from fastapi import Depends, HTTPException, Request
 
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", str(60 * 24 * 30)))  # default: 30 Tage
 JWT_SECRET = os.getenv("JWT_SECRET")
 ALGORITHMUS = "HS256"
 
@@ -23,7 +24,8 @@ def create_access_token(user: User):
         "email": user.email,
         "role":  user.role,
         "active": user.is_active,
-        "typ": "access"
+        "typ": "access",
+        "exp": datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES),
     }
     return jwt.encode(claims=claims, key=JWT_SECRET, algorithm=ALGORITHMUS)
 
