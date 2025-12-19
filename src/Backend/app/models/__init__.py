@@ -7,6 +7,7 @@ from .contract import Contract
 from .station import Station
 from .route import Route
 from .workshop import Workshop
+from .route_stop import RouteStop
 
 __all__ = [
     "User",
@@ -20,6 +21,7 @@ __all__ = [
     "Contract",
     "Station",
     "Route",
+    "RouteStop",
     "Workshop",
     "CompanyUserLink",
 ]
