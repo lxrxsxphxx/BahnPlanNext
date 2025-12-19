@@ -79,6 +79,12 @@ class CompanyService:
         self.db.add(company)
 
         try:
+            # erzeugt company.id ohne Commit
+            self.db.flush()
+
+            link = CompanyUserLink(user_id=user.id, company_id=company.id, is_owner=True)
+            self.db.add(link)
+
             self.db.commit()
             self.db.refresh(company)
         except IntegrityError:
