@@ -11,6 +11,6 @@ router = APIRouter(tags=["Routes"])
 def get_route_service(db: Session = Depends(database.get_db)):
     return RouteService(db)
 
-@router.get("/routes/{route_uuid}", response_model=RouteDetailOut)
+@router.get("/trasse/{route_uuid}", response_model=RouteDetailOut)
 def get_route_detail(route_uuid: UUID, service: RouteService = Depends(get_route_service)):
     return service.get_route_detail(route_uuid)
