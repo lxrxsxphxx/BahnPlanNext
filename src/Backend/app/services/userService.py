@@ -85,6 +85,9 @@ class UserService:
 
         # Token erzeugen & Mail schicken
         token = auth.create_access_token(db_user)
+
+        #Debug
+        #print("VERIFY-TOKEN:", token)
         sendmail.send_mail(to=user.email, token=token,
                            username=user.username)
 
@@ -136,7 +139,7 @@ class UserService:
             )
 
         # Nutzer aus Token holen
-        username = claims.get("sub")
+        username = claims.get("sub") or claims.get("username")
         if not username:
             return HTMLResponse(
                 content="""

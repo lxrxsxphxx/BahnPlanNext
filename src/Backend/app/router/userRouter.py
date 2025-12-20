@@ -14,12 +14,6 @@ router = APIRouter(tags=["User"])
 def get_user_service(db: Session = Depends(database.get_db)):
     return UserService(db)
 
-
-@router.get("/users")
-def get_all_users(service: UserService = Depends(get_user_service)):
-    return service.get_all_users()
-
-
 @router.post("/register")
 def register_user(
     user: UserSchema,
@@ -32,6 +26,10 @@ def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
     service: UserService = Depends(get_user_service)):
     return service.login(form_data)
+
+@router.get("/users")
+def get_all_users(service: UserService = Depends(get_user_service)):
+    return service.get_all_users()
 
 
 @router.get("/verify/{token}", response_class=HTMLResponse)
