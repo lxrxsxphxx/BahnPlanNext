@@ -97,13 +97,26 @@ pip install -r requirements.txt
 
 Im Backend-Verzeichnis (`src/Backend`) die Datei `.env` anpassen.
 
+#### Optional: Demo-Testdaten (Seed)
+
+Für lokale Tests (z.B. Swagger `/docs`) kann das Backend beim Start automatisch Demo-Daten anlegen
+(Stations, Route, RouteStops). Das ist **optional** und standardmäßig deaktiviert.
+
+##### Aktivieren:
+In der `.env` im Backend-Verzeichnis:
+
+```env
+SEED_DEMO_DATA=true
+```
+
+
 5. Datenbanktabellen initialisieren
 
 ```
 python -m app.init_db
 ```
 
-5. Backend starten
+6. Backend starten
 Im Backend-Verzeichnis:
 
 ```bash
