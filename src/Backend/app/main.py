@@ -2,7 +2,7 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 from contextlib import asynccontextmanager
-from app.router import userRouter
+from app.router import userRouter, vehicleRouter
 from fastapi import FastAPI
 from app import database
 
@@ -19,3 +19,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(userRouter.router)
+app.include_router(vehicleRouter.router)
