@@ -27,16 +27,16 @@ class VehicleService:
         for vehicle in vehicles:
             # Safety: falls type nicht geladen/gesetzt ist
             if vehicle.type is None:
-                zugart = "UNKNOWN"
+                train_type = "UNKNOWN"
                 type_name = None
                 type_id = vehicle.type_id
             else:
-                zugart = str(vehicle.type.kind)  # Enum -> string
+                train_type = vehicle.type.name  # Enum -> string
                 type_name = vehicle.type.name
                 type_id = vehicle.type.id
 
             # Falls Zugart von unseren Enums nicht reicht kann man hier auch noch Logik einbauen oder sogar die DB einbinden, dass sehe ich allerdings hier noch nicht als notwendig.
-            group_label = f"{zugart}"
+            group_label = f"{train_type}"
             if group_label not in grouped:
                 grouped[group_label] = {
                     "label": group_label,
@@ -44,7 +44,7 @@ class VehicleService:
                 }
 
             grouped[group_label]["trassen"].append({
-                "zugart": zugart,
+                "zugart": train_type,
                 "zugnummer": vehicle.vehicle_number,
                 "label": f"Trasse {type_name}",
                 "Details": {
