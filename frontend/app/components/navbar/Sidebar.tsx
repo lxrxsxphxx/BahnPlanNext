@@ -13,7 +13,7 @@ export default function Sidebar({ links }: { links: LinkEntry[] }) {
 
 
   return (
-    <nav className="fixed top-0 left-0 z-40 h-screen w-56 bg-black text-white shadow">
+    <nav className="fixed top-0 left-0 z-40 h-screen w-56 bg-[#111821] text-white shadow">
       <div className="flex h-full flex-col justify-between">
         <div>
           <div className="py-4 pl-8">
