@@ -22,7 +22,7 @@ export default function Beschaffung() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white p-8 md:pl-58">
+    <div className="min-h-screen bg-[#0B0F14] text-white p-8 md:pl-58">
       <h1 className="mb-8 text-4xl font-bold">Shop</h1>
 
       {/* Kategorien Abschnitt */}
@@ -30,7 +30,7 @@ export default function Beschaffung() {
         {categories.map((category) => (
           <div
             key={category.name}
-            className="rounded-lg border border-gray-700 bg-gray-800 p-8 transition-colors hover:border-gray-600"
+            className="rounded-lg border border-[#223041] bg-[#121C27] p-8 transition-colors hover:border-gray-600"
           >
             <h2 className="mb-6 text-2xl font-semibold">{category.name}</h2>
             <NavLink
@@ -47,7 +47,7 @@ export default function Beschaffung() {
       </div>
 
       {/* In Lieferung Abschnitt */}
-      <div className="rounded-lg border border-gray-700 bg-gray-800 p-8">
+      <div className="rounded-lg border border-[#223041] bg-[#121C27] p-8">
         <h2 className="mb-6 text-2xl font-semibold italic text-red-500">In Lieferung</h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
