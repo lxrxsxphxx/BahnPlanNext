@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Links,
   Meta,
@@ -9,13 +10,9 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-
-import Navbar from './components/navbar/Navbar';
-
-import { useModal } from './components/modal/useModal';
 import { Modal } from './components/modal/modal';
-import { useState } from 'react';
-
+import { useModal } from './components/modal/useModal';
+import Navbar from './components/navbar/Navbar';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -31,15 +28,47 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-
-  const {open, show, hide, close} = useModal();
+  const { open, show, hide, close } = useModal();
 
   // Two-way-binding states
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordWied, setPasswordWied] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordWied, setPasswordWied] = useState('');
 
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
+  const validate = () => {
+    const newErrors: { [key: string]: string } = {};
+
+    if (!name.trim()) newErrors.name = 'Benutzername ist erforderlich';
+    else if (!/^[a-zA-Z0-9]+$/.test(name))
+      newErrors.name = 'Nur Buchstaben und Zahlen erlaubt';
+    else if (name.length < 3) newErrors.name = 'Benutzername ist zu kurz';
+
+    if (!email.trim()) newErrors.email = 'E-Mail ist erforderlich';
+    else if (!/\S+@\S+\.\S+/.test(email))
+      newErrors.email = 'Ungültige E-Mail-Adresse';
+
+    if (!password) newErrors.password = 'Passwort ist erforderlich';
+    else if (password.length < 10) newErrors.password = 'Mindestens 10 Zeichen';
+    else if (password.length >= 128)
+      newErrors.password = 'Höchstens 128 Zeichen';
+
+    if (!passwordWied) newErrors.passwordWied = 'Bitte Passwort wiederholen';
+    else if (password !== passwordWied)
+      newErrors.passwordWied = 'Passwörter stimmen nicht überein';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!validate()) return;
+    close();
+  };
 
   return (
     <html lang="en">
@@ -56,29 +85,95 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
 
         <button
-          className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
-          onClick={() => show()}>
+          className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          onClick={() => show()}
+        >
           Open Modal
         </button>
 
         <Modal open={open} onClose={() => close()}>
-
-        <div className="text-black">
-          <h2 className="text-xl font-bold mb-4">Registrierung</h2>
-          <form className="flex flex-col gap-3">
-            <input type="text" placeholder="Name*" className="border p-2 rounded" value={name}
-                onChange={(e) => setName(e.target.value)} required/>
-            <input type="email" placeholder="Email*" className="border p-2 rounded" value={email}
-                onChange={(e) => setEmail(e.target.value)} required/>
-            <input type="password" placeholder="Passwort*" className="border p-2 rounded" value={password}
-                onChange={(e) => setPassword(e.target.value)} required/>
-            <input type="password" placeholder="Passwort wiederholen*" className="border p-2 rounded" value={passwordWied}
-                onChange={(e) => setPasswordWied(e.target.value)} required/>
-
-          </form>
-        </div>
+          <div className="text-black">
+            <h2 className="mb-4 text-xl font-bold">Registrierung</h2>
+            <form
+              className="flex flex-col gap-3"
+              id="registerForm"
+              noValidate
+              onSubmit={handleSubmit}
+            >
+              <label>
+                Benutzername:
+                <br />
+                <input
+                  type="text"
+                  placeholder="Name*"
+                  id="Benutzername"
+                  className={'rounded border p-2 invalid:border-red-500'}
+                  minLength={3}
+                  maxLength={20}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </label>
+              {errors.name && (
+                <p className="text-sm text-red-500">{errors.name}</p>
+              )}
+              <label>
+                Email:
+                <br />
+                <input
+                  type="email"
+                  placeholder="Email*"
+                  id="Email"
+                  className="rounded border p-2 invalid:border-red-500"
+                  maxLength={254}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </label>
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email}</p>
+              )}
+              <label>
+                Passwort:
+                <br />
+                <input
+                  type="password"
+                  placeholder="Passwort*"
+                  id="Passwort"
+                  className="rounded border p-2 invalid:border-red-500"
+                  minLength={10}
+                  maxLength={128}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+              </label>
+              {errors.password && (
+                <p className="text-sm text-red-500">{errors.password}</p>
+              )}
+              <label>
+                Passwort wiederholen:
+                <br />
+                <input
+                  type="password"
+                  placeholder="Passwort wiederholen*"
+                  id="PasswortWied"
+                  className="rounded border p-2 invalid:border-red-500"
+                  minLength={10}
+                  maxLength={128}
+                  value={passwordWied}
+                  onChange={(e) => setPasswordWied(e.target.value)}
+                  required
+                />
+              </label>
+              {errors.passwordWied && (
+                <p className="text-sm text-red-500">{errors.passwordWied}</p>
+              )}
+            </form>
+          </div>
         </Modal>
-
       </body>
     </html>
   );
