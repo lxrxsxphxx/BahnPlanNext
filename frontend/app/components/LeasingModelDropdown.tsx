@@ -9,9 +9,11 @@ interface Modell {
 
 interface LeasingModelDropdownProps {
   modelle: Modell[];
+  selectedModel: Modell | null;
+  setSelectedModel: React.Dispatch<React.SetStateAction<Modell | null>>;
 }
 
-export function LeasingModelDropdown({ modelle }: LeasingModelDropdownProps) {
+export function LeasingModelDropdown({ modelle, selectedModel, setSelectedModel }: LeasingModelDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -21,7 +23,7 @@ export function LeasingModelDropdown({ modelle }: LeasingModelDropdownProps) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full rounded-md bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-900 transition-colors hover:cursor-pointer"
       >
-        {isOpen ? 'Leasingmodelle \u25B2' : 'Leasingmodelle \u25BC'}
+        {selectedModel ? selectedModel.name : 'Leasingmodelle'} {isOpen ? '\u25B2' : '\u25BC'}
       </button>
 
       {isOpen && (
@@ -33,7 +35,13 @@ export function LeasingModelDropdown({ modelle }: LeasingModelDropdownProps) {
               onMouseEnter={() => setHoveredIndex(index)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="px-4 py-3 text-sm text-white hover:bg-gray-700 cursor-pointer transition-colors border-b border-gray-700 last:border-b-0">
+              <div 
+                onClick={() => {
+                  setSelectedModel(modell);
+                  setIsOpen(false);
+                }}
+                className="px-4 py-3 text-sm text-white hover:bg-gray-700 cursor-pointer transition-colors border-b border-gray-700 last:border-b-0"
+              >
                 {modell.name}
               </div>
 
