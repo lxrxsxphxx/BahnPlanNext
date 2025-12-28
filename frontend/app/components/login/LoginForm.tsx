@@ -1,11 +1,29 @@
+import { useEffect, useState } from 'react';
+
 import { login } from '@/services/auth';
-import { useState } from 'react';
 
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  // Load saved credentials from localStorage on mount
+  useEffect(() => {
+    const savedUsername = localStorage.getItem('loginForm_username');
+    const savedPassword = localStorage.getItem('loginForm_password');
+    if (savedUsername) setUsername(savedUsername);
+    if (savedPassword) setPassword(savedPassword);
+  }, []);
+
+  // Save credentials to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('loginForm_username', username);
+  }, [username]);
+
+  useEffect(() => {
+    localStorage.setItem('loginForm_password', password);
+  }, [password]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,12 +32,13 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
     } else {
       setError(null);
       console.log('Anmeldeversuch mit:', { username, password });
-      try{
+      try {
         await login(username, password);
-      }catch(err){
-        setError('Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.' + err);
+      } catch (err) {
+        setError(
+          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.' + err,
+        );
       }
-
     }
   };
 
