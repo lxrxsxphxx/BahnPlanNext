@@ -1,3 +1,4 @@
+import { login } from '@/services/auth';
 import { useState } from 'react';
 
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
@@ -6,13 +7,19 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (username === '' || password === '') {
       setError('Bitte füllen Sie alle Felder aus.');
     } else {
       setError(null);
-      // Hier würde die Anmelde-Logik implementiert werden
+      console.log('Anmeldeversuch mit:', { username, password });
+      try{
+        await login(username, password);
+      }catch(err){
+        setError('Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.' + err);
+      }
+
     }
   };
 
