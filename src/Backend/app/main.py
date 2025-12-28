@@ -3,6 +3,7 @@ load_dotenv(find_dotenv())
 
 from contextlib import asynccontextmanager
 from app.router import userRouter
+from app.router import shopRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app import database
@@ -20,3 +21,4 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(userRouter.router)
+app.include_router(shopRouter.router)
