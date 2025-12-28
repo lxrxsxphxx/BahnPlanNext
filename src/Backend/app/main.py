@@ -4,6 +4,7 @@ load_dotenv(find_dotenv())
 from contextlib import asynccontextmanager
 from app.router import userRouter
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app import database
 
 @asynccontextmanager

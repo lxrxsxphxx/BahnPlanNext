@@ -8,7 +8,7 @@ from .company import CompanyUserLink, Company
 
 class BaseUser(SQLModel):  # BaseUser noch ohne passwort
   email: EmailStr  # aus pydantic
-  username: str
+  username: str = Field(min_length=3, max_length=20)
   is_active: bool = False
   role: Roles
 
