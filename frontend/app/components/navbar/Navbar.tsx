@@ -1,8 +1,10 @@
-import { NavLink } from 'react-router';
 import { useState } from 'react';
-import Sidebar from './Sidebar';
+import { NavLink } from 'react-router';
+
 import LoginForm from '../login/LoginForm';
 import { Modal } from '../modal/modal';
+import Sidebar from './Sidebar';
+
 /**
  * Typdefinition für einen Navigationseintrag.
  *
@@ -28,7 +30,6 @@ export type LinkEntry = {
   isParent?: boolean;
   parentLink?: string;
 };
-
 
 const LINKS: LinkEntry[] = [
   { to: '/', label: 'Startseite', visibleOnFrontpage: true },
@@ -111,24 +112,25 @@ export default function Navbar({
               </ul>
             </div>
             {!isUserLoggedIn ? (
-            <div className="flex items-center gap-3">
-              <button
-                onClick={() => setIsLoginModalOpen(true)}
-                className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
-              >
-                Anmelden
-              </button>
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
+                >
+                  Anmelden
+                </button>
 
-              <button
-                onClick={() => setIsRegisterModalOpen(true)}
-                className="rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors bg-white/90 text-black/90 hover:bg-white"
-              >
-                Registrieren
-              </button>
-            </div>) : (
+                <button
+                  onClick={() => setIsRegisterModalOpen(true)}
+                  className="rounded-md border border-white/20 bg-white/90 px-3 py-1 text-sm font-semibold text-black/90 transition-colors hover:bg-white"
+                >
+                  Registrieren
+                </button>
+              </div>
+            ) : (
               <button
                 onClick={() => setIsUserLoggedIn(false)}
-                className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
+                className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
               >
                 Logout
               </button>
@@ -157,14 +159,14 @@ export default function Navbar({
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setIsLoginModalOpen(true)}
-                    className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
+                    className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                   >
                     Anmelden
                   </button>
 
                   <button
                     onClick={() => setIsRegisterModalOpen(true)}
-                    className="rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors bg-white/90 text-black/90 hover:bg-white"
+                    className="rounded-md border border-white/20 bg-white/90 px-3 py-1 text-sm font-semibold text-black/90 transition-colors hover:bg-white"
                   >
                     Registrieren
                   </button>
@@ -172,7 +174,7 @@ export default function Navbar({
               ) : (
                 <button
                   onClick={() => setIsUserLoggedIn(false)}
-                  className="rounded-md px-3 py-1 text-sm font-medium transition-colors text-white/90 hover:bg-white/10 hover:cursor-pointer"
+                  className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                 >
                   Logout
                 </button>
@@ -186,13 +188,16 @@ export default function Navbar({
 
       {/* Login Modal */}
       <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <LoginForm onClose={() => setIsLoginModalOpen(false)}/>
+        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
       </Modal>
 
       {/* Register Modal */}
-      <Modal open={isRegisterModalOpen} onClose={() => setIsRegisterModalOpen(false)}>
+      <Modal
+        open={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      >
         <div className="text-black">
-          <h2 className="text-xl font-semibold mb-4">Registrieren</h2>
+          <h2 className="mb-4 text-xl font-semibold">Registrieren</h2>
           <p>Registrierungsformular kommt hier...</p>
         </div>
       </Modal>

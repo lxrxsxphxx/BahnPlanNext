@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router';
+
 import type { LinkEntry } from './Navbar';
 
 /**
- * 
+ *
  * Sidebar-Komponente, die eine seitliche Navigationsleiste rendert (nur auf Nicht-Startseiten).
  *
  * @param {{ links: LinkEntry[] }} props - Die Eigenschaften der Komponente: ein Array von Link-Einträgen.
@@ -10,14 +11,15 @@ import type { LinkEntry } from './Navbar';
  */
 
 export default function Sidebar({ links }: { links: LinkEntry[] }) {
-
-
   return (
     <nav className="fixed top-0 left-0 z-40 h-screen w-56 bg-black text-white shadow">
       <div className="flex h-full flex-col justify-between">
         <div>
           <div className="py-4 pl-8">
-            <NavLink to="/" className="text-2xl font-semibold tracking-wide text-white">
+            <NavLink
+              to="/"
+              className="text-2xl font-semibold tracking-wide text-white"
+            >
               BahnPlan
             </NavLink>
           </div>

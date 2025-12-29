@@ -1,6 +1,52 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { login } from '@/services/auth';
+
+function useFocusTrap(active = true, onEscape?: () => void) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (!active || !containerRef.current) return;
+    if (e.key !== 'Tab') {
+      if (e.key === 'Escape') {
+        onEscape?.();
+        return;
+      }
+      return;
+    }
+
+    const focusable = containerRef.current.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+
+    const first = focusable[0] as HTMLElement;
+    const last = focusable[focusable.length - 1] as HTMLElement;
+
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        last.focus();
+        e.preventDefault();
+      }
+    } else if (document.activeElement === last) {
+      first.focus();
+      e.preventDefault();
+    }
+  }, [active, onEscape]);
+
+  useEffect(() => {
+    if (active && containerRef.current) {
+      // Focus first input on mount
+      const firstInput = containerRef.current.querySelector('input') as HTMLInputElement;
+      firstInput?.focus();
+      
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }
+  }, [active, handleKeyDown]);
+
+  return containerRef;
+}
 
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,6 +54,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
+  const containerRef = useFocusTrap(true, onClose);
   // Load saved credentials from localStorage on mount
   useEffect(() => {
     const savedUsername = localStorage.getItem('loginForm_username');
@@ -43,7 +90,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <div className="relative text-white">
+    <div className="relative text-white" ref={containerRef}>
       <button
         type="button"
         aria-label="Modal schließen"
@@ -56,6 +103,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
       <h2 className="mb-8 text-center text-3xl font-bold italic">Login</h2>
 
       <form className="space-y-5" onSubmit={handleSubmit}>
+        <label htmlFor="username">Benutzername</label>
         <div className="relative">
           <div className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-300">
             <svg
@@ -72,6 +120,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
               />
             </svg>
           </div>
+          
           <input
             type="text"
             id="username"
@@ -82,7 +131,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-
+        <label htmlFor="password">Passwort</label>
         <div className="relative">
           <div className="absolute top-1/2 left-4 -translate-y-1/2 text-gray-300">
             <svg
@@ -99,6 +148,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
               />
             </svg>
           </div>
+          
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
@@ -157,7 +207,6 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
         <button
           type="submit"
           className="mt-6 w-full rounded-xl bg-blue-600 py-3.5 font-semibold text-white transition hover:cursor-pointer hover:bg-blue-700"
-          onClick={handleSubmit}
         >
           Login
         </button>
