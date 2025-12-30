@@ -40,13 +40,12 @@ class VehicleService:
             if group_label not in grouped:
                 grouped[group_label] = {
                     "label": group_label,
-                    "trassen": []
+                    "zugteile": []
                 }
 
-            grouped[group_label]["trassen"].append({
+            grouped[group_label]["zugteile"].append({
                 "zugart": train_type,
                 "zugnummer": vehicle.vehicle_number,
-                "label": f"Trasse {type_name}",
                 "Details": {
                     "vehicle_type_id": type_id,
                     "vehicle_type_name": type_name,
