@@ -1,8 +1,10 @@
 from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
+import os
+from app.seed import seed_demo_data
 from contextlib import asynccontextmanager
-from app.router import userRouter
+from app.router import userRouter, routeRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app import database
@@ -12,6 +14,11 @@ async def lifespan(app: FastAPI):
     # Startup
     database.create_db_and_tables()
     print("DB initialized")
+
+    # Generating test data
+    if os.getenv("SEED_DEMO_DATA", "false").lower() == "true":
+        seed_demo_data(database.engine)  # engine aus database.py
+
     yield
 
     # Shutdown
@@ -20,3 +27,5 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(userRouter.router)
+
+app.include_router(routeRouter.router)
