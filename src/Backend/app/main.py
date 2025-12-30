@@ -4,8 +4,7 @@ load_dotenv(find_dotenv())
 import os
 from app.seed import seed_demo_data
 from contextlib import asynccontextmanager
-from app.router import userRouter, routeRouter
-from app.router import userRouter, vehicleRouter
+from app.router import userRouter, routeRouter, vehicleRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app import database
