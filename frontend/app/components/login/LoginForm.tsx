@@ -1,52 +1,6 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { login } from '@/services/auth';
-
-function useFocusTrap(active = true, onEscape?: () => void) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (!active || !containerRef.current) return;
-    if (e.key !== 'Tab') {
-      if (e.key === 'Escape') {
-        onEscape?.();
-        return;
-      }
-      return;
-    }
-
-    const focusable = containerRef.current.querySelectorAll(
-      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-    );
-    if (focusable.length === 0) return;
-
-    const first = focusable[0] as HTMLElement;
-    const last = focusable[focusable.length - 1] as HTMLElement;
-
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        last.focus();
-        e.preventDefault();
-      }
-    } else if (document.activeElement === last) {
-      first.focus();
-      e.preventDefault();
-    }
-  }, [active, onEscape]);
-
-  useEffect(() => {
-    if (active && containerRef.current) {
-      // Focus first input on mount
-      const firstInput = containerRef.current.querySelector('input') as HTMLInputElement;
-      firstInput?.focus();
-      
-      document.addEventListener('keydown', handleKeyDown);
-      return () => document.removeEventListener('keydown', handleKeyDown);
-    }
-  }, [active, handleKeyDown]);
-
-  return containerRef;
-}
 
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -54,8 +8,6 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const containerRef = useFocusTrap(true, onClose);
-  // Load saved credentials from localStorage on mount
   useEffect(() => {
     const savedUsername = localStorage.getItem('loginForm_username');
     const savedPassword = localStorage.getItem('loginForm_password');
@@ -63,7 +15,6 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
     if (savedPassword) setPassword(savedPassword);
   }, []);
 
-  // Save credentials to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem('loginForm_username', username);
   }, [username]);
@@ -90,11 +41,11 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
   };
 
   return (
-    <div className="relative text-white" ref={containerRef}>
+    <div className="relative text-white animate-scaleIn w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 shadow-xl">
       <button
         type="button"
         aria-label="Modal schließen"
-        className="absolute top-0 right-0 text-2xl text-gray-300 transition-colors hover:cursor-pointer hover:text-white"
+        className="absolute top-5 right-7 text-2xl text-gray-300 transition-colors hover:cursor-pointer hover:text-white"
         onClick={() => onClose?.()}
       >
         X
