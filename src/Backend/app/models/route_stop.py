@@ -1,5 +1,7 @@
 from typing import Optional
 from datetime import time
+from uuid import UUID
+
 from sqlmodel import SQLModel, Field
 
 class RouteStop(SQLModel, table=True):
@@ -7,7 +9,7 @@ class RouteStop(SQLModel, table=True):
 
     id: Optional[int] = Field(default=None, primary_key=True)
 
-    route_id: int = Field(foreign_key="routes.id", index=True)
+    route_id: UUID = Field(foreign_key="routes.uuid", index=True)
     station_id: int = Field(foreign_key="stations.id", index=True)
 
     seq: int = Field(index=True)

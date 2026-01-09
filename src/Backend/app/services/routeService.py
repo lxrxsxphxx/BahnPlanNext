@@ -18,6 +18,7 @@ class RouteService:
         return x.strftime("%H:%M") if x else None
 
     def get_route_detail(self, route_uuid: UUID):
+        # Genauere Info : https://web.archive.org/web/20150315032038/http://www.bahnplan.de/cms/bp_fv_trassen_details.php?id=291
         route = self.db.exec(select(Route).where(Route.uuid == route_uuid)).first()
         if not route:
             raise HTTPException(status_code=404, detail="Trasse nicht gefunden.")
@@ -25,7 +26,7 @@ class RouteService:
         rows = self.db.exec(
             select(RouteStop, Station)
             .join(Station, Station.id == RouteStop.station_id)
-            .where(RouteStop.route_id == route.id)
+            .where(RouteStop.route_id == route.uuid)
             .order_by(RouteStop.seq)
         ).all()
 
@@ -68,9 +69,6 @@ class RouteService:
         }
 
 
-    # Genauere Info : https://web.archive.org/web/20150315032038/http://www.bahnplan.de/cms/bp_fv_trassen_details.php?id=291
-
-
     def get_all_routes(self) -> List[Dict[str, Any]]:
         StartStation = aliased(Station)
         EndStation = aliased(Station)
@@ -85,8 +83,8 @@ class RouteService:
             )
             .join(StartStation, StartStation.id == Route.start_station_id)
             .join(EndStation, EndStation.id == Route.end_station_id)
-            .outerjoin(RouteStop, RouteStop.route_id == Route.id)
-            .group_by(Route.id, StartStation.name, EndStation.name)
+            .outerjoin(RouteStop, RouteStop.route_id == Route.uuid)
+            .group_by(Route.uuid, StartStation.name, EndStation.name)
             .order_by(Route.name)
         )
 
@@ -95,8 +93,8 @@ class RouteService:
             return []
 
         # get route-ids
-        route_ids = [route.id for route, _, _, _ in rows if
-                     route.id is not None]
+        route_ids = [route.uuid for route, _, _, _ in rows if
+                     route.uuid is not None]
 
         # get all stops & Station-names
         stop_rows = self.db.exec(

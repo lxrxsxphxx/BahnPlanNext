@@ -10,10 +10,8 @@ if TYPE_CHECKING:
 class Route(SQLModel, table=True):
   __tablename__ = "routes"
 
-  id: Optional[int] = Field(default=None, primary_key=True)
-
   uuid: UUID = Field(default_factory=uuid4, index=True, unique=True,
-                     nullable=False)
+                     nullable=False, primary_key=True)
   name: str
   start_station_id: int = Field(foreign_key="stations.id")
   end_station_id: int = Field(foreign_key="stations.id")

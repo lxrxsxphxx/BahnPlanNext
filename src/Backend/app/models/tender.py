@@ -1,5 +1,7 @@
 from datetime import datetime, date
 from typing import Optional, List
+
+from uuid import UUID
 from sqlmodel import SQLModel, Field, Relationship
 
 from .company import Company
@@ -16,7 +18,7 @@ class Tender(SQLModel, table=True):
   name: str
   description: Optional[str] = None
 
-  route_id: int = Field(foreign_key="routes.id")
+  route_id: UUID = Field(foreign_key="routes.uuid")
   route: Route = Relationship(back_populates="tenders")
 
   # Vertragsdaten (Standard: 1 Jahr)
