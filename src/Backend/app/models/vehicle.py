@@ -81,3 +81,10 @@ class VehicleTypeDetails(SQLModel, table=True):
   available_stock: Optional[int] = None
 
   vehicle_type: "VehicleType" = Relationship(back_populates="details")
+
+
+class VehicleTypeCouplingLink(SQLModel, table=True):
+    __tablename__ = "vehicle_type_coupling_links"
+
+    left_type_id: int = Field(foreign_key="vehicle_types.id", primary_key=True)
+    right_type_id: int = Field(foreign_key="vehicle_types.id", primary_key=True)

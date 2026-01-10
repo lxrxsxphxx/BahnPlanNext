@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import date, datetime
 from typing import Optional
 
@@ -24,10 +24,7 @@ class LeasedVehicleOut(BaseModel):
     lease_weekly_rate_percent: float
     acquired_at: datetime 
 
-    from typing import Optional
-from pydantic import BaseModel
-
-class ShopLocomotiveDetailsOut(BaseModel):
+class ShopVehicleTypeDetailsOut(BaseModel):
     id: int
     name: str
     kind: str
@@ -47,3 +44,4 @@ class ShopLocomotiveDetailsOut(BaseModel):
     image_key: Optional[str] = None
     total_stock: Optional[int] = None
     available_stock: Optional[int] = None
+    compatible_with: list[str] = Field(default_factory=list)
