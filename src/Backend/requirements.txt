@@ -15,7 +15,7 @@ python-dotenv==1.2.1
 pydantic==2.12.4
 typing_extensions==4.15.0
 uvicorn==0.38.0
-uvloop==0.22.1
+uvloop==0.22.1; platform_system != "Windows"
 watchfiles==1.1.1
 websockets==15.0.1
 SQLAlchemy==2.0.44

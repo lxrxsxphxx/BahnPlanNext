@@ -9,16 +9,17 @@ from app import database
 from app.schemas.userSchema import UserSchema
 from app.services.userService import UserService
 
+
+from fastapi import HTTPException
+from app.schemas.companySchema import CompanyCreateRequest, CompanyCreateResponse
+from app.services.companyService import CompanyService
+
+def get_company_service(db: Session = Depends(database.get_db)):
+    return CompanyService(db)
 router = APIRouter(tags=["User"])
 
 def get_user_service(db: Session = Depends(database.get_db)):
     return UserService(db)
-
-
-@router.get("/users")
-def get_all_users(service: UserService = Depends(get_user_service)):
-    return service.get_all_users()
-
 
 @router.post("/register")
 def register_user(
@@ -46,6 +47,23 @@ def login(
     )
 
     return {"message": "Login erfolgreich"}
+
+@router.post("/users/{user_token}/company", response_model=CompanyCreateResponse)
+def create_company(
+    user_token: str,
+    payload: CompanyCreateRequest,
+    service: CompanyService = Depends(get_company_service),
+):
+    try:
+        c = service.create_company(user_token, payload.name)
+        return CompanyCreateResponse(id=c.id, name=c.name, capital=c.capital)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+
+@router.get("/users")
+def get_all_users(service: UserService = Depends(get_user_service)):
+    return service.get_all_users()
 
 
 @router.post("/logout")

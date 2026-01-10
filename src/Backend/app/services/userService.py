@@ -118,10 +118,10 @@ class UserService:
     def verify_user(self, token: str):
         claims = auth.decode_token(token)
         if claims.get("typ") != "verify":
-                raise HTTPException(status_code=400, detail="Ungültiger Bestätigungs-Token")    
+                raise HTTPException(status_code=400, detail="Ungültiger Bestätigungs-Token")
 
         # Nutzer aus Token holen
-        username = claims.get("sub")
+        username = claims.get("sub") or claims.get("username")
         if not username:
             raise HTTPException(
                 status_code=400,
