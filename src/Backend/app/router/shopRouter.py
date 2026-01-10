@@ -22,6 +22,7 @@ def get_user_service(db: Session = Depends(database.get_db)):
     return UserService(db)
 
 
+# Hinweis: image_key kommt aus VehicleTypeDetails und wird vom Frontend zu einer Bild-URL aufgelöst
 @router.get("/vehicle-types", response_model=list[ShopVehicleTypeOut])
 def list_vehicle_types(
     kind: Optional[VehicleKind] = None,
@@ -30,18 +31,21 @@ def list_vehicle_types(
     service: ShopService = Depends(get_shop_service),
 ):
     # claims wird (noch) nicht genutzt, erzwingt aber "active user"
-    types = service.list_vehicle_types(kind=kind, q=q)
+    rows = service.list_vehicle_types(kind=kind, q=q)
 
     return [
         ShopVehicleTypeOut(
-            id=t.id,
-            name=t.name,
-            kind=t.kind.value,
-            new_price=t.new_price,
-            km_cost=t.km_cost,
-            energy_cost_base=t.energy_cost_base,
+            id=vt.id,
+            name=vt.name,
+            kind=vt.kind.value,
+            new_price=vt.new_price,
+            km_cost=vt.km_cost,
+            energy_cost_base=vt.energy_cost_base,
+            image_key=getattr(d, "image_key", None),
+            total_stock=getattr(d, "total_stock", None),
+            available_stock=getattr(d, "available_stock", None),
         )
-        for t in types
+        for (vt, d) in rows
     ]
 
 
@@ -77,6 +81,7 @@ def vehicle_type_details(
     )
 
 
+# TODO: Company-Auswahl: aktuell erste Company -> später explizit über Request/Active-Company lösen.
 @router.post("/vehicle-types/{type_id}/lease", response_model=LeasedVehicleOut)
 def lease_vehicle(
     type_id: int,

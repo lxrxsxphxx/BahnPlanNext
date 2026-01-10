@@ -9,6 +9,9 @@ class ShopVehicleTypeOut(BaseModel):
     new_price: int
     km_cost: float
     energy_cost_base: float
+    image_key: Optional[str] = None
+    total_stock: Optional[int] = None
+    available_stock: Optional[int] = None
 
 class LeaseRequest(BaseModel):
     leasing_model: int

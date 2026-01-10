@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
-from typing import Optional, Iterable
+from typing import Optional
 from fastapi import HTTPException
 from sqlmodel import Session, select
 from sqlalchemy import or_
@@ -34,8 +34,16 @@ class ShopService:
         kind: Optional[VehicleKind] = None,
         q: Optional[str] = None,
         only_shop_kinds: bool = True,
-    ) -> list[VehicleType]:
-        stmt = select(VehicleType)
+    ) -> list[tuple[VehicleType, Optional[VehicleTypeDetails]]]:
+        # Join auf Details, damit Listen-Views (Shop) image_key & Stock ohne N+1 liefern können
+        stmt = (
+            select(VehicleType, VehicleTypeDetails)
+            .join(
+                VehicleTypeDetails,
+                VehicleTypeDetails.vehicle_type_id == VehicleType.id,
+                isouter=True,
+            )
+        )
 
         if only_shop_kinds:
             stmt = stmt.where(VehicleType.kind.in_(SHOP_KINDS))
@@ -46,12 +54,7 @@ class ShopService:
         if q is not None and q.strip():
             q = q.strip()
             like = f"%{q}%"
-            stmt = stmt.where(
-                or_(
-                    VehicleType.name.ilike(like),
-                    VehicleType.name.ilike(like),
-                )
-            )
+            stmt = stmt.where(or_(VehicleType.name.ilike(like), VehicleType.name.ilike(like)))
 
         stmt = stmt.order_by(VehicleType.kind, VehicleType.name)
         return list(self.db.exec(stmt).all())
@@ -80,6 +83,8 @@ class ShopService:
 
         return vt, details, compatible_names
 
+    # TODO(CELERY): Wöchentliche Leasingrate (lease_weekly_rate_percent) wird über Scheduler/Celery abgebucht. Hier nur Anzahlung + Vertragsstart.
+    # außerdem: Liefer-/Statuslogik (in Lieferung -> einsatzbereit)
     def lease_vehicle_type(self, company: Company, type_id: int, leasing_model: int) -> Vehicle:
         if leasing_model not in LEASING_MODELS:
             raise HTTPException(status_code=400, detail="Ungültiges Leasingmodell")
@@ -87,6 +92,17 @@ class ShopService:
         vt = self.db.exec(select(VehicleType).where(VehicleType.id == type_id)).first()
         if not vt:
             raise HTTPException(status_code=404, detail="Fahrzeugtyp nicht gefunden.")
+
+        details = self.db.exec(select(VehicleTypeDetails).where(VehicleTypeDetails.vehicle_type_id == vt.id)).first()
+
+        if not details:
+            raise HTTPException(status_code=500, detail="Fahrzeugdetails nicht vorhanden -> Bestand kann nicht geprüft werden.")
+
+        if details.available_stock is None:
+            raise HTTPException(status_code=500, detail="Bestand für diesen Fahrzeugtyp ist nicht definiert.")
+
+        if details.available_stock <= 0:
+            raise HTTPException(status_code=409, detail="Dieser Fahrzeugtyp ist aktuell nicht verfügbar.")
 
         if vt.kind not in SHOP_KINDS:
             raise HTTPException(status_code=400, detail="Dieser Fahrzeugtyp ist nicht im Shop leasebar.")
@@ -99,6 +115,9 @@ class ShopService:
 
         company.capital -= down_payment
         self.db.add(company)
+
+        details.available_stock -= 1
+        self.db.add(details)
 
         v = Vehicle(
             type_id=vt.id,
