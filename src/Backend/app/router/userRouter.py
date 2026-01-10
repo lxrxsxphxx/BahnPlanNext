@@ -14,12 +14,6 @@ router = APIRouter(tags=["User"])
 def get_user_service(db: Session = Depends(database.get_db)):
     return UserService(db)
 
-
-@router.get("/users")
-def get_all_users(service: UserService = Depends(get_user_service)):
-    return service.get_all_users()
-
-
 @router.post("/register")
 def register_user(
     user: UserSchema,
@@ -46,6 +40,10 @@ def login(
     )
 
     return {"message": "Login erfolgreich"}
+
+@router.get("/users")
+def get_all_users(service: UserService = Depends(get_user_service)):
+    return service.get_all_users()
 
 
 @router.post("/logout")

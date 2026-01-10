@@ -7,6 +7,9 @@ password = os.getenv("password")
 
 
 def send_mail(to, token, username, email=email, password=password):
+    if os.getenv("DISABLE_EMAIL", "false").lower() == "true":
+        print("[sendmail] DISABLE_EMAIL=true -> skipping email send")
+        return
     msg = EmailMessage()
     msg.add_alternative(
         f"""\
@@ -17,8 +20,8 @@ def send_mail(to, token, username, email=email, password=password):
   </head>
   <body>
     <div id="box">
-      <h2>Hallo {username},</h2> 
-        <p> Bevor du die Seite nutzen kannst, klicke 
+      <h2>Hallo {username},</h2>
+        <p> Bevor du die Seite nutzen kannst, klicke
             <a href="http://localhost:8000/verify/{token}">
                 hier
             </a> um deine registrierung zu bestätigen
