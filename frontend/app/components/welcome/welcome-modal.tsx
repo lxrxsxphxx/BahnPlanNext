@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Modal } from '../modal/modal';
+
 /**
  * Typdefinition für jeden Slide
  */
@@ -62,15 +64,13 @@ export type Props = {
 export function WelcomeModal({ open, onClose }: Props) {
   const [current, setCurrent] = useState(0); // aktueller Slide-Index
 
-  if (!open) return null;
-
   /** Funktionen zum Wechseln der Slides */
   const nextSlide = () => setCurrent((p) => (p + 1) % slides.length);
   const prevSlide = () =>
     setCurrent((p) => (p - 1 + slides.length) % slides.length);
 
   return (
-    <div className="bg-opacity-1 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+    <Modal open={open} onClose={onClose}>
       {/* Modal Container */}
       <div className="relative flex h-[600px] w-[550px] flex-col overflow-hidden rounded-xl bg-gradient-to-b from-gray-100 to-white shadow-lg">
         {/* Slide Inhalt */}
@@ -115,7 +115,7 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current > 0 ? (
               <button
                 onClick={prevSlide}
-                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200 text-black"
+                className="rounded border border-gray-200 px-3 py-1 text-sm text-black hover:bg-gray-200"
               >
                 ZURÜCK
               </button>
@@ -137,7 +137,8 @@ export function WelcomeModal({ open, onClose }: Props) {
             {current < slides.length - 1 ? (
               <button
                 onClick={nextSlide}
-                className="rounded border border-gray-200 px-3 py-1 text-sm hover:bg-gray-200 text-black"
+                type="button"
+                className="rounded border border-gray-200 px-3 py-1 text-sm text-black hover:bg-gray-200"
               >
                 WEITER
               </button>
@@ -147,6 +148,6 @@ export function WelcomeModal({ open, onClose }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
