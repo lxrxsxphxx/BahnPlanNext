@@ -12,6 +12,7 @@ MAX_NAME_LEN = 25
 INVALID_NAME_MSG = "Ungültiger Name! erlaubt sind nur: A–Z, a–z, 0–9 und Standard-Satzzeichen"
 TOO_LONG_MSG = f"Name zu lang! Maximal {MAX_NAME_LEN} Zeichen."
 NAME_EXISTS_MSG = "Name existiert bereits!"
+ALREADY_HAS_COMPANY_MSG = "Du besitzt bereits eine Gesellschaft."
 
 _ALLOWED_RE = re.compile(r"^[A-Za-z0-9 .,;:!?\"'()\[\]\{\}\-_/+&@#]+$")
 
@@ -32,19 +33,8 @@ class CompanyService:
         if len(name) > MAX_NAME_LEN:
             raise HTTPException(status_code=400, detail=TOO_LONG_MSG)
 
-    def get_user_by_token(self, user_token: str) -> User:
-        try:
-            claims = auth.decode_token(user_token)
-        except Exception:
-            raise HTTPException(status_code=401, detail="Ungültiger Token.")
-
-        if not claims.get("active"):
-            raise HTTPException(
-                status_code=401,
-                detail="Bitte bestätige zuerst deine Registrierung über den Link in der E-Mail.",
-                headers={"WWW-Authenticate": "Bearer"},
-            )
-
+    def get_user_from_claims(self, claims: dict) -> User:
+        # check_active garantiert "active", aber wir bleiben defensiv
         username = claims.get("username") or claims.get("sub")
         if not username:
             raise HTTPException(status_code=401, detail="Ungültiger Token: Benutzername fehlt.")
@@ -63,11 +53,11 @@ class CompanyService:
     def company_name_exists(self, name: str) -> bool:
         return self.db.exec(select(Company).where(Company.name == name)).first() is not None
 
-    def create_company(self, user_token: str, raw_name: str) -> Company:
-        user = self.get_user_by_token(user_token)
+    def create_company(self, claims: dict, raw_name: str) -> Company:
+        user = self.get_user_from_claims(claims)
 
         if self.user_has_company(user.id):
-            raise HTTPException(status_code=400, detail="Du besitzt bereits eine Gesellschaft.")
+            raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
 
         name = self.normalize_name(raw_name)
         self.validate_name(name)
@@ -87,17 +77,11 @@ class CompanyService:
 
             self.db.commit()
             self.db.refresh(company)
+            return company
+
         except IntegrityError:
             self.db.rollback()
+            # Rennen/Parallelität: nochmal sauber unterscheiden
+            if self.user_has_company(user.id):
+                raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
             raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
-
-        link = CompanyUserLink(user_id=user.id, company_id=company.id, is_owner=True)
-        self.db.add(link)
-
-        try:
-            self.db.commit()
-        except IntegrityError:
-            self.db.rollback()
-            raise HTTPException(status_code=400, detail="Du besitzt bereits eine Gesellschaft.")
-
-        return company
