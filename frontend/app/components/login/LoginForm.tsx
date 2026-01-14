@@ -5,6 +5,7 @@ import { login } from '@/services/auth';
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -29,12 +30,16 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
       setError('Bitte füllen Sie alle Felder aus.');
     } else {
       setError(null);
+      setSuccess(null);
       console.log('Anmeldeversuch mit:', { username, password });
       try {
         await login(username, password);
+        setSuccess('Anmeldung erfolgreich.');
+        setError(null);
       } catch (err) {
+        setSuccess(null);
         setError(
-          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.' + err,
+          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.'
         );
       }
     }
@@ -162,6 +167,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
           Login
         </button>
 
+        {success && <p className="text-center text-sm text-green-400">{success}</p>}
         {error && <p className="text-center text-sm text-red-400">{error}</p>}
 
         <p className="mt-6 text-center text-sm text-gray-300">
