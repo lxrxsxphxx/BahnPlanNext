@@ -107,6 +107,19 @@ pip install -r requirements.txt
 
 Im Backend-Verzeichnis (`src/Backend`) die Datei `.env` anpassen.
 
+#### Optional: Demo-Testdaten (Seed)
+
+Für lokale Tests (z.B. Swagger `/docs`) kann das Backend beim Start automatisch Demo-Daten anlegen
+(Stations, Route, RouteStops). Das ist **optional** und standardmäßig deaktiviert.
+
+##### Aktivieren:
+In der `.env` im Backend-Verzeichnis:
+
+```env
+SEED_DEMO_DATA=true
+```
+
+
 5. Datenbanktabellen initialisieren
 
 ``` bash
@@ -120,6 +133,7 @@ python -m app.seed.seed_locomotives
 ```
 
 7. Backend starten
+8. 
 Im Backend-Verzeichnis:
 
 ```bash

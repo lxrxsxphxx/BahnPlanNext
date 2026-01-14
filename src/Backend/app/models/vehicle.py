@@ -32,6 +32,12 @@ class Vehicle(SQLModel, table=True):
   """
   __tablename__ = "vehicles"
 
+  vehicle_number: str = Field(
+      index=True,
+      nullable=False,
+      description="Fachliche Fahrzeugnummer (z. B. ICE-401-012)"
+  )
+
   id: Optional[int] = Field(default=None, primary_key=True)
 
   type_id: int = Field(foreign_key="vehicle_types.id")
