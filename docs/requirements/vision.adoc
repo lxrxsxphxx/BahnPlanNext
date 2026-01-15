@@ -1,60 +1,54 @@
 = Vision: {project-name}
-Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
-{localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
-// Platzhalter für weitere Dokumenten-Attribute
 
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben.
+
+Bahnplan ist ein Seminarprojekt der HTW Dresden mit dem Ziel, eine moderne, webbasierte Simulation des Eisenbahnbetriebs zu entwickeln.  
+Das Projekt basiert auf der ehemaligen Webseite *bahnplan.de*, die über mehrere Jahre im Internet aktiv war und den Ausgangspunkt für das aktuelle Seminar bildet.  
+Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen.  
+Diese Idee wird nun technisch und konzeptionell neu umgesetzt mit aktuellen Technologien, klarer Architektur und dem Ziel, ein funktionsfähiges MVP zu realisieren.  
+
+Das System soll es den Nutzern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen wie Fahrplanplanung oder Wartung strategisch zu treffen.  
+Damit verbindet das Projekt technisches Know-how (Webentwicklung, Softwarearchitektur, Automatisierung) mit Management- und Simulationsaspekten.  
+Im Fokus steht nicht der reine Spielaspekt, sondern das Erlernen und Anwenden von Prinzipien aus Softwarearchitektur, agilem Vorgehen und systematischer Projektplanung.
+
 
 === Zweck
-Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
+Das Dokument beschreibt die fachliche Vision und den Zielrahmen des Projekts *Bahnplan*.  
+Es fasst die Beweggründe, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und soll sicherstellen, dass alle Teammitglieder ein gemeinsames Verständnis für Ziel, Umfang und Nutzen entwickeln.  
+Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen werden in separaten Dokumenten vertieft.
+
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von <Team> entwickelt wird. Das System wird es <Zielkunde/Auftraggeber> erlauben, <Hauptfunktionen> zu nutzen, um damit <Vorteile> zu erreichen / <Aufgabe> zu erleichtern / <Problem> zu lösen.
 
+Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die von Studierenden, Interessierten oder Simulationsteilnehmern genutzt werden kann.  
+Sie erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, an Ausschreibungen teilzunehmen, Fahrpläne zu planen und Kosten zu kalkulieren.  
+Im Vordergrund steht das Zusammenspiel wirtschaftlicher und technischer Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.  
+
+Entwickelt wird die Anwendung im Team auf Basis agiler Methoden (Scrum, BDD, TDD).  
+Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentrale Spielmechaniken und technische Grundlagen demonstriert.
 === Definitionen, Akronyme und Abkürzungen
-//Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
+
 Siehe <<#glossary, Glossar>>.
 //Siehe <<./glossary.adoc#glossary, Glossar>>.
 
 === Referenzen
 (hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
-
+* Ursprüngliche Plattform: bahnplan.de  
+* Architecture Notebook (laufend gepflegt)  
+* Product Backlog (aktuell im GitHub-Projekt)
 
 == Positionierung
 
 === Fachliche Motivation
-//Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
+*Bahnplan.de* war ein browserbasiertes Multiplayer-Planspiel, das den Aufbau und Betrieb virtueller Eisenbahnunternehmen simulierte.  
+Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerweile offline ist.  
+Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter Spielmechanik.  
 
 === Produktvision
-//Eine Produktvision beschreibt das Einsatzziel der Anwendung und sorgt für ein gemeinsames Ziel und Verständnis für alle Beteiligten im Projekt. Geben Sie in knapper Form übersichtsartig die Positionierung der angestrebten Lösung im Vergleich zu verfügbaren Alternativen dar. Das folgende Format kann dazu verwendet werden:
-
-
-[cols="1,3"]
-|===
-| Für | [Zielkunde / Persona]
-| der / die | [Angabe des Bedarfs oder Chance]
-| ist das  | [Produktname]
-| eine  | [Produktkategorie]
-| der / die | [Aussage zum Hauptvorteil / Alleinstellungsmerkmal]
-| anders als | [wesentliche Lösungsalternative]
-| kann unser Produkt | [Aussage zum Hauptunterschied]
-|===
-
-
-//Beispiel
-//[cols="1,3"]
-//|===
-//| Für | Studierende der HTWD
-//| die | zu wenig Zeit in der Mittagspause zum Essen haben
-//| ist   | Flying Burger
-//| ein  | Lieferdient für Burger
-//| der  | per Drohne liefert
-//| anders als | landgestützte Lieferdienste
-//| kann unser Produkt |  durchs Fenster direkt in den Hörsaal liefern.
-//|===
+Bahnplan ist eine Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen.  
+Jede Entscheidung, ob beim Fahrzeugkauf, bei der Fahrplangestaltung oder bei der Preisbildung, beeinflusst den Erfolg im Wettbewerb.  
+Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-Ansicht der eigenen Betriebspläne.  
 
 == Stakeholder Beschreibungen
 
@@ -64,9 +58,25 @@ Siehe <<#glossary, Glossar>>.
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| [Benennung des Stakeholders (als Rolle)]
-| [Kurze Beschreibung des Stakeholders und seiner Ziele]
-| [Fassen Sie die wesentlichen Verantwortlichkeiten des Stakeholder mit Bezug auf das zu entwickelnde System kurz zusammen, d.h. ihr besonderen Interessen. Beispiele: Dieser Stakeholder sorgt dafür, dass das System gewartet wird / dass die angezeigten Daten aktuell sind / überwacht den Projektfortschritt / usw.]
+| DEV-Team
+| Das Entwicklerteam umfasst Frontend-, Backend- und Architekturverantwortliche. Es setzt die fachlichen Anforderungen technisch um, erstellt Tests und sorgt für Wartbarkeit und Qualität des Codes.
+| Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog. Enge Zusammenarbeit mit den Product Ownern.
+
+| PO (Product Owner)
+| Der Product Owner vertritt die fachlichen Interessen und priorisiert die Anforderungen. Im Projekt wird die Rolle gemeinschaftlich von Pierre und Nicola wahrgenommen.
+| Pflege und Priorisierung des Product Backlogs, Formulierung der User Stories, Abstimmung mit Kunde und DEV-Team, Sicherstellung der fachlichen Vision.
+
+| Kunde
+| Der Auftraggeber des Projekts ist Prof. Iffländer. Er bewertet Konzept, Umsetzung und Präsentation und stellt sicher, dass die Seminarziele erfüllt werden.
+| Definition der Rahmenbedingungen, fachliche Rückmeldung in Reviews, Abnahme des MVP.
+
+| Nutzer
+| Endanwender der Anwendung, also Personen, die Bahnplan aktiv spielen oder testen. Sie interagieren über die Weboberfläche, gründen Gesellschaften und nehmen an Ausschreibungen teil.
+| Nutzung und Feedback. Dienen als Orientierung für Funktionalität, Usability und Systemperformance.
+
+| Gesetzgeber
+| Externer Stakeholder, der über rechtliche Vorgaben (z. B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
+| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben bei Registrierung und Login.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
@@ -75,27 +85,36 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 == Produktüberblick
 
 === Bedarfe und Hauptfunktionen
-//Vermeiden Sie Angaben zum Entwurf. Nennen wesentliche Features (Produktmerkmale) auf allgemeiner Ebene. Fokussieren Sie sich auf die benötigten Fähigkeiten des Systems und warum (nicht wie!) diese realisiert werden sollen. Geben Sie die von den Stakeholdern vorgegebenen Prioritäten an.
-
 [%header, cols="4,1,4,1"]
 |===
-| Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| xx | xx | xx | xx
-|===
+| Bedarf | Priorität | Funktion / Fähigkeit | Geplantes Release
 
+| Besucher möchten verstehen, worum es bei Bahnplan geht, bevor sie sich registrieren. | Hoch | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | MVP
+
+| Nutzer möchten sich registrieren und einloggen können, um am Spiel teilzunehmen. | Hoch | Registrierung und Login | MVP
+
+| Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
+
+| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | MVP
+
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung  | MVP
+
+| Das System soll auch bei mehreren Nutzern stabil bleiben. | Hoch | Architektur für mehrere gleichzeitige Nutzer, Performanceoptimierung und modernes Design | MVP
+|===
 
 === Zusätzliche Produktanforderungen
-//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-Hinweise:
 
-. Führen Sie die wesentlichen anzuwendenden Standards, Hardware oder andere Plattformanforderungen, Leistungsanforderungen und Umgebungsanforderungen auf
-. Definieren Sie grob die Qualitätsanforderungen für Leistung, Robustheit, Ausfalltoleranz, Benutzbarkeit und ähnliche Merkmale, die Qualitätsanforderungen an das geplante Produkt beschreiben.
-. Notieren Sie alle Entwurfseinschränkungen, externe Einschränkungen, Annahmen oder andere Abhängigkeiten, die wenn Sie geändert werden, das Visions-Dokument beeinflussen. Ein Beispiel wäre die Annahme, dass ein bestimmtes Betriebssystem für die vom System erforderliche Hardware verfügbar ist. Ist das Betriebssystem nicht verfügbar, muss das Visions-Dokument angepasst werden.
-. Definieren Sie alle Dokumentationsanforderugen, inkl. Benutzerhandbücher, Onlinehilfe, Installations-, Kennzeichnungs- und Auslieferungsanforderungen.
-. Definieren Sie die Priorität für diese zusätzlichen Produktanforderungen. Ergänzen Sie, falls sinnvoll, Angaben zu Stabilität, Nutzen, Aufwand und Risiko für diese Anforderungen.
-
-[%header, cols="4,1,1"]
+[%header, cols="2,1,4,1"]
 |===
-| Anforderung | Priorität | Geplantes Release
-| xx | xx | xx
+| Anforderung | Priorität | Beschreibung | Geplantes Release
+
+| Performance und Skalierbarkeit
+| Hoch
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Standardaktionen dürfen keine spürbare Verzögerung verursachen.
+| MVP
+
+| Wartbarkeit und Dokumentation
+| Mittel
+| Alle Architektur- und Implementierungsentscheidungen werden nachvollziehbar dokumentiert. Die Projektdokumentation ist verpflichtend und dient als Grundlage für spätere Pflege und Erweiterung.
+| MVP
 |===
