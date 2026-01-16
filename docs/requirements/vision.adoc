@@ -1,5 +1,4 @@
-= Vision: {project-name}
-
+= Vision: Projekt:BahnPlan
 
 == Einführung
 
@@ -9,8 +8,7 @@ Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb
 Diese Idee wird nun technisch und konzeptionell neu umgesetzt mit aktuellen Technologien, klarer Architektur und dem Ziel, ein funktionsfähiges MVP zu realisieren.  
 
 Das System soll es den Nutzern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen wie Fahrplanplanung oder Wartung strategisch zu treffen.  
-Damit verbindet das Projekt technisches Know-how (Webentwicklung, Softwarearchitektur, Automatisierung) mit Management- und Simulationsaspekten.  
-Im Fokus steht nicht der reine Spielaspekt, sondern das Erlernen und Anwenden von Prinzipien aus Softwarearchitektur, agilem Vorgehen und systematischer Projektplanung.
+Damit die Nutzer die Möglichkeit haben, Management-Skills und Simulationsentscheidungen der Wirtschaft auf spielerische Art zu lernen.
 
 
 === Zweck
@@ -23,10 +21,10 @@ Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen wer
 
 Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die von Studierenden, Interessierten oder Simulationsteilnehmern genutzt werden kann.  
 Sie erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, an Ausschreibungen teilzunehmen, Fahrpläne zu planen und Kosten zu kalkulieren.  
-Im Vordergrund steht das Zusammenspiel wirtschaftlicher und technischer Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.  
+Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.
 
 Entwickelt wird die Anwendung im Team auf Basis agiler Methoden (Scrum, BDD, TDD).  
-Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentrale Spielmechaniken und technische Grundlagen demonstriert.
+Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentrale Spielmechaniken demonstriert.
 === Definitionen, Akronyme und Abkürzungen
 
 Siehe <<#glossary, Glossar>>.
@@ -34,7 +32,7 @@ Siehe <<#glossary, Glossar>>.
 
 === Referenzen
 (hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
-* Ursprüngliche Plattform: bahnplan.de  
+* Ursprüngliche Plattform: https://web.archive.org/web/20150311004527/http://www.bahnplan.de/cms
 * Architecture Notebook (laufend gepflegt)  
 * Product Backlog (aktuell im GitHub-Projekt)
 
@@ -60,11 +58,7 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 
 | DEV-Team
 | Das Entwicklerteam umfasst Frontend-, Backend- und Architekturverantwortliche. Es setzt die fachlichen Anforderungen technisch um, erstellt Tests und sorgt für Wartbarkeit und Qualität des Codes.
-| Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog. Enge Zusammenarbeit mit den Product Ownern.
-
-| PO (Product Owner)
-| Der Product Owner vertritt die fachlichen Interessen und priorisiert die Anforderungen. Im Projekt wird die Rolle gemeinschaftlich von Pierre und Nicola wahrgenommen.
-| Pflege und Priorisierung des Product Backlogs, Formulierung der User Stories, Abstimmung mit Kunde und DEV-Team, Sicherstellung der fachlichen Vision.
+| Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog.
 
 | Kunde
 | Der Auftraggeber des Projekts ist Prof. Iffländer. Er bewertet Konzept, Umsetzung und Präsentation und stellt sicher, dass die Seminarziele erfüllt werden.
@@ -91,15 +85,15 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Besucher möchten verstehen, worum es bei Bahnplan geht, bevor sie sich registrieren. | Hoch | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | MVP
 
-| Nutzer möchten sich registrieren und einloggen können, um am Spiel teilzunehmen. | Hoch | Registrierung und Login | MVP
+| Nutzer möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
 
 | Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
 
 | Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | MVP
 
-| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung  | MVP
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | hoch | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | MVP
 
-| Das System soll auch bei mehreren Nutzern stabil bleiben. | Hoch | Architektur für mehrere gleichzeitige Nutzer, Performanceoptimierung und modernes Design | MVP
+| Nutzer möchten ein ansprechendes und modernes UI | Hoch |  Modernes Design | MVP
 |===
 
 === Zusätzliche Produktanforderungen
