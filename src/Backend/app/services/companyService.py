@@ -65,10 +65,11 @@ class CompanyService:
         if self.company_name_exists(name):
             raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
 
-        company = Company(name=name, capital=4_000_000)
-        self.db.add(company)
 
         try:
+            company = Company(name=name, capital=4_000_000)
+            self.db.add(company)
+
             # erzeugt company.id ohne Commit
             self.db.flush()
 

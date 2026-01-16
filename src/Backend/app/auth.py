@@ -30,9 +30,6 @@ def create_access_token(user: User):
     return jwt.encode(claims=claims, key=JWT_SECRET, algorithm=ALGORITHMUS)
 
 
-def decode_token(token):
-    claims = jwt.decode(token, key=JWT_SECRET, algorithms=[ALGORITHMUS])
-
 def create_verify_token(user: User):
     claims = {
         "sub": user.username,
