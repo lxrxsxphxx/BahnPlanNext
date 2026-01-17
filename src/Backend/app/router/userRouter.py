@@ -45,7 +45,6 @@ def login(
 def get_all_users(service: UserService = Depends(get_user_service)):
     return service.get_all_users()
 
-
 @router.get("/login/{username}/{password}")
 def login_get(
     username: str,
