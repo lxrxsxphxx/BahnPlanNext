@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router';
+
 import Sidebar from './Sidebar';
+
 /**
  * Typdefinition für einen Navigationseintrag.
  *
@@ -25,7 +27,6 @@ export type LinkEntry = {
   isParent?: boolean;
   parentLink?: string;
 };
-
 
 const LINKS: LinkEntry[] = [
   { to: '/', label: 'Startseite', visibleOnFrontpage: true },
@@ -59,6 +60,12 @@ const LINKS: LinkEntry[] = [
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
+
+interface NavbarProps {
+  isFrontPage?: boolean;
+  onRegisterClick?: () => void;
+}
+
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
 Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links und oben dargestellt */
 /**
@@ -69,9 +76,8 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  */
 export default function Navbar({
   isFrontPage = false,
-}: {
-  isFrontPage?: boolean;
-}) {
+  onRegisterClick,
+}: NavbarProps) {
   return (
     <>
       {isFrontPage ? (
@@ -118,7 +124,11 @@ export default function Navbar({
               </NavLink>
 
               <NavLink
-                to="/register"
+                to="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  onRegisterClick?.();
+                }}
                 className={({ isActive }: { isActive: boolean }) =>
                   'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors ' +
                   (isActive
@@ -163,7 +173,11 @@ export default function Navbar({
                 </NavLink>
 
                 <NavLink
-                  to="/register"
+                  to="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onRegisterClick?.();
+                  }}
                   className={({ isActive }: { isActive: boolean }) =>
                     'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors ' +
                     (isActive

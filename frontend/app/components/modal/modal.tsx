@@ -29,20 +29,6 @@ export function Modal({ open, onClose, children }: ModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {children}
-
-        <button
-          className="mt-6 w-full rounded-xl bg-blue-600 py-2 text-white transition hover:bg-blue-700"
-          onClick={onClose}
-        >
-          Close
-        </button>
-        <button
-          className="mt-6 w-full rounded-xl bg-blue-600 py-2 text-white transition hover:bg-blue-700"
-          type="submit"
-          form="registerForm"
-        >
-          Registrieren
-        </button>
       </div>
     </div>
   );
