@@ -1,0 +1,71 @@
+version: '3.9'
+
+services:
+  # PostgreSQL Datenbank
+  postgres:
+    image: postgres:15-alpine
+    container_name: bahnplan-postgres
+    environment:
+      POSTGRES_USER: ${DB_USER:-bahnplan_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-bahnplan_password}
+      POSTGRES_DB: ${DB_NAME:-bahnplan_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      # Persistente Daten auch nach Container-Stopp
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-bahnplan_user} -d ${DB_NAME:-bahnplan_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - bahnplan-network
+    restart: unless-stopped
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./src/Backend
+      dockerfile: Dockerfile
+    container_name: bahnplan-backend
+    environment:
+      # Datenbank
+      DATABASE_URL: postgresql://${DB_USER:-bahnplan_user}:${DB_PASSWORD:-bahnplan_password}@postgres:5432/${DB_NAME:-bahnplan_db}
+      
+      # Security
+      SECRET_KEY: ${SECRET_KEY:-your-super-secret-key-change-this-in-production}
+      ALGORITHM: ${ALGORITHM:-HS256}
+      
+      # Email (optional)
+      SMTP_SERVER: ${SMTP_SERVER:-smtp.gmail.com}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SENDER_EMAIL: ${SENDER_EMAIL:-your-email@gmail.com}
+      SENDER_PASSWORD: ${SENDER_PASSWORD:-your-app-specific-password}
+      
+      # Seeding
+      SEED_DEMO_DATA: ${SEED_DEMO_DATA:-true}
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      # Code-Synchronisation für Live-Reload (nur Development!)
+      - ./src/Backend:/app
+    networks:
+      - bahnplan-network
+    restart: unless-stopped
+    command: >
+      sh -c "python -m app.init_db &&
+             python -m app.seed.seed_locomotives &&
+             fastapi dev app/main.py --host 0.0.0.0 --port 8000"
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  bahnplan-network:
+    driver: bridge

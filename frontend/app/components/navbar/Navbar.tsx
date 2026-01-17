@@ -162,6 +162,30 @@ export default function Navbar({
                   Anmelden
                 </NavLink>
 
+                {/* Dev Quick Login Button */}
+                <button
+                  onClick={async () => {
+                    try {
+                      const response = await fetch('http://localhost:8000/login/testuser/test123456', {
+                        credentials: 'include'
+                      });
+                      if (response.ok) {
+                        alert('Dev login successful! Testuser logged in.');
+                        window.location.reload();
+                      } else {
+                        alert('Dev login failed');
+                      }
+                    } catch (error) {
+                      console.error('Dev login error:', error);
+                      alert('Dev login error: ' + (error as Error).message);
+                    }
+                  }}
+                  className="rounded-md bg-yellow-500/20 px-3 py-1 text-sm font-medium text-yellow-200 hover:bg-yellow-500/30 transition-colors"
+                  title="Development only: Quick login with testuser/test123456"
+                >
+                  Dev Login
+                </button>
+
                 <NavLink
                   to="/register"
                   className={({ isActive }: { isActive: boolean }) =>

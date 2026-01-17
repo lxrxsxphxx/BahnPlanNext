@@ -1,7 +1,9 @@
 import type { Modell } from "@/routes/beschaffung.loks";
 import { LeasingModelDropdown } from "./LeasingModelDropdown";
 import { useState } from "react";
+import { leaseLok } from "@/services/lokshop";
 interface Lok{
+    id: number;
     name: string;
     image: string;
     specsLeft: { label: string; value: string }[];
@@ -17,8 +19,17 @@ interface LokCardProps {
 export default function LokCard({ lok }: LokCardProps) {
     const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
     
-    const handleLeasing = () => {
-      alert('Leasing abgeschlossen! Folgendes Modell wurde ausgewählt: ' + JSON.stringify(selectedModel));
+    const handleLeasing = async () => {
+      try {
+        if (selectedModel) {
+          await leaseLok(lok.id, selectedModel.id);
+          alert('Leasing abgeschlossen! Folgendes Modell wurde ausgewählt: ' + JSON.stringify(selectedModel));
+        } else {
+          alert('Bitte wählen Sie ein Leasingmodell aus.');
+        }
+      } catch (error) {
+        alert('Fehler beim Leasing: ' + (error as Error).message);
+      }
     }
   return (
     <div key={lok.name} className="rounded-2xl border border-blue-500/50 bg-gray-800 p-6">
@@ -27,7 +38,7 @@ export default function LokCard({ lok }: LokCardProps) {
                   {/* Bild */}
                   <div>
                     <div className="overflow-hidden rounded-md border border-gray-700">
-                      <img src={lok.image} alt={lok.name} className="h-103 w-full object-cover" />
+                      <img src={`/images/loks/br${lok.id}.jpg`} alt={lok.name} className="h-103 w-full object-cover" />
                     </div>
                   </div>
     
