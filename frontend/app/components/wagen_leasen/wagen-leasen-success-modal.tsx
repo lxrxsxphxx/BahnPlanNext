@@ -14,12 +14,12 @@ export default function LeasingSuccessModal({
   return (
     // Hintergrund-Overlay klickbar
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 animate-fadeIn"
+      className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/70"
       onClick={onClose} // Klick auf Hintergrund -> Modal schließen
     >
       {/* Modal selbst */}
       <div
-        className="w-full max-w-sm rounded-2xl bg-[#121C27] p-8 text-white shadow-2xl animate-scaleIn"
+        className="animate-scaleIn w-full max-w-sm rounded-2xl bg-[#121C27] p-8 text-white shadow-2xl"
         onClick={(e) => e.stopPropagation()} // Klick innerhalb Modal -> Event nicht weitergeben
       >
         {/* ICON */}
@@ -32,13 +32,17 @@ export default function LeasingSuccessModal({
               strokeWidth="3"
               viewBox="0 0 24 24"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
             </svg>
           </div>
         </div>
 
         {/* TITLE */}
-        <h2 className="mt-4 text-center text-3xl font-semibold italic text-gray-200">
+        <h2 className="mt-4 text-center text-3xl font-semibold text-gray-200 italic">
           Wagen geleast!
         </h2>
 
@@ -47,11 +51,16 @@ export default function LeasingSuccessModal({
         {/* CONTENT */}
         <div className="space-y-2 text-sm text-gray-300">
           <div>
-            <p className="font-semibold text-gray-200 mb-1 text-[17px] ml-5">Wagen-Informationen:</p>
-            <ul className="list-disc list-inside text-[15px] ml-5">
-              <li>{wagenName}: Standard (x{standardWagen}), Stwg. (x{steuerWagen})</li>
+            <p className="mb-1 ml-5 text-[17px] font-semibold text-gray-200">
+              Wagen-Informationen:
+            </p>
+            <ul className="ml-5 list-inside list-disc text-[15px]">
               <li>
-                Status: <span className="text-red-400 font-medium">in Lieferung</span>
+                {wagenName}: Standard (x{standardWagen}), Stwg. (x{steuerWagen})
+              </li>
+              <li>
+                Status:{' '}
+                <span className="font-medium text-red-400">in Lieferung</span>
               </li>
             </ul>
           </div>
@@ -59,8 +68,10 @@ export default function LeasingSuccessModal({
           <hr className="my-3 border-gray-700" />
 
           <div>
-            <p className="font-semibold text-gray-200 mb-1 text-[17px] ml-5">Lieferinformationen:</p>
-            <ul className="list-disc list-inside text-[15px] ml-5">
+            <p className="mb-1 ml-5 text-[17px] font-semibold text-gray-200">
+              Lieferinformationen:
+            </p>
+            <ul className="ml-5 list-inside list-disc text-[15px]">
               <li>Lieferdatum: 03.01.2026</li>
               <li>Leasingkosten werden ab Lieferdatum abgezogen</li>
             </ul>
@@ -68,17 +79,17 @@ export default function LeasingSuccessModal({
         </div>
 
         {/* BUTTONS */}
-        <div className="mt-6 flex gap-4 mb-2">
+        <div className="mt-6 mb-2 flex gap-4">
           <button
             onClick={onClose}
-            className="flex-1 rounded-lg px-2 py-2.5 bg-[#1E4F8A] text-[14px] font-semi transition hover:bg-[#2468B5] active:scale-95"
+            className="font-semi flex-1 rounded-lg bg-[#1E4F8A] px-2 py-2.5 text-[14px] transition hover:bg-[#2468B5] active:scale-95"
           >
             zu Meine Fahrzeuge
           </button>
 
           <button
             onClick={onClose}
-            className="flex-1 rounded-lg px-2 py-2.5 bg-[#1E4F8A] text-[14px] font-semi transition hover:bg-[#2468B5] active:scale-95"
+            className="font-semi flex-1 rounded-lg bg-[#1E4F8A] px-2 py-2.5 text-[14px] transition hover:bg-[#2468B5] active:scale-95"
           >
             Zurück zum Shop
           </button>
