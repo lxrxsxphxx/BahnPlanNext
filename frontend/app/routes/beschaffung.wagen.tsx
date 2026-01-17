@@ -24,7 +24,7 @@ export default function BeschaffungWagen() {
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold">Shop&gt; Wagen</h1>
         <div className="rounded-md bg-gray-800 px-4 py-2 text-sm">
-          {cashBalance.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}
+          💰 {cashBalance.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}
         </div>
       </div>
 
@@ -53,6 +53,7 @@ export default function BeschaffungWagen() {
 
       {successModalOpen && (
         <LeasingSuccessModal
+          wagenName={wagenName}
           standardWagen={leasedStandard}
           steuerWagen={leasedSteuer}
           onClose={() => setSuccessModalOpen(false)}
