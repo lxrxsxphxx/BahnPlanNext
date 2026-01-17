@@ -13,6 +13,7 @@ import './app.css';
 import { Modal } from './components/modal/modal';
 import { useModal } from './components/modal/useModal';
 import Navbar from './components/navbar/Navbar';
+import BeschaffungWagen from './routes/beschaffung.wagen';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
