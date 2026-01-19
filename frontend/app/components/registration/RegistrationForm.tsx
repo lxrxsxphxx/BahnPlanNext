@@ -1,19 +1,10 @@
 // src/components/registration/RegistrationForm.tsx
 import { useEffect, useState } from 'react';
 
-export interface RegistrationFormValues {
-  name: string;
-  email: string;
-  password: string;
-  passwordWied: string;
-}
-
-export interface RegistrationErrors {
-  name?: string;
-  email?: string;
-  password?: string;
-  passwordWied?: string;
-}
+import type {
+  RegistrationErrors,
+  RegistrationFormValues,
+} from './registration.types';
 
 interface RegistrationFormProps {
   onSuccess: () => void;

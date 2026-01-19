@@ -123,21 +123,15 @@ export default function Navbar({
                 Anmelden
               </NavLink>
 
-              <NavLink
-                to="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onRegisterClick?.();
-                }}
-                className={({ isActive }: { isActive: boolean }) =>
-                  'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors ' +
-                  (isActive
-                    ? 'bg-white text-black'
-                    : 'bg-white/90 text-black/90 hover:bg-white')
+              <button
+                type="button"
+                onClick={onRegisterClick}
+                className={
+                  'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors'
                 }
               >
                 Registrieren
-              </NavLink>
+              </button>
             </div>
           </div>
         </nav>
