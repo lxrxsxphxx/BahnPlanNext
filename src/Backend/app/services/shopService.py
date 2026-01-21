@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, datetime
 from typing import Optional
 from fastapi import HTTPException
 from sqlmodel import Session, select
-from sqlalchemy import or_
+from sqlalchemy import or_, func, cast, Integer
 
 from app.models.vehicle import (
     VehicleType,
@@ -119,7 +119,15 @@ class ShopService:
         details.available_stock -= 1
         self.db.add(details)
 
+        next_no = self.db.exec(
+            select(func.coalesce(func.max(cast(Vehicle.vehicle_number, Integer)), 0) + 1)
+        ).one()
+
+        vehicle_number = str(next_no)
+
+
         v = Vehicle(
+            vehicle_number=vehicle_number,
             type_id=vt.id,
             owner_company_id=company.id,
             is_leased=True,
@@ -127,6 +135,7 @@ class ShopService:
             lease_start=date.today(),
             lease_annual_rate_percent=m["annual_rate_percent"],
             lease_weekly_rate_percent=m["weekly_rate_percent"],
+            acquired_at=datetime.utcnow(),
         )
         self.db.add(v)
 

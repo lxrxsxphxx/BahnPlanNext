@@ -2,7 +2,7 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 import os
-from app.seed import seed_demo_data
+from app.seeding import seed_demo_data
 from contextlib import asynccontextmanager
 from app.router import userRouter, routeRouter, vehicleRouter, shopRouter
 from fastapi import FastAPI
