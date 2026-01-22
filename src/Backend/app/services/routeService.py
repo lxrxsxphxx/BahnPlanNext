@@ -121,7 +121,7 @@ class RouteService:
 
         result: List[Dict[str, Any]] = []
         for route, start_name, end_name, stop_count in rows:
-            stops = stops_by_route_id.get(route.id, [])
+            stops = stops_by_route_id.get(route.uuid, [])
 
             result.append({
                 "uuid": str(route.uuid),
