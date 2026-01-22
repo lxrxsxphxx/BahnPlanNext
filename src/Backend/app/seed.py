@@ -78,9 +78,9 @@ def seed_demo_data(db_generator) -> None:
         session.refresh(route)
 
         session.add_all([
-            RouteStop(route_id=route.id, station_id=dresden.id, seq=1, km=0.0,    dep_a=time(8, 10), dep_b=time(18, 10)),
-            RouteStop(route_id=route.id, station_id=leipzig.id, seq=2, km=121.3,  arr_a=time(9, 0), dep_a=time(9, 5), arr_b=time(17, 5), dep_b=time(17, 10)),
-            RouteStop(route_id=route.id, station_id=berlin.id,  seq=3, km=240.865, arr_a=time(10, 10), arr_b=time(16, 10)),
+            RouteStop(route_id=route.uuid, station_id=dresden.id, seq=1, km=0.0,    dep_a=time(8, 10), dep_b=time(18, 10)),
+            RouteStop(route_id=route.uuid, station_id=leipzig.id, seq=2, km=121.3,  arr_a=time(9, 0), dep_a=time(9, 5), arr_b=time(17, 5), dep_b=time(17, 10)),
+            RouteStop(route_id=route.uuid, station_id=berlin.id,  seq=3, km=240.865, arr_a=time(10, 10), arr_b=time(16, 10)),
         ])
         session.commit()
 
