@@ -14,8 +14,4 @@ COPY . /app
 
 EXPOSE 8000
 
-# ANPASSEN: Importpfad eurer FastAPI app
-# Beispiele:
-# - uvicorn app.main:app ...
-# - uvicorn main:app ...
 CMD ["bash", "-lc", "uvicorn app.main:app --host 0.0.0.0 --port 8000"]
