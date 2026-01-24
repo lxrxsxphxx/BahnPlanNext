@@ -21,10 +21,22 @@ src/
   ├─ requirements.txt
   ├─ README.md
   └──app/
+      ├── seed/
+      │   ├── seed_locomotives.py
+      │   ├── locomotives.json
       ├── enums/
       │   ├── roles.py
       │   ├── vehicle.py
       │   └── workshop.py
+      ├── router/
+      │   ├── shopRouter.py
+      │   └── userRouter.py
+      ├── services/
+      │   ├── shopService.py
+      │   └── userService.py
+      ├── schemas/
+      │   ├── shopSchema.py
+      │   └── userSchema.py
       ├── models/
       │   ├── __init__.py
       │   ├── company.py
@@ -36,8 +48,6 @@ src/
       │   ├── user.py
       │   ├── vehicle.py
       │   └── workshop.py
-      ├── schemas/
-      │   └── userSchema.py
       ├── auth.py
       ├── crud.py
       ├── database.py
@@ -112,11 +122,18 @@ SEED_DEMO_DATA=true
 
 5. Datenbanktabellen initialisieren
 
-```
+``` bash
 python -m app.init_db
 ```
 
-6. Backend starten
+6. Lokomotiven/Triebfahrzeuge einfügen und "compatible_with" setzen
+
+``` bash
+python -m app.seed.seed_locomotives
+```
+
+7. Backend starten
+8. 
 Im Backend-Verzeichnis:
 
 ```bash

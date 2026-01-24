@@ -2,9 +2,9 @@ from dotenv import find_dotenv, load_dotenv
 load_dotenv(find_dotenv())
 
 import os
-from app.seed import seed_demo_data
+from app.seeding import seed_demo_data
 from contextlib import asynccontextmanager
-from app.router import userRouter, routeRouter, vehicleRouter, companyRouter
+from app.router import userRouter, routeRouter, vehicleRouter, shopRouter, companyRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app import database
@@ -27,6 +27,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 app.include_router(userRouter.router)
+app.include_router(shopRouter.router)
 app.include_router(vehicleRouter.router)
 app.include_router(routeRouter.router)
 app.include_router(companyRouter.router)
