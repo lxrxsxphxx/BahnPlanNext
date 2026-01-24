@@ -22,7 +22,7 @@ def upsert_vehicle_type(session: Session, item: dict) -> VehicleType:
             energy_cost_base=item["energy_cost_base"],
         )
         session.add(vt)
-        session.flush()  # vt.id bekommen ohne commit
+        session.flush()
     else:
         vt.kind = kind
         vt.new_price = item["new_price"]

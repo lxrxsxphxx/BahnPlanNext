@@ -5,6 +5,7 @@ from typing import Optional
 from fastapi import HTTPException
 from sqlmodel import Session, select
 from sqlalchemy import or_, func, cast, Integer
+from sqlalchemy.exc import SQLAlchemyError
 
 from app.models.vehicle import (
     VehicleType,
@@ -65,7 +66,7 @@ class ShopService:
             select(VehicleType, VehicleTypeDetails)
             .join(VehicleTypeDetails, VehicleTypeDetails.vehicle_type_id == VehicleType.id, isouter=True)
             .where(VehicleType.id == type_id)
-            .where(VehicleType.kind.in_(tuple(SHOP_KINDS)))
+            .where(VehicleType.kind.in_(SHOP_KINDS))
         )
         row = self.db.exec(stmt).first()
         if not row:
@@ -139,6 +140,11 @@ class ShopService:
         )
         self.db.add(v)
 
-        self.db.commit()
-        self.db.refresh(v)
+        try:
+            self.db.commit()
+            self.db.refresh(v)
+        except SQLAlchemyError:
+            self.db.rollback()
+            raise HTTPException(status_code=500, detail="Leasing konnte nicht gespeichert werden (DB-Fehler).")
+
         return v
