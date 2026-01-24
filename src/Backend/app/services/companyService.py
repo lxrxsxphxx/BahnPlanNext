@@ -1,0 +1,88 @@
+import re
+from sqlalchemy.exc import IntegrityError
+from fastapi import HTTPException
+from sqlmodel import Session, select
+
+from app import auth
+from app.models.user import User
+from app.models.company import Company, CompanyUserLink
+
+MAX_NAME_LEN = 25
+
+INVALID_NAME_MSG = "Ungültiger Name! erlaubt sind nur: A–Z, a–z, 0–9 und Standard-Satzzeichen"
+TOO_LONG_MSG = f"Name zu lang! Maximal {MAX_NAME_LEN} Zeichen."
+NAME_EXISTS_MSG = "Name existiert bereits!"
+ALREADY_HAS_COMPANY_MSG = "Du besitzt bereits eine Gesellschaft."
+
+_ALLOWED_RE = re.compile(r"^[A-Za-z0-9 .,;:!?\"'()\[\]\{\}\-_/+&@#]+$")
+
+class CompanyService:
+    def __init__(self, db: Session):
+        """
+        :param db: SQLModel Session
+        """
+        self.db = db
+
+    def normalize_name(self, raw: str) -> str:
+        return (raw or "").strip()
+
+    def validate_name(self, name: str) -> None:
+        if not name or not _ALLOWED_RE.match(name):
+            raise HTTPException(status_code=400, detail=INVALID_NAME_MSG)
+
+        if len(name) > MAX_NAME_LEN:
+            raise HTTPException(status_code=400, detail=TOO_LONG_MSG)
+
+    def get_user_from_claims(self, claims: dict) -> User:
+        # check_active garantiert "active", aber wir bleiben defensiv
+        username = claims.get("username") or claims.get("sub")
+        if not username:
+            raise HTTPException(status_code=401, detail="Ungültiger Token: Benutzername fehlt.")
+
+        user = self.db.exec(select(User).where(User.username == username)).first()
+        if not user:
+            raise HTTPException(status_code=401, detail="User nicht gefunden.")
+        return user
+
+    def user_has_company(self, user_id: int) -> bool:
+        link = self.db.exec(
+            select(CompanyUserLink).where(CompanyUserLink.user_id == user_id)
+        ).first()
+        return link is not None
+
+    def company_name_exists(self, name: str) -> bool:
+        return self.db.exec(select(Company).where(Company.name == name)).first() is not None
+
+    def create_company(self, claims: dict, raw_name: str) -> Company:
+        user = self.get_user_from_claims(claims)
+
+        if self.user_has_company(user.id):
+            raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
+
+        name = self.normalize_name(raw_name)
+        self.validate_name(name)
+
+        if self.company_name_exists(name):
+            raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
+
+
+        try:
+            company = Company(name=name, capital=4_000_000)
+            self.db.add(company)
+
+            # erzeugt company.id ohne Commit
+            self.db.flush()
+
+            link = CompanyUserLink(user_id=user.id, company_id=company.id, is_owner=True)
+            self.db.add(link)
+
+            self.db.commit()
+            self.db.refresh(company)
+            return company
+
+        except IntegrityError:
+            self.db.rollback()
+            # Rennen/Parallelität: nochmal sauber unterscheiden
+            if self.user_has_company(user.id):
+                raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
+            raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
