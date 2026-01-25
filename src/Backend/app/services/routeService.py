@@ -127,11 +127,12 @@ class RouteService:
             })
 
 
-        result: List[Dict[str, Any]] = []
+        result: List[Dict[str, Any]] = [{"label": "IR", "trassen": []},
+                                        {"label": "IC", "trassen": []},
+                                        {"label": "ICE", "trassen": []}]
         for route, start_name, end_name, stop_count in rows:
             stops = stops_by_route_id.get(route.uuid, [])
-
-            result.append({
+            route_obj = {
                 "uuid": str(route.uuid),
                 "name": route.name,
                 "start_station_id": route.start_station_id,
@@ -156,6 +157,12 @@ class RouteService:
 
                 "stop_count": int(stop_count or 0),
                 "stops": stops,
-            })
+            }
+            if route.allow_ir and route.allow_ic:
+                result[0]["trassen"].append(route_obj)
+            elif route.allow_ic and not route.allow_ir:
+                result[1]["trassen"].append(route_obj)
+            elif route.allow_ice and not route.allow_ic:
+                result[2]["trassen"].append(route_obj)
 
         return result
