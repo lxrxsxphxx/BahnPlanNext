@@ -74,17 +74,25 @@ class RouteService:
         EndStation = aliased(Station)
 
         # gets stop-count & Start/End-Names & routes
+        stop_counts = (
+            select(
+                RouteStop.route_id.label("route_id"),
+                func.count(RouteStop.id).label("stop_count"),
+            )
+            .group_by(RouteStop.route_id)
+            .subquery()
+        )
+
         stmt = (
             select(
                 Route,
                 StartStation.name.label("start_station_name"),
                 EndStation.name.label("end_station_name"),
-                func.count(RouteStop.id).label("stop_count"),
+                func.coalesce(stop_counts.c.stop_count, 0).label("stop_count"),
             )
             .join(StartStation, StartStation.id == Route.start_station_id)
             .join(EndStation, EndStation.id == Route.end_station_id)
-            .outerjoin(RouteStop, RouteStop.route_id == Route.uuid)
-            .group_by(Route.uuid, StartStation.name, EndStation.name)
+            .outerjoin(stop_counts, stop_counts.c.route_id == Route.uuid)
             .order_by(Route.name)
         )
 
@@ -119,11 +127,12 @@ class RouteService:
             })
 
 
-        result: List[Dict[str, Any]] = []
+        result: List[Dict[str, Any]] = [{"label": "IR", "trassen": []},
+                                        {"label": "IC", "trassen": []},
+                                        {"label": "ICE", "trassen": []}]
         for route, start_name, end_name, stop_count in rows:
-            stops = stops_by_route_id.get(route.id, [])
-
-            result.append({
+            stops = stops_by_route_id.get(route.uuid, [])
+            route_obj = {
                 "uuid": str(route.uuid),
                 "name": route.name,
                 "start_station_id": route.start_station_id,
@@ -148,6 +157,12 @@ class RouteService:
 
                 "stop_count": int(stop_count or 0),
                 "stops": stops,
-            })
+            }
+            if route.allow_ir and route.allow_ic:
+                result[0]["trassen"].append(route_obj)
+            elif route.allow_ic and not route.allow_ir:
+                result[1]["trassen"].append(route_obj)
+            elif route.allow_ice and not route.allow_ic:
+                result[2]["trassen"].append(route_obj)
 
         return result
