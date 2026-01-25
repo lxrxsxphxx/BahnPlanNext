@@ -8,7 +8,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - db_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_root:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d bahnplannext"]
       interval: 2s
@@ -43,4 +44,7 @@ services:
       - backend
 
 volumes:
-  db_data:
+  postgres_data:
+    name: bahnplan_postgres_data
+  postgres_root:
+    name: bahnplan_postgres_root
