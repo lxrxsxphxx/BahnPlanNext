@@ -99,7 +99,28 @@ def check_my_company(
     claims: dict = Depends(auth.check_active),
     service: UserService = Depends(get_user_service),
 ):
-    return service.is_user_in_company_by_username(claims["username"])  
+    return service.is_user_in_company_by_username(claims["username"])
+
+
+# Development endpoints - remove before production!
+@router.post("/dev/activate-user/{username}")
+@router.get("/dev/activate-user/{username}")
+def dev_activate_user(
+    username: str,
+    service: UserService = Depends(get_user_service)
+):
+    """
+    Development endpoint to activate a user without email verification.
+    Usage: GET /api/user/dev/activate-user/testuser
+    """
+    user = service.get_user_by_username(username)
+    if not user:
+        raise HTTPException(status_code=404, detail=f"User '{username}' not found")
+    
+    user.is_active = True
+    service.db.commit()
+    
+    return {"message": f"User '{username}' has been activated", "username": username, "is_active": True}  
 
 
 @router.post("/dev/create-test-user")

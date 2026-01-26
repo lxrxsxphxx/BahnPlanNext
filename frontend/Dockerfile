@@ -15,9 +15,11 @@ ENV CI=true
 RUN pnpm install --prod
 
 FROM base AS build-env
+ARG VITE_API_URL=http://localhost:8000
 COPY . /app/
 COPY --from=development-dependencies-env /app/node_modules /app/node_modules
 ENV CI=true
+ENV VITE_API_URL=${VITE_API_URL}
 RUN pnpm run build
 
 FROM base

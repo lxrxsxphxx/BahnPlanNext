@@ -29,7 +29,13 @@ app = FastAPI(lifespan=lifespan)
 # Configure CORS to allow credentials from frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"],  # Frontend URLs
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:5173",
+        "http://frontend:3000",  # Docker service
+        "http://localhost:8000",  # For dev requests from browser
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

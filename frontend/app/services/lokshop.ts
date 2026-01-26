@@ -1,6 +1,7 @@
+import { API_BASE_URL } from './api';
+
 export async function fetchLoks() {
-    const baseUrl = 'http://localhost:8000'; // Change this to your API URL
-    const response = await fetch(`${baseUrl}/shop/vehicle-types?kind=locomotive`, {
+    const response = await fetch(`${API_BASE_URL}/shop/vehicle-types?kind=locomotive`, {
         credentials: 'include', // Include cookies for authentication
     });
     if (response.status === 401) {
@@ -12,8 +13,7 @@ export async function fetchLoks() {
 }
 
 export async function leaseLok(lokId: number, leasingModel: number) {
-    const baseUrl = 'http://localhost:8000'; // Change this to your API URL
-    const response = await fetch(`${baseUrl}/shop/vehicle-types/${lokId}/lease`, {
+    const response = await fetch(`${API_BASE_URL}/shop/vehicle-types/${lokId}/lease`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
