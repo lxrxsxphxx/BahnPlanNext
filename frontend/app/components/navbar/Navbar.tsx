@@ -73,8 +73,12 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  */
 export default function Navbar({
   isFrontPage = false,
+  isLoggedIn,
+  setIsLoggedIn,
 }: {
   isFrontPage?: boolean;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
@@ -82,7 +86,7 @@ export default function Navbar({
 
   return (
     <>
-      {isFrontPage ? (
+      {!isLoggedIn ? (
         <nav className="w-screen bg-[#111821] py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
@@ -111,7 +115,7 @@ export default function Navbar({
                 ))}
               </ul>
             </div>
-            {!isUserLoggedIn ? (
+            {!isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
@@ -129,7 +133,7 @@ export default function Navbar({
               </div>
             ) : (
               <button
-                onClick={() => setIsUserLoggedIn(false)}
+                onClick={() => setIsLoggedIn(false)}
                 className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
               >
                 Logout
@@ -154,7 +158,7 @@ export default function Navbar({
                   />
                 </form>
               </div>
-              {!isUserLoggedIn ? (
+              {!isLoggedIn ? (
                 /* Anmelde + Registrieren Button */
                 <div className="flex items-center gap-3">
                   <button
@@ -173,7 +177,7 @@ export default function Navbar({
                 </div>
               ) : (
                 <button
-                  onClick={() => setIsUserLoggedIn(false)}
+                  onClick={() => setIsLoggedIn(false)}
                   className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                 >
                   Logout
@@ -188,7 +192,7 @@ export default function Navbar({
 
       {/* Login Modal */}
       <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+        <LoginForm onClose={() => setIsLoginModalOpen(false)} setIsLoggedIn={setIsLoggedIn} />
       </Modal>
 
       {/* Register Modal */}

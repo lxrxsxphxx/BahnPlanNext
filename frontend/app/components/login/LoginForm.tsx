@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { login } from '@/services/auth';
 
-export default function LoginForm({ onClose }: { onClose?: () => void }) {
+export default function LoginForm({ onClose, setIsLoggedIn }: { onClose?: () => void; setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>> }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -36,6 +36,8 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
         await login(username, password);
         setSuccess('Anmeldung erfolgreich.');
         setError(null);
+        setIsLoggedIn(true);
+        onClose?.();
       } catch (err) {
         setSuccess(null);
         setError(

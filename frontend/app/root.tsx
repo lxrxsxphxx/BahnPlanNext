@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Links,
   Meta,
@@ -13,6 +13,7 @@ import './app.css';
 import { Modal } from './components/modal/modal';
 import { useModal } from './components/modal/useModal';
 import Navbar from './components/navbar/Navbar';
+import { API_ENDPOINTS } from './services/api';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -35,6 +36,28 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordWied, setPasswordWied] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check authentication status on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch(API_ENDPOINTS.myCompany, {
+          credentials: 'include',
+        });
+        
+        if (response.ok) {
+          setIsLoggedIn(true);
+        } else {
+          setIsLoggedIn(false);
+        }
+      } catch (error) {
+        setIsLoggedIn(false);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   return (
     <html lang="en">
@@ -45,7 +68,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navbar />
+        <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         {children}
         <ScrollRestoration />
         <Scripts />
