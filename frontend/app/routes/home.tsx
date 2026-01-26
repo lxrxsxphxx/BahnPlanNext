@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { type Props, WelcomeModal } from '../components/welcome/welcome-modal';
+import NeueAusschreibungen from '@/components/NeueAusschreibungen';
 import type { Route } from './+types/home';
 
 export function meta({}: Route.MetaArgs) {
@@ -14,7 +15,7 @@ export default function Home() {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
-    <div>
+    <div className='ml-64'>
       {/* Button, um das Welcome Modal anzuzeigen */}
       <button
         onClick={() => setModalOpen(true)}
@@ -29,6 +30,9 @@ export default function Home() {
       {/* Hauptinhalt der Home-Seite */}
       <h1 className="mt-4 text-2xl font-bold">Home Page Content</h1>
       <p>Hier kommt der restliche Inhalt deiner Homepage.</p>
+
+      {/* Neue Ausschreibungen */}
+      <NeueAusschreibungen />
     </div>
   );
 }
