@@ -20,7 +20,31 @@
   "rules": {
     "eslint/no-empty-pattern": "warn",
     "eslint/no-unused-vars": "warn",
+    "eslint/max-depth": [
+      "warn",
+      {
+        "max": 8
+      }
+    ],
+    "eslint/max-lines-per-function": [
+      "warn",
+      {
+        "skipComments": true,
+        "skipBlankLines": true,
+        "max": 200
+      }
+    ],
+    "eslint/max-classes-per-file": [
+      "warn",
+      {
+        "max": 6
+      }
+    ]
     "import/no-unassigned-import": "off",
+    "import/max-dependencies": [
+      "warn",
+      { "ignoreTypeImports": true, "max": 30 }
+    ],
     "react/react-in-jsx-scope": "off"
   },
   "settings": {
