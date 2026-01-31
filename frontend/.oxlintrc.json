@@ -39,7 +39,7 @@
       {
         "max": 6
       }
-    ]
+    ],
     "import/no-unassigned-import": "off",
     "import/max-dependencies": [
       "warn",
