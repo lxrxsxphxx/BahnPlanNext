@@ -37,6 +37,7 @@ export default function TrassenComponent() {
 
     <div className="p-6 space-y-6 max-w-6xl mx-auto">
       {trassen.map((group, groupIdx) => (
+        group.trassen.length === 0 ? null : (
         <div
           key={groupIdx}
           className="bg-gray-800 rounded shadow-md p-4"
@@ -73,6 +74,7 @@ export default function TrassenComponent() {
             ))}
           </div>
         </div>
+        )
       ))}
     </div>
   );
