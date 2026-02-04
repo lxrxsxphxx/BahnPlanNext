@@ -1,6 +1,19 @@
+import { API_ENDPOINTS } from "./api";
+import { getAccessToken } from "./auth";
+// Hilfsfunktion um die Authentifizierungs-Header zu erstellen
+function getAuthHeaders() {
+    const token = getAccessToken();
+    return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+/**
+ * Service Funktion um Loks aus dem Lokshop zu holen 
+ */
 export async function fetchLoks() {
-    const baseUrl = 'http://localhost:8000'; // Change this to your API URL
-    const response = await fetch(`${baseUrl}/shop/vehicle-types?kind=locomotive`, {
+    const response = await fetch(API_ENDPOINTS.fetchLoks, {
+        headers: {
+            ...getAuthHeaders(),
+        },
         credentials: 'include', // Include cookies for authentication
     });
     if (response.status === 401) {
@@ -11,12 +24,18 @@ export async function fetchLoks() {
     return response.json();
 }
 
+/**
+ * Service Funktion um eine Lok zu leasen
+ * @param lokId ID der Lok
+ * @param leasingModel ausgewähltes Leasingmodell
+ * @returns 
+ */
 export async function leaseLok(lokId: number, leasingModel: number) {
-    const baseUrl = 'http://localhost:8000'; // Change this to your API URL
-    const response = await fetch(`${baseUrl}/shop/vehicle-types/${lokId}/lease`, {
+    const response = await fetch(API_ENDPOINTS.leaseLok(lokId), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            ...getAuthHeaders(),
         },
         credentials: 'include', // Include cookies for authentication
         body: JSON.stringify({ leasing_model: leasingModel }),

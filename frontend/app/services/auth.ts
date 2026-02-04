@@ -1,5 +1,20 @@
 import { API_ENDPOINTS } from './api';
 
+const ACCESS_TOKEN_KEY = 'access_token';
+// Speichert das Zugriffstoken im lokalen Speicher des Browsers
+export function setAccessToken(token: string) {
+  localStorage.setItem(ACCESS_TOKEN_KEY, token);
+}
+// Ruft das Zugriffstoken aus dem lokalen Speicher des Browsers ab
+export function getAccessToken() {
+  return localStorage.getItem(ACCESS_TOKEN_KEY);
+}
+// Entfernt das Zugriffstoken aus dem lokalen Speicher des Browsers
+
+export function clearAccessToken() {
+  localStorage.removeItem(ACCESS_TOKEN_KEY);
+}
+
 export async function login(username: string, password: string) {
   const form = new URLSearchParams();
   form.append('username', username);
@@ -19,5 +34,9 @@ export async function login(username: string, password: string) {
       `Login fehlgeschlagen. Server antwortete mit Status ${response.status}.`,
     );
   }
-  return response.json();
+  const data = await response.json();
+  if (data?.access_token) {
+    setAccessToken(data.access_token);
+  }
+  return data;
 }
