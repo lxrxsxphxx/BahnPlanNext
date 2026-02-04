@@ -14,7 +14,7 @@ export async function fetchLoks() {
         headers: {
             ...getAuthHeaders(),
         },
-        credentials: 'include', // Include cookies for authentication
+        credentials: 'include', 
     });
     if (response.status === 401) {
         throw new Error('Unauthorized - Please login first');
@@ -37,7 +37,7 @@ export async function leaseLok(lokId: number, leasingModel: number) {
             'Content-Type': 'application/json',
             ...getAuthHeaders(),
         },
-        credentials: 'include', // Include cookies for authentication
+        credentials: 'include', 
         body: JSON.stringify({ leasing_model: leasingModel }),
     });
     if (response.status === 401) {
