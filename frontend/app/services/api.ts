@@ -12,6 +12,9 @@ export const API_ENDPOINTS = {
   logout: `${API_BASE_URL}/logout`,
   fetchLoks: `${API_BASE_URL}/shop/vehicle-types?kind=locomotive`,
   leaseLok: (lokId: number) => `${API_BASE_URL}/shop/vehicle-types/${lokId}/lease`,
+  users: `${API_BASE_URL}/users`,
+  secured: `${API_BASE_URL}/secured`,
+  usersMe: `${API_BASE_URL}/users/me`,
   myCompany: `${API_BASE_URL}/users/me/company`,
   // no refresh endpoint when using only long-lived access cookie
 } as const;
