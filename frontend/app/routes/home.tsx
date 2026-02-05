@@ -5,9 +5,10 @@ import {
   useRouteError,
 } from 'react-router';
 
-import { type Props, WelcomeModal } from '../components/welcome/welcome-modal';
+import { WelcomeModal } from '../components/welcome/welcome-modal';
 import type { Route } from './+types/home';
-import { type OpenTender, getOpenTenders } from '@/services/tender';
+import TendersSection from '@/components/tenders/TendersSection';
+import { getOpenTenders } from '@/services/tender';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -31,8 +32,7 @@ export default function Home() {
   return (
     <div>
       {/* Offene Ausschreibungen */}
-      <h1 className="mt-4 text-2xl font-bold">Neue Ausschreibungen</h1>
-      <div>{JSON.stringify(openTenders)}</div>
+      <TendersSection openTenders={openTenders} />
 
       {/* Button, um das Welcome Modal anzuzeigen */}
       <button
