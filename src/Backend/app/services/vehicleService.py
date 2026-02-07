@@ -133,10 +133,6 @@ class VehicleService:
                 "max_traction_units": locals().get('max_traction_units'),
                 "compatible_with": locals().get('compatible_with'),
             })
-            print(f"Processed vehicle {vehicle.id} - type: {type_name}, image_key: {image_key}, details: {locals().get('details')}")
-            print("----")
-            print("----")
-            print(result[-1])  # Print the last added vehicle for debugging
 
         return result
 
