@@ -1,19 +1,7 @@
 import { API_ENDPOINTS } from './api';
 
-const ACCESS_TOKEN_KEY = 'access_token';
-// Speichert das Zugriffstoken im lokalen Speicher des Browsers
-export function setAccessToken(token: string) {
-  localStorage.setItem(ACCESS_TOKEN_KEY, token);
-}
-// Ruft das Zugriffstoken aus dem lokalen Speicher des Browsers ab
-export function getAccessToken() {
-  return localStorage.getItem(ACCESS_TOKEN_KEY);
-}
-// Entfernt das Zugriffstoken aus dem lokalen Speicher des Browsers
-
-export function clearAccessToken() {
-  localStorage.removeItem(ACCESS_TOKEN_KEY);
-}
+// Bei cookie-only Auth benötigt das Frontend kein lesbares Token.
+// Login setzt das HttpOnly-Cookie; Logout löscht es.
 
 export async function login(username: string, password: string) {
   const form = new URLSearchParams();
@@ -35,8 +23,11 @@ export async function login(username: string, password: string) {
     );
   }
   const data = await response.json();
-  if (data?.access_token) {
-    setAccessToken(data.access_token);
-  }
+  // Backend setzt das HttpOnly `access_token`-Cookie; das JSON wird hier nur zurückgegeben
+  // für optionales Debugging, wir speichern das Token client-seitig nicht.
   return data;
+}
+
+export async function logout() {
+  await fetch(API_ENDPOINTS.logout, { method: 'POST', credentials: 'include' });
 }

@@ -1,21 +1,10 @@
-import { API_ENDPOINTS } from "./api";
-import { getAccessToken } from "./auth";
-// Hilfsfunktion um die Authentifizierungs-Header zu erstellen
-function getAuthHeaders() {
-    const token = getAccessToken();
-    return token ? { Authorization: `Bearer ${token}` } : {};
-}
+import { API_ENDPOINTS, apiFetch } from "./api";
 
 /**
  * Service Funktion um Loks aus dem Lokshop zu holen 
  */
 export async function fetchLoks() {
-    const response = await fetch(API_ENDPOINTS.fetchLoks, {
-        headers: {
-            ...getAuthHeaders(),
-        },
-        credentials: 'include', 
-    });
+    const response = await apiFetch(API_ENDPOINTS.fetchLoks);
     if (response.status === 401) {
         throw new Error('Unauthorized - Please login first');
     } else if (!response.ok) {
@@ -31,13 +20,9 @@ export async function fetchLoks() {
  * @returns 
  */
 export async function leaseLok(lokId: number, leasingModel: number) {
-    const response = await fetch(API_ENDPOINTS.leaseLok(lokId), {
+    const response = await apiFetch(API_ENDPOINTS.leaseLok(lokId), {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            ...getAuthHeaders(),
-        },
-        credentials: 'include', 
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ leasing_model: leasingModel }),
     });
     if (response.status === 401) {
