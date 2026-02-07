@@ -12,20 +12,29 @@ import { getOpenTenders } from '@/services/tender';
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: 'New React Router App' },
-    { name: 'description', content: 'Welcome to React Router!' },
+    { title: 'BahnplanNext Homepage' },
+    { name: 'description', content: 'Willkommen bei BahnplanNext' },
   ];
 }
 
-export async function loader({}: Route.LoaderArgs) {
+export async function loader({ }: Route.LoaderArgs) {
+  return {
+    openTenders: [],
+  };
+}
+
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
+  console.log('fetch open tenders');
   const openTenders = await getOpenTenders();
   return {
     openTenders,
   };
 }
+clientLoader.hydrate = true as const;
 
 export default function Home() {
-  const { openTenders } = useLoaderData<typeof loader>();
+  const { openTenders } = useLoaderData<typeof clientLoader>();
+  console.log(openTenders);
 
   const [modalOpen, setModalOpen] = useState(false);
 

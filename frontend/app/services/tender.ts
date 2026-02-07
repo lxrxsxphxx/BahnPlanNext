@@ -54,7 +54,7 @@ export interface OpenTender {
  */
 export async function getOpenTenders(): Promise<OpenTender[]> {
   try {
-    const response = await fetch(`${API_BASE_URL}/tender/open`);
+    const response = await fetch(`${API_BASE_URL}/tender/open`, { credentials: 'include' });
 
     if (!response.ok) {
       if (response.status === 401)
