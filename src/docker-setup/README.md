@@ -10,6 +10,7 @@ Benutzung:
 - Im Repository muss man in den Unterordner src/Backend/docker-setup wechseln
 - Bei initialem ausführen/starten: `docker compose up --build`
 - Ausführen, wenn kein Code verändert wurde: `docker compose up`
+  - Mit `docker compose up -d <service>` kann auch ein bestimmter service gestartet werden.
 - baut alles neu, ohne Cache zu nutzen: `docker compose build --no-cache`
 - nur einen service neu bauen: `docker compose up --build <service>`
   - Es gibt folgende services: db, backend, frontend
