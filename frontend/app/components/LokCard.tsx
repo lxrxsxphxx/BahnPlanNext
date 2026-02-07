@@ -15,9 +15,10 @@ interface Lok{
 
 interface LokCardProps {
   lok: Lok;
+  lokInInventory: boolean;
 }
 
-export default function LokCard({ lok }: LokCardProps) {
+export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
     const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
   const [isLeasedModalOpen, setIsLeasedModalOpen] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState('');
@@ -63,7 +64,7 @@ export default function LokCard({ lok }: LokCardProps) {
                     </div>
                     
                     <div className="w-64  p-4">
-                      {lok.action.type === 'leasing' ? (
+                      {lok.action.type === 'leasing' && !lokInInventory ? (
                         <div>
                           <LeasingModelDropdown 
                             modelle={lok.modelle} 

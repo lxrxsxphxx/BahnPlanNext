@@ -18,7 +18,7 @@ export default function Gesellschaftsbereich() {
 
   return (
     <div className="min-h-screen bg-[#0B0F14] text-white p-8 md:pl-58">
-      <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich</h1>
+      <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich: </h1>
 
       {/* Kategorien Abschnitt */}
       <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
