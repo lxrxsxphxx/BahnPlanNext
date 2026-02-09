@@ -51,5 +51,7 @@ def get_company_vehicles(
 
     company_id = user.companies[0].id
     vehicles = vehicle_service.get_vehicles_by_company(company_id)
+    print(f"Found {len(vehicles)} vehicles for company_id {company_id}")
+    print(f"Vehicles: {vehicles}")
     return vehicles
 
