@@ -8,6 +8,7 @@ interface Lok{
     id: number;
     name: string;
     image: string;
+    tractionType: string;
     specs: { label: string; value: string }[];
     action: { type: 'leasing' | 'kauf'; label: string };
     modelle: Modell[];
@@ -39,7 +40,7 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
   return (
     <>
     <div key={lok.name} className="rounded-2xl border border-blue-500/50 bg-gray-800 p-6">
-                <h2 className="mb-4 text-xl font-semibold">{lok.name}</h2>
+                <h2 className="mb-4 text-xl font-semibold">Baureihe {lok.name}-{lok.tractionType}</h2>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                   {/* Bild */}
                   <div>
@@ -87,7 +88,7 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
                             Leasing
                             </button>}
                         </div>
-                      ) : (
+                      ) : ( 
                         <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
                           {lok.action.label}
                         </button>

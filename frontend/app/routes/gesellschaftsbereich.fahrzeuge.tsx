@@ -27,8 +27,9 @@ export default function GesellschaftsbereichFahrzeuge() {
   const transformedLoks = useMemo(() => {
     return (loks || []).map((v: any) => ({
       id: v.id,
-      name: v.type_name ? `${v.type_name} ${v.vehicle_number || ''}`.trim() : (v.vehicle_number || 'Lok'),
-      image: v.image_key ? `/images/loks/${v.image_key}` : `/images/loks/br${v.id}.jpg`,
+      name: v.type_name ? `${v.type_name}`.trim() : (v.vehicle_number || 'Lok'),
+      image: v.image_key ? `${v.image}` : `/images/loks/br${v.type_name}.jpg`,
+      tractionType: v.traction_type,
       specsLeft: [
         { label: 'Tfz geeignet für', value: v.suitable_passenger_max_wagons ? `Personen (max. ${v.suitable_passenger_max_wagons} Wagen)` : (v.suitable_freight_max_tons ? `Güter (max. ${v.suitable_freight_max_tons} Tonnen)` : '—') },
         { label: 'Auslandseinsatz', value: v.countries_allowed ?? '—' },
@@ -43,21 +44,34 @@ export default function GesellschaftsbereichFahrzeuge() {
         { label: 'Energiekosten', value: v.energy_cost_base ? `${v.energy_cost_base.toFixed(2)} €/h` : '—' },
         { label: 'Kuppelbar mit', value: Array.isArray(v.compatible_with) ? v.compatible_with.join(', ') : (v.compatible_with ?? '—') },
       ],
-      action: { type: 'kauf', label: v.is_leased ? 'Eingesetzt' : 'Einsatzbereit' },
+      action: { type: 'kauf', label: v.is_leased ? 'Einsatzbereit' : 'In Lieferung' },
       modelle: [],
     }));
   }, [loks]);
+  console.log('Transformed Loks:', transformedLoks);
   return (
     <div className="min-h-screen bg-[#0B0F14] text-white p-8 md:pl-[270px]">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold">Meine Fahrzeuge</h1>
-        {company?.name && (
-          <div className="text-sm text-gray-300">Gesellschaft: {company.name} — Kapital: {company.capital?.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</div>
+        <h1 className="text-4xl font-bold">Gesellschaftsbereich &gt; Meine Fahrzeuge</h1>
+        {error && (
+          <div className="mt-4 rounded-md bg-red-500/20 p-4 text-red-200">
+            <p>Fehler beim Laden der Fahrzeuge aus der Datenbank. Fehler: {error}</p>
+          </div>
         )}
+        {company?.name && (
+          <div className="flex items-center justify-between mb-4">
+          <div className="text-2xl text-gray-300">{company.name}</div>
+          <div className="rounded-md bg-gray-800 px-4 py-2 text-sm">
+          {cashBalance.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}
+        </div>
+          </div>
+        )}
+
+        
       </div>
       <div className="space-y-6">
         {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.id} lok={lok} lokInInventory={false} />
+          <LokCard key={lok.id} lok={lok} lokInInventory={true} />
         ))}
       </div>
     </div>
