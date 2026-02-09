@@ -2,7 +2,7 @@ from typing import List, Optional, Sequence, Dict, Any
 
 from jose import JWTError
 
-from app.models.vehicle import Vehicle
+from app.models.vehicle import Vehicle, VehicleType
 from app import database
 from app import auth
 from fastapi import HTTPException
@@ -89,7 +89,7 @@ class VehicleService:
         """Return a flat list of vehicles owned by a given company."""
         # Eager-load the related VehicleType and its details so frontend gets full specs
         stmt = select(Vehicle).where(Vehicle.owner_company_id == company_id).options(
-            selectinload(Vehicle.type).selectinload(getattr(Vehicle.type, 'details'))
+            selectinload(Vehicle.type).selectinload(VehicleType.details)
         )
         vehicles = self.db.exec(stmt).all()
 
@@ -156,6 +156,10 @@ class VehicleService:
                 "max_traction_units": locals().get('max_traction_units'),
                 "compatible_with": locals().get('compatible_with'),
             })
+            print(f"Processed vehicle {vehicle.id} - type: {type_name}, image_key: {image_key}, details: {locals().get('details')}")
+            print("----")
+            print("----")
+            print(result[-1])  # Print the last added vehicle for debugging
 
         return result
 

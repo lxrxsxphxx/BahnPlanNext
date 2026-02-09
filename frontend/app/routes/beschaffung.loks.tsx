@@ -124,7 +124,7 @@ console.log('Loks from loader:', loks);
 
       <div className="space-y-6">
         {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.name} lok={lok} />
+          <LokCard key={lok.name} lok={lok}  lokInInventory={false} />
         ))}
       </div>
     </div>
