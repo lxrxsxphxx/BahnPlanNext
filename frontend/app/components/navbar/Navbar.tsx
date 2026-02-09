@@ -82,7 +82,7 @@ export default function Navbar({
 }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false); // Platzhalter für den Anmeldestatus
 
   return (
     <>

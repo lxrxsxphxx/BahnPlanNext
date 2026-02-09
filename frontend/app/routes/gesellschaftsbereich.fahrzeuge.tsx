@@ -70,6 +70,11 @@ export default function GesellschaftsbereichFahrzeuge() {
         
       </div>
       <div className="space-y-6">
+        {transformedLoks.length === 0 && !error && (
+          <div className="rounded-md bg-yellow-500/20 p-4 text-yellow-200">
+            <p>Keine Loks gefunden. Es sieht so aus, als ob du noch keine Loks besitzt. Besuche den Shop, um neue Loks zu kaufen!</p>
+          </div>
+        )}
         {transformedLoks.map((lok: any) => (
           <LokCard key={lok.id} lok={lok} lokInInventory={true} />
         ))}
