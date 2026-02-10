@@ -1,5 +1,8 @@
 import { API_ENDPOINTS } from './api';
 
+// Bei cookie-only Auth benötigt das Frontend kein lesbares Token.
+// Login setzt das HttpOnly-Cookie; Logout löscht es.
+
 export async function login(username: string, password: string) {
   const form = new URLSearchParams();
   form.append('username', username);
@@ -19,5 +22,12 @@ export async function login(username: string, password: string) {
       `Login fehlgeschlagen. Server antwortete mit Status ${response.status}.`,
     );
   }
-  return response.json();
+  const data = await response.json();
+  // Backend setzt das HttpOnly `access_token`-Cookie; das JSON wird hier nur zurückgegeben
+  // für optionales Debugging, wir speichern das Token client-seitig nicht.
+  return data;
+}
+
+export async function logout() {
+  await fetch(API_ENDPOINTS.logout, { method: 'POST', credentials: 'include' });
 }

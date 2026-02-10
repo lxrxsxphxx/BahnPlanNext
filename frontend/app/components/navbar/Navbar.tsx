@@ -83,7 +83,7 @@ export default function Navbar({
   return (
     <>
       {isFrontPage ? (
-        <nav className="w-screen bg-black py-3 text-white shadow">
+        <nav className="w-screen bg-[#111821] py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
               to="/"
@@ -139,7 +139,7 @@ export default function Navbar({
         </nav>
       ) : (
         <>
-          <div className="h-16 w-screen bg-black md:pl-56">
+          <div className="h-16 w-screen bg-[#111821] md:pl-56">
             <div className="mx-auto flex h-full max-w-6xl items-center px-4">
               {/*suchleiste zentriert*/}
               <div className="flex flex-1 justify-center">
