@@ -1,11 +1,6 @@
 import { useState } from 'react';
 
-interface Modell {
-  name: string;
-  Leasingdauer: string;
-  Anzahlung: string;
-  Monatsrate: string;
-}
+import type { Modell } from '@/routes/beschaffung.loks';
 
 interface LeasingModelDropdownProps {
   modelle: Modell[];
@@ -50,16 +45,20 @@ export function LeasingModelDropdown({ modelle, selectedModel, setSelectedModel 
                 <div className="absolute left-full top-0 ml-2 w-56 rounded-md border border-blue-500/50 bg-gray-800 p-3 shadow-lg pointer-events-none z-20">
                   <div className="text-xs text-gray-300 space-y-1">
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-400">Leasingdauer:</span>
-                      <span className="text-white">{modell.Leasingdauer}</span>
+                      <span className="font-medium text-gray-400">Jährlich:</span>
+                      <span className="text-white">{modell.jaehrlich}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-400">Anzahlung:</span>
-                      <span className="text-white">{modell.Anzahlung}</span>
+                      <span className="font-medium text-gray-400">Wöchentlich:</span>
+                      <span className="text-white">{modell.wochenrate}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="font-medium text-gray-400">Monatsrate:</span>
-                      <span className="text-white">{modell.Monatsrate}</span>
+                      <span className="font-medium text-gray-400">Zahlung:</span>
+                      <span className="text-white">{modell.zahlung}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="font-medium text-gray-400">Kündigung:</span>
+                      <span className="text-white">{modell.kuendigung}</span>
                     </div>
                   </div>
                 </div>

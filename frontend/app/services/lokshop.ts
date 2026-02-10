@@ -6,9 +6,9 @@ import { API_ENDPOINTS, apiFetch } from "./api";
 export async function fetchLoks() {
     const response = await apiFetch(API_ENDPOINTS.fetchLoks);
     if (response.status === 401) {
-        throw new Error('Unauthorized - Please login first');
+        throw new Error('Unauthorisiert, bitte zuerst einloggen');
     } else if (!response.ok) {
-        throw new Error('Failed to fetch loks');
+        throw new Error('Fehler beim Abrufen der Loks');
     }
     return response.json();
 }
@@ -26,10 +26,10 @@ export async function leaseLok(lokId: number, leasingModel: number) {
         body: JSON.stringify({ leasing_model: leasingModel }),
     });
     if (response.status === 401) {
-        throw new Error('Unauthorized - Please login first');
+        throw new Error('Unauthorisiert, bitte zuerst einloggen');
     } else if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to lease lok');
+        throw new Error(errorData.message || 'Fehler beim Leasen der Lok');
     }
     return response.json();
 }

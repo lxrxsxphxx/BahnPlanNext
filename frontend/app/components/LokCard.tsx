@@ -2,12 +2,13 @@ import type { Modell } from "@/routes/beschaffung.loks";
 import { LeasingModelDropdown } from "./LeasingModelDropdown";
 import { useState } from "react";
 import { leaseLok } from "@/services/lokshop";
+import LokLeasedModal from "./LokLeasedModal";
+import { Modal } from "./modal/modal";
 interface Lok{
     id: number;
     name: string;
     image: string;
-    specsLeft: { label: string; value: string }[];
-    specsRight: { label: string; value: string }[];
+    specs: { label: string; value: string }[];
     action: { type: 'leasing' | 'kauf'; label: string };
     modelle: Modell[];
 }
@@ -18,12 +19,15 @@ interface LokCardProps {
 
 export default function LokCard({ lok }: LokCardProps) {
     const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
+  const [isLeasedModalOpen, setIsLeasedModalOpen] = useState(false);
+  const [deliveryDate, setDeliveryDate] = useState('');
     
     const handleLeasing = async () => {
       try {
         if (selectedModel) {
           await leaseLok(lok.id, selectedModel.id);
-          alert('Leasing abgeschlossen! Folgendes Modell wurde ausgewählt: ' + JSON.stringify(selectedModel));
+          setDeliveryDate(new Date().toLocaleDateString('de-DE'));
+          setIsLeasedModalOpen(true);
         } else {
           alert('Bitte wählen Sie ein Leasingmodell aus.');
         }
@@ -32,29 +36,27 @@ export default function LokCard({ lok }: LokCardProps) {
       }
     }
   return (
+    <>
     <div key={lok.name} className="rounded-2xl border border-blue-500/50 bg-gray-800 p-6">
                 <h2 className="mb-4 text-xl font-semibold">{lok.name}</h2>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                   {/* Bild */}
                   <div>
-                    <div className="overflow-hidden rounded-md border border-gray-700">
-                      <img src={`/images/loks/br${lok.id}.jpg`} alt={lok.name} className="h-103 w-full object-cover" />
+                    <div className="overflow-hidden rounded-md ">
+                      <img src={lok.image} alt={lok.name} className="w-[20vw] h-auto object-cover" />
                     </div>
                   </div>
     
                   {/* Spezifikationstabelle und Dropdown */}
                   <div className="md:col-span-2 flex gap-4">
-                    <div className="max-w-full rounded-md border border-gray-700 p-4">
-                      <table className="w-full text-sm">
+                    <div className="rounded-md border border-gray-700 p-4">
+                      <table className="inline-table w-auto text-sm">
                         <tbody>
-                          {[...lok.specsLeft, ...lok.specsRight].map((row) => (
-                            <div>
-                                <tr key={row.label}>
-                                <td className="py-1 text-gray-300 pr-5">{row.label}:</td>
-                                <td className="py-1 text-gray-100">{row.value}</td>
-                                </tr>
-                                <hr />
-                            </div>
+                          {[...lok.specs].map((row) => (
+                            <tr key={row.label} className="border-b border-gray-700 last:border-b-0">
+                              <td className="w-48 py-1 pr-5 text-gray-300 align-top">{row.label}:</td>
+                              <td className="py-1 text-gray-100 whitespace-pre-line">{row.value}</td>
+                            </tr>
                           ))}
                         </tbody>
                       </table>
@@ -68,6 +70,16 @@ export default function LokCard({ lok }: LokCardProps) {
                             selectedModel={selectedModel} 
                             setSelectedModel={setSelectedModel} 
                           />
+                          {selectedModel && (
+                            <div className="mt-4 rounded-md border border-blue-500/50 bg-gray-900/60 p-3 text-xs text-gray-200">
+                              <div className="text-sm font-semibold text-white">Infos zum Leasingmodell</div>
+                              <div className="mt-1">
+                                {selectedModel.jaehrlich} jährlich, {selectedModel.wochenrate} wöchentlich
+                              </div>
+                              <div>Zahlung: {selectedModel.zahlung}</div>
+                              <div>Kündigung: {selectedModel.kuendigung}</div>
+                            </div>
+                          )}
                           {selectedModel && <button className='mt-20 w-56 text-center bg-blue-500 rounded-4xl pl-10 pr-10 py-2 text-sm font-medium hover:bg-blue-600 hover:cursor-pointer'
                           onClick={handleLeasing}
                           >
@@ -83,5 +95,14 @@ export default function LokCard({ lok }: LokCardProps) {
                   </div>
                 </div>
               </div>
+    <Modal open={isLeasedModalOpen} onClose={() => setIsLeasedModalOpen(false)}>
+      <LokLeasedModal
+        lokName={lok.name}
+        statusText="In Lieferung"
+        deliveryDate={deliveryDate}
+        onClose={() => setIsLeasedModalOpen(false)}
+      />
+    </Modal>
+    </>
   )
 }

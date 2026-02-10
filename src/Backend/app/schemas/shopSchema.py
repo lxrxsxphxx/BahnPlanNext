@@ -9,6 +9,14 @@ class ShopVehicleTypeOut(BaseModel):
     new_price: int
     km_cost: float
     energy_cost_base: float
+    traction_type: Optional[str] = None
+    suitable_passenger_max_wagons: Optional[int] = None
+    suitable_freight_max_tons: Optional[int] = None
+    countries_allowed: Optional[str] = None
+    power_kw: Optional[int] = None
+    max_speed_kmh: Optional[int] = None
+    depot_category: Optional[int] = None
+    max_traction_units: Optional[int] = None
     image_key: Optional[str] = None
     total_stock: Optional[int] = None
     available_stock: Optional[int] = None
