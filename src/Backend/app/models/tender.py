@@ -1,12 +1,14 @@
-from datetime import datetime, date
-from typing import Optional, List
-
+from datetime import date, datetime
+from typing import List, Optional
 from uuid import UUID
-from sqlmodel import SQLModel, Field, Relationship
 
+from sqlmodel import Field, Relationship, SQLModel
+
+from ..enums.difficulty import Difficulty
 from .company import Company
-from .route import Route
 from .contract import Contract
+from .route import Route
+
 
 class Tender(SQLModel, table=True):
   """
@@ -17,6 +19,7 @@ class Tender(SQLModel, table=True):
   id: Optional[int] = Field(default=None, primary_key=True)
   name: str
   description: Optional[str] = None
+  difficulty: Difficulty = Field(default=Difficulty.easy)
 
   route_id: UUID = Field(foreign_key="routes.uuid")
   route: Route = Relationship(back_populates="tenders")
