@@ -25,7 +25,7 @@ def get_company_info(
 ):
     company = service.get_company_from_claims(claims)
     if not company:
-        raise HTTPException(status_code=404, detail="Company not found for user")
+        raise HTTPException(status_code=404, detail="Nutzer ist in keiner Gesellschaft")
     return CompanyCreateResponse(id=company.id, name=company.name, capital=company.capital)
 
 
@@ -45,14 +45,11 @@ def get_company_vehicles(
     company_service: CompanyService = Depends(get_company_service),
     vehicle_service: VehicleService = Depends(get_vehicle_service),
 ):
-    # Resolve current user and their company (first one)
     user = company_service.get_user_from_claims(claims)
     if not user.companies:
-        raise HTTPException(status_code=404, detail="User is not part of any company")
+        raise HTTPException(status_code=404, detail="Nutzer ist in keiner Gesellschaft")
 
     company_id = user.companies[0].id
     vehicles = vehicle_service.get_vehicles_by_company(company_id)
-    print(f"Found {len(vehicles)} vehicles for company_id {company_id}")
-    print(f"Vehicles: {vehicles}")
     return vehicles
 

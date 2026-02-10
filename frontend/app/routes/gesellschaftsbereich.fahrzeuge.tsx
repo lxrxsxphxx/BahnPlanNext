@@ -25,26 +25,23 @@ export default function GesellschaftsbereichFahrzeuge() {
   const { loks, company, error } = useLoaderData() as { loks: any[], company?: { id?: number; name?: string; capital?: number } | null, error: string | null };
   const cashBalance = company?.capital ?? 4000000;
   const transformedLoks = useMemo(() => {
-    return (loks || []).map((v: any) => ({
-      id: v.id,
-      name: v.type_name ? `${v.type_name}`.trim() : (v.vehicle_number || 'Lok'),
-      image: v.image_key ? `${v.image}` : `/images/loks/br${v.type_name}.jpg`,
-      tractionType: v.traction_type,
-      specsLeft: [
-        { label: 'Tfz geeignet für', value: v.suitable_passenger_max_wagons ? `Personen (max. ${v.suitable_passenger_max_wagons} Wagen)` : (v.suitable_freight_max_tons ? `Güter (max. ${v.suitable_freight_max_tons} Tonnen)` : '—') },
-        { label: 'Auslandseinsatz', value: v.countries_allowed ?? '—' },
-        { label: 'Leistung', value: v.power_kw ? `${v.power_kw} kW` : '—' },
-        { label: 'Höchstgeschwindigkeit', value: v.max_speed_kmh ? `${v.max_speed_kmh} km/h` : '—' },
-        { label: 'Betriebswerke', value: v.depot_category ? `Kategorie ${v.depot_category}` : '—' },
-        { label: 'Maximaltraktion', value: v.max_traction_units ? `${v.max_traction_units} Tfz` : '—' },
-      ],
-      specsRight: [
-        { label: 'Neupreis', value: v.new_price ? `${(v.new_price).toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}` : '—' },
-        { label: 'Kilometerkosten', value: v.km_cost ? `${v.km_cost.toFixed(2)} €/km` : '—' },
-        { label: 'Energiekosten', value: v.energy_cost_base ? `${v.energy_cost_base.toFixed(2)} €/h` : '—' },
-        { label: 'Kuppelbar mit', value: Array.isArray(v.compatible_with) ? v.compatible_with.join(', ') : (v.compatible_with ?? '—') },
-      ],
-      action: { type: 'kauf', label: v.is_leased ? 'Einsatzbereit' : 'In Lieferung' },
+    return (loks || []).map((lok: any) => ({
+      id: lok.id,
+    name: `Baureihe ${lok.type_name} - ${lok.traction_type || 'Unbekannt'}`,
+    image: `/images/loks/${lok.image_key}`,
+    specs: [
+      { label: 'Tfz geeignet für', value: `Personen ( max ${lok.suitable_passenger_max_wagons} Wagen) \n Güter (max ${lok.suitable_freight_max_tons} Tonnen)` },
+      { label: 'Auslandseinsatz', value: lok.countries_allowed || 'Keine Einschränkung' },
+      { label: 'Leistung', value: lok.power_kw ? `${lok.power_kw} kW` : 'Unbekannt' },
+      { label: 'Höchstgeschwindigkeit', value: lok.max_speed_kmh ? `${lok.max_speed_kmh} km/h` : 'Unbekannt' },
+      { label: 'Betriebswerke', value: `Kategorie ${lok.depot_category}` || 'Unbekannt' },
+      { label: 'Maximaltraktion', value: `${lok.max_traction_units} Tfz` || 'Unbekannt' },
+      
+      { label: 'Neupreis', value: `${Number(lok.new_price).toLocaleString('de-DE')} €` },
+      { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
+      { label: 'Energiekosten', value: `${lok.energy_cost_base.toFixed(2)} €/h` },
+    ],
+      action: { type: 'kauf', label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung' },
       modelle: [],
     }));
   }, [loks]);
