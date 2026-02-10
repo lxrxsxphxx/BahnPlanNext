@@ -40,7 +40,7 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
   return (
     <>
     <div key={lok.name} className="rounded-2xl border border-blue-500/50 bg-gray-800 p-6">
-                <h2 className="mb-4 text-xl font-semibold">Baureihe {lok.name}-{lok.tractionType}</h2>
+                <h2 className="mb-4 text-xl font-semibold">{lok.name}</h2>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
                   {/* Bild */}
                   <div>
@@ -88,10 +88,25 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
                             Leasing
                             </button>}
                         </div>
-                      ) : ( 
-                        <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
-                          {lok.action.label}
-                        </button>
+                      ) : (
+                        lokInInventory ? (
+                          <button
+                            className={
+                              `rounded-full px-6 py-3 text-md font-semibold mt-[40%] ml-[10vw] ` +
+                              (lok.action.label === 'Einsatzbereit'
+                                ? ' border border-green-500 text-green-400 bg-black/40'
+                                : lok.action.label === 'In Lieferung'
+                                ? ' border border-red-500 text-red-400 bg-black/40'
+                                : ' border border-gray-500 text-gray-300 bg-black/40')
+                            }
+                          >
+                            {lok.action.label}
+                          </button>
+                        ) : (
+                          <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
+                            {lok.action.label}
+                          </button>
+                        )
                       )}
                     </div>
                   </div>
