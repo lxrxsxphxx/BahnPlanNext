@@ -1,7 +1,7 @@
-import LokCard from '@/components/LokCard';
+import ShowLoks from '@/components/ShowLoks';
 import { fetchCompaniesLoks, fetchCompanyInfo } from '@/services/gesellschaftsbereich';
-import { useLoaderData } from 'react-router';
-import { useMemo } from 'react';
+import { useState } from 'react';
+import { Link, useLoaderData } from 'react-router';
 
 
 export async function clientLoader() {
@@ -23,33 +23,12 @@ export async function clientLoader() {
 
 export default function GesellschaftsbereichFahrzeuge() {
   const { loks, company, error } = useLoaderData() as { loks: any[], company?: { id?: number; name?: string; capital?: number } | null, error: string | null };
+  const [isWagonActive, setIsWagonActive] = useState(false);
   const cashBalance = company?.capital ?? 4000000;
-  const transformedLoks = useMemo(() => {
-    return (loks || []).map((lok: any) => ({
-      id: lok.id,
-    name: `Baureihe ${lok.type_name} - ${lok.traction_type || 'Unbekannt'}`,
-    image: `/images/loks/${lok.image_key}`,
-    specs: [
-      { label: 'Tfz geeignet für', value: `Personen ( max ${lok.suitable_passenger_max_wagons} Wagen) \n Güter (max ${lok.suitable_freight_max_tons} Tonnen)` },
-      { label: 'Auslandseinsatz', value: lok.countries_allowed || 'Keine Einschränkung' },
-      { label: 'Leistung', value: lok.power_kw ? `${lok.power_kw} kW` : 'Unbekannt' },
-      { label: 'Höchstgeschwindigkeit', value: lok.max_speed_kmh ? `${lok.max_speed_kmh} km/h` : 'Unbekannt' },
-      { label: 'Betriebswerke', value: `Kategorie ${lok.depot_category}` || 'Unbekannt' },
-      { label: 'Maximaltraktion', value: `${lok.max_traction_units} Tfz` || 'Unbekannt' },
-      
-      { label: 'Neupreis', value: `${Number(lok.new_price).toLocaleString('de-DE')} €` },
-      { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
-      { label: 'Energiekosten', value: `${lok.energy_cost_base.toFixed(2)} €/h` },
-    ],
-      action: { type: 'kauf', label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung' },
-      modelle: [],
-    }));
-  }, [loks]);
-  console.log('Transformed Loks:', transformedLoks);
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white p-8 md:pl-[270px]">
+    <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
       <div className="mb-8">
-        <h1 className="text-4xl font-bold">Gesellschaftsbereich &gt; Meine Fahrzeuge</h1>
+        <h1 className="text-4xl font-bold"><Link to="/gesellschaftsbereich">Gesellschaftsbereich</Link> &gt; Meine Fahrzeuge</h1>
         {error && (
           <div className="mt-4 rounded-md bg-red-500/20 p-4 text-red-200">
             <p>Fehler beim Laden der Fahrzeuge aus der Datenbank. Fehler: {error}</p>
@@ -66,16 +45,33 @@ export default function GesellschaftsbereichFahrzeuge() {
 
         
       </div>
-      <div className="space-y-6">
-        {transformedLoks.length === 0 && !error && (
-          <div className="rounded-md bg-yellow-500/20 p-4 text-yellow-200">
-            <p>Keine Loks gefunden. Es sieht so aus, als ob du noch keine Loks besitzt. Besuche den Shop, um neue Loks zu kaufen!</p>
-          </div>
-        )}
-        {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.id} lok={lok} lokInInventory={true} />
-        ))}
+      <div className='mt-10 flex gap-6 items-end mb-6'>
+        <button
+          type="button"
+          onClick={() => setIsWagonActive(false)}
+          aria-pressed={!isWagonActive}
+          className={`text-lg font-semibold ${!isWagonActive ? 'text-white border-b-4 border-blue-500 pb-2' : 'text-gray-400 pb-3'} hover:cursor-pointer`}
+        >
+          Loks
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setIsWagonActive(true)}
+          aria-pressed={isWagonActive}
+          className={`text-lg font-semibold ${isWagonActive ? 'text-white border-b-4 border-blue-500 pb-2' : 'text-gray-400 pb-3'} hover:cursor-pointer`}
+        >
+          Wagen
+        </button>
       </div>
+      {!isWagonActive && (
+        <ShowLoks loks={loks} error={error} />
+      )}
+      {isWagonActive && (
+        <div className="mt-6 rounded-md bg-yellow-500/20 p-4 text-yellow-200">
+          <p>Der Wagen-Bereich ist derzeit noch in Entwicklung. Bitte hab etwas Geduld, während wir daran arbeiten, dir bald auch deine Wagen anzuzeigen!</p>
+        </div>
+      )}
     </div>
   );
 }

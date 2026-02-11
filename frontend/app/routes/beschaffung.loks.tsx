@@ -43,7 +43,7 @@ console.log('Loks from loader:', loks);
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 md:pl-[270px]">
+      <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 ">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-3xl font-bold">
             <Link to="/beschaffung" className="hover:underline">Shop</Link> &gt; Loks
@@ -116,7 +116,7 @@ console.log('Loks from loader:', loks);
   })), [loks]);
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 md:pl-[270px]">
+    <div className="min-h-screen bg-[#0B0F14] text-white  py-8 ">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold">
           <Link to="/beschaffung" className="hover:underline">Shop</Link> &gt; Loks
