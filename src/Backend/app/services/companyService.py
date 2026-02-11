@@ -45,11 +45,11 @@ class CompanyService:
         return user
 
     def get_company_from_claims(self, claims: dict):
-        """Return the first company associated with the user from token claims, or None."""
+        # gib die Gesellschaft zurück, die mit dem User verknüpft ist (falls vorhanden)
         user = self.get_user_from_claims(claims)
         if not user.companies:
             return None
-        # return the first linked company (consistent with other parts of the app)
+        # gib die erste Gesellschaft zurück, falls mehrere existieren (sollte nicht der Fall sein)
         return user.companies[0]
     def get_company_from_claims(self, claims: dict):
         user = self.get_user_from_claims(claims)
