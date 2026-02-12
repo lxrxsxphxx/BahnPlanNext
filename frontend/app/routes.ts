@@ -4,4 +4,5 @@ export default [
     index('routes/home.tsx'),
     route('beschaffung', 'routes/Beschaffung.tsx'),
     route('beschaffung/wagen', 'routes/beschaffung.wagen.tsx'),
+    route('beschaffung/loks', 'routes/beschaffung.loks.tsx'),
 ] satisfies RouteConfig;

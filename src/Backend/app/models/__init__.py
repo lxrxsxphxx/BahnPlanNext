@@ -1,6 +1,6 @@
 from .user import User, BaseUser, Roles
 from .company import Company, CompanyUserLink
-from .vehicle import Vehicle
+from .vehicle import Vehicle, VehicleType, VehicleTypeDetails, VehicleTypeCouplingLink
 from .tender import Tender, TenderBid
 from .loan import Loan
 from .contract import Contract
@@ -15,6 +15,9 @@ __all__ = [
     "Roles",
     "Company",
     "Vehicle",
+    "VehicleType",
+    "VehicleTypeDetails",
+    "VehicleTypeCouplingLink",
     "Tender",
     "TenderBid",
     "Loan",

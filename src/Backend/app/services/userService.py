@@ -1,3 +1,4 @@
+import os
 from typing import List, Optional, Sequence
 
 from jose import JWTError
@@ -82,7 +83,16 @@ class UserService:
         # User anlegen
         db_user = self.create_user(user=user)
 
-        # Token erzeugen & Mail schicken
+        # Token erzeugen & Mail schicken (optional in Entwicklung)
+        if os.getenv("DISABLE_EMAIL", "false").lower() == "true":
+            db_user.is_active = True
+            self.db.commit()
+            self.db.refresh(db_user)
+            return {
+                "message": "User erfolgreich registriert. E-Mail-Versand deaktiviert, Account sofort aktiviert.",
+                "user_id": db_user.id,
+            }
+
         token = auth.create_verify_token(db_user)
         sendmail.send_mail(to=user.email, token=token,
                            username=user.username)
@@ -118,10 +128,10 @@ class UserService:
     def verify_user(self, token: str):
         claims = auth.decode_token(token)
         if claims.get("typ") != "verify":
-                raise HTTPException(status_code=400, detail="Ungültiger Bestätigungs-Token")    
+                raise HTTPException(status_code=400, detail="Ungültiger Bestätigungs-Token")
 
         # Nutzer aus Token holen
-        username = claims.get("sub")
+        username = claims.get("sub") or claims.get("username")
         if not username:
             raise HTTPException(
                 status_code=400,
