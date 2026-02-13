@@ -1,32 +1,18 @@
 // Trassenübersicht Komponente & Models
-import { useEffect, useState } from "react";
+import { useLoaderData } from "react-router";
+import type { Route } from "../+types/root";
+import { getTrassen, type Trasse, type TrassenGruppe, type TrassenStops } from "@/services/trassen";
 
-interface Trasse {
-  name: string;
-  zugart: string;
-  zugnummer: string;
-  details: Record<string, any>;
-  label: string;
-  stops: TrassenStops[]
-
+export async function loader({ }: Route.LoaderArgs) {
+  return { trassen: [] };
 }
 
-interface TrassenStops {
-  seq: number;
-  station_name: string;
-  arr_a: string | null;
-  dep_a: string | null;
-  arr_b: string | null;
-  dep_b: string | null;
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
 
+  const trassen = await getTrassen();
+  return { trassen };
 }
-
-interface TrassenGruppe {
-  label: string;
-  trassen: Trasse[];
-}
-
-type TrassenResponse = TrassenGruppe[];
+clientLoader.hydrate = true as const;
 
 function sortStops(stops: TrassenStops[]): TrassenStops[] {
   return [...stops].sort((a, b) => a.seq - b.seq);
@@ -42,27 +28,12 @@ function getFirstAndLast(stops: TrassenStops[]) {
 
 
 export default function TrassenComponent() {
-
-  const [trassen, setTrassen] = useState<TrassenResponse>([]);
-
-  useEffect(() => {
-    async function loadTrassen() {
-
-      const res = await fetch(
-        "http://localhost:8000/trassen"
-      );
-
-      const data: TrassenResponse = await res.json();
-      setTrassen(data);
-    }
-
-    loadTrassen();
-  }, [])
+  const { trassen } = useLoaderData<typeof clientLoader>();
 
   return (
 
     <div className="p-6 space-y-6 max-w-6xl mx-auto">
-      {trassen.map((group, groupIdx) => (
+      {trassen.map((group: TrassenGruppe, groupIdx: number) => (
         group.trassen.length === 0 ? null : (
           <div
             key={groupIdx}
@@ -75,7 +46,7 @@ export default function TrassenComponent() {
 
             <div className="flex flex-col gap-4">
               <table>
-                {group.trassen.map((trasse, trasseIdx) => {
+                {group.trassen.map((trasse: Trasse, trasseIdx: number) => {
                   const { first, last, sorted } = getFirstAndLast(trasse.stops);
 
                   return (
