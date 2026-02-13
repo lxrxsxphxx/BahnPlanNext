@@ -2,18 +2,18 @@
 
 == Einführung
 
-Bahnplan ist ein Seminarprojekt der HTW Dresden mit dem Ziel, eine moderne, webbasierte Simulation des Eisenbahnbetriebs zu entwickeln.  
+Bahnplan ist ein Seminarprojekt der HTW Dresden mit dem Ziel, eine moderne, webbasierte Simulation des deutschen Eisenbahnbetriebs zu entwickeln.  
 Das Projekt basiert auf der ehemaligen Webseite *bahnplan.de*, die über mehrere Jahre im Internet aktiv war und den Ausgangspunkt für das aktuelle Seminar bildet.  
-Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen.  
-Diese Idee wird nun technisch und konzeptionell neu umgesetzt mit aktuellen Technologien, klarer Architektur und dem Ziel, ein funktionsfähiges MVP zu realisieren.  
+Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen, war jedoch von technischer Seite und gestalterisch veraltet und wurde mittlerweile offline genommen. 
+Diese Idee wird nun technisch und konzeptionell neu umgesetzt mit aktuellen Technologien, klarer Architektur und einem moderneren Userinterface um den Nutzern ein ansprechendes und lehrreiches Spielerlebnis zu bieten.
 
-Das System soll es den Nutzern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen wie Fahrplanplanung oder Wartung strategisch zu treffen.  
-Damit die Nutzer die Möglichkeit haben, Management-Skills und Simulationsentscheidungen der Wirtschaft auf spielerische Art zu lernen.
+Das System soll es den Spielern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen zur Fahrplanplanung oder Wartung zu treffen.
+Damit die Nutzer die Möglichkeit haben, Simulationsentscheidungen der Wirtschaft auf spielerische Art zu lernen.
 
 
 === Zweck
 Das Dokument beschreibt die fachliche Vision und den Zielrahmen des Projekts *Bahnplan*.  
-Es fasst die Beweggründe, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und soll sicherstellen, dass alle Teammitglieder ein gemeinsames Verständnis für Ziel, Umfang und Nutzen entwickeln.  
+Es fasst die Beweggründe für die Teammitglieder, die das Projekt umsetzen, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und soll sicherstellen, dass alle ein gemeinsames Verständnis für Ziel (also die Vison), Umfang und Nutzen zu schaffen.
 Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen werden in separaten Dokumenten vertieft.
 
 
@@ -23,18 +23,13 @@ Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die von Studie
 Sie erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, an Ausschreibungen teilzunehmen, Fahrpläne zu planen und Kosten zu kalkulieren.  
 Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.
 
-Entwickelt wird die Anwendung im Team auf Basis agiler Methoden (Scrum, BDD, TDD).  
 Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentrale Spielmechaniken demonstriert.
+
 === Definitionen, Akronyme und Abkürzungen
 
 Siehe <<#glossary, Glossar>>.
 //Siehe <<./glossary.adoc#glossary, Glossar>>.
 
-=== Referenzen
-(hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
-* Ursprüngliche Plattform: https://web.archive.org/web/20150311004527/http://www.bahnplan.de/cms
-* Architecture Notebook (laufend gepflegt)  
-* Product Backlog (aktuell im GitHub-Projekt)
 
 == Positionierung
 
@@ -44,7 +39,7 @@ Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerwe
 Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter Spielmechanik.  
 
 === Produktvision
-Bahnplan ist eine Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen.  
+Bahnplan ist die neue, wiederbelebte Echtzeit-Websimulation, da die alte Websimulation nicht mehr Verfügbar und veraltet ist, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen. 
 Jede Entscheidung, ob beim Fahrzeugkauf, bei der Fahrplangestaltung oder bei der Preisbildung, beeinflusst den Erfolg im Wettbewerb.  
 Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-Ansicht der eigenen Betriebspläne.  
 
@@ -70,7 +65,7 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 
 | Gesetzgeber
 | Externer Stakeholder, der über rechtliche Vorgaben (z. B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
-| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben bei Registrierung und Login.
+| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben bei Registrierung und Login wie z.B. DSGVO, Impressumpflicht.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
@@ -83,15 +78,17 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 |===
 | Bedarf | Priorität | Funktion / Fähigkeit | Geplantes Release
 
-| Besucher möchten verstehen, worum es bei Bahnplan geht, bevor sie sich registrieren. | Hoch | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | MVP
+| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Mittel | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | xx
 
 | Nutzer möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
 
+| Nutzer möchten sich über die Züge und Wagen informieren können, um gezieltere Investitionsentscheidungen zu den den eigenen in der Gesellschaft verwendeten Fahrzeugen treffen zu können. | Hoch | Erwerben von Zügen und Wagen mit detaillierten Informationen | MVP
+
 | Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
 
-| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | MVP
+| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | xx
 
-| Das System soll realistische betriebliche Zusammenhänge abbilden. | hoch | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | MVP
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | xx
 
 | Nutzer möchten ein ansprechendes und modernes UI | Hoch |  Modernes Design | MVP
 |===
