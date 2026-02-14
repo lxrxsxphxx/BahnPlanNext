@@ -58,8 +58,12 @@ const LINKS: LinkEntry[] = [
   {
     to: '/gesellschaftsbereich',
     label: 'Gesellschaftsbereich',
-    parentLink: 'Community',
+    isParent: true,
+    visibleOnFrontpage: true,
   },
+  { to: '/finanzen', label: 'Finanzen', parentLink: 'Gesellschaftsbereich' },
+  { to: '/gesellschaftsbereich/fahrzeuge', label: 'Meine Fahrzeuge', parentLink: 'Gesellschaftsbereich' },
+  { to: '/meine-fahrplaene', label: 'Meine Fahrpläne', parentLink: 'Gesellschaftsbereich' },
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
@@ -78,7 +82,7 @@ export default function Navbar({
 }) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false); // Platzhalter für den Anmeldestatus
 
   return (
     <>

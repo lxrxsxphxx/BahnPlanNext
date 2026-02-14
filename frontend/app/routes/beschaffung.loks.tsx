@@ -5,6 +5,7 @@ import type { Route } from './+types/beschaffung.loks';
 import LokCard from '@/components/LokCard';
 import { Link, useLoaderData } from 'react-router';
 import { useMemo } from 'react';
+import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,7 +16,8 @@ export function meta({}: Route.MetaArgs) {
 export async function clientLoader() {
   try {
     const loks = await fetchLoks();
-    return { loks, error: null };
+    const company = await fetchCompanyInfo(); 
+    return { loks, company, error: null };
   } catch (err) {
     console.error('Fehler beim Laden der Loks im Loader:', err);
     return { loks: [], error: (err as Error).message || 'Fehler beim Laden der Loks' };
@@ -32,14 +34,16 @@ export interface Modell {
 }
 
 export default function BeschaffungLoks() {
-  const cashBalance = 4000000;
-  const { loks, error } = useLoaderData() as { loks: any[], error: string | null };
+
+  const { loks, company, error } = useLoaderData() as { loks: any[], company?: { id?: number; name?: string; capital?: number } | null, error: string | null };
+  const cashBalance = company?.capital ?? 4000000;
+
 console.log('Loks from loader:', loks);
 
 
   if (error) {
     return (
-      <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 md:pl-[270px]">
+      <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 ">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-3xl font-bold">
             <Link to="/beschaffung" className="hover:underline">Shop</Link> &gt; Loks
@@ -112,7 +116,7 @@ console.log('Loks from loader:', loks);
   })), [loks]);
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white px-[40px] py-8 md:pl-[270px]">
+    <div className="min-h-screen bg-[#0B0F14] text-white  py-8 ">
       <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold">
           <Link to="/beschaffung" className="hover:underline">Shop</Link> &gt; Loks
@@ -124,7 +128,7 @@ console.log('Loks from loader:', loks);
 
       <div className="space-y-6">
         {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.name} lok={lok} />
+          <LokCard key={lok.name} lok={lok}  lokInInventory={false} />
         ))}
       </div>
     </div>

@@ -8,6 +8,7 @@ interface Lok{
     id: number;
     name: string;
     image: string;
+    tractionType: string;
     specs: { label: string; value: string }[];
     action: { type: 'leasing' | 'kauf'; label: string };
     modelle: Modell[];
@@ -15,9 +16,10 @@ interface Lok{
 
 interface LokCardProps {
   lok: Lok;
+  lokInInventory: boolean;
 }
 
-export default function LokCard({ lok }: LokCardProps) {
+export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
     const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
   const [isLeasedModalOpen, setIsLeasedModalOpen] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState('');
@@ -63,7 +65,7 @@ export default function LokCard({ lok }: LokCardProps) {
                     </div>
                     
                     <div className="w-64  p-4">
-                      {lok.action.type === 'leasing' ? (
+                      {lok.action.type === 'leasing' && !lokInInventory ? (
                         <div>
                           <LeasingModelDropdown 
                             modelle={lok.modelle} 
@@ -87,9 +89,24 @@ export default function LokCard({ lok }: LokCardProps) {
                             </button>}
                         </div>
                       ) : (
-                        <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
-                          {lok.action.label}
-                        </button>
+                        lokInInventory ? (
+                          <button
+                            className={
+                              `rounded-full px-6 py-3 text-md font-semibold mt-[40%] ml-[10vw] ` +
+                              (lok.action.label === 'Einsatzbereit'
+                                ? ' border border-green-500 text-green-400 bg-black/40'
+                                : lok.action.label === 'In Lieferung'
+                                ? ' border border-red-500 text-red-400 bg-black/40'
+                                : ' border border-gray-500 text-gray-300 bg-black/40')
+                            }
+                          >
+                            {lok.action.label}
+                          </button>
+                        ) : (
+                          <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
+                            {lok.action.label}
+                          </button>
+                        )
                       )}
                     </div>
                   </div>
