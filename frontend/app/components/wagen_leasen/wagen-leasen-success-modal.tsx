@@ -1,5 +1,6 @@
 interface LeasingSuccessModalProps {
   wagenName: string;
+  lokName: string;
   standardWagen: number;
   steuerWagen: number;
   onClose: () => void;
@@ -7,6 +8,7 @@ interface LeasingSuccessModalProps {
 
 export default function LeasingSuccessModal({
   wagenName,
+  lokName,
   standardWagen,
   steuerWagen,
   onClose,
@@ -19,7 +21,7 @@ export default function LeasingSuccessModal({
     >
       {/* Modal selbst */}
       <div
-        className="animate-scaleIn w-full max-w-sm rounded-2xl bg-[#121C27] p-8 text-white shadow-2xl"
+        className="animate-scaleIn w-full max-w-105 rounded-2xl bg-[#121C27] p-8 text-white shadow-2xl"
         onClick={(e) => e.stopPropagation()} // Klick innerhalb Modal -> Event nicht weitergeben
       >
         {/* ICON */}
@@ -61,6 +63,9 @@ export default function LeasingSuccessModal({
               <li>
                 Status:{' '}
                 <span className="font-medium text-red-400">in Lieferung</span>
+              </li>
+              <li>
+                Gekuppelt mit: {lokName}
               </li>
             </ul>
           </div>

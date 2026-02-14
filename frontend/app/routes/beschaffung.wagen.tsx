@@ -13,6 +13,7 @@ export function meta({}: Route.MetaArgs) {
 export default function BeschaffungWagen() {
   const cashBalance = 4000000;
   const wagenName = 'Silberlinge';
+  const lokName = 'Elektrolokomotive: 101-001';
 
   const [leasingOpen, setLeasingOpen] = useState(false);
   const [successModalOpen, setSuccessModalOpen] = useState(false);
@@ -54,6 +55,7 @@ export default function BeschaffungWagen() {
       {successModalOpen && (
         <LeasingSuccessModal
           wagenName={wagenName}
+          lokName={lokName}
           standardWagen={leasedStandard}
           steuerWagen={leasedSteuer}
           onClose={() => setSuccessModalOpen(false)}
