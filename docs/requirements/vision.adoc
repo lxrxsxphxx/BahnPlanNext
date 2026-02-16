@@ -7,7 +7,8 @@ Das Projekt basiert auf der ehemaligen Webseite *bahnplan.de*, die über mehrere
 Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen, war jedoch von technischer Seite und gestalterisch veraltet und wurde mittlerweile offline genommen. 
 Diese Idee wird nun technisch und konzeptionell neu umgesetzt, mit aktuellen Technologien, klarer Architektur und einer modernen Benutzeroberfläche, um den Nutzern ein ansprechendes und lehrreiches Spielerlebnis zu bieten.
 
-Das System soll es den Spielern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen zur Fahrplanplanung oder Wartung zu treffen.
+Das System soll es den Spielern ermöglichen, ein eigenes Bahnunternehmen zu gründen und betriebliche Entscheidungen zur Fahrzeugverwaltung zu treffen.
+Die Planung und Erstellung von Fahrplänen sowie die Teilnahme an Ausschreibungen werden in der Post-MVP-Phase ergänzt.
 So lernen die Spieler wirtschaftliche und betriebliche Zusammenhänge auf spielerische Weise kennen.
 
 
@@ -19,11 +20,10 @@ Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen wer
 
 === Gültigkeitsbereich (Scope)
 
-Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die im MVP zunächst von eingeladenen Testerinnen und Testern genutzt wird.
-Die Teilnahme an Ausschreibungen, das Kallkulieren der Fahrpläne sowie eine öffentliche Nutzung für weitere Interessierte ist für spätere Produktphasen geplant.
-Die Anwendung erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, Wagen und Loks zu leasen und zu verwalten.  
-Die Teilnahme an Ausschreibungen und die Erstellung von Fahrplänen ist explizit für Post-MVP vorgesehen.
-Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.
+Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die im MVP zunächst von festgelegten Tester:innen genutzt wird.
+Im MVP liegt der Fokus auf der Gründung eines virtuellen Bahnunternehmens sowie dem Leasing und der Verwaltung von Wagen und Loks.
+Die Planung und Erstellung von Fahrplänen, die Teilnahme an Ausschreibungen sowie eine öffentliche Nutzung für weitere Interessierte sind für die Post-MVP-Phase vorgesehen.
+Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren bezogen auf das eigene virtuelle Bahnunternehmen.
 
 Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP.
 
@@ -41,10 +41,10 @@ Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu be
 
 === Produktvision
 Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen.  
-Die Teilnahme an realitätsnahen Ausschreibungen wird in einer späteren Ausbaustufe (Post-MVP) ergänzt.  
+Die Teilnahme an realitätsnahen Ausschreibungen wird in der Post-MVP-Phase ergänzt.  
 Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und technisch veraltet ist. 
-Jede Entscheidung, ob beim Fahrzeugkauf, bei der Fahrplangestaltung oder bei der Preisbildung, beeinflusst den Erfolg im Wettbewerb.  
-Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-Ansicht der eigenen Betriebspläne.  
+Jede betriebliche Entscheidung beeinflusst den Erfolg im Wettbewerb. Dazu zählen im MVP vor allem Fahrzeugleasing sowie in der Post-MVP-Phase Fahrplangestaltung, Ausschreibungen, Preisbildung und Wartung.  
+Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 
 == Stakeholder-Beschreibungen
 
@@ -54,7 +54,7 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| DEV-Team
+| Developers
 | Das Entwicklerteam umfasst Frontend-, Backend- und Architekturverantwortliche. Es setzt die fachlichen Anforderungen technisch um, erstellt Tests und sorgt für Wartbarkeit und Qualität des Codes.
 | Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog.
 
@@ -71,7 +71,7 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 | Definition der Rahmenbedingungen, fachliche Rückmeldung bei Nachfragen, Bewertung und Abnahme des MVP im Seminarkontext.
 
 | Nutzer
-| Endanwender der Anwendung. Im MVP sind dies festgelegte Testerinnen und Tester, die über die Weboberfläche interagieren, Gesellschaften gründen und Kernfunktionen testen. In späteren Produktphasen wird die Nutzung für eine breitere Öffentlichkeit und um Ausschreibungen erweitert.
+| Endanwender der Anwendung. Im MVP sind dies festgelegte Tester:innen, die mit der Weboberfläche interagieren, Gesellschaften gründen und Kernfunktionen testen. In der Post-MVP-Phase wird die Nutzergruppe erweitert.
 | Nutzung und Feedback. Dienen als Orientierung für Funktionalität, Usability und Systemperformance.
 
 | Gesetzgeber
@@ -89,11 +89,11 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 |===
 | Bedarf | Priorität | Funktion / Fähigkeit | Geplantes Release
 
-| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Mittel | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | Post-MVP
+| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Niedrig | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | Post-MVP
 
 | Spieler möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
 
-| Spieler möchten sich über Züge und Wagen informieren können, um gezieltere Investitionsentscheidungen für die in ihrer Gesellschaft verwendeten Fahrzeuge treffen zu können. | Hoch | Erwerben von Zügen und Wagen mit detaillierten Informationen | MVP
+| Spieler möchten sich über Loks und Wagen informieren können, um gezieltere Leasingentscheidungen für die in ihrer Gesellschaft verwendeten Fahrzeuge treffen zu können. | Hoch | Leasing und Verwaltung von Loks und Wagen mit detaillierten Informationen | MVP
 
 | Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
 
@@ -101,7 +101,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
 
-| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Modernes Design | MVP
+| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | UI mit konsistenten Komponenten für Login, Gesellschaftsgründung, Fahrzeugübersicht und Leasing | MVP
 |===
 
 === Zusätzliche Produktanforderungen
@@ -112,11 +112,11 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Performance und Skalierbarkeit
 | Hoch
-| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzerinnen und Nutzern zuverlässig reagieren. Bei 100 gleichzeitigen Nutzerinnen und Nutzern müssen mindestens 95 % der Interaktionen mit der Anwendung innerhalb von 2 Sekunden abgeschlossen sein.
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur vollständigen Response am Backend).
 | MVP
 
 | Wartbarkeit und Dokumentation
 | Mittel
-| Alle Architektur- und Implementierungsentscheidungen werden nachvollziehbar dokumentiert. Die Projektdokumentation ist verpflichtend und dient als Grundlage für spätere Pflege und Erweiterung.
+| Für 100 % der MVP-Kernfunktionen liegen aktuelle technische Dokumentationen vor (API-Endpunkte, Datenmodell, Betriebsabläufe). Die Dokumentation wird regelmäßig aktualisiert, um Änderungen im Code widerzuspiegeln. Es existieren klare Coding-Standards und eine strukturierte Codebasis, die es neuen Entwickler:innen ermöglicht, sich schnell einzuarbeiten.
 | MVP
 |===
