@@ -42,7 +42,7 @@ Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu be
 === Produktvision
 Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen.  
 Die Teilnahme an realitätsnahen Ausschreibungen wird in der Post-MVP-Phase ergänzt.  
-Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und technisch veraltet ist. 
+Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und gestalterisch sowie technisch veraltet ist. 
 Jede betriebliche Entscheidung beeinflusst den Erfolg im Wettbewerb. Dazu zählen im MVP vor allem Fahrzeugleasing sowie in der Post-MVP-Phase Fahrplangestaltung, Ausschreibungen, Preisbildung und Wartung.  
 Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 
