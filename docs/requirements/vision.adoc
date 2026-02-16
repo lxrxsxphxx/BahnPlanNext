@@ -46,6 +46,8 @@ Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar un
 Jede betriebliche Entscheidung beeinflusst den Erfolg im Wettbewerb. Dazu zählen im MVP vor allem Fahrzeugleasing sowie in der Post-MVP-Phase Fahrplangestaltung, Ausschreibungen, Preisbildung und Wartung.  
 Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 
+Bis zum Semesterende liefert *Bahnplan* ein lauffähiges MVP, mit dem festgelegte Tester:innen den Kernablauf ohne Unterstützung durchführen können: Registrierung/Login, Gründung einer Gesellschaft sowie Leasing und Verwaltung von Fahrzeugen.
+
 == Stakeholder-Beschreibungen
 
 === Zusammenfassung der Stakeholder
@@ -117,6 +119,6 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Wartbarkeit und Dokumentation
 | Mittel
-| Für 100 % der MVP-Kernfunktionen liegen aktuelle technische Dokumentationen vor (API-Endpunkte, Datenmodell, Betriebsabläufe). Die Dokumentation wird regelmäßig aktualisiert, um Änderungen im Code widerzuspiegeln. Es existieren klare Coding-Standards und eine strukturierte Codebasis, die es neuen Entwickler:innen ermöglicht, sich schnell einzuarbeiten.
+| Die Anforderung gilt als erfüllt, wenn folgende Nachweise im Repository vorliegen: (1) eine technische Dokumentation für 100 % der MVP-Kernfunktionen (API-Endpunkte, Datenmodell, Betriebsabläufe) und (2) jede Änderung an API-Endpunkten oder Datenmodell wird in der Dokumentation mitgezogen.
 | MVP
 |===
