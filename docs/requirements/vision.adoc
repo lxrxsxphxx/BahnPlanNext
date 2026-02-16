@@ -117,7 +117,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 | Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur Response am Backend).
 | MVP
 
-| Wartbarkeit und Dokumentation
+| Wartbarkeit und Dokumentation für Zukunftige Entwickler:innen
 | Mittel
 | Die Anforderung gilt als erfüllt, wenn folgende Nachweise im Repository vorliegen: (1) eine technische Dokumentation für 100 % der MVP-Kernfunktionen (API-Endpunkte, Datenmodell, Betriebsabläufe) und (2) jede Änderung an API-Endpunkten oder Datenmodell wird in der Dokumentation mitgezogen.
 | MVP
