@@ -19,11 +19,13 @@ Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen wer
 
 === Gültigkeitsbereich (Scope)
 
-Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die von Studierenden, Interessierten oder Simulationsteilnehmern genutzt werden kann.  
-Sie erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, an Ausschreibungen teilzunehmen, Fahrpläne zu planen und Kosten zu kalkulieren.  
+Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die im MVP zunächst von eingeladenen Testerinnen und Testern genutzt wird.
+Die Teilnahme an Ausschreibungen, das Kallkulieren der Fahrpläne sowie eine öffentliche Nutzung für weitere Interessierte ist für spätere Produktphasen geplant.
+Die Anwendung erlaubt es, ein virtuelles Eisenbahnunternehmen zu gründen, Wagen und Loks zu leasen und zu verwalten.  
+Die Teilnahme an Ausschreibungen und die Erstellung von Fahrplänen ist explizit für Post-MVP vorgesehen.
 Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren – von Leasing und Wartung bis zur betrieblichen Planung.
 
-Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentrale Spielmechaniken demonstriert.
+Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP.
 
 === Definitionen, Akronyme und Abkürzungen
 
@@ -38,7 +40,9 @@ Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerwe
 Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter Spielmechanik.  
 
 === Produktvision
-Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen. Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und technisch veraltet ist. 
+Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen.  
+Die Teilnahme an realitätsnahen Ausschreibungen wird in einer späteren Ausbaustufe (Post-MVP) ergänzt.  
+Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und technisch veraltet ist. 
 Jede Entscheidung, ob beim Fahrzeugkauf, bei der Fahrplangestaltung oder bei der Preisbildung, beeinflusst den Erfolg im Wettbewerb.  
 Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-Ansicht der eigenen Betriebspläne.  
 
@@ -55,7 +59,7 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 | Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog.
 
 | Product Owner
-| Die Product Owner sind zwei sind für die fachliche Priorisierung verantwortlich und stellen den Nutzen des Produkts für Nutzer und Kunde sicher.
+| Die Product Owner sind für die fachliche Priorisierung verantwortlich und stellen den Nutzen des Produkts für Nutzer und Kunde sicher.
 | Pflege und Priorisierung des Product Backlogs, Klärung fachlicher Anforderungen mit den anderen Stakeholdern, fachliche Abnahme der Product-Backlog-Items und der Inkremente.
 
 | Scrum Master
@@ -67,12 +71,12 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 | Definition der Rahmenbedingungen, fachliche Rückmeldung bei Nachfragen, Bewertung und Abnahme des MVP im Seminarkontext.
 
 | Nutzer
-| Endanwender der Anwendung, also Personen, die Bahnplan aktiv spielen oder testen. Sie interagieren über die Weboberfläche, gründen Gesellschaften und nehmen an Ausschreibungen teil.
+| Endanwender der Anwendung. Im MVP sind dies festgelegte Testerinnen und Tester, die über die Weboberfläche interagieren, Gesellschaften gründen und Kernfunktionen testen. In späteren Produktphasen wird die Nutzung für eine breitere Öffentlichkeit und um Ausschreibungen erweitert.
 | Nutzung und Feedback. Dienen als Orientierung für Funktionalität, Usability und Systemperformance.
 
 | Gesetzgeber
 | Externer Stakeholder, der über rechtliche Vorgaben (z.B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
-| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben (z.B. DSGVO) sowie der Impressumspflicht für den Webbetrieb.
+| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben (z.B. DSGVO) sowie der Impressumspflicht bei öffentlichem Webbetrieb.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
