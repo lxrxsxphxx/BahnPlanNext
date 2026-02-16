@@ -37,7 +37,7 @@ Siehe <<glossary.adoc#glossary, Glossar>>.
 === Fachliche Motivation
 *Bahnplan.de* war ein browserbasiertes Multiplayer-Planspiel, das den Aufbau und Betrieb virtueller Eisenbahnunternehmen simulierte.  
 Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerweile offline ist.  
-Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter Spielmechanik.  
+Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter automatisierter Spielmechanik.  
 
 === Produktvision
 Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen.  
