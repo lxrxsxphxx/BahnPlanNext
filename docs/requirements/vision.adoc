@@ -103,7 +103,6 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
 
-| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | UI mit konsistenten Komponenten für Login, Gesellschaftsgründung, Fahrzeugübersicht und Leasing | MVP
 |===
 
 === Zusätzliche Produktanforderungen
@@ -117,8 +116,15 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 | Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur Response am Backend).
 | MVP
 
+| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Die Anforderung gilt als erfüllt, wenn folgende Kriterien erfüllt sind: (1) UI mit konsistenten Komponenten für Login, Gesellschaftsgründung, Fahrzeugübersicht und Leasing (2) sichtbare Fokuseffekte bei Interaktionen | MVP
+
 | Wartbarkeit und Dokumentation für Zukunftige Entwickler:innen
-| Mittel
+| Hoch
 | Die Anforderung gilt als erfüllt, wenn folgende Nachweise im Repository vorliegen: (1) eine technische Dokumentation für 100 % der MVP-Kernfunktionen (API-Endpunkte, Datenmodell, Betriebsabläufe) und (2) jede Änderung an API-Endpunkten oder Datenmodell wird in der Dokumentation mitgezogen.
 | MVP
+
+| Datenschutz und rechtliche Mindestanforderungen
+| Hoch
+| Das System muss die gesetzlichen Anforderungen an Datenschutz und Informationssicherheit erfüllen, insbesondere die DSGVO, sowie die Impressumspflicht bei öffentlichem Webbetrieb. Die Anforderung gilt als erfüllt, wenn folgende Nachweise vorliegen: (1) Datenschutzerklärung und Impressum auf der Webseite (2) keine Speicherung personenbezogener Daten ohne Einwilligung (3) sichere Passwortspeicherung (z.B. Hashing) für Nutzerkonten.
+| Post-MVP
 |===
