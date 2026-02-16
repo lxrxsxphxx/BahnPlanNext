@@ -1,19 +1,19 @@
-= Vision: Projekt:BahnPlan
+= Vision: Projekt Bahnplan
 
 == Einführung
 
 Bahnplan ist ein Seminarprojekt der HTW Dresden mit dem Ziel, eine moderne, webbasierte Simulation des deutschen Eisenbahnbetriebs zu entwickeln.  
 Das Projekt basiert auf der ehemaligen Webseite *bahnplan.de*, die über mehrere Jahre im Internet aktiv war und den Ausgangspunkt für das aktuelle Seminar bildet.  
 Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen, war jedoch von technischer Seite und gestalterisch veraltet und wurde mittlerweile offline genommen. 
-Diese Idee wird nun technisch und konzeptionell neu umgesetzt mit aktuellen Technologien, klarer Architektur und einem moderneren Userinterface um den Nutzern ein ansprechendes und lehrreiches Spielerlebnis zu bieten.
+Diese Idee wird nun technisch und konzeptionell neu umgesetzt, mit aktuellen Technologien, klarer Architektur und einer modernen Benutzeroberfläche, um den Nutzern ein ansprechendes und lehrreiches Spielerlebnis zu bieten.
 
 Das System soll es den Spielern ermöglichen, ein eigenes Bahnunternehmen zu gründen, an Ausschreibungen teilzunehmen und betriebliche Entscheidungen zur Fahrplanplanung oder Wartung zu treffen.
-Damit die Nutzer die Möglichkeit haben, Simulationsentscheidungen der Wirtschaft auf spielerische Art zu lernen.
+So lernen die Spieler wirtschaftliche und betriebliche Zusammenhänge auf spielerische Weise kennen.
 
 
 === Zweck
 Das Dokument beschreibt die fachliche Vision und den Zielrahmen des Projekts *Bahnplan*.  
-Es fasst die Beweggründe für die Teammitglieder, die das Projekt umsetzen, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und soll sicherstellen, dass alle ein gemeinsames Verständnis für Ziel (also die Vison), Umfang und Nutzen zu schaffen.
+Es fasst die Beweggründe des Teams, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und stellt sicher, dass alle ein gemeinsames Verständnis von Vision, Umfang und Nutzen haben.
 Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen werden in separaten Dokumenten vertieft.
 
 
@@ -38,11 +38,11 @@ Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerwe
 Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter Spielmechanik.  
 
 === Produktvision
-Bahnplan ist die neue, wiederbelebte Echtzeit-Websimulation, da die alte Websimulation nicht mehr Verfügbar und veraltet ist, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen. 
+Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen und an realitätsnahen Ausschreibungen teilnehmen. Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und technisch veraltet ist. 
 Jede Entscheidung, ob beim Fahrzeugkauf, bei der Fahrplangestaltung oder bei der Preisbildung, beeinflusst den Erfolg im Wettbewerb.  
 Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-Ansicht der eigenen Betriebspläne.  
 
-== Stakeholder Beschreibungen
+== Stakeholder-Beschreibungen
 
 === Zusammenfassung der Stakeholder
 
@@ -54,17 +54,25 @@ Die Anwendung bietet ein modernes Design, automatisierte Abläufe und eine Live-
 | Das Entwicklerteam umfasst Frontend-, Backend- und Architekturverantwortliche. Es setzt die fachlichen Anforderungen technisch um, erstellt Tests und sorgt für Wartbarkeit und Qualität des Codes.
 | Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog.
 
+| Product Owner
+| Die Product Owner sind zwei sind für die fachliche Priorisierung verantwortlich und stellen den Nutzen des Produkts für Nutzer und Kunde sicher.
+| Pflege und Priorisierung des Product Backlogs, Klärung fachlicher Anforderungen mit den anderen Stakeholdern, fachliche Abnahme der Product-Backlog-Items und der Inkremente.
+
+| Scrum Master
+| Der Scrum Master unterstützt das Scrum-Framework im Team und fördert die Verbesserung des Prozesses.
+| Moderation und Sicherstellung der Scrum-Events, Beseitigung von Prozesshindernissen, Unterstützung des Teams bei der Einhaltung von Scrum-Praktiken.
+
 | Kunde
 | Der Auftraggeber des Projekts ist Prof. Iffländer. Er bewertet Konzept, Umsetzung und Präsentation und stellt sicher, dass die Seminarziele erfüllt werden.
-| Definition der Rahmenbedingungen, fachliche Rückmeldung in Reviews, Abnahme des MVP.
+| Definition der Rahmenbedingungen, fachliche Rückmeldung bei Nachfragen, Bewertung und Abnahme des MVP im Seminarkontext.
 
 | Nutzer
 | Endanwender der Anwendung, also Personen, die Bahnplan aktiv spielen oder testen. Sie interagieren über die Weboberfläche, gründen Gesellschaften und nehmen an Ausschreibungen teil.
 | Nutzung und Feedback. Dienen als Orientierung für Funktionalität, Usability und Systemperformance.
 
 | Gesetzgeber
-| Externer Stakeholder, der über rechtliche Vorgaben (z. B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
-| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben bei Registrierung und Login wie z.B. DSGVO, Impressumpflicht.
+| Externer Stakeholder, der über rechtliche Vorgaben (z.B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
+| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben (z.B. DSGVO) sowie der Impressumspflicht für den Webbetrieb.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
@@ -79,17 +87,17 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Mittel | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | Post-MVP
 
-| Nutzer möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
+| Spieler möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
 
-| Nutzer möchten sich über die Züge und Wagen informieren können, um gezieltere Investitionsentscheidungen zu den den eigenen in der Gesellschaft verwendeten Fahrzeugen treffen zu können. | Hoch | Erwerben von Zügen und Wagen mit detaillierten Informationen | MVP
+| Spieler möchten sich über Züge und Wagen informieren können, um gezieltere Investitionsentscheidungen für die in ihrer Gesellschaft verwendeten Fahrzeuge treffen zu können. | Hoch | Erwerben von Zügen und Wagen mit detaillierten Informationen | MVP
 
 | Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
 
 | Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | Post-MVP
 
-| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
 
-| Nutzer möchten ein ansprechendes und modernes UI | Hoch |  Modernes Design | MVP
+| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Modernes Design | MVP
 |===
 
 === Zusätzliche Produktanforderungen
@@ -100,7 +108,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Performance und Skalierbarkeit
 | Hoch
-| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der Aktionen innerhalb von 2 Sekunden abgeschlossen sein.
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzerinnen und Nutzern zuverlässig reagieren. Bei 100 gleichzeitigen Nutzerinnen und Nutzern müssen mindestens 95 % der Interaktionen mit der Anwendung innerhalb von 2 Sekunden abgeschlossen sein.
 | MVP
 
 | Wartbarkeit und Dokumentation
