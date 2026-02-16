@@ -27,8 +27,7 @@ Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP, das zentra
 
 === Definitionen, Akronyme und Abkürzungen
 
-Siehe <<#glossary, Glossar>>.
-//Siehe <<./glossary.adoc#glossary, Glossar>>.
+Siehe <<glossary.adoc#glossary, Glossar>>.
 
 
 == Positionierung
@@ -78,7 +77,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 |===
 | Bedarf | Priorität | Funktion / Fähigkeit | Geplantes Release
 
-| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Mittel | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | xx
+| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Mittel | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | Post-MVP
 
 | Nutzer möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
 
@@ -86,9 +85,9 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
 
-| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | xx
+| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | Post-MVP
 
-| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | xx
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell  mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
 
 | Nutzer möchten ein ansprechendes und modernes UI | Hoch |  Modernes Design | MVP
 |===
@@ -101,7 +100,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Performance und Skalierbarkeit
 | Hoch
-| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Standardaktionen dürfen keine spürbare Verzögerung verursachen.
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der Aktionen innerhalb von 2 Sekunden abgeschlossen sein.
 | MVP
 
 | Wartbarkeit und Dokumentation
