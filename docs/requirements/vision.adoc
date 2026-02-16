@@ -114,7 +114,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Performance und Skalierbarkeit
 | Hoch
-| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur vollständigen Response am Backend).
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur Response am Backend).
 | MVP
 
 | Wartbarkeit und Dokumentation
