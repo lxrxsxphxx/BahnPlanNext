@@ -52,8 +52,8 @@ Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 | ist | Bahnplan
 | eine | webbasierte Simulation
 | in der |Spieler:innen ihre eigene virtuelle Eisenbahngesellschaft gründen und führen können
-| anders als | die frühere Plattform *bahnplan.de* oder andere Wirtschaftssimulationen
-| kann unser Produkt | mit einem modernen Design, klaren Benutzerführung und automatisierten Abläufen punkten, die den Einstieg erleichtern und das Spielerlebnis verbessern.
+| anders als | die frühere Plattform bahnplan.de
+| kann unser Produkt | mit einem modernen Design, klaren Benutzerführung und automatisierten Abläufen punkten, die den Einstieg erleichtern und das Spielerlebnis verbessern ohne dabei die Komplexität der ursprünglichen Plattform zu reduzieren.
 |===
 
 Bis zum Semesterende liefert *Bahnplan* ein lauffähiges MVP, mit dem festgelegte Tester:innen den Kernablauf ohne Unterstützung durchführen können: Registrierung/Login, Gründung einer Gesellschaft sowie Leasing und Verwaltung von Fahrzeugen.
