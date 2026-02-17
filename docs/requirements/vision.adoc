@@ -116,9 +116,9 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 
 | Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Die Anforderung gilt als erfüllt, wenn folgendes Kriterium erfüllt ist: UI mit konsistenten Komponenten innerhalb der gesamten Anwendung | MVP
 
-| Wartbarkeit und Dokumentation für Zukunftige Entwickler:innen
+| Wartbarkeit durch Architektur und Modularität
 | Hoch
-| Die Anforderung gilt als erfüllt, wenn folgende Nachweise im Repository vorliegen: (1) eine technische Dokumentation für 100 % der MVP-Kernfunktionen (API-Endpunkte, Datenmodell, Betriebsabläufe) und (2) jede Änderung an API-Endpunkten oder Datenmodell wird in der Dokumentation mitgezogen.
+| Die Anforderung gilt als erfüllt, wenn die MVP-Kernfunktionen in einer modularen Architektur umgesetzt sind (Trennung von API, Geschäftslogik und Datenzugriff), sodass Änderungen an einem Modul nur minimale Auswirkungen auf andere Module haben. Änderungen an API-Endpunkten oder Datenmodell werden in den betroffenen Modulen und deren Schnittstellenbeschreibung konsistent nachgezogen.
 | MVP
 
 | Datenschutz und rechtliche Mindestanforderungen
