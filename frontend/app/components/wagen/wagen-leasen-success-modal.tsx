@@ -1,8 +1,10 @@
+
 interface LeasingSuccessModalProps {
   wagenName: string;
   lokName: string;
   standardWagen: number;
   steuerWagen: number;
+  lieferDatum: string; // ngày hôm nay
   onClose: () => void;
 }
 
@@ -11,20 +13,22 @@ export default function LeasingSuccessModal({
   lokName,
   standardWagen,
   steuerWagen,
+  lieferDatum,
   onClose,
-}: LeasingSuccessModalProps) {
+}: LeasingSuccessModalProps) {  
+  const handleGoToFahrzeuge = () => {
+    window.location.href = '/gesellschaftsbereich/fahrzeuge';
+  };
+
   return (
-    // Hintergrund-Overlay klickbar
     <div
       className="animate-fadeIn fixed inset-0 z-50 flex items-center justify-center bg-black/70"
-      onClick={onClose} // Klick auf Hintergrund -> Modal schließen
+      onClick={onClose}
     >
-      {/* Modal selbst */}
       <div
         className="animate-scaleIn w-full max-w-105 rounded-2xl bg-[#121C27] p-8 text-white shadow-2xl"
-        onClick={(e) => e.stopPropagation()} // Klick innerhalb Modal -> Event nicht weitergeben
+        onClick={(e) => e.stopPropagation()}
       >
-        {/* ICON */}
         <div className="flex justify-center">
           <div className="flex h-16 w-16 items-center justify-center rounded-full border-4 border-green-500/80">
             <svg
@@ -34,23 +38,17 @@ export default function LeasingSuccessModal({
               strokeWidth="3"
               viewBox="0 0 24 24"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 13l4 4L19 7"
-              />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
         </div>
 
-        {/* TITLE */}
         <h2 className="mt-4 text-center text-3xl font-semibold text-gray-200 italic">
           Wagen geleast!
         </h2>
 
         <hr className="my-3 border-gray-700" />
 
-        {/* CONTENT */}
         <div className="space-y-2 text-sm text-gray-300">
           <div>
             <p className="mb-1 ml-5 text-[17px] font-semibold text-gray-200">
@@ -61,12 +59,9 @@ export default function LeasingSuccessModal({
                 {wagenName}: Standard (x{standardWagen}), Stwg. (x{steuerWagen})
               </li>
               <li>
-                Status:{' '}
-                <span className="font-medium text-red-400">in Lieferung</span>
+                Status: <span className="font-medium text-red-400">in Lieferung</span>
               </li>
-              <li>
-                Gekuppelt mit: {lokName}
-              </li>
+              <li>Gekuppelt mit: {lokName}</li>
             </ul>
           </div>
 
@@ -77,26 +72,24 @@ export default function LeasingSuccessModal({
               Lieferinformationen:
             </p>
             <ul className="ml-5 list-inside list-disc text-[15px]">
-              <li>Lieferdatum: 03.01.2026</li>
+              <li>Lieferdatum: {lieferDatum}</li>
               <li>Leasingkosten werden ab Lieferdatum abgezogen</li>
             </ul>
           </div>
         </div>
 
-        {/* BUTTONS */}
         <div className="mt-6 mb-2 flex gap-4">
           <button
             onClick={onClose}
             className="font-semi flex-1 rounded-lg bg-[#1E4F8A] px-2 py-2.5 text-[14px] transition hover:bg-[#2468B5] active:scale-95"
           >
-            zu Meine Fahrzeuge
+            zurück zum Shop
           </button>
-
           <button
-            onClick={onClose}
+            onClick={handleGoToFahrzeuge}
             className="font-semi flex-1 rounded-lg bg-[#1E4F8A] px-2 py-2.5 text-[14px] transition hover:bg-[#2468B5] active:scale-95"
           >
-            Zurück zum Shop
+            zu Meine Fahrzeuge
           </button>
         </div>
       </div>

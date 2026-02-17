@@ -11,11 +11,15 @@ export async function fetchCompaniesLoks() {
 }
 
 export async function fetchCompanyInfo() {
-    const response = await apiFetch(API_ENDPOINTS.myCompany);
-    if (response.status === 401) {
-        throw new Error('Unauthorisiert, bitte zuerst einloggen');
-    } else if (!response.ok) {
-        throw new Error('Fehler beim Laden der Unternehmensinformationen');
-    }
-    return response.json();
+  const res = await apiFetch(API_ENDPOINTS.myCompany);
+
+  if (!res.ok) {
+    const text = await res.text();
+    console.error("Company API Error:", res.status, text);
+    throw new Error(
+      `Company API Fehler: ${res.status} - ${text}`
+    );
+  }
+
+  return res.json();
 }
