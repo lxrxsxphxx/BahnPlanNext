@@ -46,6 +46,16 @@ Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar un
 Jede betriebliche Entscheidung beeinflusst den Erfolg im Wettbewerb. Dazu zählen im MVP vor allem Fahrzeugleasing sowie in der Post-MVP-Phase Fahrplangestaltung, Ausschreibungen, Preisbildung und Wartung.  
 Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 
+|===
+| Für | Bahninteressierte
+| die |  die Spaß an wirtschaftlichen Simulationen haben
+| ist | Bahnplan
+| eine | webbasierte Simulation
+| in der |Spieler:innen ihre eigene virtuelle Eisenbahngesellschaft gründen und führen können
+| anders als | die frühere Plattform *bahnplan.de* oder andere Wirtschaftssimulationen
+| kann unser Produkt | mit einem modernen Design, klaren Benutzerführung und automatisierten Abläufen punkten, die den Einstieg erleichtern und das Spielerlebnis verbessern.
+|===
+
 Bis zum Semesterende liefert *Bahnplan* ein lauffähiges MVP, mit dem festgelegte Tester:innen den Kernablauf ohne Unterstützung durchführen können: Registrierung/Login, Gründung einer Gesellschaft sowie Leasing und Verwaltung von Fahrzeugen.
 
 == Stakeholder-Beschreibungen
@@ -55,18 +65,6 @@ Bis zum Semesterende liefert *Bahnplan* ein lauffähiges MVP, mit dem festgelegt
 [%header, cols="1,3,3"]
 |===
 | Name | Beschreibung | Verantwortlichkeiten
-
-| Developers
-| Das Entwicklerteam umfasst Frontend-, Backend- und Architekturverantwortliche. Es setzt die fachlichen Anforderungen technisch um, erstellt Tests und sorgt für Wartbarkeit und Qualität des Codes.
-| Entwicklung, Integration und Dokumentation der Software. Umsetzung der Anforderungen aus dem Product Backlog.
-
-| Product Owner
-| Die Product Owner sind für die fachliche Priorisierung verantwortlich und stellen den Nutzen des Produkts für Nutzer und Kunde sicher.
-| Pflege und Priorisierung des Product Backlogs, Klärung fachlicher Anforderungen mit den anderen Stakeholdern, fachliche Abnahme der Product-Backlog-Items und der Inkremente.
-
-| Scrum Master
-| Der Scrum Master unterstützt das Scrum-Framework im Team und fördert die Verbesserung des Prozesses.
-| Moderation und Sicherstellung der Scrum-Events, Beseitigung von Prozesshindernissen, Unterstützung des Teams bei der Einhaltung von Scrum-Praktiken.
 
 | Kunde
 | Der Auftraggeber des Projekts ist Prof. Iffländer. Er bewertet Konzept, Umsetzung und Präsentation und stellt sicher, dass die Seminarziele erfüllt werden.
