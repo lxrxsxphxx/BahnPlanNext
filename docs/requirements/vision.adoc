@@ -114,7 +114,7 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 | Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur Response am Backend).
 | MVP
 
-| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Die Anforderung gilt als erfüllt, wenn folgende Kriterien erfüllt sind: (1) UI mit konsistenten Komponenten für Login, Gesellschaftsgründung, Fahrzeugübersicht und Leasing (2) sichtbare Fokuseffekte bei Interaktionen | MVP
+| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Die Anforderung gilt als erfüllt, wenn folgendes Kriterium erfüllt ist: UI mit konsistenten Komponenten innerhalb der gesamten Anwendung | MVP
 
 | Wartbarkeit und Dokumentation für Zukunftige Entwickler:innen
 | Hoch
