@@ -32,6 +32,7 @@ def list_vehicle_types(
 ):
     # claims wird (noch) nicht genutzt, erzwingt aber "active user"
     rows = service.list_vehicle_types(kind=kind, q=q)
+    print(f"Rows: {rows}")
 
     return [
         ShopVehicleTypeOut(
@@ -41,6 +42,14 @@ def list_vehicle_types(
             new_price=vt.new_price,
             km_cost=vt.km_cost,
             energy_cost_base=vt.energy_cost_base,
+            traction_type=getattr(d, "traction_type", None),
+            suitable_passenger_max_wagons=getattr(d, "suitable_passenger_max_wagons", None),
+            suitable_freight_max_tons=getattr(d, "suitable_freight_max_tons", None),
+            countries_allowed=getattr(d, "countries_allowed", None),
+            power_kw=getattr(d, "power_kw", None),
+            max_speed_kmh=getattr(d, "max_speed_kmh", None),
+            depot_category=getattr(d, "depot_category", None),
+            max_traction_units=getattr(d, "max_traction_units", None),
             image_key=getattr(d, "image_key", None),
             total_stock=getattr(d, "total_stock", None),
             available_stock=getattr(d, "available_stock", None),

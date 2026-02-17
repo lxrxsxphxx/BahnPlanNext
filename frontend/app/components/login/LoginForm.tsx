@@ -36,6 +36,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
         await login(username, password);
         setSuccess('Anmeldung erfolgreich.');
         setError(null);
+        window.location.reload();
       } catch (err) {
         setSuccess(null);
         setError(
