@@ -10,6 +10,9 @@ from fastapi.responses import HTMLResponse
 from sqlmodel import Session, select
 from sqlalchemy.orm import selectinload
 
+from datetime import datetime, timezone
+from app.enums.vehicle_delivery_status import VehicleDeliveryStatus
+
 
 class VehicleService:
     def __init__(self, db: Session):
@@ -19,6 +22,23 @@ class VehicleService:
         self.db = db
 
     def get_all_vehicles(self) -> List[Dict[str, Any]]:
+
+        now = datetime.now(timezone.utc)
+
+        # Refresh Lieferstatus (Übergangslösung bis Celery)
+        stmt_due = select(Vehicle).where(
+            Vehicle.delivery_status == VehicleDeliveryStatus.in_delivery,
+            Vehicle.delivery_end_at.is_not(None),
+            Vehicle.delivery_end_at <= now,
+        )
+        due = self.db.exec(stmt_due).all()
+
+        if due:
+            for v in due:
+                v.delivery_status = VehicleDeliveryStatus.ready
+                v.delivered_at = now
+            self.db.commit()
+
         stmt = select(Vehicle).options(selectinload(Vehicle.type))
         vehicles = self.db.exec(stmt).all()
 
@@ -53,6 +73,9 @@ class VehicleService:
                     "condition_percent": vehicle.condition_percent,
                     "acquired_at": vehicle.acquired_at,
                     "is_leased": vehicle.is_leased,
+                    "delivery_status": vehicle.delivery_status,
+                    "delivery_end_at": vehicle.delivery_end_at,
+                    "delivered_at": vehicle.delivered_at,
                     "leasing_model": vehicle.leasing_model,
                     "lease_start": vehicle.lease_start,
                     "lease_annual_rate_percent": vehicle.lease_annual_rate_percent,
