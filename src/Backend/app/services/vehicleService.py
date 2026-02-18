@@ -25,7 +25,7 @@ class VehicleService:
 
         now = datetime.now(timezone.utc)
 
-        # Refresh Lieferstatus (Übergangslösung bis Celery)
+        # Refresh Lieferstatus
         stmt_due = select(Vehicle).where(
             Vehicle.delivery_status == VehicleDeliveryStatus.in_delivery,
             Vehicle.delivery_end_at.is_not(None),

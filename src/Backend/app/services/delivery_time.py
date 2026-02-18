@@ -13,7 +13,7 @@ def compute_delivery_end_at_utc(purchased_at_utc: datetime) -> datetime:
 
     local = purchased_at_utc.astimezone(BERLIN)
 
-    # Ziel: der nächste Sonntag 07:00 (oder kommende Woche, wenn schon vorbei)
+    # Ziel: der nächste Sonntag 07:00 (oder kommende Woche)
     days_until_sunday = (6 - local.weekday()) % 7  # Mon=0..Sun=6
     sunday_date = local.date() + timedelta(days=days_until_sunday)
     target_local = datetime.combine(sunday_date, time(7, 0), tzinfo=BERLIN)
