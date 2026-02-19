@@ -50,8 +50,10 @@ export default function WagenLeasenForm({
   onLeasenSuccess,
   onLokAssignmentChange,
 }: WagenLeasenFormProps) {
+  const filteredLokList = lokList.filter((lok) => (lok.suitable_passenger_max_wagons ?? 0) > 0);
+
   const [selectedLokId, setSelectedLokId] = useState<number | undefined>(
-    lokList.find(
+    filteredLokList.find(
       (lok) => !lokAssignments[lok.id] || lokAssignments[lok.id] === wagenId
     )?.id
   );
@@ -77,6 +79,12 @@ export default function WagenLeasenForm({
     e.preventDefault();
     if (!selectedLokId) return;
 
+    // Validate one wagon-type per Lok
+    const existingAssignment = lokAssignments[selectedLokId];
+    if (existingAssignment && existingAssignment !== wagenId) {
+      alert('Diese Lok ist bereits einer anderen Wagenart zugewiesen. Eine Lok kann nur eine Wagenart haben.');
+      return;
+    }
     const newAssignments = { ...lokAssignments, [selectedLokId]: wagenId };
     const newAssignedCount = {
       ...assignedWagenCount,
@@ -97,7 +105,8 @@ export default function WagenLeasenForm({
       assignedToLok: selectedLokId,
       standardCount: standardWagen,
       steuerCount: steuerWagen,
-      leaseDate: formattedDate
+      leaseDate: formattedDate,
+      leasingModel: selectedModel?.id ?? selectedLok?.leasing_model,
     } as any); 
 
     setLieferDatum(formattedDate);
@@ -148,7 +157,7 @@ export default function WagenLeasenForm({
 
   const selectedModel = modelle.find((m) => m.id === selectedLok?.leasing_model);
 
-  if (!lokList || lokList.length === 0) {
+  if (!filteredLokList || filteredLokList.length === 0) {
     return (
       <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={onClose}>
         <NoLokError  wagenName={wagenName} onClose={onClose || (() => {})} />
@@ -183,7 +192,7 @@ export default function WagenLeasenForm({
                   value={selectedLokId}
                   onChange={(e) => setSelectedLokId(Number(e.target.value))}
                 >
-                  {lokList
+                  {filteredLokList
                     .filter(
                       (lok) =>
                         !lokAssignments[lok.id] ||
@@ -389,6 +398,8 @@ export default function WagenLeasenForm({
           standardWagen={standardWagen}
           steuerWagen={steuerWagen}
           lieferDatum={lieferDatum}
+          leasingModelName={selectedModel?.name ?? selectedLok?.leasing_model?.toString() ?? '-'}
+          leasenKostenProWoche={leasenKostenProWoche}
           onClose={() => {
             setShowSuccess(false);
             onClose?.();

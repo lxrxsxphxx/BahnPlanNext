@@ -7,6 +7,8 @@ interface LeasingSuccessModalProps {
   steuerWagen: number;
   lieferDatum: string;
   onClose: () => void;
+  leasingModelName?: string;
+  leasenKostenProWoche?: number;
 }
 
 export default function LeasingSuccessModal({
@@ -16,6 +18,8 @@ export default function LeasingSuccessModal({
   steuerWagen,
   lieferDatum,
   onClose,
+  leasingModelName,
+  leasenKostenProWoche,
 }: LeasingSuccessModalProps) {  
   const navigate = useNavigate(); 
 
@@ -61,6 +65,16 @@ export default function LeasingSuccessModal({
               <li>
                 {wagenName}: Standard (x{standardWagen}), Stwg. (x{steuerWagen})
               </li>
+              {leasingModelName && (
+                <li>
+                  Leasingmodell: <span className="font-medium text-gray-200">{leasingModelName}</span>
+                </li>
+              )}
+              {typeof leasenKostenProWoche === 'number' && (
+                <li>
+                  Zusätzl. Leasingkosten/Woche: <span className="font-medium text-gray-200">{leasenKostenProWoche.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })}</span>
+                </li>
+              )}
               <li>
                 Status: <span className="font-medium text-red-400">in Lieferung</span>
               </li>
