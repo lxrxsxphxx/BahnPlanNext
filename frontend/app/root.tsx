@@ -14,6 +14,7 @@ import { Modal } from './components/modal/modal';
 import { useModal } from './components/modal/useModal';
 import Navbar from './components/navbar/Navbar';
 import BeschaffungWagen from './routes/beschaffung.wagen';
+import { WagonProvider } from './components/wagen/add-wagen';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -46,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        <WagonProvider>
         <Navbar />
         <div className="ml-56">{children}</div>
         <ScrollRestoration />
@@ -97,13 +99,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
             </form>
           </div>
         </Modal>
+        </WagonProvider>
       </body>
     </html>
   );
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+      <Outlet />
+  );
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

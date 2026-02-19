@@ -1,7 +1,9 @@
 import ShowLoks from '@/components/ShowLoks';
+import { useWagon } from '@/components/wagen/add-wagen';
 import { fetchCompaniesLoks, fetchCompanyInfo } from '@/services/gesellschaftsbereich';
 import { useState } from 'react';
 import { Link, useLoaderData } from 'react-router';
+import WagonList from '@/components/wagen/wagen-list';
 
 
 export async function clientLoader() {
@@ -23,8 +25,10 @@ export async function clientLoader() {
 
 export default function GesellschaftsbereichFahrzeuge() {
   const { loks, company, error } = useLoaderData() as { loks: any[], company?: { id?: number; name?: string; capital?: number } | null, error: string | null };
+  const { myWagons } = useWagon();
   const [isWagonActive, setIsWagonActive] = useState(false);
   const cashBalance = company?.capital ?? 4000000;
+
   return (
     <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
       <div className="mb-8">
@@ -67,10 +71,10 @@ export default function GesellschaftsbereichFahrzeuge() {
       {!isWagonActive && (
         <ShowLoks loks={loks} error={error} />
       )}
-      {isWagonActive && (
-        <div className="mt-6 rounded-md bg-yellow-500/20 p-4 text-yellow-200">
-          <p>Der Wagen-Bereich ist derzeit noch in Entwicklung. Bitte hab etwas Geduld, während wir daran arbeiten, dir bald auch deine Wagen anzuzeigen!</p>
-        </div>
+      {!isWagonActive ? (
+        <ShowLoks loks={loks} error={error} />
+      ) : (
+        <WagonList wagons={myWagons} />
       )}
     </div>
   );

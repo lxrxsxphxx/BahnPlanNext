@@ -10,6 +10,10 @@ export interface Wagen {
   preisSteuer: number;
   kostenKm: number;
   kapazitaet: number;
+  assignedToLok?: number;
+  standardCount?: number;
+  steuerCount?: number;
+  leaseDate?: string;
 }
 
 interface Lok {
@@ -92,8 +96,10 @@ export default function WagenCard({
         </div>
       </div>
 
+
       {leasingOpen && (
         <WagenLeasenForm
+          wagen={wagen}
           wagenId={wagen.id}
           wagenName={wagen.name}
           lokList={lokList}

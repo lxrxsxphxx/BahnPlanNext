@@ -1,5 +1,7 @@
 import { useState } from "react";
 import LeasingSuccessModal from "./wagen-leasen-success-modal";
+import { useWagon } from './add-wagen';
+import wagenData  from "../../routes/beschaffung.wagen";
 
 interface Lok {
   id: number;
@@ -9,7 +11,16 @@ interface Lok {
   leasing_model: number;
 }
 
+interface Wagen {
+  id: number;
+  name: string;
+  image: string;
+  vmax?: number;
+  [key: string]: any; 
+}
+
 interface WagenLeasenFormProps {
+  wagen: Wagen;
   wagenId: number;
   wagenName: string;
   lokList: Lok[];
@@ -29,6 +40,7 @@ interface WagenLeasenFormProps {
 }
 
 export default function WagenLeasenForm({
+  wagen,
   wagenId,
   wagenName,
   lokList,
@@ -59,6 +71,8 @@ export default function WagenLeasenForm({
   const leasenKostenProWoche = gesamt * 125000;
   const leasenKostenProJahr = leasenKostenProWoche * 52;
 
+  const { addWagon } = useWagon();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedLokId) return;
@@ -77,6 +91,14 @@ export default function WagenLeasenForm({
       month: "2-digit",
       year: "numeric",
     });
+
+    addWagon({ 
+      ...wagen,
+      assignedToLok: selectedLokId,
+      standardCount: standardWagen,
+      steuerCount: steuerWagen,
+      leaseDate: formattedDate
+    } as any); 
 
     setLieferDatum(formattedDate);
     setSelectedLokName(selectedLok ? `${selectedLok.traction_type} ${selectedLok.type_name} (ID: ${selectedLok.id})` : "-");

@@ -5,6 +5,7 @@ import WagenCard from "../components/wagen/WagenCard";
 import type { Wagen } from "../components/wagen/WagenCard";
 import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
 import { API_ENDPOINTS, apiFetch } from "@/services/api";
+import { useWagon } from "@/components/wagen/add-wagen";
 
 interface Lok {
   id: number;
@@ -18,12 +19,19 @@ export default function BeschaffungWagen() {
   const [company, setCompany] = useState<{ id?: number; name?: string; capital?: number } | null>(null);
   const [loading, setLoading] = useState(true);
   const [lokList, setLokList] = useState<Lok[]>([]);
+  const { addWagon } = useWagon();
 
   // key = lokId, value = wagenId
   const [lokAssignments, setLokAssignments] = useState<Record<number, number>>({});
 
   // key = lokId, value = Anzahl zugewiesener Wagen
   const [assignedWagenCount, setAssignedWagenCount] = useState<Record<number, number>>({});
+
+  const [leasedWagen, setLeasedWagen] = useState<
+    { wagen: Wagen; lok: Lok; standard: number; steuer: number; datum: string }[]
+  >([]);
+
+  const [isWagonActive, setIsWagonActive] = useState(false);
 
   const cashBalance = company?.capital ?? 4000000;
 

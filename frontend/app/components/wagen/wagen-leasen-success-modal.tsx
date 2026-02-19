@@ -1,10 +1,11 @@
+import { useNavigate } from "react-router";
 
 interface LeasingSuccessModalProps {
   wagenName: string;
   lokName: string;
   standardWagen: number;
   steuerWagen: number;
-  lieferDatum: string; // ngày hôm nay
+  lieferDatum: string;
   onClose: () => void;
 }
 
@@ -16,8 +17,10 @@ export default function LeasingSuccessModal({
   lieferDatum,
   onClose,
 }: LeasingSuccessModalProps) {  
+  const navigate = useNavigate(); 
+
   const handleGoToFahrzeuge = () => {
-    window.location.href = '/gesellschaftsbereich/fahrzeuge';
+    navigate('/gesellschaftsbereich/fahrzeuge'); 
   };
 
   return (
