@@ -1,7 +1,7 @@
 import { useState } from "react";
 import LeasingSuccessModal from "./wagen-leasen-success-modal";
 import { useWagon } from './add-wagen';
-import wagenData  from "../../routes/beschaffung.wagen";
+import NoLokError from "./no-lok-error-modal";
 
 interface Lok {
   id: number;
@@ -147,6 +147,14 @@ export default function WagenLeasenForm({
   ];
 
   const selectedModel = modelle.find((m) => m.id === selectedLok?.leasing_model);
+
+  if (!lokList || lokList.length === 0) {
+    return (
+      <div className="fixed inset-0 z-[60] flex items-center justify-center" onClick={onClose}>
+        <NoLokError  wagenName={wagenName} onClose={onClose || (() => {})} />
+      </div>
+    );
+  }
 
   return (
     <div

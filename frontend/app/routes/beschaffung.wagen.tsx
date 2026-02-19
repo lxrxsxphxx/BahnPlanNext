@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import WagenCard from "../components/wagen/WagenCard";
-import type { Wagen } from "../components/wagen/WagenCard";
+import WagenCard from "@/components/wagen/WagenCard";
+import type { Wagen } from "@/components/wagen/WagenCard";
 import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
 import { API_ENDPOINTS, apiFetch } from "@/services/api";
 import { useWagon } from "@/components/wagen/add-wagen";
