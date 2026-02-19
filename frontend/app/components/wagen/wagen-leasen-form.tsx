@@ -50,9 +50,9 @@ export default function WagenLeasenForm({
   const gesamtWagen = selectedLok?.suitable_passenger_max_wagons || 0;
   const zugewieseneWagen = assignedWagenCount[selectedLokId ?? -1] || 0;
 
-  const [selectedLokName, setSelectedLokName] = useState(""); 
-  const [lieferDatum, setLieferDatum] = useState(""); 
-  const [showSuccess, setShowSuccess] = useState(false); 
+  const [selectedLokName, setSelectedLokName] = useState("");
+  const [lieferDatum, setLieferDatum] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const gesamt = standardWagen + steuerWagen;
 
@@ -79,53 +79,52 @@ export default function WagenLeasenForm({
     });
 
     setLieferDatum(formattedDate);
-    setSelectedLokName(selectedLok?.type_name || "");
+    setSelectedLokName(selectedLok ? `${selectedLok.traction_type} ${selectedLok.type_name} (ID: ${selectedLok.id})` : "-");
+
     setShowSuccess(true);
 
     onLeasenSuccess?.(standardWagen, steuerWagen, selectedLokId);
-    onClose?.();
+
   };
 
-  // Clamp helper
   const maxWagen = gesamtWagen - zugewieseneWagen;
 
   const modelle = [
-  {
-    id: 1,
-    name: 'Modell 1',
-    jaehrlich: '0 %',
-    wochenrate: '0,30 %',
-    zahlung: 'jährlich im Voraus',
-    kuendigung: 'nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)',
-  },
-  {
-    id: 2,
-    name: 'Modell 2',
-    jaehrlich: '5 %',
-    wochenrate: '0,18 %',
-    zahlung: 'jährlich im Voraus',
-    kuendigung: 'nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)',
-  },
-  {
-    id: 3,
-    name: 'Modell 3',
-    jaehrlich: '10 %',
-    wochenrate: '0,06 %',
-    zahlung: 'jährlich im Voraus',
-    kuendigung: 'nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)',
-  },
-  {
-    id: 4,
-    name: 'Modell 4',
-    jaehrlich: '0 %',
-    wochenrate: '0,33 %',
-    zahlung: 'jährlich im Voraus',
-    kuendigung: 'jederzeit, keine Sperrfrist/keine Kündigungsgebühr',
-  },
-];
+    {
+      id: 1,
+      name: "Modell 1",
+      jaehrlich: "0 %",
+      wochenrate: "0,30 %",
+      zahlung: "jährlich im Voraus",
+      kuendigung: "nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)",
+    },
+    {
+      id: 2,
+      name: "Modell 2",
+      jaehrlich: "5 %",
+      wochenrate: "0,18 %",
+      zahlung: "jährlich im Voraus",
+      kuendigung: "nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)",
+    },
+    {
+      id: 3,
+      name: "Modell 3",
+      jaehrlich: "10 %",
+      wochenrate: "0,06 %",
+      zahlung: "jährlich im Voraus",
+      kuendigung: "nach 6 Wochen, 25.000 € (entfällt nach 365 Tagen)",
+    },
+    {
+      id: 4,
+      name: "Modell 4",
+      jaehrlich: "0 %",
+      wochenrate: "0,33 %",
+      zahlung: "jährlich im Voraus",
+      kuendigung: "jederzeit, keine Sperrfrist/keine Kündigungsgebühr",
+    },
+  ];
 
-const selectedModel = modelle.find(m => m.id === selectedLok?.leasing_model);
-
+  const selectedModel = modelle.find((m) => m.id === selectedLok?.leasing_model);
 
   return (
     <div
@@ -352,6 +351,20 @@ const selectedModel = modelle.find(m => m.id === selectedLok?.leasing_model);
           </div>
         </form>
       </div>
+
+      {showSuccess && (
+        <LeasingSuccessModal
+          wagenName={wagenName}
+          lokName={selectedLokName}
+          standardWagen={standardWagen}
+          steuerWagen={steuerWagen}
+          lieferDatum={lieferDatum}
+          onClose={() => {
+            setShowSuccess(false);
+            onClose?.();
+          }}
+        />
+      )}
     </div>
   );
 }

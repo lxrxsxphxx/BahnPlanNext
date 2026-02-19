@@ -1,7 +1,5 @@
-// WagenCard.tsx
 import { useState } from "react";
 import WagenLeasenForm from "./wagen-leasen-form";
-import LeasingSuccessModal from "./wagen-leasen-success-modal";
 
 export interface Wagen {
   id: number;
@@ -43,13 +41,6 @@ export default function WagenCard({
   onLokAssignmentChange,
 }: WagenCardProps) {
   const [leasingOpen, setLeasingOpen] = useState(false);
-  const [successModalOpen, setSuccessModalOpen] = useState(false);
-  const [leasedStandard, setLeasedStandard] = useState(0);
-  const [leasedSteuer, setLeasedSteuer] = useState(0);
-  const [successModalInfo, setSuccessModalInfo] = useState({
-    lokName: "-",
-    lieferDatum: "",
-  });
 
   const specs = [
     { label: "Höchstgeschwindigkeit", value: `${wagen.vmax} km/h` },
@@ -64,6 +55,7 @@ export default function WagenCard({
       <div className="flex justify-center">
         <div className="rounded-2xl border border-blue-500/50 bg-gray-800 p-7 w-full max-w-400">
           <h2 className="mb-4 text-xl font-semibold text-center">{wagen.name}</h2>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="overflow-hidden rounded-md">
               <img
@@ -79,8 +71,8 @@ export default function WagenCard({
                   <tbody>
                     {specs.map((row) => (
                       <tr key={row.label} className="border-b border-gray-700 last:border-b-0">
-                        <td className="w-48 py-1 pr-5 text-gray-300 align-top">{row.label}:</td>
-                        <td className="py-1 text-gray-100 whitespace-pre-line">{row.value}</td>
+                        <td className="w-48 py-1 pr-5 text-gray-300">{row.label}:</td>
+                        <td className="py-1 text-gray-100">{row.value}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -100,7 +92,6 @@ export default function WagenCard({
         </div>
       </div>
 
-      {/* Leasing Modal */}
       {leasingOpen && (
         <WagenLeasenForm
           wagenId={wagen.id}
@@ -109,39 +100,7 @@ export default function WagenCard({
           lokAssignments={lokAssignments}
           assignedWagenCount={assignedWagenCount}
           onClose={() => setLeasingOpen(false)}
-          onLeasenSuccess={(standard, steuer, selectedLokId) => {
-            const selectedLok = lokList.find(lok => lok.id === selectedLokId);
-            const today = new Date();
-            const formattedDate = today.toLocaleDateString("de-DE", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric",
-            });
-
-            setLeasedStandard(standard);
-            setLeasedSteuer(steuer);
-
-            setSuccessModalInfo({
-              lokName: selectedLok ? `${selectedLok.traction_type} ${selectedLok.type_name}` : "-",
-              lieferDatum: formattedDate,
-            });
-
-            setSuccessModalOpen(true);
-            setLeasingOpen(false);
-          }}
           onLokAssignmentChange={onLokAssignmentChange}
-        />
-      )}
-
-      {/* Success Modal */}
-      {successModalOpen && (
-        <LeasingSuccessModal
-          wagenName={wagen.name}
-          lokName={`${successModalInfo.lokName}`}
-          standardWagen={leasedStandard}
-          steuerWagen={leasedSteuer}
-          lieferDatum={successModalInfo.lieferDatum}
-          onClose={() => setSuccessModalOpen(false)}
         />
       )}
     </>

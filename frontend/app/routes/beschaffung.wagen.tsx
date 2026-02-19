@@ -41,7 +41,7 @@ export default function BeschaffungWagen() {
     loadCompany();
   }, []);
 
-  // --- Load Loks ---
+  // --- Load meine Loks ---
   useEffect(() => {
     async function loadLoks() {
       try {
@@ -66,21 +66,6 @@ export default function BeschaffungWagen() {
     }
     loadLoks();
   }, []);
-
-  // --- Load stored assignments from localStorage ---
-  useEffect(() => {
-    const storedAssignments = localStorage.getItem('lokAssignments');
-    if (storedAssignments) setLokAssignments(JSON.parse(storedAssignments));
-
-    const storedCounts = localStorage.getItem('assignedWagenCount');
-    if (storedCounts) setAssignedWagenCount(JSON.parse(storedCounts));
-  }, []);
-
-  // --- Save to localStorage ---
-  useEffect(() => {
-    localStorage.setItem('lokAssignments', JSON.stringify(lokAssignments));
-    localStorage.setItem('assignedWagenCount', JSON.stringify(assignedWagenCount));
-  }, [lokAssignments, assignedWagenCount]);
 
   // --- Wagen sample data ---
   const wagenData: Wagen[] = [
