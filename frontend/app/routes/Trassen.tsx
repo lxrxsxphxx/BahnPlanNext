@@ -1,11 +1,17 @@
 // Trassenübersicht Komponente & Models
-import { useLoaderData } from "react-router";
-import type { Route } from "../+types/root";
-import { getTrassen, type Trasse, type TrassenGruppe, type TrassenStops } from "@/services/trassen";
+import { useLoaderData } from 'react-router';
+
+import type { Route } from '../+types/root';
+import {
+  type Trasse,
+  type TrassenGruppe,
+  type TrassenStops,
+  getTrassen,
+} from '@/services/trassen';
 
 /**
  * **TrassenComponent**
- * * Eine tabellarische Übersicht aller verfügbaren Trassen (Fahrwegkapazitäten), 
+ * * Eine tabellarische Übersicht aller verfügbaren Trassen (Fahrwegkapazitäten),
  * gruppiert nach Kategorien (z.B. Nahverkehr, Fernverkehr, Güterverkehr).
  * * ### Kernfunktionalitäten
  * - **Datenaufbereitung**: Sortiert Haltestellen (`stops`) chronologisch nach ihrer Sequenz-ID.
@@ -21,12 +27,11 @@ import { getTrassen, type Trasse, type TrassenGruppe, type TrassenStops } from "
  * 3. `useMemo` (implizit durch Mapping) transformiert die Stops für die Anzeige.
  * * @category Pages
  */
-export async function loader({ }: Route.LoaderArgs) {
+export async function loader({}: Route.LoaderArgs) {
   return { trassen: [] };
 }
 
-export async function clientLoader({ }: Route.ClientLoaderArgs) {
-
+export async function clientLoader({}: Route.ClientLoaderArgs) {
   const trassen = await getTrassen();
   return { trassen };
 }
@@ -44,21 +49,15 @@ function getFirstAndLast(stops: TrassenStops[]) {
   };
 }
 
-
 export default function TrassenComponent() {
   const { trassen } = useLoaderData<typeof clientLoader>();
 
   return (
-
-    <div className="p-6 space-y-6 max-w-6xl mx-auto">
-      {trassen.map((group: TrassenGruppe, groupIdx: number) => (
+    <div className="mx-auto max-w-6xl space-y-6 p-6">
+      {trassen.map((group: TrassenGruppe, groupIdx: number) =>
         group.trassen.length === 0 ? null : (
-          <div
-            key={groupIdx}
-            className="bg-gray-800 rounded shadow-md p-4"
-          >
-
-            <h2 className="text-2xl font-bold text-white border-b border-gray-700 pb-2 mb-4">
+          <div key={groupIdx} className="rounded bg-gray-800 p-4 shadow-md">
+            <h2 className="mb-4 border-b border-gray-700 pb-2 text-2xl font-bold text-white">
               {group.label}
             </h2>
 
@@ -70,7 +69,7 @@ export default function TrassenComponent() {
                   return (
                     <div
                       key={trasseIdx}
-                      className="grid grid-cols-[200px_1fr] gap-4 items-start border-b border-gray-700 py-3"
+                      className="grid grid-cols-[200px_1fr] items-start gap-4 border-b border-gray-700 py-3"
                     >
                       {/* Trasse name */}
                       <div className="font-semibold text-white">
@@ -85,7 +84,9 @@ export default function TrassenComponent() {
                             {first?.dep_a} - {last?.arr_a}
                           </div>
                           <div className="text-gray-200">
-                            {sorted.map(stop => stop.station_name).join(" - ")}
+                            {sorted
+                              .map((stop) => stop.station_name)
+                              .join(' - ')}
                           </div>
                         </div>
 
@@ -95,20 +96,20 @@ export default function TrassenComponent() {
                             {first?.dep_b} - {last?.arr_b}
                           </div>
                           <div className="text-gray-200">
-                            {sorted.map(stop => stop.station_name).join(" - ")}
+                            {sorted
+                              .map((stop) => stop.station_name)
+                              .join(' - ')}
                           </div>
                         </div>
                       </div>
                     </div>
-
                   );
                 })}
-
               </table>
             </div>
           </div>
-        )
-      ))}
+        ),
+      )}
     </div>
   );
 }

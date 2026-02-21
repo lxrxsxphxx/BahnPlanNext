@@ -38,11 +38,7 @@ const LINKS: LinkEntry[] = [
     label: 'Ausschreibungen',
     visibleOnFrontpage: true,
   },
-  { to:"/shop",
-    label: "Shop",
-    isParent: true,
-    visibleOnFrontpage: true
-  },
+  { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
   { to: '/trassen', label: 'Trassen' },
   {
     to: '/betrieb',

@@ -82,34 +82,30 @@ export function Modal({ open, onClose, children }: ModalProps) {
       // Shift + Tab = rückwärts, Tab = vorwärts
       if (e.shiftKey) {
         nextIndex =
-          currentIndex <= 0
-            ? focusableElements.length - 1
-            : currentIndex - 1;
+          currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1;
       } else {
         nextIndex =
-          currentIndex < 0 ||
-          currentIndex >= focusableElements.length - 1
+          currentIndex < 0 || currentIndex >= focusableElements.length - 1
             ? 0
             : currentIndex + 1;
       }
 
       focusableElements[nextIndex].focus();
     },
-    [onClose]
+    [onClose],
   );
 
   useEffect(() => {
     if (!open) return;
 
     previousActiveElementRef.current = document.activeElement as HTMLElement;
-    
+
     const overlayEl = overlayRef.current;
     const parent = overlayEl?.parentElement;
     const siblings = parent
       ? (Array.from(parent.children) as HTMLElement[])
       : (Array.from(document.body.children) as HTMLElement[]);
     const nonModalElements = siblings.filter((el) => el !== overlayEl);
-
 
     // Setze inert und aria-hidden auf non-modal elements
     nonModalElements.forEach((el) => {
@@ -161,14 +157,9 @@ export function Modal({ open, onClose, children }: ModalProps) {
           onClose();
         }
       }}
-      role='presentation'
+      role="presentation"
     >
-      <div
-        ref={modalRef}
-        className=""
-        role="dialog"
-        aria-modal="true"
-      >
+      <div ref={modalRef} className="" role="dialog" aria-modal="true">
         {children}
       </div>
     </div>

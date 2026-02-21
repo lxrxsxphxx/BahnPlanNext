@@ -17,13 +17,13 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function loader({}: Route.LoaderArgs) {
   return {
     openTenders: [],
   };
 }
 
-export async function clientLoader({ }: Route.ClientLoaderArgs) {
+export async function clientLoader({}: Route.ClientLoaderArgs) {
   console.log('fetch open tenders');
   const openTenders = await getOpenTenders();
   return {
@@ -34,7 +34,7 @@ clientLoader.hydrate = true as const;
 
 /**
  * **Home (Route Component)**
- * * Das Haupt-Dashboard von BahnplanNext. Diese Komponente aggregiert wichtige 
+ * * Das Haupt-Dashboard von BahnplanNext. Diese Komponente aggregiert wichtige
  * Informationen wie Ausschreibungen und bietet Zugang zum Onboarding-Tutorial.
  *
  * ### Funktionalitäten

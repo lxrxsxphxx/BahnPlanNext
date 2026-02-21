@@ -22,11 +22,11 @@ interface LokLeasedModalProps {
  * @category Components
  * @example
  * ```tsx
- * <LokLeasedModal 
- * lokName="Siemens Vectron" 
- * statusText="Aktiv" 
- * deliveryDate="24.12.2024" 
- * onClose={() => setOpen(false)} 
+ * <LokLeasedModal
+ * lokName="Siemens Vectron"
+ * statusText="Aktiv"
+ * deliveryDate="24.12.2024"
+ * onClose={() => setOpen(false)}
  * />
  * ```
  */
@@ -38,7 +38,7 @@ export default function LokLeasedModal({
   onViewVehicles,
 }: LokLeasedModalProps) {
   return (
-    <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-8 text-white shadow-xl animate-scaleIn">
+    <div className="animate-scaleIn relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-8 text-white shadow-xl">
       <div className="mb-4 flex items-center justify-center">
         <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-green-400 text-green-300">
           <svg
@@ -55,11 +55,17 @@ export default function LokLeasedModal({
           </svg>
         </div>
       </div>
-      <h2 className="mb-2 text-center text-2xl font-semibold italic">Lok geleast!</h2>
-      <p className="mb-6 text-center text-sm text-gray-200">Vielen Dank. Ihre Lok ist nun in Ihrem Depot verfügbar.</p>
+      <h2 className="mb-2 text-center text-2xl font-semibold italic">
+        Lok geleast!
+      </h2>
+      <p className="mb-6 text-center text-sm text-gray-200">
+        Vielen Dank. Ihre Lok ist nun in Ihrem Depot verfügbar.
+      </p>
 
       <div className="rounded-lg border border-gray-700 bg-gray-900/40 p-4 text-sm">
-        <div className="mb-3 text-xs uppercase tracking-wide text-gray-400">Lok-Informationen</div>
+        <div className="mb-3 text-xs tracking-wide text-gray-400 uppercase">
+          Lok-Informationen
+        </div>
         <div className="space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-gray-400">Baureihe</span>
@@ -73,13 +79,17 @@ export default function LokLeasedModal({
 
         <div className="my-4 h-px bg-gray-700" />
 
-        <div className="mb-2 text-xs uppercase tracking-wide text-gray-400">Lieferinformationen</div>
+        <div className="mb-2 text-xs tracking-wide text-gray-400 uppercase">
+          Lieferinformationen
+        </div>
         <div className="space-y-1">
           <div className="flex items-center justify-between">
             <span className="text-gray-400">Lieferdatum</span>
             <span className="text-white">{deliveryDate}</span>
           </div>
-          <div className="text-xs text-gray-400">Leasingkosten werden ab Lieferdatum abgezogen.</div>
+          <div className="text-xs text-gray-400">
+            Leasingkosten werden ab Lieferdatum abgezogen.
+          </div>
         </div>
       </div>
 

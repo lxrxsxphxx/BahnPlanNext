@@ -47,7 +47,7 @@ export default function TendersSection({
       )}
 
       {openTenders.length > 0 && (
-        <div className="divide-y ">
+        <div className="divide-y">
           {openTenders.map((t) => (
             <Tender key={t.id} tender={t} />
           ))}

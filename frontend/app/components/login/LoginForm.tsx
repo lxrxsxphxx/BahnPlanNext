@@ -62,14 +62,14 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
       } catch (err) {
         setSuccess(null);
         setError(
-          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.'
+          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.',
         );
       }
     }
   };
 
   return (
-    <div className="relative text-white animate-scaleIn w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 shadow-xl">
+    <div className="animate-scaleIn relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 text-white shadow-xl">
       <button
         type="button"
         aria-label="Modal schließen"
@@ -99,7 +99,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
               />
             </svg>
           </div>
-          
+
           <input
             type="text"
             id="username"
@@ -127,7 +127,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
               />
             </svg>
           </div>
-          
+
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
@@ -190,7 +190,9 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
           Login
         </button>
 
-        {success && <p className="text-center text-sm text-green-400">{success}</p>}
+        {success && (
+          <p className="text-center text-sm text-green-400">{success}</p>
+        )}
         {error && <p className="text-center text-sm text-red-400">{error}</p>}
 
         <p className="mt-6 text-center text-sm text-gray-300">
