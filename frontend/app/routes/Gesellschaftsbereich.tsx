@@ -1,5 +1,6 @@
-import type { Route } from './+types/Beschaffung';
 import { NavLink } from 'react-router';
+
+import type { Route } from './+types/Beschaffung';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,9 +16,8 @@ export default function Gesellschaftsbereich() {
     { name: 'Fahrpläne', path: '/gesellschaftsbereich/fahrplaene' },
   ];
 
-
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
+    <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
       <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich: </h1>
 
       {/* Kategorien Abschnitt */}
@@ -40,7 +40,6 @@ export default function Gesellschaftsbereich() {
           </div>
         ))}
       </div>
-
     </div>
   );
 }

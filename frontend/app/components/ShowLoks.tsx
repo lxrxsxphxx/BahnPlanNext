@@ -1,5 +1,6 @@
-import LokCard from '@/components/LokCard';
 import { useMemo } from 'react';
+
+import LokCard from '@/components/LokCard';
 
 type Props = {
   loks: any[];
@@ -27,17 +28,46 @@ export default function ShowLoks({ loks, error }: Props) {
         name: `Baureihe ${key} - ${traction}${suffix}`,
         image: `/images/loks/${lok.image_key}`,
         specs: [
-          { label: 'Tfz geeignet für', value: `Personen ( max ${lok.suitable_passenger_max_wagons} Wagen) \n Güter (max ${lok.suitable_freight_max_tons} Tonnen)` },
-          { label: 'Auslandseinsatz', value: lok.countries_allowed || 'Keine Einschränkung' },
-          { label: 'Leistung', value: lok.power_kw ? `${lok.power_kw} kW` : 'Unbekannt' },
-          { label: 'Höchstgeschwindigkeit', value: lok.max_speed_kmh ? `${lok.max_speed_kmh} km/h` : 'Unbekannt' },
-          { label: 'Betriebswerke', value: `Kategorie ${lok.depot_category}` || 'Unbekannt' },
-          { label: 'Maximaltraktion', value: `${lok.max_traction_units} Tfz` || 'Unbekannt' },
-          { label: 'Neupreis', value: `${Number(lok.new_price).toLocaleString('de-DE')} €` },
+          {
+            label: 'Tfz geeignet für',
+            value: `Personen ( max ${lok.suitable_passenger_max_wagons} Wagen) \n Güter (max ${lok.suitable_freight_max_tons} Tonnen)`,
+          },
+          {
+            label: 'Auslandseinsatz',
+            value: lok.countries_allowed || 'Keine Einschränkung',
+          },
+          {
+            label: 'Leistung',
+            value: lok.power_kw ? `${lok.power_kw} kW` : 'Unbekannt',
+          },
+          {
+            label: 'Höchstgeschwindigkeit',
+            value: lok.max_speed_kmh
+              ? `${lok.max_speed_kmh} km/h`
+              : 'Unbekannt',
+          },
+          {
+            label: 'Betriebswerke',
+            value: `Kategorie ${lok.depot_category}` || 'Unbekannt',
+          },
+          {
+            label: 'Maximaltraktion',
+            value: `${lok.max_traction_units} Tfz` || 'Unbekannt',
+          },
+          {
+            label: 'Neupreis',
+            value: `${Number(lok.new_price).toLocaleString('de-DE')} €`,
+          },
           { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
-          { label: 'Energiekosten', value: `${lok.energy_cost_base.toFixed(2)} €/h` },
+          {
+            label: 'Energiekosten',
+            value: `${lok.energy_cost_base.toFixed(2)} €/h`,
+          },
         ],
-        action: { type: 'kauf', label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung' },
+        action: {
+          type: 'kauf',
+          label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung',
+        },
         modelle: [],
       };
     });
@@ -51,7 +81,10 @@ export default function ShowLoks({ loks, error }: Props) {
     <div className="space-y-6">
       {transformedLoks.length === 0 && !error && (
         <div className="rounded-md bg-yellow-500/20 p-4 text-yellow-200">
-          <p>Keine Loks gefunden. Es sieht so aus, als ob du noch keine Loks besitzt. Besuche den Shop, um neue Loks zu kaufen!</p>
+          <p>
+            Keine Loks gefunden. Es sieht so aus, als ob du noch keine Loks
+            besitzt. Besuche den Shop, um neue Loks zu kaufen!
+          </p>
         </div>
       )}
       {transformedLoks.map((lok: any) => (
