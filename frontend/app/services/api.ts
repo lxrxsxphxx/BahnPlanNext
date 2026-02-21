@@ -11,8 +11,9 @@ export const API_ENDPOINTS = {
   register: `${API_BASE_URL}/register`,
   logout: `${API_BASE_URL}/logout`,
   fetchLoks: `${API_BASE_URL}/shop/vehicle-types?kind=locomotive`,
-  leaseLok: (lokId: number) => `${API_BASE_URL}/shop/vehicle-types/${lokId}/lease`,
-   myCompany: `${API_BASE_URL}/users/company`,
+  leaseLok: (lokId: number) =>
+    `${API_BASE_URL}/shop/vehicle-types/${lokId}/lease`,
+  myCompany: `${API_BASE_URL}/users/company`,
   myCompaniesLoks: `${API_BASE_URL}/users/company/vehicles`,
   // no refresh endpoint when using only long-lived access cookie
 } as const;
@@ -20,7 +21,10 @@ export const API_ENDPOINTS = {
 // Zentraler Fetch-Wrapper für alle API-Aufrufe.
 // - sendet standardmäßig `credentials: 'include'`
 // - verwendet Cookie-basierte Auth (keine Authorization-Header vom Client)
-export async function apiFetch(input: RequestInfo, init: RequestInit = {}): Promise<Response> {
+export async function apiFetch(
+  input: RequestInfo,
+  init: RequestInit = {},
+): Promise<Response> {
   const mergedInit: RequestInit = {
     ...init,
     credentials: 'include',
