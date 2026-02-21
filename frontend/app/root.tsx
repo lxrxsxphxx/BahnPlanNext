@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Links,
   Meta,
@@ -10,10 +9,7 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-import { Modal } from './components/modal/modal';
-import { useModal } from './components/modal/useModal';
 import Navbar from './components/navbar/Navbar';
-import RegistrationForm from './components/registration/RegistrationForm';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -29,8 +25,6 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { open, show, hide, close } = useModal();
-
   return (
     <html lang="en">
       <head>
@@ -40,34 +34,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navbar onRegisterClick={show} />
-        {children}
+        <Navbar />
+        <div className="ml-56">{children}</div>
         <ScrollRestoration />
         <Scripts />
-
-        <button
-          className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-          onClick={() => show()}
-        >
-          Open Modal
-        </button>
-
-        <Modal open={open} onClose={() => close()}>
-          <div className="relative text-black">
-            <button
-              type="button"
-              onClick={close}
-              className="absolute top-3 right-3 text-xl text-gray-500 hover:text-black"
-              aria-label="Modal schließen"
-            >
-              ✕
-            </button>
-
-            <h2 className="mb-4 text-xl font-bold">Registrierung</h2>
-
-            <RegistrationForm onSuccess={close} resetTrigger={!open} />
-          </div>
-        </Modal>
       </body>
     </html>
   );

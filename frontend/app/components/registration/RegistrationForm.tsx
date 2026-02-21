@@ -7,7 +7,7 @@ import type {
 } from './registration.types';
 
 interface RegistrationFormProps {
-  onSuccess: () => void;
+  onClose: () => void;
   resetTrigger?: boolean; // wird true, wenn Modal geschlossen wird
 }
 
@@ -47,7 +47,7 @@ export function validate(
 }
 
 export default function RegistrationForm({
-  onSuccess,
+  onClose,
   resetTrigger,
 }: RegistrationFormProps) {
   const [name, setName] = useState('');
@@ -76,84 +76,94 @@ export default function RegistrationForm({
     if (!isValid) return;
 
     // Alles korrekt, Erfolg
-    onSuccess();
+    onClose();
   };
 
   return (
-    <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
-      {/* Benutzername */}
-      <label htmlFor="Benutzername">Benutzername:</label>
-      <input
-        type="text"
-        id="Benutzername"
-        placeholder="Name*"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className={`rounded border p-2 ${errors.name ? 'border-red-500' : ''}`}
-        minLength={3}
-        maxLength={20}
-        required
-      />
-      {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
-
-      {/* Email */}
-      <label htmlFor="Email">Email:</label>
-      <input
-        type="email"
-        id="Email"
-        placeholder="Email*"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className={`rounded border p-2 ${errors.email ? 'border-red-500' : ''}`}
-        maxLength={254}
-        required
-      />
-      {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
-
-      {/* Passwort */}
-      <label htmlFor="Passwort">Passwort:</label>
-      <input
-        type="password"
-        id="Passwort"
-        placeholder="Passwort*"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className={`rounded border p-2 ${
-          errors.password ? 'border-red-500' : ''
-        }`}
-        minLength={10}
-        maxLength={128}
-        required
-      />
-      {errors.password && (
-        <p className="text-sm text-red-500">{errors.password}</p>
-      )}
-
-      {/* Passwort wiederholen */}
-      <label htmlFor="PasswortWied">Passwort wiederholen:</label>
-      <input
-        type="password"
-        id="PasswortWied"
-        placeholder="Passwort wiederholen*"
-        value={passwordWied}
-        onChange={(e) => setPasswordWied(e.target.value)}
-        className={`rounded border p-2 ${
-          errors.passwordWied ? 'border-red-500' : ''
-        }`}
-        minLength={10}
-        maxLength={128}
-        required
-      />
-      {errors.passwordWied && (
-        <p className="text-sm text-red-500">{errors.passwordWied}</p>
-      )}
-
+    <div className="animate-scaleIn relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 text-white shadow-xl">
       <button
-        type="submit"
-        className="mt-4 rounded-xl bg-blue-600 py-2 text-white hover:bg-blue-700"
+        type="button"
+        aria-label="Modal schließen"
+        className="absolute top-5 right-7 text-2xl text-gray-300 transition-colors hover:cursor-pointer hover:text-white"
+        onClick={() => onClose()}
       >
-        Registrieren
+        X
       </button>
-    </form>
+      <form className="flex flex-col gap-3" onSubmit={handleSubmit} noValidate>
+        {/* Benutzername */}
+        <label htmlFor="Benutzername">Benutzername:</label>
+        <input
+          type="text"
+          id="Benutzername"
+          placeholder="Name*"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className={`rounded border p-2 ${errors.name ? 'border-red-500' : ''}`}
+          minLength={3}
+          maxLength={20}
+          required
+        />
+        {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
+
+        {/* Email */}
+        <label htmlFor="Email">Email:</label>
+        <input
+          type="email"
+          id="Email"
+          placeholder="Email*"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className={`rounded border p-2 ${errors.email ? 'border-red-500' : ''}`}
+          maxLength={254}
+          required
+        />
+        {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
+
+        {/* Passwort */}
+        <label htmlFor="Passwort">Passwort:</label>
+        <input
+          type="password"
+          id="Passwort"
+          placeholder="Passwort*"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={`rounded border p-2 ${
+            errors.password ? 'border-red-500' : ''
+          }`}
+          minLength={10}
+          maxLength={128}
+          required
+        />
+        {errors.password && (
+          <p className="text-sm text-red-500">{errors.password}</p>
+        )}
+
+        {/* Passwort wiederholen */}
+        <label htmlFor="PasswortWied">Passwort wiederholen:</label>
+        <input
+          type="password"
+          id="PasswortWied"
+          placeholder="Passwort wiederholen*"
+          value={passwordWied}
+          onChange={(e) => setPasswordWied(e.target.value)}
+          className={`rounded border p-2 ${
+            errors.passwordWied ? 'border-red-500' : ''
+          }`}
+          minLength={10}
+          maxLength={128}
+          required
+        />
+        {errors.passwordWied && (
+          <p className="text-sm text-red-500">{errors.passwordWied}</p>
+        )}
+
+        <button
+          type="submit"
+          className="mt-4 rounded-xl bg-blue-600 py-2 text-white hover:bg-blue-700"
+        >
+          Registrieren
+        </button>
+      </form>
+    </div>
   );
 }

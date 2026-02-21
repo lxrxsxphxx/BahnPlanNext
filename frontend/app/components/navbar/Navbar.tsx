@@ -1,5 +1,9 @@
+import { useState } from 'react';
 import { NavLink } from 'react-router';
 
+import LoginForm from '../login/LoginForm';
+import { Modal } from '../modal/modal';
+import RegistrationForm from '../registration/RegistrationForm';
 import Sidebar from './Sidebar';
 
 /**
@@ -35,6 +39,8 @@ const LINKS: LinkEntry[] = [
     label: 'Ausschreibungen',
     visibleOnFrontpage: true,
   },
+  { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
+  { to: '/trassen', label: 'Trassen' },
   {
     to: '/betrieb',
     label: 'Betrieb',
@@ -76,12 +82,17 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  */
 export default function Navbar({
   isFrontPage = false,
-  onRegisterClick,
-}: NavbarProps) {
+}: {
+  isFrontPage?: boolean;
+}) {
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
+
   return (
     <>
       {isFrontPage ? (
-        <nav className="w-screen bg-black py-3 text-white shadow">
+        <nav className="w-screen bg-[#111821] py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
               to="/"
@@ -109,35 +120,35 @@ export default function Navbar({
                 ))}
               </ul>
             </div>
+            {!isUserLoggedIn ? (
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setIsLoginModalOpen(true)}
+                  className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
+                >
+                  Anmelden
+                </button>
 
-            <div className="flex items-center gap-3">
-              <NavLink
-                to="/login"
-                className={({ isActive }: { isActive: boolean }) =>
-                  'rounded-md px-3 py-1 text-sm font-medium transition-colors ' +
-                  (isActive
-                    ? 'bg-white/20 text-white'
-                    : 'text-white/90 hover:bg-white/10')
-                }
-              >
-                Anmelden
-              </NavLink>
-
+                <button
+                  onClick={() => setIsRegisterModalOpen(true)}
+                  className="rounded-md border border-white/20 bg-white/90 px-3 py-1 text-sm font-semibold text-black/90 transition-colors hover:bg-white"
+                >
+                  Registrieren
+                </button>
+              </div>
+            ) : (
               <button
-                type="button"
-                onClick={onRegisterClick}
-                className={
-                  'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors'
-                }
+                onClick={() => setIsUserLoggedIn(false)}
+                className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
               >
-                Registrieren
+                Logout
               </button>
-            </div>
+            )}
           </div>
         </nav>
       ) : (
         <>
-          <div className="h-16 w-screen bg-black md:pl-56">
+          <div className="h-16 w-screen bg-[#111821] md:pl-56">
             <div className="mx-auto flex h-full max-w-6xl items-center px-4">
               {/*suchleiste zentriert*/}
               <div className="flex flex-1 justify-center">
@@ -152,42 +163,50 @@ export default function Navbar({
                   />
                 </form>
               </div>
-              {/* Anmelde + Registrieren Button */}
-              <div className="flex items-center gap-3">
-                <NavLink
-                  to="/login"
-                  className={({ isActive }: { isActive: boolean }) =>
-                    'rounded-md px-3 py-1 text-sm font-medium transition-colors ' +
-                    (isActive
-                      ? 'bg-white/20 text-white'
-                      : 'text-white/90 hover:bg-white/10')
-                  }
-                >
-                  Anmelden
-                </NavLink>
+              {!isUserLoggedIn ? (
+                /* Anmelde + Registrieren Button */
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsLoginModalOpen(true)}
+                    className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
+                  >
+                    Anmelden
+                  </button>
 
-                <NavLink
-                  to="#"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    onRegisterClick?.();
-                  }}
-                  className={({ isActive }: { isActive: boolean }) =>
-                    'rounded-md border border-white/20 px-3 py-1 text-sm font-semibold transition-colors ' +
-                    (isActive
-                      ? 'bg-white text-black'
-                      : 'bg-white/90 text-black/90 hover:bg-white')
-                  }
+                  <button
+                    onClick={() => setIsRegisterModalOpen(true)}
+                    className="rounded-md border border-white/20 bg-white/90 px-3 py-1 text-sm font-semibold text-black/90 transition-colors hover:bg-white"
+                  >
+                    Registrieren
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setIsUserLoggedIn(false)}
+                  className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                 >
-                  Registrieren
-                </NavLink>
-              </div>
+                  Logout
+                </button>
+              )}
             </div>
           </div>
 
           <Sidebar links={LINKS} />
         </>
       )}
+
+      {/* Login Modal */}
+      <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
+        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+      </Modal>
+
+      {/* Register Modal */}
+      <Modal
+        open={isRegisterModalOpen}
+        onClose={() => setIsRegisterModalOpen(false)}
+      >
+        <RegistrationForm onClose={() => setIsRegisterModalOpen(false)} />
+      </Modal>
     </>
   );
 }
