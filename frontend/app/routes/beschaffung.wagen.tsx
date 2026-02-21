@@ -64,6 +64,7 @@ export default function BeschaffungWagen() {
           suitable_passenger_max_wagons: lok.suitable_passenger_max_wagons,
           leasing_model: lok.leasing_model,
         }));
+        console.log("Geladene Loks:", loks);
         setLokList(loks);
       } catch (err) {
         console.error("Fehler beim Laden der Loks:", err);

@@ -68,9 +68,6 @@ export default function GesellschaftsbereichFahrzeuge() {
           Wagen
         </button>
       </div>
-      {!isWagonActive && (
-        <ShowLoks loks={loks} error={error} />
-      )}
       {!isWagonActive ? (
         <ShowLoks loks={loks} error={error} />
       ) : (

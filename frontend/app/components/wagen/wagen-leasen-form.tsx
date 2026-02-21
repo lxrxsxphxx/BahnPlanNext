@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import LeasingSuccessModal from "./wagen-leasen-success-modal";
 import { useWagon } from './add-wagen';
 import NoLokError from "./no-lok-error-modal";
@@ -64,6 +64,18 @@ export default function WagenLeasenForm({
   const gesamtWagen = selectedLok?.suitable_passenger_max_wagons || 0;
   const zugewieseneWagen = assignedWagenCount[selectedLokId ?? -1] || 0;
 
+  // Ensure selectedLokId remains valid if lokAssignments change (prevent assigning different wagon types)
+  useEffect(() => {
+    if (selectedLokId == null) return;
+    const existingAssignment = lokAssignments[selectedLokId];
+    if (existingAssignment && existingAssignment !== wagenId) {
+      // selected lok is no longer available for this wagen -> clear selection
+      setSelectedLokId(undefined);
+    }
+  }, [lokAssignments, selectedLokId, wagenId]);
+
+  const selectedLokValid = !selectedLokId || !lokAssignments[selectedLokId] || lokAssignments[selectedLokId] === wagenId;
+
   const [selectedLokName, setSelectedLokName] = useState("");
   const [lieferDatum, setLieferDatum] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
@@ -76,6 +88,14 @@ export default function WagenLeasenForm({
   const { addWagon } = useWagon();
 
   const handleSubmit = (e: React.FormEvent) => {
+    console.log("Submit clicked with:", {
+      selectedLokId,
+      standardWagen,
+      steuerWagen,      gesamt,
+      leasenKostenProWoche,
+      leasenKostenProJahr,
+    });
+    console.log("Current lokAssignments:", lokAssignments);
     e.preventDefault();
     if (!selectedLokId) return;
 
@@ -383,11 +403,16 @@ export default function WagenLeasenForm({
             </button>
             <button
               type="submit"
-              className="flex-1 py-2 text-sm font-semibold bg-[#3D7041] rounded-xl hover:bg-green-700"
+              disabled={!selectedLokValid || gesamt === 0}
+              className={`flex-1 py-2 text-sm font-semibold rounded-xl ${(!selectedLokValid || gesamt === 0) ? 'bg-gray-600 cursor-not-allowed' : 'bg-[#3D7041] hover:bg-green-700'}`}
             >
               Bestätigen
             </button>
           </div>
+
+          {!selectedLokValid && (
+            <div className="mt-2 text-sm text-red-400">Die ausgewählte Lok ist bereits einer anderen Wagenart zugewiesen.</div>
+          )}
         </form>
       </div>
 
