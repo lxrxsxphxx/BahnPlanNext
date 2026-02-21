@@ -67,9 +67,8 @@ const LINKS: LinkEntry[] = [
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
 
-interface NavbarProps {
+export interface NavbarProps {
   isFrontPage?: boolean;
-  onRegisterClick?: () => void;
 }
 
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
@@ -80,11 +79,7 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  * @param {{ isFrontPage?: boolean }} props - Die Eigenschaften der Komponente: ein optionaler Boolean-Wert, der angibt, ob die aktuelle Seite die Startseite ist.
  * @returns {JSX.Element} Die gerenderte Navbar-Komponente.
  */
-export default function Navbar({
-  isFrontPage = false,
-}: {
-  isFrontPage?: boolean;
-}) {
+export default function Navbar({ isFrontPage = false }: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
