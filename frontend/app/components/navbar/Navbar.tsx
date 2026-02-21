@@ -3,6 +3,7 @@ import { NavLink } from 'react-router';
 
 import LoginForm from '../login/LoginForm';
 import { Modal } from '../modal/modal';
+import RegistrationForm from '../registration/RegistrationForm';
 import Sidebar from './Sidebar';
 
 /**
@@ -38,6 +39,8 @@ const LINKS: LinkEntry[] = [
     label: 'Ausschreibungen',
     visibleOnFrontpage: true,
   },
+  { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
+  { to: '/trassen', label: 'Trassen' },
   {
     to: '/betrieb',
     label: 'Betrieb',
@@ -63,6 +66,13 @@ const LINKS: LinkEntry[] = [
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
+
+export interface NavbarProps {
+  isLoggedIn?: boolean;
+  onLoginSuccess?: () => void;
+  onLogout?: () => void;
+}
+
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
 Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links und oben dargestellt */
 /**
@@ -75,11 +85,7 @@ export default function Navbar({
   isLoggedIn = false,
   onLoginSuccess,
   onLogout,
-}: {
-  isLoggedIn?: boolean;
-  onLoginSuccess?: () => void;
-  onLogout?: () => void;
-}) {
+}: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
 
@@ -205,10 +211,7 @@ export default function Navbar({
         open={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
       >
-        <div className="text-black">
-          <h2 className="mb-4 text-xl font-semibold">Registrieren</h2>
-          <p>Registrierungsformular kommt hier...</p>
-        </div>
+        <RegistrationForm onClose={() => setIsRegisterModalOpen(false)} />
       </Modal>
     </>
   );

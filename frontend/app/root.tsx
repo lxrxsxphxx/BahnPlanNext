@@ -10,8 +10,6 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-import { Modal } from './components/modal/modal';
-import { useModal } from './components/modal/useModal';
 import Navbar from './components/navbar/Navbar';
 import { checkLoggedIn, logout } from './services/auth';
 
@@ -29,15 +27,7 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const { open, show, hide, close } = useModal();
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  // Two-way-binding states
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordWied, setPasswordWied] = useState('');
 
   useEffect(() => {
     let isMounted = true;
@@ -82,53 +72,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <div className="ml-56">{children}</div>
         <ScrollRestoration />
         <Scripts />
-
-        <button
-          className="rounded-xl bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-          onClick={() => show()}
-        >
-          Open Modal
-        </button>
-
-        <Modal open={open} onClose={() => close()}>
-          <div className="text-black">
-            <h2 className="mb-4 text-xl font-bold">Registrierung</h2>
-            <form className="flex flex-col gap-3">
-              <input
-                type="text"
-                placeholder="Name*"
-                className="rounded border p-2"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <input
-                type="email"
-                placeholder="Email*"
-                className="rounded border p-2"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Passwort*"
-                className="rounded border p-2"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <input
-                type="password"
-                placeholder="Passwort wiederholen*"
-                className="rounded border p-2"
-                value={passwordWied}
-                onChange={(e) => setPasswordWied(e.target.value)}
-                required
-              />
-            </form>
-          </div>
-        </Modal>
       </body>
     </html>
   );
