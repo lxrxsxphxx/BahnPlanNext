@@ -3,6 +3,24 @@ import { useLoaderData } from "react-router";
 import type { Route } from "../+types/root";
 import { getTrassen, type Trasse, type TrassenGruppe, type TrassenStops } from "@/services/trassen";
 
+/**
+ * **TrassenComponent**
+ * * Eine tabellarische Übersicht aller verfügbaren Trassen (Fahrwegkapazitäten), 
+ * gruppiert nach Kategorien (z.B. Nahverkehr, Fernverkehr, Güterverkehr).
+ * * ### Kernfunktionalitäten
+ * - **Datenaufbereitung**: Sortiert Haltestellen (`stops`) chronologisch nach ihrer Sequenz-ID.
+ * - **Bidirektionale Anzeige**: Stellt sowohl die Hin- (A) als auch die Rückfahrt (B) mit Abfahrts- und Ankunftszeiten dar.
+ * - **Dynamisches Mapping**: Generiert eine visuelle "String-Chain" der Haltestellen für jede Trasse.
+ * - **Gruppierung**: Zeigt Trassen innerhalb ihrer jeweiligen {@link TrassenGruppe} an und blendet leere Gruppen automatisch aus.
+ * * ### Logik-Hilfsfunktionen
+ * - `sortStops`: Stellt sicher, dass die Haltestellen unabhängig von der API-Reihenfolge korrekt sortiert sind.
+ * - `getFirstAndLast`: Extrahiert Start- und Endpunkte für die kompakte Zeitdarstellung.
+ * * ### Datenfluss
+ * 1. Der {@link clientLoader} ruft die Trassendaten ab.
+ * 2. `useLoaderData` stellt die Daten der Komponente zur Verfügung.
+ * 3. `useMemo` (implizit durch Mapping) transformiert die Stops für die Anzeige.
+ * * @category Pages
+ */
 export async function loader({ }: Route.LoaderArgs) {
   return { trassen: [] };
 }

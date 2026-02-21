@@ -6,3 +6,5 @@
 /.react-router/
 /build/
 /coverage/
+
+/docs/

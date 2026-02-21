@@ -24,6 +24,29 @@ const difficultyMeta = {
   },
 } as const;
 
+/**
+ * **Tender**
+ * * Eine UI-Komponente zur Darstellung eines einzelnen Ausschreibungseintrags (Tender) in einer Liste.
+ *
+ * ### Funktionalitäten:
+ * - **Visuelle Kategorisierung**: Verwendet farbige Indikatoren (Balken und Rahmen) basierend auf der Schwierigkeit (`easy`, `medium`, `hard`).
+ * - **Routen-Formatierung**: Wandelt kommagetrennte Routen-Strings in ein lesbares Format um (z. B. "A - B - C").
+ * - **Datumsformatierung**: Formatiert das Vertragsdatum lokalisiert für Deutschland (dd.mm.yyyy).
+ *
+ * ### Logik-Details:
+ * - `routeLabel`: Verarbeitet den `tender.route` String. Entfernt Leerzeichen und filtert leere Segmente.
+ * - `dateLabel`: Nutzt `toLocaleDateString`, um ein standardisiertes deutsches Datum zu erzeugen.
+ * - `meta`: Greift auf `difficultyMeta` zu, um die Stil-Klassen dynamisch zuzuweisen.
+ *
+ * @param props - Die Eigenschaften der Komponente.
+ * @param props.tender - Das Ausschreibungsobjekt vom Typ {@link OpenTender}.
+ * * @example
+ * ```tsx
+ * <Tender tender={myOpenTenderObject} />
+ * ```
+ * * @category Components
+ * @returns Ein React-Element, das die Ausschreibung in einer Card-Ansicht darstellt.
+ */
 export default function Tender({ tender }: { tender: OpenTender }) {
   const meta = difficultyMeta[tender.difficulty];
   const routeLabel = tender.route

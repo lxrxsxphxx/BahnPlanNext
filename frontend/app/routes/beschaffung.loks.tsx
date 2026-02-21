@@ -31,6 +31,23 @@ export interface Modell {
   kuendigung: string;
 }
 
+/**
+ * **BeschaffungLoks (Page)**
+ * * Die Hauptseite für die Lok-Beschaffung. Sie fungiert als "Smart Container", 
+ * der Rohdaten aus dem Loader für die {@link LokCard} aufbereitet.
+ * * ### Funktionalitäten
+ * - **Data Fetching**: Nutzt `useLoaderData` für den Zugriff auf API-Daten.
+ * - **Transformation**: Wandelt komplexe DB-Objekte in ein flaches Format für die UI um (siehe `transformedLoks`).
+ * - **Fehlerbehandlung**: Zeigt einen Error-State an, falls der API-Aufruf fehlschlägt.
+ * - **Währungsanzeige**: Formatiert das Spielerkonto (`cashBalance`) lokalisiert in EUR.
+ * * ### Transformations-Logik
+ * Die Komponente nutzt `useMemo`, um die Performance zu optimieren. Dabei werden:
+ * - Baureihen-Namen generiert.
+ * - Bildpfade aufgelöst.
+ * - Technische Specs (Leistung, Geschwindigkeit, etc.) in String-Arrays für die Tabellenanzeige übersetzt.
+ * - Statische Leasing-Modelle an jedes Fahrzeug angehängt.
+ * * @category Pages
+ */
 export default function BeschaffungLoks() {
   const cashBalance = 4000000;
   const { loks, error } = useLoaderData() as { loks: any[], error: string | null };

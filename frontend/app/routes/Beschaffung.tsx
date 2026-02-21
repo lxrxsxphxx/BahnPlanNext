@@ -8,6 +8,28 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+/**
+ * **Beschaffung (Page)**
+ *
+ * Diese Komponente dient als zentraler Hub für das Einkaufssystem von BahnPlan.
+ * Sie bietet eine Übersicht über alle verfügbaren Kategorien (Loks, Wagen, Trassen, Handel).
+ * 
+ * ### Hauptkomponenten
+ * - **Kategorien-Grid**: Eine Übersicht der Teilbereiche (Wagen, Loks, Trassen, Handel) mit direkter Verlinkung.
+ * - **Lieferstatus-Monitor**: Ein spezieller Bereich am unteren Ende der Seite, der aktuell bestellte, aber noch nicht gelieferte Fahrzeuge auflistet.
+ *
+ * ### Funktionalitäten
+ * - **Navigation**: Nutzt {@link NavLink} für ein reaktives Routing innerhalb des Beschaffungs-Subsystems.
+ * - **Bedingte Anzeige**: Unterscheidet bei der Lieferliste zwischen Kategorien mit aktiven Bestellungen und leeren Zuständen.
+ * - **Responsives Layout**: Das Grid passt sich automatisch von einspaltig (Mobile) auf dreispaltig (Desktop) an.
+ *
+ * ### Datenstruktur (Lokal)
+ * - `categories`: Definiert die Namen und Zielpfade für die Shop-Navigation.
+ * - `inDelivery`: Hält die Informationen über laufende Lieferungen (aktuell statisch implementiert).
+ *
+ * @category Pages
+ * @returns Die gerenderte Shop-Übersichtsseite.
+ */
 export default function Beschaffung() {
   const categories = [
     { name: 'Wagen', path: '/beschaffung/wagen' },

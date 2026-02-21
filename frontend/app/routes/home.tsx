@@ -32,10 +32,29 @@ export async function clientLoader({ }: Route.ClientLoaderArgs) {
 }
 clientLoader.hydrate = true as const;
 
+/**
+ * **Home (Route Component)**
+ * * Das Haupt-Dashboard von BahnplanNext. Diese Komponente aggregiert wichtige 
+ * Informationen wie Ausschreibungen und bietet Zugang zum Onboarding-Tutorial.
+ *
+ * ### Funktionalitäten
+ * - **Datenintegration**: Konsumiert Ausschreibungsdaten via `useLoaderData` und reicht sie an {@link TendersSection} weiter.
+ * - **Onboarding-Trigger**: Verwaltet den Sichtbarkeitsstatus des {@link WelcomeModal}.
+ * - **Hydration Management**: Nutzt den `clientLoader` von React-Router für performantes Client-seitiges Data Fetching.
+ * - **Fehlerbehandlung**: Integriert eine {@link ErrorBoundary} zur Absicherung bei API-Fehlern.
+ *
+ * ### Logik & State
+ * - `openTenders`: Array von {@link OpenTender}, das die aktuelle Wettbewerbslage widerspiegelt.
+ * - `modalOpen`: Lokaler UI-State (`boolean`), der die Anzeige des Willkommens-Modals steuert.
+ *
+ * @category Routes
+ */
 export default function Home() {
+  /** Die Liste der Ausschreibungen aus dem Loader.*/
   const { openTenders } = useLoaderData<typeof clientLoader>();
   console.log(openTenders);
 
+  /** Status für das Welcome-Modal.*/
   const [modalOpen, setModalOpen] = useState(false);
 
   return (

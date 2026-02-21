@@ -2,6 +2,28 @@ import { useEffect, useState } from 'react';
 
 import { login } from '@/services/auth';
 
+/**
+ * Eine React-Komponente, die ein interaktives Anmeldeformular bereitstellt.
+ * * ### Funktionalitäten:
+ * - **Authentifizierung:** Verarbeitet den Login-Prozess über den `login` Service.
+ * - **Status-Management:** Verwaltet Fehlermeldungen, Erfolgsmeldungen und die Sichtbarkeit des Passworts.
+ * - **Persistenz:** Speichert Eingaben (Benutzername/Passwort) im `localStorage`, damit diese nach einem Seiten-Reload erhalten bleiben.
+ * - **UI/UX:** Nutzt Tailwind CSS für ein modernes, dunkles Design mit Animationen (`animate-scaleIn`).
+ * * ## Interner Status (State)
+ * | State | Typ | Beschreibung |
+ * | :--- | :--- | :--- |
+ * | `username` | `string` | Benutzername, synchronisiert mit LocalStorage. |
+ * | `password` | `string` | Passwort (Klartext), synchronisiert mit LocalStorage. |
+ * | `showPassword` | `boolean` | Status der Passwort-Sichtbarkeit. |
+ * | `error` | `string` | Aktuelle Fehlermeldung. |
+ * * ## Logik & Effekte
+ * - **Laden**: Beim Mounten werden Daten aus dem Speicher geladen.
+ * - **Speichern**: Jede Änderung an Username/Passwort triggert ein `setItem` im LocalStorage.
+ * - **Validierung**: `handleSubmit` prüft auf leere Felder, bevor der Service aufgerufen wird.
+ * * @param props - Komponenten-Props
+ * @param props.onClose - Callback zum Schließen des Modals.
+ * @category Components
+ */
 export default function LoginForm({ onClose }: { onClose?: () => void }) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);

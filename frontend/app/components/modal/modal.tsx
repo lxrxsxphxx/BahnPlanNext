@@ -7,6 +7,37 @@ interface ModalProps {
   children: ReactNode;
 }
 
+/**
+ * **Modal**
+ *
+ * Eine hochgradig barrierefreie (A11y) Modal-Komponente, die eine Fokus-Falle (Focus Trap) implementiert.
+ *
+ * ### Funktionalitäten
+ * - **Focus Trap**: Verhindert, dass der Fokus das Modal verlässt, während es offen ist.
+ * - **Escape-Key**: Schließt das Modal automatisch beim Drücken der Escape-Taste.
+ * - **Focus Restore**: Stellt den Fokus auf das ursprüngliche Element wieder her, wenn das Modal geschlossen wird.
+ * - **Aria-Inert**: Setzt Geschwisterelemente auf `inert` und `aria-hidden`, um Screenreader-Interaktionen außerhalb des Modals zu unterbinden.
+ * - **Click-Outside**: Schließt das Modal, wenn auf das Overlay geklickt wird.
+ *
+ * ### Referenzen (Refs)
+ * - `modalRef`: Referenz auf den Dialog-Container (notwendig für Fokus-Berechnungen).
+ * - `overlayRef`: Referenz auf das Hintergrund-Overlay.
+ * - `previousActiveElementRef`: Speichert das Element, das vor dem Öffnen den Fokus hatte.
+ *
+ * ### Logik & Effekte
+ * - **Tastatur-Handler**: Überwacht `Tab` (Fokus-Zyklus) und `Escape` (Schließen).
+ * - **A11y-Cleanup**: Stellt sicher, dass das Attribut `inert` beim Unmounten von allen Hintergrundelementen entfernt wird.
+ * - **Fokus-Initialisierung**: Setzt den Fokus nach 50ms Verzögerung automatisch auf das erste interaktive Element im Modal.
+ *
+ * @param props - Die Eigenschaften der Komponente.
+ * @category Components
+ * @example
+ * ```tsx
+ * <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+ * <p>Inhalt des Modals</p>
+ * </Modal>
+ * ```
+ */
 export function Modal({ open, onClose, children }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
