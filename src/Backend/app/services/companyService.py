@@ -93,14 +93,12 @@ class CompanyService:
                 raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
             raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
 
-    def get_company_vehicles(self, claims: dict) -> List[Vehicle]:
+    def get_company_vehicles(self, company) -> List[Vehicle]:
         """
         gets the company by their name and returns all Vehicles as List or returns Error message
         :param claims: companyName: Name of Company
         :return: List[CompanyVehicleResponse]
         """
-        company = self.db.exec(select(Company).where(Company.name == claims["companyName"])).first()
-
         if company:
             company_vehicles = []
             for vehicle in company.vehicles:

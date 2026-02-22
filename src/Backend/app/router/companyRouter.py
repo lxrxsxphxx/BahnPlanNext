@@ -6,7 +6,9 @@ from app import database, auth
 from app.schemas.companySchema import CompanyCreateRequest, CompanyCreateResponse
 from app.services.companyService import CompanyService
 
+from router.userRouter import get_user_service
 from schemas.companySchema import CompanyVehicleResponse
+from services.userService import UserService
 
 router = APIRouter(tags=["Company"])
 
@@ -24,11 +26,18 @@ def create_company(
 
 @router.post("/users/company/vehicles", response_model=CompanyVehicleResponse)
 def get_company_vehicles(claims: dict = Depends(auth.check_active),
-                         service: CompanyService = Depends(get_company_service)):
+                         service: CompanyService = Depends(get_company_service),
+                         users: UserService = Depends(get_user_service)):
     """
     returns company vehicles for the given CompanyName
     :param claims: dict
     :param service: CompanyService
     :return: List[CompanyVehicleResponse]
     """
-    return service.get_company_vehicles(claims)
+    user = users.get_user_by_username(claims["username"])
+    if not user.companies:
+        raise HTTPException(status_code=400,
+                            detail="User ist in keiner Gesellschaft.")
+    company = user.companies[0]
+
+    return service.get_company_vehicles(company)
