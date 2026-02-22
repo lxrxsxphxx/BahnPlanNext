@@ -27,7 +27,7 @@ class CompanyVehicleResponse(BaseModel):
     condition_percent: float
     acquired_at: datetime
     is_leased: bool
-    leasing_model: Optional[int]
-    lease_start: Optional[date]
-    lease_annual_rate_percent: Optional[float]
-    lease_weekly_rate_percent: Optional[float]
+    leasing_model: Optional[int] = None
+    lease_start: Optional[date] = None
+    lease_annual_rate_percent: Optional[float] = None
+    lease_weekly_rate_percent: Optional[float] = None
