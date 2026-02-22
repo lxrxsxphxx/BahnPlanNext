@@ -44,11 +44,11 @@ export default function Beschaffung() {
       'Baureihe 101 - Elektrolokomotive',
       'Baureihe 110 - Elektrolokomotive',
     ],
-    wagen: [],
+    wagen: [] as string[],
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
+    <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
       <h1 className="mb-8 text-4xl font-bold">Shop</h1>
 
       {/* Kategorien Abschnitt */}
@@ -83,8 +83,8 @@ export default function Beschaffung() {
           <div>
             <h3 className="mb-4 text-xl font-semibold">Loks</h3>
             <ul className="space-y-2">
-              {inDelivery.loks.map((lok, index) => (
-                <li key={index} className="text-gray-300 italic">
+              {inDelivery.loks.map((lok) => (
+                <li key={lok} className="text-gray-300 italic">
                   {lok}
                 </li>
               ))}
@@ -98,8 +98,8 @@ export default function Beschaffung() {
               <p className="text-gray-500 italic">Keine Wagen in Lieferung</p>
             ) : (
               <ul className="space-y-2">
-                {inDelivery.wagen.map((wagen, index) => (
-                  <li key={index} className="text-gray-300 italic">
+                {inDelivery.wagen.map((wagen) => (
+                  <li key={wagen} className="text-gray-300 italic">
                     {wagen}
                   </li>
                 ))}

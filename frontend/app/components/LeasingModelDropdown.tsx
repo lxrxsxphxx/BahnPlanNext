@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import type { Modell } from '@/routes/beschaffung.loks';
 
-interface LeasingModelDropdownProps {
+export interface LeasingModelDropdownProps {
   modelle: Modell[];
   selectedModel: Modell | null;
   setSelectedModel: React.Dispatch<React.SetStateAction<Modell | null>>;

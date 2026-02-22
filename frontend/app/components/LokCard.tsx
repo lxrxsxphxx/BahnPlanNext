@@ -1,22 +1,15 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { LeasingModelDropdown } from './LeasingModelDropdown';
 import LokLeasedModal from './LokLeasedModal';
+import type { TransformedLok } from './ShowLoks';
 import { Modal } from './modal/modal';
 import type { Modell } from '@/routes/beschaffung.loks';
 import { leaseLok } from '@/services/lokshop';
 
-interface Lok {
-  id: number;
-  name: string;
-  image: string;
-  specs: { label: string; value: string }[];
-  action: { type: 'leasing' | 'kauf'; label: string };
-  modelle: Modell[];
-}
-
-interface LokCardProps {
-  lok: Lok;
+export interface LokCardProps {
+  lok: TransformedLok;
+  lokInInventory: boolean;
 }
 
 /**
@@ -49,14 +42,16 @@ interface LokCardProps {
  * <LokCard lok={lokData} />
  * ```
  */
-export default function LokCard({ lok }: LokCardProps) {
+export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
   const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
   const [isLeasedModalOpen, setIsLeasedModalOpen] = useState(false);
   const [deliveryDate, setDeliveryDate] = useState('');
 
-  const handleLeasing = async () => {
+  const handleLeasing = useCallback(async () => {
     try {
       if (selectedModel) {
+        console.debug('Leasingmodell ausgewählt:', selectedModel);
+        console.debug('Lok ID für Leasing:', lok.id);
         await leaseLok(lok.id, selectedModel.id);
         setDeliveryDate(new Date().toLocaleDateString('de-DE'));
         setIsLeasedModalOpen(true);
@@ -66,7 +61,8 @@ export default function LokCard({ lok }: LokCardProps) {
     } catch (error) {
       alert('Fehler beim Leasing: ' + (error as Error).message);
     }
-  };
+  }, [selectedModel, lok.id]);
+
   return (
     <>
       <div
@@ -109,7 +105,7 @@ export default function LokCard({ lok }: LokCardProps) {
             </div>
 
             <div className="w-64 p-4">
-              {lok.action.type === 'leasing' ? (
+              {lok.action.type === 'leasing' && !lokInInventory ? (
                 <div>
                   <LeasingModelDropdown
                     modelle={lok.modelle}
@@ -138,6 +134,19 @@ export default function LokCard({ lok }: LokCardProps) {
                     </button>
                   )}
                 </div>
+              ) : lokInInventory ? (
+                <button
+                  className={
+                    `text-md mt-[40%] ml-[10vw] rounded-full px-6 py-3 font-semibold ` +
+                    (lok.action.label === 'Einsatzbereit'
+                      ? ' border border-green-500 bg-black/40 text-green-400'
+                      : lok.action.label === 'In Lieferung'
+                        ? ' border border-red-500 bg-black/40 text-red-400'
+                        : ' border border-gray-500 bg-black/40 text-gray-300')
+                  }
+                >
+                  {lok.action.label}
+                </button>
               ) : (
                 <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
                   {lok.action.label}

@@ -1,10 +1,10 @@
-'use client';
-
 import { useMemo } from 'react';
 import { Link, useLoaderData } from 'react-router';
 
 import type { Route } from './+types/beschaffung.loks';
 import LokCard from '@/components/LokCard';
+import type { TransformedLok } from '@/components/ShowLoks';
+import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
 import { fetchLoks } from '@/services/lokshop';
 
 export function meta({}: Route.MetaArgs) {
@@ -16,14 +16,15 @@ export function meta({}: Route.MetaArgs) {
     },
   ];
 }
+
 export async function clientLoader() {
   try {
     const loks = await fetchLoks();
-    return { loks, error: null };
+    const company = await fetchCompanyInfo();
+    return { loks, company };
   } catch (err) {
     console.error('Fehler beim Laden der Loks im Loader:', err);
     return {
-      loks: [],
       error: (err as Error).message || 'Fehler beim Laden der Loks',
     };
   }
@@ -56,44 +57,17 @@ export interface Modell {
  * * @category Pages
  */
 export default function BeschaffungLoks() {
-  const cashBalance = 4000000;
-  const { loks, error } = useLoaderData() as {
-    loks: any[];
-    error: string | null;
-  };
-  console.log('Loks from loader:', loks);
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-[#0B0F14] px-[40px] py-8 text-white md:pl-[270px]">
-        <div className="mb-4 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">
-            <Link to="/beschaffung" className="hover:underline">
-              Shop
-            </Link>{' '}
-            &gt; Loks
-          </h1>
-          <div className="rounded-md bg-gray-800 px-4 py-2 text-sm">
-            {cashBalance.toLocaleString('de-DE', {
-              style: 'currency',
-              currency: 'EUR',
-            })}
-          </div>
-        </div>
-        <div className="rounded-md bg-red-500/20 p-4 text-red-200">
-          <p>Fehler beim Laden der Loks aus der Datenbank.</p>
-          <p className="mt-2 text-sm">Fehler: {error}</p>
-        </div>
-      </div>
-    );
-  }
+  const { loks, company, error } = useLoaderData<typeof clientLoader>();
+  console.debug('Loks from loader:', loks);
+  const cashBalance = company?.capital ?? 4000000;
 
   // Transform API data to match LokCard structure
-  const transformedLoks = useMemo(
-    () =>
-      loks.map((lok: any) => ({
+  const transformedLoks = useMemo<TransformedLok[]>(() => {
+    if (!loks) return [];
+    return loks.map(
+      (lok): TransformedLok => ({
         id: lok.id,
-        name: `Baureihe ${lok.name} - ${lok.traction_type || 'Unbekannt'}`,
+        name: `Baureihe ${lok.name || 'Unbekannt'} - ${lok.traction_type || 'Unbekannt'}`,
         image: `/images/loks/${lok.image_key}`,
         specs: [
           {
@@ -116,11 +90,15 @@ export default function BeschaffungLoks() {
           },
           {
             label: 'Betriebswerke',
-            value: `Kategorie ${lok.depot_category}` || 'Unbekannt',
+            value: lok.depot_category
+              ? `Kategorie ${lok.depot_category}`
+              : 'Unbekannt',
           },
           {
             label: 'Maximaltraktion',
-            value: `${lok.max_traction_units} Tfz` || 'Unbekannt',
+            value: lok.max_traction_units
+              ? `${Number(lok.max_traction_units)} Tfz`
+              : 'Unbekannt',
           },
           {
             label: 'Verfügbar',
@@ -129,12 +107,21 @@ export default function BeschaffungLoks() {
 
           {
             label: 'Neupreis',
-            value: `${Number(lok.new_price).toLocaleString('de-DE')} €`,
+            value: lok.new_price
+              ? `${Number(lok.new_price).toLocaleString('de-DE')} €`
+              : 'Unbekannt',
           },
-          { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
+          {
+            label: 'Kilometerkosten',
+            value: lok.km_cost
+              ? `${Number(lok.km_cost).toFixed(2)} €/km`
+              : 'Unbekannt',
+          },
           {
             label: 'Energiekosten',
-            value: `${lok.energy_cost_base.toFixed(2)} €/h`,
+            value: lok.energy_cost_base
+              ? `${Number(lok.energy_cost_base).toFixed(2)} €/h`
+              : 'Unbekannt',
           },
         ],
         action: { type: 'leasing', label: 'Leasingmodell' },
@@ -172,9 +159,34 @@ export default function BeschaffungLoks() {
             kuendigung: 'jederzeit, keine Sperrfrist/keine Kündigungsgebühr',
           },
         ],
-      })),
-    [loks],
-  );
+      }),
+    );
+  }, [loks]);
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-[#0B0F14] px-[40px] py-8 text-white">
+        <div className="mb-4 flex items-center justify-between">
+          <h1 className="text-3xl font-bold">
+            <Link to="/beschaffung" className="hover:underline">
+              Shop
+            </Link>{' '}
+            &gt; Loks
+          </h1>
+          <div className="rounded-md bg-gray-800 px-4 py-2 text-sm">
+            {cashBalance.toLocaleString('de-DE', {
+              style: 'currency',
+              currency: 'EUR',
+            })}
+          </div>
+        </div>
+        <div className="rounded-md bg-red-500/20 p-4 text-red-200">
+          <p>Fehler beim Laden der Loks aus der Datenbank.</p>
+          <p className="mt-2 text-sm">Fehler: {error}</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#0B0F14] text-white py-8 px-10 ">
@@ -194,8 +206,8 @@ export default function BeschaffungLoks() {
       </div>
 
       <div className="space-y-6">
-        {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.name} lok={lok} />
+        {transformedLoks.map((lok: TransformedLok) => (
+          <LokCard key={lok.id} lok={lok} lokInInventory={false} />
         ))}
       </div>
     </div>
