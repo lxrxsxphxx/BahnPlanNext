@@ -14,9 +14,9 @@
     "format:check": "prettier . --check",
     "lint": "oxlint",
     "lint:ci": "oxlint --format=github",
-    "build:docs": "typedoc --tsconfig ./tsconfig.json --validation.notReferenced false"  
+    "build:docs": "typedoc"
   },
-  
+
   "dependencies": {
     "@react-router/node": "^7.9.2",
     "@react-router/serve": "^7.9.2",

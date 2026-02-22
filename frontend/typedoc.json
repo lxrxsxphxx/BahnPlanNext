@@ -6,5 +6,10 @@
   "name": "BahnPlanNext Documentation",
   "skipErrorChecking": true,
   "cleanOutputDir": true,
-  "validation": false
+  "validation": false,
+  "exclude": [
+    "**/*.test.*",
+    "app/root.tsx",
+    "app/routes.ts"
+  ]
 }
