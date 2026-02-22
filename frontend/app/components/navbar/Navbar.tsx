@@ -3,6 +3,7 @@ import { NavLink } from 'react-router';
 
 import LoginForm from '../login/LoginForm';
 import { Modal } from '../modal/modal';
+import RegistrationForm from '../registration/RegistrationForm';
 import Sidebar from './Sidebar';
 
 /**
@@ -65,6 +66,13 @@ const LINKS: LinkEntry[] = [
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
+
+export interface NavbarProps {
+  isLoggedIn?: boolean;
+  onLoginSuccess?: () => void;
+  onLogout?: () => void;
+}
+
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
 Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links und oben dargestellt */
 /**
@@ -74,18 +82,17 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  * @returns {JSX.Element} Die gerenderte Navbar-Komponente.
  */
 export default function Navbar({
-  isFrontPage = false,
-}: {
-  isFrontPage?: boolean;
-}) {
+  isLoggedIn = false,
+  onLoginSuccess,
+  onLogout,
+}: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
 
   return (
     <>
-      {isFrontPage ? (
-        <nav className="w-screen bg-[#111821] py-3 text-white shadow">
+      {!isLoggedIn ? (
+        <nav className="w-screen bg-black py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
               to="/"
@@ -113,7 +120,7 @@ export default function Navbar({
                 ))}
               </ul>
             </div>
-            {!isUserLoggedIn ? (
+            {!isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
@@ -131,7 +138,7 @@ export default function Navbar({
               </div>
             ) : (
               <button
-                onClick={() => setIsUserLoggedIn(false)}
+                onClick={() => onLogout?.()}
                 className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
               >
                 Logout
@@ -156,7 +163,7 @@ export default function Navbar({
                   />
                 </form>
               </div>
-              {!isUserLoggedIn ? (
+              {!isLoggedIn ? (
                 /* Anmelde + Registrieren Button */
                 <div className="flex items-center gap-3">
                   <button
@@ -175,7 +182,7 @@ export default function Navbar({
                 </div>
               ) : (
                 <button
-                  onClick={() => setIsUserLoggedIn(false)}
+                  onClick={() => onLogout?.()}
                   className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                 >
                   Logout
@@ -190,7 +197,13 @@ export default function Navbar({
 
       {/* Login Modal */}
       <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+        <LoginForm
+          onClose={() => setIsLoginModalOpen(false)}
+          onSuccess={() => {
+            onLoginSuccess?.();
+            setIsLoginModalOpen(false);
+          }}
+        />
       </Modal>
 
       {/* Register Modal */}
@@ -198,10 +211,7 @@ export default function Navbar({
         open={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
       >
-        <div className="text-black">
-          <h2 className="mb-4 text-xl font-semibold">Registrieren</h2>
-          <p>Registrierungsformular kommt hier...</p>
-        </div>
+        <RegistrationForm onClose={() => setIsRegisterModalOpen(false)} />
       </Modal>
     </>
   );

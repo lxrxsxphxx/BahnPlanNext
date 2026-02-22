@@ -1,62 +1,64 @@
-= Vision: {project-name}
-Vorname Nachname <email@domain.org>; Vorname2 Nachname2 <email2@domain.org>; Vorname3 Nachname3 <email3@domain.org>
-{localdatetime}
-include::../_includes/default-attributes.inc.adoc[]
-// Platzhalter für weitere Dokumenten-Attribute
-
+= Vision: Projekt Bahnplan
 
 == Einführung
-Der Zweck dieses Dokuments ist es, die wesentlichen Bedarfe und Funktionalitäten des Systems {project-system-name} überblicksartig zu beschreiben. Der Fokus liegt auf den Fähigkeiten, die von Stakeholdern und adressierten Nutzern benötigt werden, und der Begründung dieser Bedarfe. Die Details, wie das System {project-system-name} diese Bedarfe erfüllt, werden durch User Stories im Product Backlog sowie dem UX-Konzept beschrieben.
+
+Bahnplan ist ein Seminarprojekt der HTW Dresden mit dem Ziel, eine moderne, webbasierte Simulation des deutschen Eisenbahnbetriebs zu entwickeln.  
+Das Projekt basiert auf der ehemaligen Webseite *bahnplan.de*, die über mehrere Jahre im Internet aktiv war und den Ausgangspunkt für das aktuelle Seminar bildet.  
+Die ursprüngliche Plattform diente als Planspiel rund um den Aufbau und Betrieb virtueller Eisenbahnunternehmen, war jedoch von technischer Seite und gestalterisch veraltet und wurde mittlerweile offline genommen. 
+Diese Idee wird nun technisch und konzeptionell neu umgesetzt, mit aktuellen Technologien, klarer Architektur und einer modernen Benutzeroberfläche, um den Nutzern ein ansprechendes und lehrreiches Spielerlebnis zu bieten.
+
+Das System soll es den Spielern ermöglichen, ein eigenes Bahnunternehmen zu gründen und betriebliche Entscheidungen zur Fahrzeugverwaltung zu treffen.
+Die Planung und Erstellung von Fahrplänen sowie die Teilnahme an Ausschreibungen werden in der Post-MVP-Phase ergänzt.
+So lernen die Spieler wirtschaftliche und betriebliche Zusammenhänge auf spielerische Weise kennen.
+
 
 === Zweck
-Der Zweck dieses Dokuments ist es, die wesentlichen Anforderungen an das System aus Sicht und mit den Begriffen der künftigen Anwender zu beschreiben.
+Das Dokument beschreibt die fachliche Vision und den Zielrahmen des Projekts *Bahnplan*.  
+Es fasst die Beweggründe des Teams, das Einsatzgebiet und die geplanten Fähigkeiten des Systems zusammen und stellt sicher, dass alle ein gemeinsames Verständnis von Vision, Umfang und Nutzen haben.
+Detailkonzepte, Architekturbeschreibungen und Implementierungsentscheidungen werden in separaten Dokumenten vertieft.
+
 
 === Gültigkeitsbereich (Scope)
-Dieses Visions-Dokument bezieht sich auf das System {project-system-name}, das von <Team> entwickelt wird. Das System wird es <Zielkunde/Auftraggeber> erlauben, <Hauptfunktionen> zu nutzen, um damit <Vorteile> zu erreichen / <Aufgabe> zu erleichtern / <Problem> zu lösen.
+
+Das System *Bahnplan* wird als webbasierte Simulation entwickelt, die im MVP zunächst von festgelegten Tester:innen genutzt wird.
+Im MVP liegt der Fokus auf der Gründung eines virtuellen Bahnunternehmens sowie dem Leasing und der Verwaltung von Wagen und Loks.
+Die Planung und Erstellung von Fahrplänen, die Teilnahme an Ausschreibungen sowie eine öffentliche Nutzung für weitere Interessierte sind für die Post-MVP-Phase vorgesehen.
+Im Vordergrund steht das Zusammenspiel wirtschaftlicher Faktoren bezogen auf das eigene virtuelle Bahnunternehmen.
+
+Das Ziel des Semesters ist die Fertigstellung eines lauffähigen MVP.
 
 === Definitionen, Akronyme und Abkürzungen
-//Verweis passend zum Belegabgabe-Template se1_belegabgabe_t00.adoc
-Siehe <<#glossary, Glossar>>.
-//Siehe <<./glossary.adoc#glossary, Glossar>>.
 
-=== Referenzen
-(hier externe Verweise zu anderen Dokumenten, Quellen, Standards etc. einfügen, sofern notwendig)
+Siehe <<glossary.adoc#glossary, Glossar>>.
 
 
 == Positionierung
 
 === Fachliche Motivation
-//Erläutern Sie kurz den Hintergrund, in dem das Projekt angesiedelt ist. Welches Problem soll gelöst werden, wie ist es entstanden? Welche Verbesserung wird angestrebt. Achten Sie darauf, eine fachliche (organisatorische, betriebswirtschaftliche) Perspektive einzunehmen.
+*Bahnplan.de* war ein browserbasiertes Multiplayer-Planspiel, das den Aufbau und Betrieb virtueller Eisenbahnunternehmen simulierte.  
+Die Seite bot eine komplexe, aber technisch überholte Simulation, die mittlerweile offline ist.  
+Das aktuelle Projekt verfolgt das Ziel, die Grundidee dieser Plattform neu zu beleben, mit moderner Webarchitektur, klarer Benutzerführung und verbesserter automatisierter Spielmechanik.  
 
 === Produktvision
-//Eine Produktvision beschreibt das Einsatzziel der Anwendung und sorgt für ein gemeinsames Ziel und Verständnis für alle Beteiligten im Projekt. Geben Sie in knapper Form übersichtsartig die Positionierung der angestrebten Lösung im Vergleich zu verfügbaren Alternativen dar. Das folgende Format kann dazu verwendet werden:
+Bahnplan ist eine wiederbelebte Echtzeit-Websimulation, in der Spieler ihre eigene Eisenbahngesellschaft führen.  
+Die Teilnahme an realitätsnahen Ausschreibungen wird in der Post-MVP-Phase ergänzt.  
+Die Anwendung entsteht, weil die frühere Websimulation nicht mehr verfügbar und gestalterisch sowie technisch veraltet ist. 
+Jede betriebliche Entscheidung beeinflusst den Erfolg im Wettbewerb. Dazu zählen im MVP vor allem Fahrzeugleasing sowie in der Post-MVP-Phase Fahrplangestaltung, Ausschreibungen, Preisbildung und Wartung.  
+Die Anwendung bietet ein modernes Design und automatisierte Abläufe.
 
-
-[cols="1,3"]
 |===
-| Für | [Zielkunde / Persona]
-| der / die | [Angabe des Bedarfs oder Chance]
-| ist das  | [Produktname]
-| eine  | [Produktkategorie]
-| der / die | [Aussage zum Hauptvorteil / Alleinstellungsmerkmal]
-| anders als | [wesentliche Lösungsalternative]
-| kann unser Produkt | [Aussage zum Hauptunterschied]
+| Für | Bahninteressierte
+| die |  die Spaß an wirtschaftlichen Simulationen haben
+| ist | Bahnplan
+| eine | webbasierte Simulation
+| in der |Spieler:innen ihre eigene virtuelle Eisenbahngesellschaft gründen und führen können
+| anders als | die frühere Plattform bahnplan.de
+| kann unser Produkt | mit einem modernen Design, klaren Benutzerführung und automatisierten Abläufen punkten, die den Einstieg erleichtern und das Spielerlebnis verbessern ohne dabei die Komplexität der ursprünglichen Plattform zu reduzieren.
 |===
 
+Bis zum Semesterende liefert *Bahnplan* ein lauffähiges MVP, mit dem festgelegte Tester:innen den Kernablauf ohne Unterstützung durchführen können: Registrierung/Login, Gründung einer Gesellschaft sowie Leasing und Verwaltung von Fahrzeugen.
 
-//Beispiel
-//[cols="1,3"]
-//|===
-//| Für | Studierende der HTWD
-//| die | zu wenig Zeit in der Mittagspause zum Essen haben
-//| ist   | Flying Burger
-//| ein  | Lieferdient für Burger
-//| der  | per Drohne liefert
-//| anders als | landgestützte Lieferdienste
-//| kann unser Produkt |  durchs Fenster direkt in den Hörsaal liefern.
-//|===
-
-== Stakeholder Beschreibungen
+== Stakeholder-Beschreibungen
 
 === Zusammenfassung der Stakeholder
 
@@ -64,9 +66,17 @@ Siehe <<#glossary, Glossar>>.
 |===
 | Name | Beschreibung | Verantwortlichkeiten
 
-| [Benennung des Stakeholders (als Rolle)]
-| [Kurze Beschreibung des Stakeholders und seiner Ziele]
-| [Fassen Sie die wesentlichen Verantwortlichkeiten des Stakeholder mit Bezug auf das zu entwickelnde System kurz zusammen, d.h. ihr besonderen Interessen. Beispiele: Dieser Stakeholder sorgt dafür, dass das System gewartet wird / dass die angezeigten Daten aktuell sind / überwacht den Projektfortschritt / usw.]
+| Kunde
+| Der Auftraggeber des Projekts ist Prof. Iffländer. Er bewertet Konzept, Umsetzung und Präsentation und stellt sicher, dass die Seminarziele erfüllt werden.
+| Definition der Rahmenbedingungen, fachliche Rückmeldung bei Nachfragen, Bewertung und Abnahme des MVP im Seminarkontext.
+
+| Nutzer
+| Endanwender der Anwendung. Im MVP sind dies festgelegte Tester:innen, die mit der Weboberfläche interagieren, Gesellschaften gründen und Kernfunktionen testen. In der Post-MVP-Phase wird die Nutzergruppe erweitert.
+| Nutzung und Feedback. Dienen als Orientierung für Funktionalität, Usability und Systemperformance.
+
+| Gesetzgeber
+| Externer Stakeholder, der über rechtliche Vorgaben (z.B. Datenschutz, Urheber- oder Wettbewerbsrecht) indirekten Einfluss auf die Systemgestaltung hat.
+| Beachtung gesetzlicher Rahmenbedingungen, insbesondere Datenschutz- und Informationsschutzvorgaben (z.B. DSGVO) sowie der Impressumspflicht bei öffentlichem Webbetrieb.
 |===
 
 Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mittels Personas vorgenommen.
@@ -75,27 +85,44 @@ Die Verfeinerung der Stakeholder, die das System benutzen, wird im UX-Konzept mi
 == Produktüberblick
 
 === Bedarfe und Hauptfunktionen
-//Vermeiden Sie Angaben zum Entwurf. Nennen wesentliche Features (Produktmerkmale) auf allgemeiner Ebene. Fokussieren Sie sich auf die benötigten Fähigkeiten des Systems und warum (nicht wie!) diese realisiert werden sollen. Geben Sie die von den Stakeholdern vorgegebenen Prioritäten an.
-
 [%header, cols="4,1,4,1"]
 |===
-| Bedarf | Priorität | Features / Funktionen | Geplantes Release
-| xx | xx | xx | xx
-|===
+| Bedarf | Priorität | Funktion / Fähigkeit | Geplantes Release
 
+| Besucher möchten einen ersten Einblick in das Spiel erhalten, um sich zu entscheiden, ob sie sich für das Spiel registrieren möchten. | Niedrig | Startseite mit allgemeiner Spielbeschreibung, Regelwerk und Tutorial | Post-MVP
+
+| Spieler möchten ihren Spielstand über längeren Zeitraum behalten können. | Hoch | Registrierung/Login mit gespeichertem personalisierten Spielstand | MVP
+
+| Spieler möchten sich über Loks und Wagen informieren können, um gezieltere Leasingentscheidungen für die in ihrer Gesellschaft verwendeten Fahrzeuge treffen zu können. | Hoch | Leasing und Verwaltung von Loks und Wagen mit detaillierten Informationen | MVP
+
+| Spieler möchten ihre eigene Gesellschaft gründen und führen. | Hoch | Gründung einer virtuellen Bahn-Gesellschaft mit Startkapital | MVP
+
+| Spieler möchten an Ausschreibungen teilnehmen, um Verkehrsnetze zu betreiben. | Mittel | Ausschreibungssystem mit Angebotsabgabe, Fristen und Bewertung nach Kosten und Bonuspunkten | Post-MVP
+
+| Das System soll realistische betriebliche Zusammenhänge abbilden. | Mittel | Kostenmodell mit regelmäßiger Abrechnung und komplexen Bedingungen/Regeln | Post-MVP
+
+|===
 
 === Zusätzliche Produktanforderungen
-//Zutreffendes angeben, nicht zutreffendes streichen oder auskommentieren
-Hinweise:
 
-. Führen Sie die wesentlichen anzuwendenden Standards, Hardware oder andere Plattformanforderungen, Leistungsanforderungen und Umgebungsanforderungen auf
-. Definieren Sie grob die Qualitätsanforderungen für Leistung, Robustheit, Ausfalltoleranz, Benutzbarkeit und ähnliche Merkmale, die Qualitätsanforderungen an das geplante Produkt beschreiben.
-. Notieren Sie alle Entwurfseinschränkungen, externe Einschränkungen, Annahmen oder andere Abhängigkeiten, die wenn Sie geändert werden, das Visions-Dokument beeinflussen. Ein Beispiel wäre die Annahme, dass ein bestimmtes Betriebssystem für die vom System erforderliche Hardware verfügbar ist. Ist das Betriebssystem nicht verfügbar, muss das Visions-Dokument angepasst werden.
-. Definieren Sie alle Dokumentationsanforderugen, inkl. Benutzerhandbücher, Onlinehilfe, Installations-, Kennzeichnungs- und Auslieferungsanforderungen.
-. Definieren Sie die Priorität für diese zusätzlichen Produktanforderungen. Ergänzen Sie, falls sinnvoll, Angaben zu Stabilität, Nutzen, Aufwand und Risiko für diese Anforderungen.
-
-[%header, cols="4,1,1"]
+[%header, cols="2,1,4,1"]
 |===
-| Anforderung | Priorität | Geplantes Release
-| xx | xx | xx
+| Anforderung | Priorität | Beschreibung | Geplantes Release
+
+| Performance und Skalierbarkeit
+| Hoch
+| Das System soll als Echtzeitanwendung stabil laufen und auch bei etwa 100 gleichzeitigen Nutzer:innen zuverlässig reagieren. Bei einer Last von 100 gleichzeitigen Nutzer:innen müssen mindestens 95 % der HTTP-API-Anfragen der MVP-Kernfunktionen innerhalb von 2 Sekunden beantwortet werden (gemessen als Antwortzeit vom Request-Eingang bis zur Response am Backend).
+| MVP
+
+| Spieler möchten ein ansprechendes und modernes UI nutzen. | Hoch | Die Anforderung gilt als erfüllt, wenn folgendes Kriterium erfüllt ist: UI mit konsistenten Komponenten innerhalb der gesamten Anwendung | MVP
+
+| Wartbarkeit durch Architektur und Modularität
+| Hoch
+| Die Anforderung gilt als erfüllt, wenn die MVP-Kernfunktionen in einer modularen Architektur umgesetzt sind (Trennung von API, Geschäftslogik und Datenzugriff), sodass Änderungen an einem Modul nur minimale Auswirkungen auf andere Module haben. Änderungen an API-Endpunkten oder Datenmodell werden in den betroffenen Modulen und deren Schnittstellenbeschreibung konsistent nachgezogen.
+| MVP
+
+| Datenschutz und rechtliche Mindestanforderungen
+| Hoch
+| Das System muss die gesetzlichen Anforderungen an Datenschutz und Informationssicherheit erfüllen, insbesondere die DSGVO, sowie die Impressumspflicht bei öffentlichem Webbetrieb. Die Anforderung gilt als erfüllt, wenn folgende Nachweise vorliegen: (1) Datenschutzerklärung und Impressum auf der Webseite (2) keine Speicherung personenbezogener Daten ohne Einwilligung (3) sichere Passwortspeicherung (z.B. Hashing) für Nutzerkonten.
+| Post-MVP
 |===

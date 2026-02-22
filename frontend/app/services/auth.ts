@@ -1,7 +1,23 @@
 import { API_ENDPOINTS } from './api';
 
-// Bei cookie-only Auth benötigt das Frontend kein lesbares Token.
-// Login setzt das HttpOnly-Cookie; Logout löscht es.
+export type CurrentUser = {
+  username: string;
+  email: string;
+  role: string;
+};
+
+export async function getCurrentUser(): Promise<CurrentUser | null> {
+  try {
+    const response = await fetch(API_ENDPOINTS.usersMe, {
+      credentials: 'include',
+    });
+
+    if (!response.ok) return null;
+    return (await response.json()) as CurrentUser;
+  } catch {
+    return null;
+  }
+}
 
 export async function login(username: string, password: string) {
   const form = new URLSearchParams();
@@ -28,6 +44,18 @@ export async function login(username: string, password: string) {
   return data;
 }
 
-export async function logout() {
-  await fetch(API_ENDPOINTS.logout, { method: 'POST', credentials: 'include' });
+export async function checkLoggedIn(): Promise<boolean> {
+  const me = await getCurrentUser();
+  return Boolean(me);
+}
+
+export async function logout(): Promise<void> {
+  const response = await fetch(API_ENDPOINTS.logout, {
+    method: 'POST',
+    credentials: 'include',
+  });
+
+  if (!response.ok) {
+    throw new Error('Logout fehlgeschlagen.');
+  }
 }

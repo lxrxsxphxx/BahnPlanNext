@@ -24,7 +24,13 @@ import { login } from '@/services/auth';
  * @param props.onClose - Callback zum Schließen des Modals.
  * @category Components
  */
-export default function LoginForm({ onClose }: { onClose?: () => void }) {
+export default function LoginForm({
+  onClose,
+  onSuccess,
+}: {
+  onClose?: () => void;
+  onSuccess?: () => void;
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -59,6 +65,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
         setSuccess('Anmeldung erfolgreich.');
         setError(null);
         window.location.reload();
+        onSuccess?.();
       } catch (err) {
         setSuccess(null);
         setError(
