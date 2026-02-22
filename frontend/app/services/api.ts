@@ -16,7 +16,7 @@ export const API_ENDPOINTS = {
   users: `${API_BASE_URL}/users`,
   secured: `${API_BASE_URL}/secured`,
   usersMe: `${API_BASE_URL}/users/me`,
-  myCompany: `${API_BASE_URL}/users/me/company`,
+  myCompany: `${API_BASE_URL}/users/company`,
   // no refresh endpoint when using only long-lived access cookie
 } as const;
 

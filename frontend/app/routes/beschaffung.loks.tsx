@@ -21,6 +21,7 @@ export async function clientLoader() {
   try {
     const loks = await fetchLoks();
     const company = await fetchCompanyInfo();
+    console.debug('clientLoader: company, loks', { company, loks });
     return { loks, company, error: null };
   } catch (err) {
     console.error('Fehler beim Laden der Loks im Loader:', err);
