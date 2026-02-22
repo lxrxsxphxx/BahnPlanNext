@@ -163,8 +163,8 @@ export default function BeschaffungLoks() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] py-8 text-white">
-      <div className="mb-4 flex items-center justify-between">
+    <div className="min-h-screen bg-[#0B0F14] text-white py-8 px-10 ">
+      <div className="flex items-center justify-between mb-4">
         <h1 className="text-3xl font-bold">
           <Link to="/beschaffung" className="hover:underline">
             Shop

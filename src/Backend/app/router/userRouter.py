@@ -1,5 +1,5 @@
 from typing import List
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 import os
@@ -44,6 +44,23 @@ def login(
 @router.get("/users")
 def get_all_users(service: UserService = Depends(get_user_service)):
     return service.get_all_users()
+
+
+@router.get("/users/me")
+def get_current_user(
+    claims: dict = Depends(auth.check_active),
+    service: UserService = Depends(get_user_service),
+):
+    username = claims.get("username") or claims.get("sub")
+    user = service.get_user_by_username(username) if username else None
+    if not user:
+        raise HTTPException(status_code=401, detail="User nicht gefunden")
+    return {
+        "username": user.username,
+        "email": user.email,
+        "role": user.role,
+    }
+
 
 @router.post("/logout")
 def logout(response: Response):

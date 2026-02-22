@@ -2,7 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { login } from '@/services/auth';
 
-export default function LoginForm({ onClose }: { onClose?: () => void }) {
+export default function LoginForm({
+  onClose,
+  onSuccess,
+}: {
+  onClose?: () => void;
+  onSuccess?: () => void;
+}) {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
@@ -36,6 +42,7 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
         setSuccess('Anmeldung erfolgreich.');
         setError(null);
         window.location.reload();
+        onSuccess?.();
       } catch (err) {
         setSuccess(null);
         setError(
