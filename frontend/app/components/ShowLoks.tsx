@@ -4,23 +4,6 @@ import LokCard from '@/components/LokCard';
 import type { Modell } from '@/routes/beschaffung.loks';
 import type { CompanyLok } from '@/services/gesellschaftsbereich';
 
-interface Lok {
-  id: number;
-  type_name?: string;
-  traction_type?: string;
-  image_key?: string;
-  suitable_passenger_max_wagons?: number;
-  suitable_freight_max_tons?: number;
-  countries_allowed?: string;
-  power_kw?: number;
-  max_speed_kmh?: number;
-  depot_category?: string | number;
-  max_traction_units?: number;
-  new_price?: number | string;
-  km_cost?: number;
-  energy_cost_base?: number;
-  is_leased?: boolean;
-}
 export interface TransformedLok {
   id: number;
   name: string;
