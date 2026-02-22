@@ -1,4 +1,16 @@
 import { useState } from "react";
+import { useLoaderData } from 'react-router';
+import { fetchCompanyInfo } from "@/services/gesellschaftsbereich";
+
+export async function clientLoader() {
+  try {
+    const company = await fetchCompanyInfo();
+    return { company };
+  } catch (err) {
+    console.error('Fehler beim Laden der Company im Loader:', err);
+    return { error: (err as Error).message || 'Fehler beim Laden der Company' };
+  }
+}
 
 const KREDITE = [
   {
@@ -30,12 +42,13 @@ const KREDITE = [
 
 export default function Kredite() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const cashBalance = 4000000;
+  const { company, error } = useLoaderData<typeof clientLoader>();
+  const cashBalance = company?.capital ?? 4000000;
   return (
-    <div className="w-full max-w-6xl mx-auto">
+    <div className="w-full mx-auto mt-6  px-10 py-8">
       {/* Titel */}
         <div className="flex justify-between items-center mb-6">
-            <h1 className="mb-6 text-xl font-semibold text-white">
+            <h1 className="mb-6 text-3xl font-semibold text-white">
                 Shop &gt; Kredite
             </h1>
 
@@ -62,7 +75,6 @@ export default function Kredite() {
               {/* Titel */}
               <div className="mb-4 flex items-center justify-between">
                 <h2 className="text-lg font-medium">{kredit.title}</h2>
-                <span className="text-slate-400">💰</span>
               </div>
 
               {/* Betrag */}
@@ -99,7 +111,7 @@ export default function Kredite() {
 
       {/* Hinweis */}
       <p className="mt-6 text-xs text-slate-400">
-        ℹ️ Hinweis zur Rückzahlung: Automatische wöchentliche Abzüge von Ihrem
+        Hinweis zur Rückzahlung: Automatische wöchentliche Abzüge von Ihrem
         Kontostand.
       </p>
     </div>
