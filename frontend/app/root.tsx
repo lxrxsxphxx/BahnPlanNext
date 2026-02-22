@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Links,
   Meta,
@@ -10,6 +11,7 @@ import {
 import type { Route } from './+types/root';
 import './app.css';
 import Navbar from './components/navbar/Navbar';
+import { checkLoggedIn, logout } from './services/auth';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,6 +27,34 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    checkLoggedIn().then((loggedIn) => {
+      if (!isMounted) return;
+      setIsLoggedIn(loggedIn);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleLoginSuccess = async () => {
+    const loggedIn = await checkLoggedIn();
+    setIsLoggedIn(loggedIn);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      setIsLoggedIn(false);
+    }
+  };
+
   return (
     <html lang="en">
       <head>
@@ -34,7 +64,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Navbar />
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          onLoginSuccess={handleLoginSuccess}
+          onLogout={handleLogout}
+        />
         <div className="ml-56">{children}</div>
         <ScrollRestoration />
         <Scripts />
