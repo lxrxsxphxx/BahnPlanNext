@@ -26,6 +26,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 | Ziel| möchte einen der Vision entsprechenden MVP begutachten
 | Frustrationen | unsaubere Kommunikation, fehlende Dokumentation
 |===
+
 === Nutzer: Eric Elseländer
 |===
 | Alter | 32
@@ -37,6 +38,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 | Ziele | komplexe, realitätsnahe Simulation mit vielen Spezialregeln, Intuitives UI
 | Frustrationen | zu geringe Komplexität, bürokratische Oberflächen, schlechte Navigation, fehlendes modernes UI
 |===
+
 === Nutzer: Sophie Kramer
 |===
 | Alter | 27
@@ -48,6 +50,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 | Ziele | schnell Spielprinzip verstehen, mit wenigen Klicks eigene Gesellschaft starten
 | Frustrationen | Fachbegriffe ohne Erklärung, zu viele Tabellen ohne Leitfaden, lange Einarbeitung, fehlende "Einsteiger"-Modi
 |===
+
 === Gesetzgeber: Anna Weber
 |===
 | Alter | 45
@@ -57,6 +60,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 | Ziele | DSGVO-konforme Verarbeitung, transparente Impressums- und Datenschutzhinweise, minimale Datenerhebung
 | Frustrationen | fehlende Einwilligungen, unklare Datenflüsse, technische Maßnahmen ohne Dokumentation
 |===
+
 == Nutzungskontext
 * Arbeitsaufgaben (MVP): Registrierung/Login, Gesellschaft gründen, Startkapital prüfen, Loks/Wagen leasen und verwalten, einfache Finanzübersicht lesen. 
 * Arbeitsaufgaben (Post-MVP): Fahrpläne erstellen, an Ausschreibungen teilnehmen.
