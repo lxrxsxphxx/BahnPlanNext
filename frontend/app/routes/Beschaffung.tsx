@@ -22,7 +22,7 @@ export default function Beschaffung() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white p-8 md:pl-58">
+    <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
       <h1 className="mb-8 text-4xl font-bold">Shop</h1>
 
       {/* Kategorien Abschnitt */}

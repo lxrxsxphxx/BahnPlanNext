@@ -44,6 +44,17 @@ class CompanyService:
             raise HTTPException(status_code=401, detail="User nicht gefunden.")
         return user
 
+    def get_company_from_claims(self, claims: dict):
+        # gib die Gesellschaft zurück, die mit dem User verknüpft ist (falls vorhanden)
+        user = self.get_user_from_claims(claims)
+        if not user.companies:
+            return None
+        # gib die erste Gesellschaft zurück, falls mehrere existieren (sollte nicht der Fall sein)
+        return user.companies[0]
+    def get_company_from_claims(self, claims: dict):
+        user = self.get_user_from_claims(claims)
+        if not user.companies: return None
+        return user.companies[0]
     def user_has_company(self, user_id: int) -> bool:
         link = self.db.exec(
             select(CompanyUserLink).where(CompanyUserLink.user_id == user_id)
