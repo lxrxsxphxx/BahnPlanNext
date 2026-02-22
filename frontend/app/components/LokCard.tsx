@@ -5,6 +5,7 @@ import LokLeasedModal from './LokLeasedModal';
 import { Modal } from './modal/modal';
 import type { Modell } from '@/routes/beschaffung.loks';
 import { leaseLok } from '@/services/lokshop';
+import type { TransformedLok } from './ShowLoks';
 
 interface Lok {
   id: number;
@@ -17,7 +18,7 @@ interface Lok {
 }
 
 interface LokCardProps {
-  lok: Lok;
+  lok: TransformedLok;
   lokInInventory: boolean;
 }
 
@@ -29,6 +30,8 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
   const handleLeasing = useCallback(async () => {
     try {
       if (selectedModel) {
+        console.debug('Leasingmodell ausgewählt:', selectedModel);
+        console.debug('Lok ID für Leasing:', lok.id);
         await leaseLok(lok.id, selectedModel.id);
         setDeliveryDate(new Date().toLocaleDateString('de-DE'));
         setIsLeasedModalOpen(true);

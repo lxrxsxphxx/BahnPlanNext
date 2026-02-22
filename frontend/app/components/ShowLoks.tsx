@@ -1,23 +1,51 @@
 import { useMemo } from 'react';
 
 import LokCard from '@/components/LokCard';
+import type { Modell } from '@/routes/beschaffung.loks';
+import type { CompanyLok } from '@/services/gesellschaftsbereich';
+
+interface Lok {
+  id: number;
+  type_name?: string;
+  traction_type?: string;
+  image_key?: string;
+  suitable_passenger_max_wagons?: number;
+  suitable_freight_max_tons?: number;
+  countries_allowed?: string;
+  power_kw?: number;
+  max_speed_kmh?: number;
+  depot_category?: string | number;
+  max_traction_units?: number;
+  new_price?: number | string;
+  km_cost?: number;
+  energy_cost_base?: number;
+  is_leased?: boolean;
+}
+export interface TransformedLok {
+  id: number;
+  name: string;
+  image: string;
+  specs: { label: string; value: string }[];
+  action: { type: 'leasing' | 'kauf'; label: string };
+  modelle: Modell[];
+}
 
 type Props = {
-  loks: any[];
+  loks: CompanyLok[] | null | undefined;
   error: string | null;
 };
 
 export default function ShowLoks({ loks, error }: Props) {
   const transformedLoks = useMemo(() => {
-    const items = loks || [];
+    const items: CompanyLok[] = loks || [];
     const counts: Record<string, number> = {};
-    items.forEach((l: any) => {
+    items.forEach((l) => {
       const key = l.type_name || 'Unbekannt';
       counts[key] = (counts[key] || 0) + 1;
     });
 
     const seen: Record<string, number> = {};
-    return items.map((lok: any) => {
+    return items.map((lok) => {
       const key = lok.type_name || 'Unbekannt';
       seen[key] = (seen[key] || 0) + 1;
       const suffix = counts[key] > 1 ? ` (${seen[key]})` : '';
@@ -30,7 +58,7 @@ export default function ShowLoks({ loks, error }: Props) {
         specs: [
           {
             label: 'Tfz geeignet für',
-            value: `Personen ( max ${lok.suitable_passenger_max_wagons} Wagen) \n Güter (max ${lok.suitable_freight_max_tons} Tonnen)`,
+            value: `Personen ( max ${lok.suitable_passenger_max_wagons ?? '–'} Wagen) \n Güter (max ${lok.suitable_freight_max_tons ?? '–'} Tonnen)`,
           },
           {
             label: 'Auslandseinsatz',
@@ -42,34 +70,29 @@ export default function ShowLoks({ loks, error }: Props) {
           },
           {
             label: 'Höchstgeschwindigkeit',
-            value: lok.max_speed_kmh
-              ? `${lok.max_speed_kmh} km/h`
-              : 'Unbekannt',
+            value: lok.max_speed_kmh ? `${lok.max_speed_kmh} km/h` : 'Unbekannt',
           },
           {
             label: 'Betriebswerke',
-            value: `Kategorie ${lok.depot_category}` || 'Unbekannt',
+            value: lok.depot_category ? `Kategorie ${lok.depot_category}` : 'Unbekannt',
           },
           {
             label: 'Maximaltraktion',
-            value: `${lok.max_traction_units} Tfz` || 'Unbekannt',
+            value: lok.max_traction_units ? `${lok.max_traction_units} Tfz` : 'Unbekannt',
           },
           {
             label: 'Neupreis',
-            value: `${Number(lok.new_price).toLocaleString('de-DE')} €`,
+            value: lok.new_price != null ? `${Number(lok.new_price).toLocaleString('de-DE')} €` : 'Unbekannt',
           },
-          { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
-          {
-            label: 'Energiekosten',
-            value: `${lok.energy_cost_base.toFixed(2)} €/h`,
-          },
+          { label: 'Kilometerkosten', value: lok.km_cost != null ? `${lok.km_cost.toFixed(2)} €/km` : 'Unbekannt' },
+          { label: 'Energiekosten', value: lok.energy_cost_base != null ? `${lok.energy_cost_base.toFixed(2)} €/h` : 'Unbekannt' },
         ],
         action: {
           type: 'kauf',
           label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung',
         },
         modelle: [],
-      };
+      } as TransformedLok;
     });
   }, [loks]);
 
@@ -87,7 +110,7 @@ export default function ShowLoks({ loks, error }: Props) {
           </p>
         </div>
       )}
-      {transformedLoks.map((lok: any) => (
+      {transformedLoks.map((lok) => (
         <LokCard key={lok.id} lok={lok} lokInInventory={true} />
       ))}
     </div>

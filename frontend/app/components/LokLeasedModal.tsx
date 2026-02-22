@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router";
 interface LokLeasedModalProps {
   lokName: string;
   statusText: string;
@@ -13,6 +14,10 @@ export default function LokLeasedModal({
   onClose,
   onViewVehicles,
 }: LokLeasedModalProps) {
+  const navigate = useNavigate();
+  const handleGoToFahrzeuge = () => {
+    navigate('/gesellschaftsbereich/fahrzeuge');
+  };
   return (
     <div className="relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-8 text-white shadow-xl animate-scaleIn">
       <div className="mb-4 flex items-center justify-center">
@@ -63,7 +68,7 @@ export default function LokLeasedModal({
         <button
           type="button"
           className="rounded-md border border-gray-600 bg-gray-800 px-4 py-2 text-xs font-medium text-gray-200 hover:bg-gray-700"
-          onClick={onViewVehicles ?? onClose}
+          onClick={handleGoToFahrzeuge}
         >
           Zu Meine Fahrzeuge
         </button>

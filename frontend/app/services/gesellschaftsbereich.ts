@@ -1,21 +1,49 @@
 import { API_ENDPOINTS, apiFetch } from './api';
 
-export async function fetchCompaniesLoks() {
+export interface CompanyInfo {
+  id?: number;
+  name?: string;
+  capital?: number;
+  [key: string]: unknown;
+}
+
+export interface CompanyLok {
+  id: number;
+  type_name?: string;
+  traction_type?: string;
+  image_key?: string;
+  suitable_passenger_max_wagons?: number;
+  suitable_freight_max_tons?: number;
+  countries_allowed?: string;
+  power_kw?: number;
+  max_speed_kmh?: number;
+  depot_category?: string | number;
+  max_traction_units?: number;
+  new_price?: number | string;
+  km_cost?: number;
+  energy_cost_base?: number;
+  is_leased?: boolean;
+  [key: string]: unknown; // für zusätzliche Felder, die von der API zurückgegeben werden könnten
+}
+
+export async function fetchCompaniesLoks(): Promise<CompanyLok[]> {
   const response = await apiFetch(API_ENDPOINTS.myCompaniesLoks);
   if (response.status === 401) {
     throw new Error('Unauthorisiert, bitte zuerst einloggen');
   } else if (!response.ok) {
     throw new Error('Fehler beim Laden der Loks');
   }
-  return response.json();
+  console.debug('API-Antwort für Unternehmensloks:', response);
+  return (await response.json()) as Promise<CompanyLok[]>;
 }
 
-export async function fetchCompanyInfo() {
+export async function fetchCompanyInfo(): Promise<CompanyInfo> {
   const response = await apiFetch(API_ENDPOINTS.myCompany);
   if (response.status === 401) {
     throw new Error('Unauthorisiert, bitte zuerst einloggen');
   } else if (!response.ok) {
     throw new Error('Fehler beim Laden der Unternehmensinformationen');
   }
-  return response.json();
+  console.debug('API-Antwort für Unternehmensinformationen:', response);
+  return (await response.json()) as Promise<CompanyInfo>;
 }

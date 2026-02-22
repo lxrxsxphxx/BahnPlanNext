@@ -3,8 +3,9 @@ import { Link, useLoaderData } from 'react-router';
 
 import type { Route } from './+types/beschaffung.loks';
 import LokCard from '@/components/LokCard';
-import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
+import { fetchCompanyInfo, type CompanyLok } from '@/services/gesellschaftsbereich';
 import { fetchLoks } from '@/services/lokshop';
+import type { TransformedLok } from '@/components/ShowLoks';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -41,7 +42,7 @@ export interface Modell {
 
 export default function BeschaffungLoks() {
   const { loks, company, error } = useLoaderData() as {
-    loks: any[];
+    loks: CompanyLok[];
     company?: { id?: number; name?: string; capital?: number } | null;
     error: string | null;
   };
@@ -49,11 +50,11 @@ export default function BeschaffungLoks() {
   const cashBalance = company?.capital ?? 4000000;
 
   // Transform API data to match LokCard structure
-  const transformedLoks = useMemo(
+  const transformedLoks = useMemo<TransformedLok[]>(
     () =>
-      loks.map((lok: any) => ({
+      loks.map((lok: CompanyLok): TransformedLok => ({
         id: lok.id,
-        name: `Baureihe ${lok.name} - ${lok.traction_type || 'Unbekannt'}`,
+        name: `Baureihe ${lok.name || 'Unbekannt'} - ${lok.traction_type || 'Unbekannt'}`,
         image: `/images/loks/${lok.image_key}`,
         specs: [
           {
@@ -76,11 +77,11 @@ export default function BeschaffungLoks() {
           },
           {
             label: 'Betriebswerke',
-            value: `Kategorie ${lok.depot_category}` || 'Unbekannt',
+            value: lok.depot_category ? `Kategorie ${lok.depot_category}` : 'Unbekannt',
           },
           {
             label: 'Maximaltraktion',
-            value: `${lok.max_traction_units} Tfz` || 'Unbekannt',
+            value: lok.max_traction_units ? `${Number(lok.max_traction_units)} Tfz` : 'Unbekannt',
           },
           {
             label: 'Verfügbar',
@@ -89,12 +90,12 @@ export default function BeschaffungLoks() {
 
           {
             label: 'Neupreis',
-            value: `${Number(lok.new_price).toLocaleString('de-DE')} €`,
+            value: lok.new_price ? `${Number(lok.new_price).toLocaleString('de-DE')} €` : 'Unbekannt',
           },
-          { label: 'Kilometerkosten', value: `${lok.km_cost.toFixed(2)} €/km` },
+          { label: 'Kilometerkosten', value: lok.km_cost ? `${Number(lok.km_cost).toFixed(2)} €/km` : 'Unbekannt' },
           {
             label: 'Energiekosten',
-            value: `${lok.energy_cost_base.toFixed(2)} €/h`,
+            value: lok.energy_cost_base ? `${Number(lok.energy_cost_base).toFixed(2)} €/h` : 'Unbekannt',
           },
         ],
         action: { type: 'leasing', label: 'Leasingmodell' },
@@ -179,8 +180,8 @@ export default function BeschaffungLoks() {
       </div>
 
       <div className="space-y-6">
-        {transformedLoks.map((lok: any) => (
-          <LokCard key={lok.name} lok={lok} lokInInventory={false} />
+                {transformedLoks.map((lok: TransformedLok) => (
+          <LokCard key={lok.id} lok={lok} lokInInventory={false} />
         ))}
       </div>
     </div>
