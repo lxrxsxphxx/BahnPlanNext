@@ -29,7 +29,8 @@ export async function leaseLok(lokId: number, leasingModel: number) {
         throw new Error('Unauthorisiert, bitte zuerst einloggen');
     } else if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.message || 'Fehler beim Leasen der Lok');
+        // FastAPI returns { detail: '...' } for HTTPException; prefer detail, fallback to message
+        throw new Error(errorData.detail || errorData.message || 'Fehler beim Leasen der Lok');
     }
     return response.json();
 }
