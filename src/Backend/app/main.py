@@ -4,17 +4,12 @@ load_dotenv(find_dotenv())
 
 import os
 from contextlib import asynccontextmanager
-<<<<<<< feature/#73-wagon-list
 from app.router import userRouter, routeRouter, vehicleRouter, shopRouter, companyRouter, wagonRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-=======
 
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
 
->>>>>>> dev
 from app import database
 from app.router import (
     companyRouter,
