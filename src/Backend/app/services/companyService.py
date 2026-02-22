@@ -1,4 +1,6 @@
 import re
+from typing import List
+
 from sqlalchemy.exc import IntegrityError
 from fastapi import HTTPException
 from sqlmodel import Session, select
@@ -7,12 +9,16 @@ from app import auth
 from app.models.user import User
 from app.models.company import Company, CompanyUserLink
 
+from models import Vehicle, company
+from schemas.companySchema import CompanyVehicleResponse
+
 MAX_NAME_LEN = 25
 
 INVALID_NAME_MSG = "Ungültiger Name! erlaubt sind nur: A–Z, a–z, 0–9 und Standard-Satzzeichen"
 TOO_LONG_MSG = f"Name zu lang! Maximal {MAX_NAME_LEN} Zeichen."
 NAME_EXISTS_MSG = "Name existiert bereits!"
 ALREADY_HAS_COMPANY_MSG = "Du besitzt bereits eine Gesellschaft."
+CANNOT_FIND_COMPANY = "Company cannot be found."
 
 _ALLOWED_RE = re.compile(r"^[A-Za-z0-9 .,;:!?\"'()\[\]\{\}\-_/+&@#]+$")
 
@@ -86,3 +92,35 @@ class CompanyService:
             if self.user_has_company(user.id):
                 raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
             raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
+
+    def get_company_vehicles(self, claims: dict) -> List[Vehicle]:
+        """
+        gets the company by their name and returns all Vehicles as List or returns Error message
+        :param claims: companyName: Name of Company
+        :return: List[CompanyVehicleResponse]
+        """
+        company = self.db.exec(select(Company).where(Company.name == claims["companyName"])).first()
+
+        if company:
+            company_vehicles = []
+            for vehicle in company.vehicles:
+                company_vehicles.append(
+                    CompanyVehicleResponse(vehicle_number = vehicle.vehicle_number,
+                                           id = vehicle.id,
+                                           type_id = vehicle.type_id,
+                                           owner_company_id = company.id,
+                                           type = vehicle.type,
+                                           delivery_status = vehicle.delivery_status,
+                                           delivery_end_at = vehicle.delivery_end_at,
+                                           delivered_at=vehicle.delivered_at,
+                                           condition_percent = vehicle.condition_percent,
+                                           acquired_at = vehicle.acquired_at,
+                                           is_leased = vehicle.is_leased,
+                                           leasing_model = vehicle.leasing_model,
+                                           lease_start = vehicle.lease_start,
+                                           lease_annual_rate_percent = vehicle.lease_annual_rate_percent,
+                                           lease_weekly_rate_percent = vehicle.lease_weekly_rate_percent))
+
+            return company_vehicles
+        else:
+            raise HTTPException(status_code=400, detail=CANNOT_FIND_COMPANY)
