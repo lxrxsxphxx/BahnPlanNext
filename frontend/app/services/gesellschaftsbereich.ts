@@ -45,3 +45,21 @@ export async function fetchCompanyInfo(): Promise<CompanyInfo> {
   console.debug('API-Antwort für Unternehmensinformationen:', response);
   return (await response.json()) as Promise<CompanyInfo>;
 }
+
+export async function createCompany(name: string) {
+  const response = await apiFetch(`${API_ENDPOINTS.myCompany}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  if (response.status == 400) {
+    throw new Error('Du besitzt bereits eine Gesellschaft');
+  } else if (!response.ok) {
+    throw new Error('Erstellung der Gesellschaft fehlgeschlagen');
+  }
+
+  return response.json();
+}
