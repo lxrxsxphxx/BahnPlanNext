@@ -2,13 +2,12 @@ import { useCallback, useState } from 'react';
 
 import { LeasingModelDropdown } from './LeasingModelDropdown';
 import LokLeasedModal from './LokLeasedModal';
+import type { TransformedLok } from './ShowLoks';
 import { Modal } from './modal/modal';
 import type { Modell } from '@/routes/beschaffung.loks';
 import { leaseLok } from '@/services/lokshop';
-import type { TransformedLok } from './ShowLoks';
 
-
-interface LokCardProps {
+export interface LokCardProps {
   lok: TransformedLok;
   lokInInventory: boolean;
 }

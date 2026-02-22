@@ -13,14 +13,14 @@ export interface TransformedLok {
   modelle: Modell[];
 }
 
-type Props = {
-  loks: CompanyLok[] | null | undefined;
-  error: string | null;
+export type Props = {
+  loks?: CompanyLok[];
+  error?: string;
 };
 
 export default function ShowLoks({ loks, error }: Props) {
   const transformedLoks = useMemo(() => {
-    const items: CompanyLok[] = loks || [];
+    const items = loks || [];
     const counts: Record<string, number> = {};
     items.forEach((l) => {
       const key = l.type_name || 'Unbekannt';
@@ -49,26 +49,48 @@ export default function ShowLoks({ loks, error }: Props) {
           },
           {
             label: 'Leistung',
-            value: lok.power_kw ? `${lok.power_kw} kW` : 'Unbekannt',
+            value:
+              lok.power_kw === undefined ? 'Unbekannt' : `${lok.power_kw} kW`,
           },
           {
             label: 'Höchstgeschwindigkeit',
-            value: lok.max_speed_kmh ? `${lok.max_speed_kmh} km/h` : 'Unbekannt',
+            value: lok.max_speed_kmh
+              ? `${lok.max_speed_kmh} km/h`
+              : 'Unbekannt',
           },
           {
             label: 'Betriebswerke',
-            value: lok.depot_category ? `Kategorie ${lok.depot_category}` : 'Unbekannt',
+            value: lok.depot_category
+              ? `Kategorie ${lok.depot_category}`
+              : 'Unbekannt',
           },
           {
             label: 'Maximaltraktion',
-            value: lok.max_traction_units ? `${lok.max_traction_units} Tfz` : 'Unbekannt',
+            value: lok.max_traction_units
+              ? `${lok.max_traction_units} Tfz`
+              : 'Unbekannt',
           },
           {
             label: 'Neupreis',
-            value: lok.new_price != null ? `${Number(lok.new_price).toLocaleString('de-DE')} €` : 'Unbekannt',
+            value:
+              lok.new_price === undefined
+                ? 'Unbekannt'
+                : `${Number(lok.new_price).toLocaleString('de-DE')} €`,
           },
-          { label: 'Kilometerkosten', value: lok.km_cost != null ? `${lok.km_cost.toFixed(2)} €/km` : 'Unbekannt' },
-          { label: 'Energiekosten', value: lok.energy_cost_base != null ? `${lok.energy_cost_base.toFixed(2)} €/h` : 'Unbekannt' },
+          {
+            label: 'Kilometerkosten',
+            value:
+              lok.km_cost === undefined
+                ? 'Unbekannt'
+                : `${lok.km_cost.toFixed(2)} €/km`,
+          },
+          {
+            label: 'Energiekosten',
+            value:
+              lok.energy_cost_base === undefined
+                ? 'Unbekannt'
+                : `${lok.energy_cost_base.toFixed(2)} €/h`,
+          },
         ],
         action: {
           type: 'kauf',
@@ -81,7 +103,7 @@ export default function ShowLoks({ loks, error }: Props) {
 
   // keep the debug log that was previously in the route file
   // eslint-disable-next-line no-console
-  console.log('Transformed Loks (ShowLoks):', transformedLoks);
+  console.debug('Transformed Loks (ShowLoks):', transformedLoks);
 
   return (
     <div className="space-y-6">

@@ -5,7 +5,6 @@ import ShowLoks from '@/components/ShowLoks';
 import {
   fetchCompaniesLoks,
   fetchCompanyInfo,
-  type CompanyLok,
 } from '@/services/gesellschaftsbereich';
 
 export async function clientLoader() {
@@ -16,23 +15,17 @@ export async function clientLoader() {
     // Remove or guard this in production.
     // eslint-disable-next-line no-console
     console.debug('clientLoader: company, loks', { company, loks });
-    return { loks, company, error: null };
+    return { loks, company };
   } catch (err) {
     console.error('Fehler beim Laden der Loks im Loader:', err);
     return {
-      loks: [],
-      company: null,
       error: (err as Error).message || 'Fehler beim Laden der Loks',
     };
   }
 }
 
 export default function GesellschaftsbereichFahrzeuge() {
-  const { loks, company, error } = useLoaderData() as {
-    loks: CompanyLok[];
-    company?: { id?: number; name?: string; capital?: number } | null;
-    error: string | null;
-  };
+  const { loks, company, error } = useLoaderData<typeof clientLoader>();
   const [isWagonActive, setIsWagonActive] = useState(false);
   const cashBalance = company?.capital ?? 4000000;
 

@@ -3,9 +3,9 @@ import { Link, useLoaderData } from 'react-router';
 
 import type { Route } from './+types/beschaffung.loks';
 import LokCard from '@/components/LokCard';
-import { fetchCompanyInfo, type CompanyLok } from '@/services/gesellschaftsbereich';
-import { fetchLoks } from '@/services/lokshop';
 import type { TransformedLok } from '@/components/ShowLoks';
+import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
+import { fetchLoks } from '@/services/lokshop';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -21,11 +21,10 @@ export async function clientLoader() {
   try {
     const loks = await fetchLoks();
     const company = await fetchCompanyInfo();
-    return { loks, company, error: null };
+    return { loks, company };
   } catch (err) {
     console.error('Fehler beim Laden der Loks im Loader:', err);
     return {
-      loks: [],
       error: (err as Error).message || 'Fehler beim Laden der Loks',
     };
   }
@@ -41,18 +40,15 @@ export interface Modell {
 }
 
 export default function BeschaffungLoks() {
-  const { loks, company, error } = useLoaderData() as {
-    loks: CompanyLok[];
-    company?: { id?: number; name?: string; capital?: number } | null;
-    error: string | null;
-  };
+  const { loks, company, error } = useLoaderData<typeof clientLoader>();
   console.debug('Loks from loader:', loks);
   const cashBalance = company?.capital ?? 4000000;
 
   // Transform API data to match LokCard structure
-  const transformedLoks = useMemo<TransformedLok[]>(
-    () =>
-      loks.map((lok: CompanyLok): TransformedLok => ({
+  const transformedLoks = useMemo<TransformedLok[]>(() => {
+    if (!loks) return [];
+    return loks.map(
+      (lok): TransformedLok => ({
         id: lok.id,
         name: `Baureihe ${lok.name || 'Unbekannt'} - ${lok.traction_type || 'Unbekannt'}`,
         image: `/images/loks/${lok.image_key}`,
@@ -77,11 +73,15 @@ export default function BeschaffungLoks() {
           },
           {
             label: 'Betriebswerke',
-            value: lok.depot_category ? `Kategorie ${lok.depot_category}` : 'Unbekannt',
+            value: lok.depot_category
+              ? `Kategorie ${lok.depot_category}`
+              : 'Unbekannt',
           },
           {
             label: 'Maximaltraktion',
-            value: lok.max_traction_units ? `${Number(lok.max_traction_units)} Tfz` : 'Unbekannt',
+            value: lok.max_traction_units
+              ? `${Number(lok.max_traction_units)} Tfz`
+              : 'Unbekannt',
           },
           {
             label: 'Verfügbar',
@@ -90,12 +90,21 @@ export default function BeschaffungLoks() {
 
           {
             label: 'Neupreis',
-            value: lok.new_price ? `${Number(lok.new_price).toLocaleString('de-DE')} €` : 'Unbekannt',
+            value: lok.new_price
+              ? `${Number(lok.new_price).toLocaleString('de-DE')} €`
+              : 'Unbekannt',
           },
-          { label: 'Kilometerkosten', value: lok.km_cost ? `${Number(lok.km_cost).toFixed(2)} €/km` : 'Unbekannt' },
+          {
+            label: 'Kilometerkosten',
+            value: lok.km_cost
+              ? `${Number(lok.km_cost).toFixed(2)} €/km`
+              : 'Unbekannt',
+          },
           {
             label: 'Energiekosten',
-            value: lok.energy_cost_base ? `${Number(lok.energy_cost_base).toFixed(2)} €/h` : 'Unbekannt',
+            value: lok.energy_cost_base
+              ? `${Number(lok.energy_cost_base).toFixed(2)} €/h`
+              : 'Unbekannt',
           },
         ],
         action: { type: 'leasing', label: 'Leasingmodell' },
@@ -133,9 +142,9 @@ export default function BeschaffungLoks() {
             kuendigung: 'jederzeit, keine Sperrfrist/keine Kündigungsgebühr',
           },
         ],
-      })),
-    [loks],
-  );
+      }),
+    );
+  }, [loks]);
 
   if (error) {
     return (
@@ -180,7 +189,7 @@ export default function BeschaffungLoks() {
       </div>
 
       <div className="space-y-6">
-                {transformedLoks.map((lok: TransformedLok) => (
+        {transformedLoks.map((lok: TransformedLok) => (
           <LokCard key={lok.id} lok={lok} lokInInventory={false} />
         ))}
       </div>

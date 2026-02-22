@@ -4,7 +4,6 @@ export interface CompanyInfo {
   id?: number;
   name?: string;
   capital?: number;
-  [key: string]: unknown;
 }
 
 export interface CompanyLok {
@@ -23,7 +22,6 @@ export interface CompanyLok {
   km_cost?: number;
   energy_cost_base?: number;
   is_leased?: boolean;
-  [key: string]: unknown; // für zusätzliche Felder, die von der API zurückgegeben werden könnten
 }
 
 export async function fetchCompaniesLoks(): Promise<CompanyLok[]> {
