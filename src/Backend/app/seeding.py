@@ -44,6 +44,7 @@ def seed_demo_data(db_generator) -> None:
                 type_id=wagon_type.id,
                 owner_company_id=company.id
             )
+            vehicle.img_file = f"/wagon.png"  # Setze den Pfad zum Bild basierend auf der Fahrzeugnummer
             session.add(vehicle)
         session.commit()
 

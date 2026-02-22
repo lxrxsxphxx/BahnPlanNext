@@ -56,6 +56,14 @@ class Vehicle(SQLModel, table=True):
   lease_annual_rate_percent: Optional[float] = None
   lease_weekly_rate_percent: Optional[float] = None
 
+  img_file: str
+
+  max_speed: Optional[int] = 200  # km/h
+  price_standard: Optional[int] = 110
+  price_control: Optional[int] = 250
+  cost_km: Optional[int] = 12
+  capacity: Optional[int] = 80
+
 class VehicleTypeDetails(SQLModel, table=True):
   """
   Detaildaten eines Fahrzeugtyps (Triebfahrzeugübersicht).
