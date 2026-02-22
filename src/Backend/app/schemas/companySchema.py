@@ -1,4 +1,6 @@
 from datetime import datetime, date
+from typing import Optional
+
 from pydantic import BaseModel
 
 from enums.vehicle_delivery_status import VehicleDeliveryStatus
@@ -25,7 +27,7 @@ class CompanyVehicleResponse(BaseModel):
     condition_percent: float
     acquired_at: datetime
     is_leased: bool
-    leasing_model: int
-    lease_start: date
-    lease_annual_rate_percent: float
-    lease_weekly_rate_percent: float
+    leasing_model: Optional[int]
+    lease_start: Optional[date]
+    lease_annual_rate_percent: Optional[float]
+    lease_weekly_rate_percent: Optional[float]

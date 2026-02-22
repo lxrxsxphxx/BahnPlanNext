@@ -34,6 +34,8 @@ def get_company_vehicles(claims: dict = Depends(auth.check_active),
     :return: List[CompanyVehicleResponse]
     """
     user = users.get_user_by_username(claims["username"])
+    if not user:
+        raise HTTPException(status_code=400, detail="User not found")
     if not user.companies:
         raise HTTPException(status_code=400,
                             detail="User ist in keiner Gesellschaft.")
