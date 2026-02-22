@@ -7,15 +7,6 @@ import type { Modell } from '@/routes/beschaffung.loks';
 import { leaseLok } from '@/services/lokshop';
 import type { TransformedLok } from './ShowLoks';
 
-interface Lok {
-  id: number;
-  name: string;
-  image: string;
-  tractionType: string;
-  specs: { label: string; value: string }[];
-  action: { type: 'leasing' | 'kauf'; label: string };
-  modelle: Modell[];
-}
 
 interface LokCardProps {
   lok: TransformedLok;
