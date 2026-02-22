@@ -18,41 +18,45 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 // Fügen Sie hier als Tabelle oder Bild die Persons der wichtigsten Stakeholder ein
 
 === Kunde: Prof. Iffländer
-* Alter: 55
-* Geschlecht: männlich
-* Beruf: Professor an der HTW Dresden
-* Technikaffinität: routinierter PC-Nutzer, mag detaillierte Berichte und kurze Demos; wenig Zeit für tiefegehende Tests
-* Ziel: möchte einen der Vision entsprechenden MVP begutachten
-* Frustrationen: unsaubere Kommunikation, fehlende Dokumentation
-
+|===
+| Alter | 55
+| Geschlecht| männlich
+| Beruf | Professor an der HTW Dresden
+| Technikaffinität| routinierter PC-Nutzer, mag detaillierte Berichte und kurze Demos wenig Zeit für tiefegehende Tests
+| Ziel| möchte einen der Vision entsprechenden MVP begutachten
+| Frustrationen | unsaubere Kommunikation, fehlende Dokumentation
+|===
 === Nutzer: Eric Elseländer
-* Alter: 32
-* Geschlecht: männlich
-* Beruf: Bürojob
-* Familienstand: ledig
-* Technikaffinität: programmiert hobbymäßig, sehr vertraut mit PC und Smartphone
-* Vorwissen: kennt Ausschreibungssysteme und Fahrzeugtypen der Bahn sehr genau
-* Ziele: komplexe, realitätsnahe Simulation mit vielen Stellschrauben; Intuitives UI
-* Frustrationen: zu geringe Komplexität, bürokratische Oberflächen, schlechte Navigation, fehlendes modernes UI
-
+|===
+| Alter | 32
+| Geschlecht | männlich
+| Beruf | Bürojob
+| Familienstand | ledig
+| Technikaffinität | programmiert hobbymäßig, sehr vertraut mit PC und Smartphone
+| Vorwissen | kennt Ausschreibungssysteme und Fahrzeugtypen der Bahn sehr genau
+| Ziele | komplexe, realitätsnahe Simulation mit vielen Spezialregeln, Intuitives UI
+| Frustrationen | zu geringe Komplexität, bürokratische Oberflächen, schlechte Navigation, fehlendes modernes UI|
+|===
 === Nutzer: Sophie Kramer
-* Alter: 27
-* Geschlecht: weiblich
-* Beruf: Marketing-Referentin
-* Familienstand: in Partnerschaft
-* Technikaffinität: nutzt Smartphone täglich, Desktop weniger häufig; kein Programmier- oder Fachbahnwissen, lernt gern per Tutorial
-* Vorwissen: Bahnbegeistert durch Reisen, kennt Fahrzeugtypen und Ausschreibungen nur oberflächlich
-* Ziele: schnell Spielprinzip verstehen, mit wenigen Klicks eigene Gesellschaft starten
-* Frustrationen: Fachbegriffe ohne Erklärung, zu viele Tabellen ohne Leitfaden, lange Einarbeitung, fehlende "Einsteiger"-Modi
-
+|===
+| Alter | 27
+| Geschlecht | weiblich
+| Beruf | Marketing-Referentin
+| Familienstand | in Partnerschaft
+| Technikaffinität | nutzt Smartphone täglich, Desktop weniger häufig; kein Programmier- oder Fachbahnwissen, lernt gern per Tutorial
+| Vorwissen | Bahnbegeistert durch Reisen, kennt Fahrzeugtypen und Ausschreibungen nur oberflächlich
+| Ziele | schnell Spielprinzip verstehen, mit wenigen Klicks eigene Gesellschaft starten
+| Frustrationen | Fachbegriffe ohne Erklärung, zu viele Tabellen ohne Leitfaden, lange Einarbeitung, fehlende "Einsteiger"-Modi
+|===
 === Gesetzgeber: Anna Weber
-* Alter: 45
-* Geschlecht: weiblich
-* Beruf: Juristin / Datenschutzbeauftragte
-* Technikaffinität: nutzt Standard-Bürosoftware, erwartet klare Datenschutz- und Sicherheitsnachweise
-* Ziele: DSGVO-konforme Verarbeitung, transparente Impressums- und Datenschutzhinweise, minimale Datenerhebung
-* Frustrationen: fehlende Einwilligungen, unklare Datenflüsse, technische Maßnahmen ohne Dokumentation
-
+|===
+| Alter | 45
+| Geschlecht | weiblich
+| Beruf | Juristin / Datenschutzbeauftragte
+| Technikaffinität | nutzt Standard-Bürosoftware, erwartet klare Datenschutz- und Sicherheitsnachweise
+| Ziele | DSGVO-konforme Verarbeitung, transparente Impressums- und Datenschutzhinweise, minimale Datenerhebung
+| Frustrationen | fehlende Einwilligungen, unklare Datenflüsse, technische Maßnahmen ohne Dokumentation
+|===
 == Nutzungskontext
 * Arbeitsaufgaben (MVP): Registrierung/Login, Gesellschaft gründen, Startkapital prüfen, Loks/Wagen leasen und verwalten, einfache Finanzübersicht lesen. Post-MVP: Fahrpläne erstellen, an Ausschreibungen teilnehmen.
 * Beteiligte Personen: Einzelspieler:innen oder kleine Freundesgruppen. Feedbackschleifen mit Team/Tutoren nur außerhalb der App.
