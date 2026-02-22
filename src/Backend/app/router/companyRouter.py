@@ -2,12 +2,11 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
 from app import database, auth
-from app.schemas.companySchema import CompanyCreateRequest, CompanyCreateResponse
+from app.schemas.companySchema import CompanyCreateRequest, CompanyCreateResponse, CompanyVehicleResponse
 from app.services.companyService import CompanyService
 
-from router.userRouter import get_user_service
-from schemas.companySchema import CompanyVehicleResponse
-from services.userService import UserService
+from app.router.userRouter import get_user_service
+from app.services.userService import UserService
 
 router = APIRouter(tags=["Company"])
 

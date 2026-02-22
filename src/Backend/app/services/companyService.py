@@ -8,9 +8,9 @@ from sqlmodel import Session, select
 from app import auth
 from app.models.user import User
 from app.models.company import Company, CompanyUserLink
+from app.models.vehicle import Vehicle
 
-from models import Vehicle, company
-from schemas.companySchema import CompanyVehicleResponse
+from app.schemas.companySchema import CompanyVehicleResponse
 
 MAX_NAME_LEN = 25
 

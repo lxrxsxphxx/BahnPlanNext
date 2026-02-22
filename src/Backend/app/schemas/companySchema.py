@@ -3,8 +3,8 @@ from typing import Optional
 
 from pydantic import BaseModel
 
-from enums.vehicle_delivery_status import VehicleDeliveryStatus
-from models import VehicleTypeDetails
+from app.enums.vehicle_delivery_status import VehicleDeliveryStatus
+from app.models import VehicleTypeDetails
 
 
 class CompanyCreateRequest(BaseModel):
