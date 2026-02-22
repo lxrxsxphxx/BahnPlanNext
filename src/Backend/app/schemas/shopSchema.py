@@ -33,7 +33,11 @@ class LeasedVehicleOut(BaseModel):
     lease_start: date
     lease_annual_rate_percent: float
     lease_weekly_rate_percent: float
-    acquired_at: datetime 
+    acquired_at: datetime
+
+    delivery_status: str
+    delivery_end_at: Optional[datetime] = None
+    delivered_at: Optional[datetime] = None
 
 class ShopVehicleTypeDetailsOut(BaseModel):
     id: int

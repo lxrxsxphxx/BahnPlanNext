@@ -127,4 +127,8 @@ def lease_vehicle(
         lease_annual_rate_percent=v.lease_annual_rate_percent,
         lease_weekly_rate_percent=v.lease_weekly_rate_percent,
         acquired_at=v.acquired_at,
+
+        delivery_status=v.delivery_status,
+        delivery_end_at=v.delivery_end_at,
+        delivered_at=v.delivered_at,
     )

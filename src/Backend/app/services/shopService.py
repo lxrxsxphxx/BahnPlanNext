@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from datetime import date, datetime
+from datetime import date, datetime,timezone
 from typing import Optional
 from fastapi import HTTPException
 from sqlmodel import Session, select
 from sqlalchemy import or_, func, cast, Integer
 from sqlalchemy.exc import SQLAlchemyError
+from app.enums.vehicle_delivery_status import VehicleDeliveryStatus
+from app.services.delivery_time import compute_delivery_end_at_utc
 
 from app.models.vehicle import (
     VehicleType,
@@ -126,6 +128,7 @@ class ShopService:
 
         vehicle_number = str(next_no)
 
+        now_utc = datetime.now(timezone.utc)
 
         v = Vehicle(
             vehicle_number=vehicle_number,
@@ -136,7 +139,9 @@ class ShopService:
             lease_start=date.today(),
             lease_annual_rate_percent=m["annual_rate_percent"],
             lease_weekly_rate_percent=m["weekly_rate_percent"],
-            acquired_at=datetime.utcnow(),
+            acquired_at=now_utc,
+            delivery_status=VehicleDeliveryStatus.in_delivery,
+            delivery_end_at=compute_delivery_end_at_utc(now_utc),
         )
         self.db.add(v)
 
