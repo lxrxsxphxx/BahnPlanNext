@@ -120,8 +120,12 @@ class ShopService:
         details.available_stock -= 1
         self.db.add(details)
 
+        # Ermittle die nächste verfügbare fortlaufende Nummer.
+        # Filter: Betrachte nur vehicle_number-Werte, die ausschließlich aus Ziffern bestehen,
+        # damit das Casten nach Integer nicht mit alphanumerischen Nummern (z.B. "WAGON-001") fehlschlägt.
         next_no = self.db.exec(
             select(func.coalesce(func.max(cast(Vehicle.vehicle_number, Integer)), 0) + 1)
+            .where(Vehicle.vehicle_number.op('~')('^[0-9]+$'))
         ).one()
 
         vehicle_number = str(next_no)

@@ -5,6 +5,7 @@ import ShowLoks from '@/components/ShowLoks';
 import {
   fetchCompaniesLoks,
   fetchCompanyInfo,
+  type CompanyLok,
 } from '@/services/gesellschaftsbereich';
 
 export async function clientLoader() {
@@ -28,7 +29,7 @@ export async function clientLoader() {
 
 export default function GesellschaftsbereichFahrzeuge() {
   const { loks, company, error } = useLoaderData() as {
-    loks: any[];
+    loks: CompanyLok[];
     company?: { id?: number; name?: string; capital?: number } | null;
     error: string | null;
   };
