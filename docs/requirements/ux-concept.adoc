@@ -59,7 +59,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 |===
 == Nutzungskontext
 * Arbeitsaufgaben (MVP): Registrierung/Login, Gesellschaft gründen, Startkapital prüfen, Loks/Wagen leasen und verwalten, einfache Finanzübersicht lesen. 
-* Arbeitsaufgabem (Post-MVP): Fahrpläne erstellen, an Ausschreibungen teilnehmen.
+* Arbeitsaufgaben (Post-MVP): Fahrpläne erstellen, an Ausschreibungen teilnehmen.
 * Beteiligte Personen: Einzelspieler:innen oder kleine Freundesgruppen. Feedbackschleifen mit Team/Tutoren nur außerhalb der App.
 * Arbeitsmittel & Plattformen: primär Desktop (Chrome/Firefox/Edge), gelegentlich Tablet/Smartphone für schnelle Checks, permanente Internetverbindung, keine Offline-Nutzung.
 * Physische und soziale Umgebung & Zeit: Nutzung zu Hause oder im Büro in ruhiger Umgebung. Sessions 10–30 Minuten, mehrere Male pro Woche.  Parallele Nutzer:innen im Echtzeitbetrieb.
