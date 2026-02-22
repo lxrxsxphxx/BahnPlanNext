@@ -31,7 +31,6 @@ export default function LoginForm({ onClose }: { onClose?: () => void }) {
     } else {
       setError(null);
       setSuccess(null);
-      console.log('Anmeldeversuch mit:', { username, password });
       try {
         await login(username, password);
         setSuccess('Anmeldung erfolgreich.');
