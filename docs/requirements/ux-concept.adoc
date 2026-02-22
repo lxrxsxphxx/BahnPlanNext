@@ -62,7 +62,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 * Arbeitsaufgaben (Post-MVP): Fahrpläne erstellen, an Ausschreibungen teilnehmen.
 * Beteiligte Personen: Einzelspieler:innen oder kleine Freundesgruppen. Feedbackschleifen mit Team nur außerhalb der App.
 * Arbeitsmittel & Plattformen: primär Desktop (Chrome/Firefox/Edge), gelegentlich Tablet/Smartphone für schnelle Checks, permanente Internetverbindung, keine Offline-Nutzung.
-* Physische und soziale Umgebung & Zeit: Nutzung zu Hause oder im Büro in ruhiger Umgebung. Sessions 10–30 Minuten, mehrere Male pro Woche.  Parallele Nutzer:innen im Echtzeitbetrieb.
+* Physische und soziale Umgebung & Zeit: Nutzung zu Hause oder im Büro in ruhiger Umgebung. Sessions 10-30 Minuten, mehrere Male pro Woche.  Parallele Nutzer:innen im Echtzeitbetrieb.
 * Bedienbarkeit: Maus + Tastatur, auf Mobilgeräten Touch. Kontraststarkes angestrebt minimalistisches und konsistentes UI, gut lesbare Tabellen. Einsteiger-Modus mit geführten Abläufen.
 * Fehlerquellen: Fachjargon ohne Erklärung, Tabellenüberfrachtung, unbeabsichtigtes Verlassen ohne Speichern, langsame Verbindungen.
 * Integrationen: Im MVP keine externen Systeme, nur interne Datenhaltung und Authentifizierung.
