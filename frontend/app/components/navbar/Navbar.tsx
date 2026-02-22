@@ -41,6 +41,7 @@ const LINKS: LinkEntry[] = [
   },
   { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
   { to: '/trassen', label: 'Trassen' },
+    { to: 'shop/kredite', label: 'Kredite', parentLink: 'Shop' },
   {
     to: '/betrieb',
     label: 'Betrieb',
