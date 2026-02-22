@@ -3,6 +3,7 @@ import { NavLink } from 'react-router';
 
 import LoginForm from '../login/LoginForm';
 import { Modal } from '../modal/modal';
+import RegistrationForm from '../registration/RegistrationForm';
 import Sidebar from './Sidebar';
 
 /**
@@ -38,6 +39,8 @@ const LINKS: LinkEntry[] = [
     label: 'Ausschreibungen',
     visibleOnFrontpage: true,
   },
+  { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
+  { to: '/trassen', label: 'Trassen' },
   {
     to: '/betrieb',
     label: 'Betrieb',
@@ -64,6 +67,11 @@ const LINKS: LinkEntry[] = [
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
+
+export interface NavbarProps {
+  isFrontPage?: boolean;
+}
+
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
 Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links und oben dargestellt */
 /**
@@ -72,11 +80,7 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  * @param {{ isFrontPage?: boolean }} props - Die Eigenschaften der Komponente: ein optionaler Boolean-Wert, der angibt, ob die aktuelle Seite die Startseite ist.
  * @returns {JSX.Element} Die gerenderte Navbar-Komponente.
  */
-export default function Navbar({
-  isFrontPage = false,
-}: {
-  isFrontPage?: boolean;
-}) {
+export default function Navbar({ isFrontPage = false }: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
@@ -84,7 +88,7 @@ export default function Navbar({
   return (
     <>
       {isFrontPage ? (
-        <nav className="w-screen bg-black py-3 text-white shadow">
+        <nav className="w-screen bg-[#111821] py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
               to="/"
@@ -140,7 +144,7 @@ export default function Navbar({
         </nav>
       ) : (
         <>
-          <div className="h-16 w-screen bg-black md:pl-56">
+          <div className="h-16 w-screen bg-[#111821] md:pl-56">
             <div className="mx-auto flex h-full max-w-6xl items-center px-4">
               {/*suchleiste zentriert*/}
               <div className="flex flex-1 justify-center">
@@ -197,10 +201,7 @@ export default function Navbar({
         open={isRegisterModalOpen}
         onClose={() => setIsRegisterModalOpen(false)}
       >
-        <div className="text-black">
-          <h2 className="mb-4 text-xl font-semibold">Registrieren</h2>
-          <p>Registrierungsformular kommt hier...</p>
-        </div>
+        <RegistrationForm onClose={() => setIsRegisterModalOpen(false)} />
       </Modal>
     </>
   );
