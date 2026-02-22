@@ -16,8 +16,13 @@ export default function Beschaffung() {
     { name: 'Handel', path: '/beschaffung/handel' },
   ];
 
-  const inDelivery = {
+  /*const inDelivery = {
     loks: ['Baureihe 101 - Elektrolokomotive', 'Baureihe 110 - Elektrolokomotive'],
+    wagen: [],
+  };*/
+
+  const inDelivery = {
+    loks: [],
     wagen: [],
   };
 
