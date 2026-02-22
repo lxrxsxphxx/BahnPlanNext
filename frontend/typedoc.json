@@ -1,0 +1,10 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./app"],
+  "entryPointStrategy": "expand",
+  "out": "docs",
+  "name": "BahnPlanNext Documentation",
+  "skipErrorChecking": true,
+  "cleanOutputDir": true,
+  "validation": false
+}

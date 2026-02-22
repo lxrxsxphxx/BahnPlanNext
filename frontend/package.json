@@ -13,8 +13,10 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "lint": "oxlint",
-    "lint:ci": "oxlint --format=github"
+    "lint:ci": "oxlint --format=github",
+    "build:docs": "typedoc --tsconfig ./tsconfig.json --validation.notReferenced false"  
   },
+  
   "dependencies": {
     "@react-router/node": "^7.9.2",
     "@react-router/serve": "^7.9.2",
