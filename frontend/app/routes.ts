@@ -7,4 +7,5 @@ export default [
   route('beschaffung/loks', 'routes/beschaffung.loks.tsx'),
   route('gesellschaftsbereich', 'routes/Gesellschaftsbereich.tsx'),
   route('gesellschaftsbereich/fahrzeuge', 'routes/gesellschaftsbereich.fahrzeuge.tsx'),
+  route('shop/kredite', 'routes/Kredite.tsx'),
 ] satisfies RouteConfig;
