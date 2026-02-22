@@ -59,7 +59,6 @@ export default function LoginForm({
     } else {
       setError(null);
       setSuccess(null);
-      console.log('Anmeldeversuch mit:', { username, password });
       try {
         await login(username, password);
         setSuccess('Anmeldung erfolgreich.');
