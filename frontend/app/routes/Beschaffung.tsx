@@ -1,5 +1,6 @@
-import type { Route } from './+types/Beschaffung';
 import { NavLink } from 'react-router';
+
+import type { Route } from './+types/Beschaffung';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -17,12 +18,15 @@ export default function Beschaffung() {
   ];
 
   const inDelivery = {
-    loks: ['Baureihe 101 - Elektrolokomotive', 'Baureihe 110 - Elektrolokomotive'],
-    wagen: [],
+    loks: [
+      'Baureihe 101 - Elektrolokomotive',
+      'Baureihe 110 - Elektrolokomotive',
+    ],
+    wagen: [] as string[],
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0F14] text-white p-8 ">
+    <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
       <h1 className="mb-8 text-4xl font-bold">Shop</h1>
 
       {/* Kategorien Abschnitt */}
@@ -48,15 +52,17 @@ export default function Beschaffung() {
 
       {/* In Lieferung Abschnitt */}
       <div className="rounded-lg border border-[#223041] bg-[#121C27] p-8">
-        <h2 className="mb-6 text-2xl font-semibold italic text-red-500">In Lieferung</h2>
+        <h2 className="mb-6 text-2xl font-semibold text-red-500 italic">
+          In Lieferung
+        </h2>
 
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
           {/* Loks */}
           <div>
             <h3 className="mb-4 text-xl font-semibold">Loks</h3>
             <ul className="space-y-2">
-              {inDelivery.loks.map((lok, index) => (
-                <li key={index} className="italic text-gray-300">
+              {inDelivery.loks.map((lok) => (
+                <li key={lok} className="text-gray-300 italic">
                   {lok}
                 </li>
               ))}
@@ -67,11 +73,11 @@ export default function Beschaffung() {
           <div>
             <h3 className="mb-4 text-xl font-semibold">Wagen</h3>
             {inDelivery.wagen.length === 0 ? (
-              <p className="italic text-gray-500">Keine Wagen in Lieferung</p>
+              <p className="text-gray-500 italic">Keine Wagen in Lieferung</p>
             ) : (
               <ul className="space-y-2">
-                {inDelivery.wagen.map((wagen, index) => (
-                  <li key={index} className="italic text-gray-300">
+                {inDelivery.wagen.map((wagen) => (
+                  <li key={wagen} className="text-gray-300 italic">
                     {wagen}
                   </li>
                 ))}
