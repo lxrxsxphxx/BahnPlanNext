@@ -19,7 +19,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 
 === Kunde: Prof. Iffländer
 |===
-| Alter | 55
+| Alter | 32
 | Geschlecht| männlich
 | Beruf | Professor an der HTW Dresden
 | Technikaffinität| routinierter PC-Nutzer, mag detaillierte Berichte und kurze Demos wenig Zeit für tiefegehende Tests
@@ -35,7 +35,7 @@ In diesem Dokument werden die Benutzeroberflächen des Systems *Bahnplan* beschr
 | Technikaffinität | programmiert hobbymäßig, sehr vertraut mit PC und Smartphone
 | Vorwissen | kennt Ausschreibungssysteme und Fahrzeugtypen der Bahn sehr genau
 | Ziele | komplexe, realitätsnahe Simulation mit vielen Spezialregeln, Intuitives UI
-| Frustrationen | zu geringe Komplexität, bürokratische Oberflächen, schlechte Navigation, fehlendes modernes UI|
+| Frustrationen | zu geringe Komplexität, bürokratische Oberflächen, schlechte Navigation, fehlendes modernes UI
 |===
 === Nutzer: Sophie Kramer
 |===
