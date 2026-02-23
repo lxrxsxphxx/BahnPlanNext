@@ -67,9 +67,10 @@ export default function TrassenComponent() {
                   const { first, last, sorted } = getFirstAndLast(trasse.stops);
 
                   return (
-                    <div
+                    <a
+                      href={`/trassen/${trasse.uuid}`}
                       key={trasseIdx}
-                      className="grid grid-cols-[200px_1fr] items-start gap-4 border-b border-gray-700 py-3"
+                      className="grid grid-cols-[200px_1fr] items-start gap-4 border-b border-gray-700 py-3 cursor-pointer hover:bg-gray-800 "
                     >
                       {/* Trasse name */}
                       <div className="font-semibold text-white">
@@ -102,7 +103,7 @@ export default function TrassenComponent() {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </a>
                   );
                 })}
               </table>
