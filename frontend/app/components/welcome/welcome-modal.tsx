@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { Modal } from '../modal/modal';
 
 /**
- * Typdefinition für jeden Slide
+ * Die Datenquelle für das Welcome-Modal.
+ * Enthält die Einführungs-Texte und Bilder für neue BahnPlan-Nutzer.
+ * @internal
  */
 type Slide = {
   image?: string; // optionales Bild
@@ -54,12 +56,32 @@ export type Props = {
 };
 
 /**
- * WelcomeModal-Komponente
+ * **WelcomeModal**
  *
- * Zeigt eine Reihe von Slides für neue Nutzer an.
+ * Eine Onboarding-Komponente, die neuen Nutzern die Kernfeatures von BahnPlan in einer Slideshow vorstellt.
  *
- * @param open - Modal sichtbar oder nicht
- * @param onClose - Callback, wenn Modal geschlossen wird
+ * ### Funktionalitäten
+ * - **Slideshow-Navigation**: Ermöglicht Vor- und Zurückblättern durch die Feature-Vorstellung.
+ * - **Pagination**: Zeigt visuelle "Dots" zur Orientierung innerhalb der Slides.
+ * - **Call-to-Action**: Bietet am Ende der Slideshow einen dedizierten Button zum Starten der Anwendung.
+ * - **Integration**: Nutzt die Basis-Komponente {@link Modal} für das Overlay-Verhalten.
+ *
+ * ### Interner Status (State)
+ * | State | Typ | Beschreibung |
+ * | :--- | :--- | :--- |
+ * | `current` | `number` | Der Index des aktuell angezeigten Slides (0-basiert). |
+ *
+ * ### Logik-Methoden
+ * - `nextSlide`: Erhöht den Index (mit Modulo-Schutz für Endlos-Schleifen, falls gewünscht).
+ * - `prevSlide`: Verringert den Index.
+ * - **Bedingtes Rendering**: Navigations-Buttons werden nur angezeigt, wenn weitere Slides verfügbar sind.
+ *
+ * @param props - Komponenten-Eigenschaften.
+ * @category Components
+ * @example
+ * ```tsx
+ * <WelcomeModal open={isFirstVisit} onClose={() => setFirstVisit(false)} />
+ * ```
  */
 export function WelcomeModal({ open, onClose }: Props) {
   const [current, setCurrent] = useState(0); // aktueller Slide-Index

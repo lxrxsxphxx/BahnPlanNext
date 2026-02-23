@@ -1,6 +1,7 @@
 from datetime import datetime, date
 from typing import Optional, List
 from sqlmodel import SQLModel, Field, Relationship
+from app.enums.vehicle_delivery_status import VehicleDeliveryStatus
 
 from ..enums.vehicle import VehicleKind
 from .company import Company
@@ -45,6 +46,11 @@ class Vehicle(SQLModel, table=True):
 
   type: VehicleType = Relationship()
   owner: Company = Relationship(back_populates="vehicles")
+
+  delivery_status: VehicleDeliveryStatus = Field(
+      default=VehicleDeliveryStatus.in_delivery)
+  delivery_end_at: Optional[datetime] = Field(default=None, nullable=True)
+  delivered_at: Optional[datetime] = Field(default=None, nullable=True)
 
   condition_percent: float = 100.0  # Zustand in %
   acquired_at: datetime = Field(default_factory=datetime.utcnow)
