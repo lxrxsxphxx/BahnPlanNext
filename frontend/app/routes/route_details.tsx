@@ -36,6 +36,13 @@ type RouteDetail = {
   stops: Stop[];
 };
 
+const renderVehicle = (name: string, allowed: boolean, colorClass: string) => (
+    <div className={`flex items-center gap-2 ${colorClass}`}>
+    <span>{allowed ? "✔" : "✕"}</span>
+    <span className="font-medium">{name}</span>
+  </div>
+  );
+
 const RouteDetailView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
 
@@ -72,14 +79,7 @@ const RouteDetailView: React.FC = () => {
 
   const { fahrzeugtypen } = route;
 
-  const renderVehicle = (name: string, allowed: boolean, colorClass: string) => (
-    <div className={`flex items-center gap-2 ${colorClass}`}>
-    <span>{allowed ? "✔" : "✕"}</span>
-    <span className="font-medium">{name}</span>
-  </div>
-  );
-
-  return (
+    return (
     <div className="bg-gray-900 text-white p-6 max-w-4xl mx-auto rounded-lg shadow-lg">
       <h2 className="text-xl font-bold mb-4">{route.name}</h2>
 
