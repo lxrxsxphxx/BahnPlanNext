@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router';
 
 import type { Route } from './+types/Beschaffung';
-import { createCompany } from '@/services/gesellschaftsbereich';
+import {
+  type CompanyInfo,
+  createCompany,
+} from '@/services/gesellschaftsbereich';
 import { fetchCompanyInfo2 } from '@/services/gesellschaftsbereich';
 
 export function meta({}: Route.MetaArgs) {
@@ -18,7 +21,7 @@ export default function Gesellschaftsbereich() {
     { name: 'Fahrzeuge', path: '/gesellschaftsbereich/fahrzeuge' },
     { name: 'Fahrpläne', path: '/gesellschaftsbereich/fahrplaene' },
   ];
-  const [userCompany, setUserCompany] = useState<any | null>(null);
+  const [userCompany, setUserCompany] = useState<CompanyInfo | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -190,16 +193,7 @@ export function gesellschaftErstellenHinweis() {
         </div>
         <p className="mt-5 mb-5">
           {' '}
-          Zudem lohnt es sich,{' '}
-          <NavLink to="/Regeln" className="text-blue-500">
-            Regeln
-          </NavLink>{' '}
-          und
-          <NavLink to="/faq" className="text-blue-500">
-            {' '}
-            FAQ
-          </NavLink>{' '}
-          durchzulesen.
+          Zudem lohnt es sich, die Regeln und FAQ durchzulesen.
         </p>
         <p className="mt-5">
           Nach erfolgreicher Erstellung wird die Gesellschaft mit einem{' '}

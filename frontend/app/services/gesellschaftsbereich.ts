@@ -45,8 +45,7 @@ export async function fetchCompanyInfo(): Promise<CompanyInfo | null> {
     throw new Error('Fehler beim Laden der Unternehmensinformationen');
   }
   console.debug('API-Antwort für Unternehmensinformationen:', response);
-  //return (await response.json()) as Promise<CompanyInfo>;
-  return await response.json();
+  return (await response.json()) as Promise<CompanyInfo>;
 }
 
 export async function fetchCompanyInfo2(): Promise<CompanyInfo | null> {
@@ -65,7 +64,7 @@ export async function fetchCompanyInfo2(): Promise<CompanyInfo | null> {
 
 export async function createCompany(name: string) {
   /*const response = await apiFetch(`${API_ENDPOINTS.myCompany}`, {*/
-  await apiFetch(API_ENDPOINTS.createCompany, {
+  const response = await apiFetch(API_ENDPOINTS.createCompany, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -73,11 +72,11 @@ export async function createCompany(name: string) {
     body: JSON.stringify({ name }),
   });
 
-  /*if (response.status == 400) {
+  if (response.status == 400) {
     throw new Error('Du besitzt bereits eine Gesellschaft');
   } else if (!response.ok) {
     throw new Error('Erstellung der Gesellschaft fehlgeschlagen');
   }
 
-  return response.json();*/
+  return response.json();
 }
