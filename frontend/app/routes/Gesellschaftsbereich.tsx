@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router';
+import { NavLink, useNavigate } from 'react-router';
 
 import type { Route } from './+types/Beschaffung';
 import { createCompany } from '@/services/gesellschaftsbereich';
-import { fetchCompanyInfo } from '@/services/gesellschaftsbereich';
+import { fetchCompanyInfo2 } from '@/services/gesellschaftsbereich';
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -22,13 +22,13 @@ export default function Gesellschaftsbereich() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchCompanyInfo()
+    fetchCompanyInfo2()
       .then((company) => {
-        console.log('Geladene Gesellschaft:', userCompany);
-        setUserCompany(company && Object.keys(company).length ? company : null);
+        console.log('Geladene Gesellschaft:', company);
+        setUserCompany(company ?? null);
       })
       .catch((err) => {
-        console.error('Fehlerbeim Laden der gesellschaft:', err);
+        console.error('Fehler beim Laden der gesellschaft:', err);
         setUserCompany(null);
       })
       .finally(() => setLoading(false));
@@ -38,7 +38,7 @@ export default function Gesellschaftsbereich() {
     return <p>Lade Unternehmensinformationen...</p>;
   }
 
-  if (!userCompany.in_company) {
+  if (!userCompany || !userCompany.in_company) {
     return (
       <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
         <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich</h1>
@@ -46,10 +46,10 @@ export default function Gesellschaftsbereich() {
       </div>
     );
   }
+
   return (
     <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
       <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich: </h1>
-
       {/* Kategorien Abschnitt */}
       <div className="mb-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((category) => (
@@ -82,6 +82,17 @@ export function CreateCompanyForm({ onSuccess }: Props) {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!success) return;
+
+    const timer = setTimeout(() => {
+      navigate('/gesellschaftsbereich');
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [success, navigate]);
 
   const validate = () => {
     const regex = /^[A-Za-z0-9.,\-()!? ]+$/;
@@ -201,27 +212,3 @@ export function gesellschaftErstellenHinweis() {
     </div>
   );
 }
-
-/* entscheiden, ob sich gesellschaftErstellenHinweis öffnet oder Weiterleitung zu Dashboard */
-/*export default function Gesellschaftsbereich() {
-  const [userCompany, setUserCompany] = useState<any | null>(null);
-
-  //Gesellschaft existiert nicht
-  if (!userCompany) {
-    return (
-      <div className="min-h-screen bg-[#0B0F14] p-8 text-white">
-        <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich</h1>
-        {gesellschaftErstellenHinweis()}
-      </div>
-    );
-  }
-
-  //Gesellschaft existiert
-  return (
-    /* Hier weitere Inhalte für den Gesellschaftsbereich einfügen*/
-/*<div className="min-h-screen bg-[#0B0F14] p-8 text-white">
-      <h1 className="mb-8 text-4xl font-bold">Gesellschaftsbereich</h1>
-    </div>
-  );
-}
-*/
