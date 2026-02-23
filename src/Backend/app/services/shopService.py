@@ -4,7 +4,7 @@ from datetime import date, datetime,timezone
 from typing import Optional
 from fastapi import HTTPException
 from sqlmodel import Session, select
-from sqlalchemy import or_, func, cast, Integer
+from sqlalchemy import or_, func, cast, Integer, exists
 from sqlalchemy.exc import SQLAlchemyError
 from app.enums.vehicle_delivery_status import VehicleDeliveryStatus
 from app.services.delivery_time import compute_delivery_end_at_utc
@@ -86,17 +86,54 @@ class ShopService:
 
         return vt, details, compatible_names
 
+    def company_has_compatible_locomotive(self, company_id: int,
+                                          target_type_id: int) -> bool:
+        """
+        gets all locomotive-types which support the target type and returns True or False to check if a locomotive has support for it
+        :param company_id: Company-ID
+        :param target_type_id: Vehicle-Type-ID
+        :return: Bool
+        """
+        loco_type_ids_subq = (
+            select(VehicleTypeCouplingLink.left_type_id)
+            .join(VehicleType,
+                  VehicleType.id == VehicleTypeCouplingLink.left_type_id)
+            .where(VehicleTypeCouplingLink.right_type_id == target_type_id)
+            .where(VehicleType.kind == VehicleKind.locomotive)
+            .subquery()
+        )
+
+        # Exists: besitzt die Company ein einsatzbereites Vehicle dieser Lok-Typen?
+        stmt = select(
+            exists(
+                select(Vehicle.id)
+                .where(Vehicle.owner_company_id == company_id)
+                .where(Vehicle.type_id.in_(
+                    select(loco_type_ids_subq.c.left_type_id)))
+                .where(
+                    Vehicle.delivery_status == VehicleDeliveryStatus.delivered)
+            )
+        )
+        return bool(self.db.exec(stmt).one())
+
     # TODO(CELERY): Wöchentliche Leasingrate (lease_weekly_rate_percent) wird über Scheduler/Celery abgebucht. Hier nur Anzahlung + Vertragsstart.
     # außerdem: Liefer-/Statuslogik (in Lieferung -> einsatzbereit)
     def lease_vehicle_type(self, company: Company, type_id: int, leasing_model: int) -> Vehicle:
         if leasing_model not in LEASING_MODELS:
             raise HTTPException(status_code=400, detail="Ungültiges Leasingmodell")
 
-        vt = self.db.exec(select(VehicleType).where(VehicleType.id == type_id)).first()
+        vt , details, compatible_names = self.get_vehicle_type_details(type_id)
+
+        # checks if compatible with a company-locomotive
+        if vt.kind != VehicleKind.locomotive:
+            if not self.company_has_compatible_locomotive(company.id, vt.id):
+                raise HTTPException(
+                    status_code=400,
+                    detail="Keine geeignete Lokomotive im Bestand, um diesen Fahrzeugtyp anhängen zu können."
+                )
+
         if not vt:
             raise HTTPException(status_code=404, detail="Fahrzeugtyp nicht gefunden.")
-
-        details = self.db.exec(select(VehicleTypeDetails).where(VehicleTypeDetails.vehicle_type_id == vt.id)).first()
 
         if not details:
             raise HTTPException(status_code=500, detail="Fahrzeugdetails nicht vorhanden -> Bestand kann nicht geprüft werden.")
@@ -122,8 +159,12 @@ class ShopService:
         details.available_stock -= 1
         self.db.add(details)
 
+        # Ermittle die nächste verfügbare fortlaufende Nummer.
+        # Filter: Betrachte nur vehicle_number-Werte, die ausschließlich aus Ziffern bestehen,
+        # damit das Casten nach Integer nicht mit alphanumerischen Nummern (z.B. "WAGON-001") fehlschlägt.
         next_no = self.db.exec(
             select(func.coalesce(func.max(cast(Vehicle.vehicle_number, Integer)), 0) + 1)
+            .where(Vehicle.vehicle_number.op('~')('^[0-9]+$'))
         ).one()
 
         vehicle_number = str(next_no)

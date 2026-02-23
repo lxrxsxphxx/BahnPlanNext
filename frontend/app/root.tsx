@@ -63,7 +63,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="overflow-x-hidden">
         <Navbar
           isLoggedIn={isLoggedIn}
           onLoginSuccess={handleLoginSuccess}

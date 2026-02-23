@@ -41,6 +41,7 @@ const LINKS: LinkEntry[] = [
   },
   { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
   { to: '/trassen', label: 'Trassen' },
+  { to: 'shop/kredite', label: 'Kredite', parentLink: 'Shop' },
   {
     to: '/betrieb',
     label: 'Betrieb',
@@ -61,8 +62,12 @@ const LINKS: LinkEntry[] = [
   {
     to: '/gesellschaftsbereich',
     label: 'Gesellschaftsbereich',
-    parentLink: 'Community',
+    isParent: true,
+    visibleOnFrontpage: true,
   },
+  { to: '/finanzen', label: 'Finanzen', parentLink: 'Gesellschaftsbereich' },
+  { to: '/gesellschaftsbereich/fahrzeuge', label: 'Meine Fahrzeuge', parentLink: 'Gesellschaftsbereich' },
+  { to: '/meine-fahrplaene', label: 'Meine Fahrpläne', parentLink: 'Gesellschaftsbereich' },
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];

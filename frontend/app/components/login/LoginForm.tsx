@@ -2,6 +2,28 @@ import { useEffect, useState } from 'react';
 
 import { login } from '@/services/auth';
 
+/**
+ * Eine React-Komponente, die ein interaktives Anmeldeformular bereitstellt.
+ * * ### Funktionalitäten:
+ * - **Authentifizierung:** Verarbeitet den Login-Prozess über den `login` Service.
+ * - **Status-Management:** Verwaltet Fehlermeldungen, Erfolgsmeldungen und die Sichtbarkeit des Passworts.
+ * - **Persistenz:** Speichert Eingaben (Benutzername/Passwort) im `localStorage`, damit diese nach einem Seiten-Reload erhalten bleiben.
+ * - **UI/UX:** Nutzt Tailwind CSS für ein modernes, dunkles Design mit Animationen (`animate-scaleIn`).
+ * * ## Interner Status (State)
+ * | State | Typ | Beschreibung |
+ * | :--- | :--- | :--- |
+ * | `username` | `string` | Benutzername, synchronisiert mit LocalStorage. |
+ * | `password` | `string` | Passwort (Klartext), synchronisiert mit LocalStorage. |
+ * | `showPassword` | `boolean` | Status der Passwort-Sichtbarkeit. |
+ * | `error` | `string` | Aktuelle Fehlermeldung. |
+ * * ## Logik & Effekte
+ * - **Laden**: Beim Mounten werden Daten aus dem Speicher geladen.
+ * - **Speichern**: Jede Änderung an Username/Passwort triggert ein `setItem` im LocalStorage.
+ * - **Validierung**: `handleSubmit` prüft auf leere Felder, bevor der Service aufgerufen wird.
+ * * @param props - Komponenten-Props
+ * @param props.onClose - Callback zum Schließen des Modals.
+ * @category Components
+ */
 export default function LoginForm({
   onClose,
   onSuccess,
@@ -47,14 +69,14 @@ export default function LoginForm({
       } catch (err) {
         setSuccess(null);
         setError(
-          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.'
+          'Anmeldung fehlgeschlagen. Bitte überprüfen Sie Ihre Eingaben.',
         );
       }
     }
   };
 
   return (
-    <div className="relative text-white animate-scaleIn w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 shadow-xl">
+    <div className="animate-scaleIn relative w-full max-w-md rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 p-12 text-white shadow-xl">
       <button
         type="button"
         aria-label="Modal schließen"
@@ -84,7 +106,7 @@ export default function LoginForm({
               />
             </svg>
           </div>
-          
+
           <input
             type="text"
             id="username"
@@ -112,7 +134,7 @@ export default function LoginForm({
               />
             </svg>
           </div>
-          
+
           <input
             type={showPassword ? 'text' : 'password'}
             id="password"
@@ -175,7 +197,9 @@ export default function LoginForm({
           Login
         </button>
 
-        {success && <p className="text-center text-sm text-green-400">{success}</p>}
+        {success && (
+          <p className="text-center text-sm text-green-400">{success}</p>
+        )}
         {error && <p className="text-center text-sm text-red-400">{error}</p>}
 
         <p className="mt-6 text-center text-sm text-gray-300">
