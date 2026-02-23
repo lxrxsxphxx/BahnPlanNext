@@ -8,12 +8,42 @@ export interface LeasingModelDropdownProps {
   setSelectedModel: React.Dispatch<React.SetStateAction<Modell | null>>;
 }
 
+/**
+ * **LeasingModelDropdown**
+ * * Eine spezialisierte Dropdown-Komponente zur Auswahl von Leasing-Konditionen für Lokomotiven.
+ * * ### Funktionalitäten
+ * - **Interaktive Auswahl**: Öffnet eine Liste aller verfügbaren {@link Modell}-Optionen.
+ * - **Dynamische Tooltips**: Beim Hovern über eine Option erscheint ein seitliches Informationsfenster mit Details zu Raten, Zahlungszyklen und Kündigungsfristen.
+ * - **Zustandsanzeige**: Zeigt den Namen des aktuell gewählten Modells im Button-Label an.
+ * - **Z-Index Management**: Nutzt `z-10` und `z-20`, um sicherzustellen, dass das Dropdown und die Tooltips über anderen UI-Elementen schweben.
+ * * ### Interner Status (State)
+ * | State | Typ | Beschreibung |
+ * | :--- | :--- | :--- |
+ * | `isOpen` | `boolean` | Steuert, ob das Dropdown-Menü ausgeklappt ist. |
+ * | `hoveredIndex` | `number \| null` | Hält den Index der Option, über der sich der Mauszeiger befindet, um den passenden Tooltip anzuzeigen. |
+ * * ### UI-Struktur
+ * 1. **Trigger-Button**: Wechselt den `isOpen` Status.
+ * 2. **Info-Tooltip**: Erscheint rechts neben der Liste bei Hover.
+ * * @param props - Die Konfigurationsobjekte der Komponente.
+ * @returns Ein funktionales React-Element (Dropdown mit Tooltips).
+ * * @category Components
+ * @example
+ * ```tsx
+ * <LeasingModelDropdown
+ * modelle={leasingDaten}
+ * selectedModel={choice}
+ * setSelectedModel={setChoice}
+ * />
+ * ```
+ */
 export function LeasingModelDropdown({
   modelle,
   selectedModel,
   setSelectedModel,
 }: LeasingModelDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  /** Trackt die aktuell gehoverte Option für die Tooltip-Anzeige. @internal */
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
@@ -26,6 +56,7 @@ export function LeasingModelDropdown({
         {isOpen ? '\u25B2' : '\u25BC'}
       </button>
 
+      {/* Ausklappbare Liste */}
       {isOpen && (
         <div className="absolute top-full left-0 z-10 mt-2 w-56 rounded-md border border-gray-600 bg-gray-800 shadow-lg">
           {modelle.map((modell, index) => (

@@ -2,7 +2,12 @@
 .env
 /node_modules/
 
+# vite
+/.vite/
+
 # React Router
 /.react-router/
 /build/
 /coverage/
+
+/docs/

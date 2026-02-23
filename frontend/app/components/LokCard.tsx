@@ -12,6 +12,36 @@ export interface LokCardProps {
   lokInInventory: boolean;
 }
 
+/**
+ * **LokCard**
+ *
+ * Eine zentrale UI-Komponente zur Darstellung einer Lokomotive im Beschaffungssystem.
+ * Sie ermöglicht es Nutzern, Details einzusehen, Leasingmodelle zu wählen und den Leasingprozess zu starten.
+ *
+ * ### Funktionalitäten
+ * - **Visualisierung**: Zeigt Lok-Bild, Name und eine tabellarische Ansicht technischer Daten.
+ * - **Interaktives Leasing**: Integriert das {@link LeasingModelDropdown} zur Auswahl von Konditionen.
+ * - **Prozess-Steuerung**: Führt den `leaseLok` API-Call aus und validiert die Benutzereingabe.
+ * - **Erfolgsbestätigung**: Öffnet ein Feedback-Modal ({@link LokLeasedModal}) nach erfolgreichem Leasing.
+ *
+ * ### Logik & State
+ * - `selectedModel`: Speichert das vom Nutzer gewählte {@link Modell}.
+ * - `isLeasedModalOpen`: Steuert das Erfolgs-Overlay nach Abschluss der Transaktion.
+ * - `deliveryDate`: Berechnet das Lieferdatum (aktuelles Datum) für die Anzeige im Erfolgs-Modal.
+ *
+ * ### Workflow `handleLeasing`
+ * 1. Prüft, ob ein Modell ausgewählt wurde.
+ * 2. Ruft den asynchronen Service `leaseLok` auf.
+ * 3. Setzt das lokale Lieferdatum.
+ * 4. Öffnet das Bestätigungs-Modal bei Erfolg oder zeigt einen `alert` bei Fehlern.
+ *
+ * @param props - Die Komponenteneigenschaften.
+ * @category Components
+ * @example
+ * ```tsx
+ * <LokCard lok={lokData} />
+ * ```
+ */
 export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
   const [selectedModel, setSelectedModel] = useState<Modell | null>(null);
   const [isLeasedModalOpen, setIsLeasedModalOpen] = useState(false);

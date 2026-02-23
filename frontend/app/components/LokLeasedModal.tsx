@@ -8,6 +8,30 @@ interface LokLeasedModalProps {
   onViewVehicles?: () => void;
 }
 
+/**
+ * **LokLeasedModal**
+ * * Eine Feedback-Komponente, die dem Nutzer den erfolgreichen Abschluss eines Leasingvertrags bestätigt.
+ * * ### Funktionalitäten
+ * - **Erfolgsbestätigung**: Visuelle Rückmeldung durch ein grünes Checkmark-Icon und eine prägnante Überschrift.
+ * - **Zusammenfassung**: Anzeige der wichtigsten Vertrags- und Lieferdetails in einer strukturierten Box.
+ * - **Navigation**: Bietet zwei Handlungsoptionen – zurück zum Shop oder direkt zur eigenen Fahrzeugliste.
+ * - **Animation**: Nutzt die Tailwind-Klasse `animate-scaleIn` für ein sanftes Einblenden des Modals.
+ * * ### UI-Komponenten
+ * - **Header**: Icons und Erfolgsmeldung.
+ * - **Info-Box**: Unterteilt in "Lok-Informationen" und "Lieferinformationen" zur besseren Lesbarkeit.
+ * - **Action-Bar**: Buttons für die weitere User Journey.
+ * * @param props - Die Konfigurationseigenschaften des Modals.
+ * @category Components
+ * @example
+ * ```tsx
+ * <LokLeasedModal
+ * lokName="Siemens Vectron"
+ * statusText="Aktiv"
+ * deliveryDate="24.12.2024"
+ * onClose={() => setOpen(false)}
+ * />
+ * ```
+ */
 export default function LokLeasedModal({
   lokName,
   statusText,
