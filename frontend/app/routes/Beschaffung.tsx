@@ -35,15 +35,12 @@ export default function Beschaffung() {
   const categories = [
     { name: 'Wagen', path: '/beschaffung/wagen' },
     { name: 'Loks', path: '/beschaffung/loks' },
-    { name: 'Trassen', path: '/beschaffung/trassen' },
-    { name: 'Handel', path: '/beschaffung/handel' },
+    { name: 'Trassen', path: '/trassen' },
+    { name: 'Kredite', path: '/shop/kredite' },
   ];
 
   const inDelivery = {
-    loks: [
-      'Baureihe 101 - Elektrolokomotive',
-      'Baureihe 110 - Elektrolokomotive',
-    ],
+    loks: [],
     wagen: [] as string[],
   };
 
