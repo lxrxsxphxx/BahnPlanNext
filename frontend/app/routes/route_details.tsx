@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 type Stop = {
   seq: number;
@@ -35,20 +36,22 @@ type RouteDetail = {
   stops: Stop[];
 };
 
-type Props = {
-  routeUuid: string;
-};
+const RouteDetailView: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
 
-const RouteDetailView: React.FC<Props> = ({ routeUuid = "9dc6cdd5-6559-4a92-9ec3-d226a75e855d"
- }) => {
   const [route, setRoute] = useState<RouteDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!id) {
+      setError("Keine UUID in der URL gefunden");
+      setLoading(false);
+      return;
+    }
     const fetchRouteDetail = async () => {
       try {
-        const res = await fetch(`http://localhost:8000/trasse/${routeUuid}`);
+        const res = await fetch(`http://localhost:8000/trasse/${id}`);
         if (!res.ok) {
           throw new Error(`Fehler ${res.status}: ${res.statusText}`);
         }
@@ -61,7 +64,7 @@ const RouteDetailView: React.FC<Props> = ({ routeUuid = "9dc6cdd5-6559-4a92-9ec3
       }
     };
     fetchRouteDetail();
-  }, [routeUuid]);
+  }, [id]);
 
   if (loading) return <p  className="text-white">Lädt...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
