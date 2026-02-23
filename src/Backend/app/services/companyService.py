@@ -93,32 +93,30 @@ class CompanyService:
                 raise HTTPException(status_code=400, detail=ALREADY_HAS_COMPANY_MSG)
             raise HTTPException(status_code=400, detail=NAME_EXISTS_MSG)
 
-    def get_company_vehicles(self, company) -> List[Vehicle]:
+    @staticmethod
+    def get_company_vehicles(company: Company) -> List[Vehicle]:
         """
         gets the company by their name and returns all Vehicles as List or returns Error message
-        :param claims: companyName: Name of Company
+        :param company: Company-Obj
         :return: List[CompanyVehicleResponse]
         """
-        if company:
-            company_vehicles = []
-            for vehicle in company.vehicles:
-                company_vehicles.append(
-                    CompanyVehicleResponse(vehicle_number = vehicle.vehicle_number,
-                                           id = vehicle.id,
-                                           type_id = vehicle.type_id,
-                                           owner_company_id = company.id,
-                                           type = vehicle.type,
-                                           delivery_status = vehicle.delivery_status,
-                                           delivery_end_at = vehicle.delivery_end_at,
-                                           delivered_at=vehicle.delivered_at,
-                                           condition_percent = vehicle.condition_percent,
-                                           acquired_at = vehicle.acquired_at,
-                                           is_leased = vehicle.is_leased,
-                                           leasing_model = vehicle.leasing_model,
-                                           lease_start = vehicle.lease_start,
-                                           lease_annual_rate_percent = vehicle.lease_annual_rate_percent,
-                                           lease_weekly_rate_percent = vehicle.lease_weekly_rate_percent))
+        company_vehicles = []
+        for vehicle in company.vehicles:
+            company_vehicles.append(
+                CompanyVehicleResponse(vehicle_number = vehicle.vehicle_number,
+                                       id = vehicle.id,
+                                       type_id = vehicle.type_id,
+                                       owner_company_id = company.id,
+                                       type = vehicle.type,
+                                       delivery_status = vehicle.delivery_status,
+                                       delivery_end_at = vehicle.delivery_end_at,
+                                       delivered_at=vehicle.delivered_at,
+                                       condition_percent = vehicle.condition_percent,
+                                       acquired_at = vehicle.acquired_at,
+                                       is_leased = vehicle.is_leased,
+                                       leasing_model = vehicle.leasing_model,
+                                       lease_start = vehicle.lease_start,
+                                       lease_annual_rate_percent = vehicle.lease_annual_rate_percent,
+                                       lease_weekly_rate_percent = vehicle.lease_weekly_rate_percent))
 
-            return company_vehicles
-        else:
-            raise HTTPException(status_code=400, detail=CANNOT_FIND_COMPANY)
+        return company_vehicles
