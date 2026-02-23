@@ -41,6 +41,7 @@ const LINKS: LinkEntry[] = [
   },
   { to: '/shop', label: 'Shop', isParent: true, visibleOnFrontpage: true },
   { to: '/trassen', label: 'Trassen' },
+  { to: 'shop/kredite', label: 'Kredite', parentLink: 'Shop' },
   {
     to: '/betrieb',
     label: 'Betrieb',
@@ -62,14 +63,20 @@ const LINKS: LinkEntry[] = [
   {
     to: '/gesellschaftsbereich',
     label: 'Gesellschaftsbereich',
-    parentLink: 'Community',
+    isParent: true,
+    visibleOnFrontpage: true,
   },
+  { to: '/finanzen', label: 'Finanzen', parentLink: 'Gesellschaftsbereich' },
+  { to: '/gesellschaftsbereich/fahrzeuge', label: 'Meine Fahrzeuge', parentLink: 'Gesellschaftsbereich' },
+  { to: '/meine-fahrplaene', label: 'Meine Fahrpläne', parentLink: 'Gesellschaftsbereich' },
   { to: '/faq', label: 'FAQ', parentLink: 'Community' },
   { to: '/regeln', label: 'Regeln', visibleOnFrontpage: true },
 ];
 
 export interface NavbarProps {
-  isFrontPage?: boolean;
+  isLoggedIn?: boolean;
+  onLoginSuccess?: () => void;
+  onLogout?: () => void;
 }
 
 /** Sollte isFrontPage true sein (-> bei der Startseite/Landing Page), wird die Navbar als horizontale Leiste oben dargestellt
@@ -80,15 +87,18 @@ Sollte isFrontPage false sein, wird die Navbar als vertikale Seitenleiste links 
  * @param {{ isFrontPage?: boolean }} props - Die Eigenschaften der Komponente: ein optionaler Boolean-Wert, der angibt, ob die aktuelle Seite die Startseite ist.
  * @returns {JSX.Element} Die gerenderte Navbar-Komponente.
  */
-export default function Navbar({ isFrontPage = false }: NavbarProps) {
+export default function Navbar({
+  isLoggedIn = false,
+  onLoginSuccess,
+  onLogout,
+}: NavbarProps) {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true); // Platzhalter für den Anmeldestatus
 
   return (
     <>
-      {isFrontPage ? (
-        <nav className="w-screen bg-[#111821] py-3 text-white shadow">
+      {!isLoggedIn ? (
+        <nav className="w-screen bg-black py-3 text-white shadow">
           <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-15 py-3">
             <NavLink
               to="/"
@@ -116,7 +126,7 @@ export default function Navbar({ isFrontPage = false }: NavbarProps) {
                 ))}
               </ul>
             </div>
-            {!isUserLoggedIn ? (
+            {!isLoggedIn ? (
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setIsLoginModalOpen(true)}
@@ -134,7 +144,7 @@ export default function Navbar({ isFrontPage = false }: NavbarProps) {
               </div>
             ) : (
               <button
-                onClick={() => setIsUserLoggedIn(false)}
+                onClick={() => onLogout?.()}
                 className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
               >
                 Logout
@@ -159,7 +169,7 @@ export default function Navbar({ isFrontPage = false }: NavbarProps) {
                   />
                 </form>
               </div>
-              {!isUserLoggedIn ? (
+              {!isLoggedIn ? (
                 /* Anmelde + Registrieren Button */
                 <div className="flex items-center gap-3">
                   <button
@@ -178,7 +188,7 @@ export default function Navbar({ isFrontPage = false }: NavbarProps) {
                 </div>
               ) : (
                 <button
-                  onClick={() => setIsUserLoggedIn(false)}
+                  onClick={() => onLogout?.()}
                   className="rounded-md px-3 py-1 text-sm font-medium text-white/90 transition-colors hover:cursor-pointer hover:bg-white/10"
                 >
                   Logout
@@ -193,7 +203,13 @@ export default function Navbar({ isFrontPage = false }: NavbarProps) {
 
       {/* Login Modal */}
       <Modal open={isLoginModalOpen} onClose={() => setIsLoginModalOpen(false)}>
-        <LoginForm onClose={() => setIsLoginModalOpen(false)} />
+        <LoginForm
+          onClose={() => setIsLoginModalOpen(false)}
+          onSuccess={() => {
+            onLoginSuccess?.();
+            setIsLoginModalOpen(false);
+          }}
+        />
       </Modal>
 
       {/* Register Modal */}
