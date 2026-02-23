@@ -29,3 +29,7 @@ class CompanyVehicleOut(BaseModel):
     depot_category: Optional[int] = None
     max_traction_units: Optional[int] = None
     compatible_with: Optional[str] = None
+    # Delivery fields
+    delivery_status: Optional[str] = None
+    delivery_end_at: Optional[datetime] = None
+    delivered_at: Optional[datetime] = None

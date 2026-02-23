@@ -135,18 +135,20 @@ export default function LokCard({ lok, lokInInventory = false }: LokCardProps) {
                   )}
                 </div>
               ) : lokInInventory ? (
-                <button
-                  className={
-                    `text-md mt-[40%] ml-[10vw] rounded-full px-6 py-3 font-semibold ` +
-                    (lok.action.label === 'Einsatzbereit'
-                      ? ' border border-green-500 bg-black/40 text-green-400'
-                      : lok.action.label === 'In Lieferung'
-                        ? ' border border-red-500 bg-black/40 text-red-400'
-                        : ' border border-gray-500 bg-black/40 text-gray-300')
-                  }
-                >
-                  {lok.action.label}
-                </button>
+                <div className="flex">
+                  <button
+                    className={
+                      `text-md mt-[40%] ml-auto block rounded-full px-6 py-3 font-semibold ` +
+                      (lok.action.label === 'Einsatzbereit'
+                        ? ' border border-green-500 bg-black/40 text-green-400'
+                        : lok.action.label === 'In Lieferung'
+                          ? ' border border-red-500 bg-black/40 text-red-400'
+                          : ' border border-gray-500 bg-black/40 text-gray-300')
+                    }
+                  >
+                    {lok.action.label}
+                  </button>
+                </div>
               ) : (
                 <button className="rounded-md bg-gray-700 px-4 py-2 text-sm font-medium hover:bg-gray-600">
                   {lok.action.label}

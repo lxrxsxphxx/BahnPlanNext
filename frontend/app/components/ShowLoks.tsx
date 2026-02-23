@@ -34,6 +34,28 @@ export default function ShowLoks({ loks, error }: Props) {
       const suffix = counts[key] > 1 ? ` (${seen[key]})` : '';
       const traction = lok.traction_type || 'Unbekannt';
 
+      const deliveryStatus = (lok as any).delivery_status as string | undefined;
+      const deliveryEnd = (lok as any).delivery_end_at_date as Date | null | undefined;
+      const deliveredAt = (lok as any).delivered_at_date as Date | null | undefined;
+
+      const deliverySpecLabel = (() => {
+        if (deliveryStatus === 'in_delivery') {
+          const eta = deliveryEnd ? ` (vorauss. ${deliveryEnd.toLocaleDateString('de-DE')})` : '';
+          return `In Lieferung${eta}`;
+        }
+        if (deliveredAt) {
+          return `Eingetroffen am ${deliveredAt.toLocaleDateString('de-DE')}`;
+        }
+        return lok.is_leased ? 'Einsatzbereit' : 'Verfügbar';
+      })();
+
+      // Short action label for the button (no ETA/time)
+      const actionLabel = (() => {
+        if (deliveryStatus === 'in_delivery') return 'In Lieferung';
+        if (deliveredAt) return 'Eingetroffen';
+        return lok.is_leased ? 'Einsatzbereit' : 'Verfügbar';
+      })();
+
       return {
         id: lok.id,
         name: `Baureihe ${key} - ${traction}${suffix}`,
@@ -91,10 +113,14 @@ export default function ShowLoks({ loks, error }: Props) {
                 ? 'Unbekannt'
                 : `${lok.energy_cost_base.toFixed(2)} €/h`,
           },
+          {
+            label: 'Lieferstatus',
+            value: deliverySpecLabel,
+          },
         ],
         action: {
           type: 'kauf',
-          label: lok.is_leased ? 'Einsatzbereit' : 'In Lieferung',
+          label: actionLabel,
         },
         modelle: [],
       } as TransformedLok;
