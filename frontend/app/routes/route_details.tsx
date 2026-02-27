@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useLoaderData } from "react-router";
 
 type Stop = {
   seq: number;
@@ -36,6 +35,18 @@ type RouteDetail = {
   stops: Stop[];
 };
 
+export const clientLoader = async ({ params }: { params: any }) => {
+  const { id } = params;
+  if (!id) throw new Response("Keine UUID in der URL gefunden", { status: 400 });
+
+  const res = await fetch(`http://localhost:8000/trasse/${id}`);
+  if (!res.ok) throw new Response(`Fehler ${res.status}: ${res.statusText}`, { status: res.status });
+
+  const data: RouteDetail = await res.json();
+  return data;
+};
+
+
 const renderVehicle = (name: string, allowed: boolean, colorClass: string) => (
     <div className={`flex items-center gap-2 ${colorClass}`}>
     <span>{allowed ? "✔" : "✕"}</span>
@@ -44,39 +55,8 @@ const renderVehicle = (name: string, allowed: boolean, colorClass: string) => (
   );
 
 const RouteDetailView: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-
-  const [route, setRoute] = useState<RouteDetail | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!id) {
-      setError("Keine UUID in der URL gefunden");
-      setLoading(false);
-      return;
-    }
-    const fetchRouteDetail = async () => {
-      try {
-        const res = await fetch(`http://localhost:8000/trasse/${id}`);
-        if (!res.ok) {
-          throw new Error(`Fehler ${res.status}: ${res.statusText}`);
-        }
-        const data: RouteDetail = await res.json();
-        setRoute(data);
-      } catch (err: any) {
-        setError(err.message || "Fehler beim Laden der Trasse");
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchRouteDetail();
-  }, [id]);
-
-  if (loading) return <p  className="text-white">Lädt...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
-  if (!route) return <p className="text-white">Keine Trasse gefunden</p>;
-
+  
+  const route = useLoaderData<typeof clientLoader>();
   const { fahrzeugtypen } = route;
 
     return (
