@@ -18,6 +18,38 @@ export type Props = {
   error?: string;
 };
 
+/**
+ * **ShowLoks**
+ * * Diese Komponente dient als zentrale Anzeige-Logik für den Lokomotiv eines Spielers. 
+ * Sie fungiert als "Adapter", der rohe API-Daten (`CompanyLok`) in ein benutzerfreundliches 
+ * Anzeige-Format (`TransformedLok`) für die `LokCard` umwandelt.
+ *
+ * ### Hauptfunktionen
+ * - **Daten-Veredelung**: Berechnet formatierte Strings für Währungen (€), Geschwindigkeiten (km/h) und Leistungen (kW).
+ * - **Auto-Indexierung**: Erkennt Duplikate desselben Typs und fügt automatisch eine Nummerierung hinzu (z.B. "Baureihe 101 (1)", "Baureihe 101 (2)").
+ * - **Einsatz-Checks**: Bereitet komplexe Texte für die maximale Wagenanzahl und Tonnage-Kapazität auf.
+ * - **Leerzustand-Handling**: Informiert den Nutzer proaktiv, wenn noch keine Fahrzeuge vorhanden sind.
+ *
+ * ### Logik & Performance
+ * - **Zwei-Phasen-Algorithmus**:
+ * 1. *Phase 1*: Zählt alle Vorkommen eines Typs in `counts`.
+ * 2. *Phase 2*: Transformiert jedes Element und nutzt den `seen`-Counter für die korrekte Suffix-Vergabe.
+ * - **Performance-Optimierung**: Dank `useMemo` wird die komplexe Schleifen-Logik nur dann ausgeführt, wenn sich das `loks`-Array tatsächlich ändert (z.B. nach einem Kauf).
+ * - **Fehlertoleranz**: Behandelt `undefined` Werte und liefert standardmäßig "Unbekannt", um UI-Abstürze zu verhindern.
+ *
+ * @param props - Die Properties der Komponente.
+ * @param props.loks - Die Liste der Lokomotiven vom Server (optional).
+ * @param props.error - Eine Fehlermeldung, falls der Datenabruf fehlgeschlagen ist.
+ * * @category Display-Components
+ * @example
+ * ```tsx
+ * <ShowLoks 
+ * loks={data.myInventory} 
+ * error={apiError} 
+ * />
+ * ```
+ */
+
 export default function ShowLoks({ loks, error }: Props) {
   const transformedLoks = useMemo(() => {
     const items = loks || [];

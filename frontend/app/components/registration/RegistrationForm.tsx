@@ -46,6 +46,41 @@ export function validate(
   return Object.keys(newErrors).length === 0;
 }
 
+/**
+ * **RegistrationForm**
+ *
+ * Eine Formular-Komponente für die Benutzerregistrierung mit integrierter Validierung
+ * und Statusverwaltung.
+ *
+ * ### Funktionalitäten
+ * - **Formular-Validierung**: Überprüft Benutzername, E-Mail und Passwort (Länge, Format, Übereinstimmung).
+ * - **Fehlerbehandlung**: Zeigt detaillierte Fehlermeldungen für jedes Eingabefeld an, wenn die Daten ungültig sind.
+ * - **Status-Management**: Verwaltet interne States für alle Input-Felder und das Fehler-Objekt.
+ * - **Auto-Reset**: Setzt alle Eingabefelder automatisch zurück, wenn der `resetTrigger` aktiv ist (z. B. beim Schließen des Modals).
+ * - **Barrierefreiheit (A11y)**: Nutzt semantische HTML-Tags (`label`, `aria-label`) und unterdrückt die Standard-Browser-Validierung via `noValidate`.
+ *
+ * ### Zustände (States)
+ * - `name`, `email`, `password`, `passwordWied`: Speichern die aktuellen Benutzereingaben.
+ * - `errors`: Hält die Validierungsfehler vom Typ `RegistrationErrors`.
+ *
+ * ### Logik & Effekte
+ * - **Validierungs-Logik**: Die Funktion `validate` nutzt Regex für E-Mails und prüft Passwort-Mindestlängen (10-128 Zeichen).
+ * - **Reset-Effekt**: Ein `useEffect` überwacht den `resetTrigger`, um das Formular beim Schließen der UI zu leeren.
+ * - **Submit-Handler**: Verhindert den Standard-Reload, führt die Validierung aus und schließt bei Erfolg das Formular.
+ *
+ * @param props - Die Eigenschaften der Komponente.
+ * @param props.onClose - Callback-Funktion, die nach erfolgreicher Registrierung oder beim Abbrechen aufgerufen wird.
+ * @param props.resetTrigger - Boolean, der signalisiert, wann das Formular zurückgesetzt werden soll.
+ * @category Components
+ * @example
+ * ```tsx
+ * <RegistrationForm 
+ * onClose={() => setOpen(false)} 
+ * resetTrigger={!open} 
+ * />
+ * ```
+ */
+
 export default function RegistrationForm({
   onClose,
   resetTrigger,

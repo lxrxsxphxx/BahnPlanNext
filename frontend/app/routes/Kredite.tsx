@@ -40,6 +40,42 @@ const KREDITE = [
   },
 ];
 
+/**
+ * **Kredite**
+ * Diese Komponente stellt das Finanzierungs-Interface des Spiels dar. Spieler können hier 
+ * verschiedene Kreditpakete einsehen und auswählen, um ihr Kapital zu erhöhen.
+ * Sie kombiniert Live-Daten des Unternehmens mit statischen Kredit-Angeboten.
+ *
+ * ### Aktueller Status (Integration)
+ * - **Read-Only (Live)**: Das aktuelle Kapital (`cashBalance`) wird via `clientLoader` 
+ * echtzeitnah aus dem Backend geladen (`fetchCompanyInfo`).
+ * - **Mock-Daten (Statisch)**: Die Kreditangebote (`KREDITE`) sind fest kodiert. Es erfolgt 
+ * momentan **keine** API-Transaktion beim Klick auf "Auswählen".
+ * - **Fehlende Logik**: Die Verrechnung des Kreditbetrags mit dem Kontostand sowie die 
+ * Zinsberechnung (Zinsen/Tilgung) sind noch nicht implementiert (Backend-Task).
+ *
+ * ### Funktionalitäten
+ * - **Kapital-Display**: Anzeige des liquiden Kapitals der Gesellschaft, formatiert als 
+ * Währung (Euro, de-DE).
+ * - **Selektions-Logik**: Ein lokaler State (`selectedId`) ermöglicht das visuelle 
+ * Hervorheben eines Kreditpakets zur Vorbereitung eines zukünftigen "Kredit-Abschluss"-Flows.
+ * - **Informations-Design**: Detaillierte Darstellung von wöchentlichen vs. jährlichen 
+ * Zinssätzen zur Unterstützung der Spieler-Entscheidung.
+ *
+ * ### Geplante Erweiterungen
+ * 1. Implementierung einer `action`-Funktion für den POST-Request zum Backend.
+ * 2. Dynamische Berechnung der Zinslast basierend auf dem aktuellen Firmen-Rating.
+ * 3. Validierung: Deaktivierung von Krediten, die das Kreditlimit der Firma überschreiten.
+ *
+ * @category Pages / Finance
+ * @status In-Progress / UI-Only
+ * @example
+ * ```tsx
+ * // Der Loader stellt sicher, dass das Kapital bekannt ist, bevor die Seite lädt.
+ * <Route path="kredite" element={<Kredite />} loader={clientLoader} />
+ * ```
+ */
+
 export default function Kredite() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const { company, error } = useLoaderData<typeof clientLoader>();

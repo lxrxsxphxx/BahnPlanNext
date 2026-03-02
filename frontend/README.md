@@ -109,6 +109,52 @@ docker build -t bahnplan-next .
 docker run -p 3000:3000 bahnplan-next
 ```
 
+## Dokumentation
+
+Das Projekt verwendet TypeDoc, um HTML-Dokumentation aus dem TypeScript-Code zu generieren.
+
+### Dokumentation erstellen
+
+Um die Docs zu erstellen, führe aus:
+
+```bash
+pnpm run build:docs
+```
+
+Die Dokumentation wird im Ordner docs/ erzeugt. Du kannst die Datei öffnen:
+
+```bash
+docs/index.html
+```
+
+im Browser, um die API-Dokumentation anzusehen.
+
+### Fehlerbehebung
+
+Wenn folgender Fehler erscheint:
+
+typedoc: command not found
+
+bedeutet dies, dass typedoc in deinem lokalen Projekt noch nicht installiert ist. Dies kann passieren, wenn:
+
+* Du das Repo geklont hast, bevor typedoc hinzugefügt wurde, oder
+
+* Du nach dem Pull eines Branches, der typedoc hinzufügt, nicht pnpm install ausgeführt hast.
+
+Lösung:
+
+Installiere alle Abhängigkeiten:
+
+```bash
+pnpm install
+```
+
+Danach erneut ausführen:
+
+```bash
+pnpm run build:docs
+```
+
 ### DIY Deployment
 
 If you're familiar with deploying Node applications, the built-in app server is production-ready.
