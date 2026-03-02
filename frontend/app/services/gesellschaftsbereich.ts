@@ -69,13 +69,48 @@ export async function fetchCompaniesLoks(): Promise<CompanyLok[]> {
  * @async
  * @returns {Promise<CompanyInfo | null>} Die Firmendaten oder `null`, falls keine Gesellschaft existiert.
  */
-export async function fetchCompanyInfo(): Promise<CompanyInfo> {
+export async function fetchCompanyInfo(): Promise<CompanyInfo | null> {
   const response = await apiFetch(API_ENDPOINTS.myCompany);
   if (response.status === 401) {
     throw new Error('Unauthorisiert, bitte zuerst einloggen');
+  } else if (response.status === 404) {
+    return null; // keine Gesellschaft
   } else if (!response.ok) {
     throw new Error('Fehler beim Laden der Unternehmensinformationen');
   }
   console.debug('API-Antwort für Unternehmensinformationen:', response);
   return (await response.json()) as Promise<CompanyInfo>;
+}
+
+export async function fetchCompanyInfo2(): Promise<CompanyInfo | null> {
+  const response = await apiFetch(API_ENDPOINTS.myCompany2);
+  if (response.status === 401) {
+    throw new Error('Unauthorisiert, bitte zuerst einloggen');
+  } else if (response.status === 404) {
+    return null; // keine Gesellschaft
+  } else if (!response.ok) {
+    throw new Error('Fehler beim Laden der Unternehmensinformationen');
+  }
+  console.debug('API-Antwort für Unternehmensinformationen:', response);
+  //return (await response.json()) as Promise<CompanyInfo>;
+  return await response.json();
+}
+
+export async function createCompany(name: string) {
+  /*const response = await apiFetch(`${API_ENDPOINTS.myCompany}`, {*/
+  const response = await apiFetch(API_ENDPOINTS.createCompany, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  if (response.status == 400) {
+    throw new Error('Du besitzt bereits eine Gesellschaft');
+  } else if (!response.ok) {
+    throw new Error('Erstellung der Gesellschaft fehlgeschlagen');
+  }
+
+  return response.json();
 }
