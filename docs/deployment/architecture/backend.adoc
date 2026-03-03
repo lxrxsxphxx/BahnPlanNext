@@ -74,6 +74,7 @@ Startup:
 - Falls `SEED_DEMO_DATA=true`: seed_demo_data(engine)
 
 Shutdown:
+
 - Ausgabe "Server stopping..."
 
 Registrierte Router:
@@ -264,7 +265,8 @@ User <--> Company (Many-to-Many über CompanyUserLink)
 === userSchema.py
 
 Klassen:
-- UserSchema(BaseUser)
+
+  - UserSchema(BaseUser)
   - password: str
 
 === Registrierung (UserService)
@@ -382,6 +384,7 @@ Ablauf Leasing:
 9. commit()
 
 Transaktionssicherheit:
+
 - rollback() bei SQLAlchemyError
 
 === Lieferlogik
