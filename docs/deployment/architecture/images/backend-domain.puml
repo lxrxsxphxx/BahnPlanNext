@@ -1,0 +1,231 @@
+@startuml
+hide methods
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+
+' ========= Enums =========
+enum Roles {
+  user
+  admin
+}
+enum Difficulty {
+  easy
+  medium
+  hard
+}
+enum VehicleDeliveryStatus {
+  in_delivery
+  ready
+}
+enum VehicleKind {
+  locomotive
+  multiple_unit
+  wagon
+}
+enum WorkshopType {
+  bw
+  aw
+}
+
+' ========= Entities =========
+class User {
+  id: int
+  email: EmailStr
+  username: str
+  hashed_password: str
+  is_active: bool
+  role: Roles
+}
+
+class Company {
+  id: int
+  name: str
+  capital: int
+  created_at: datetime
+  last_active_at: datetime
+  parent_company_id: int?
+}
+
+class CompanyUserLink {
+  user_id: int
+  company_id: int
+  is_owner: bool
+  joined_at: datetime
+}
+
+class SubsidiaryDetails {
+  company_id: int
+  internal_code: str?
+  risk_category: str?
+  notes: str?
+}
+
+class Loan {
+  id: int
+  company_id: int
+  principal: int
+  remaining_principal: int
+  interest_rate_weekly: float
+  created_at: datetime
+  due_date: date?
+  is_overdraft: bool
+}
+
+class VehicleType {
+  id: int
+  name: str
+  kind: VehicleKind
+  new_price: int
+  km_cost: float
+  energy_cost_base: float
+}
+
+class VehicleTypeDetails {
+  vehicle_type_id: int
+  traction_type: str?
+  suitable_passenger_max_wagons: int?
+  suitable_freight_max_tons: int?
+  countries_allowed: str?
+  power_kw: int?
+  max_speed_kmh: int?
+  depot_category: int?
+  max_traction_units: int?
+  image_key: str?
+  total_stock: int?
+  available_stock: int?
+}
+
+class VehicleTypeCouplingLink {
+  left_type_id: int
+  right_type_id: int
+}
+
+class Vehicle {
+  id: int
+  vehicle_number: str
+  type_id: int
+  owner_company_id: int
+  delivery_status: VehicleDeliveryStatus
+  delivery_end_at: datetime?
+  delivered_at: datetime?
+  condition_percent: float
+  acquired_at: datetime
+  is_leased: bool
+  leasing_model: int?
+  lease_start: date?
+  lease_annual_rate_percent: float?
+  lease_weekly_rate_percent: float?
+}
+
+class Station {
+  id: int
+  name: str
+}
+
+class Route {
+  uuid: UUID
+  name: str
+  start_station_id: int
+  end_station_id: int
+  distance_km: float
+  track_type: str
+  min_service_percent: int
+  min_trips_per_week_dir: int
+  service_speed_kmh: int
+  max_train_length_wagons: int
+  capacity_recommendation_seats: int
+  cost_per_trip_eur: float
+  allow_ir: bool
+  allow_ic: bool
+  allow_ice: bool
+  special_notes: str?
+}
+
+class RouteStop {
+  id: int
+  route_id: UUID
+  station_id: int
+  seq: int
+  km: float
+  arr_a: time?
+  dep_a: time?
+  arr_b: time?
+  dep_b: time?
+}
+
+class Tender {
+  id: int
+  name: str
+  description: str?
+  difficulty: Difficulty
+  route_id: UUID
+  contract_start_monday: date?
+  contract_duration_weeks: int
+  takt_description: str?
+  service_time_description: str?
+}
+
+class TenderBid {
+  id: int
+  tender_id: int
+  company_id: int
+  submitted_at: datetime
+  weekly_subsidy_request: int
+  schedule_file_path: str?
+}
+
+class Contract {
+  id: int
+  tender_id: int
+  company_id: int
+  rank: int
+  subsidy_percentage: float
+  subsidy_weekly_amount: int
+  valid_from: date
+  valid_until: date
+  auto_renew: bool
+  canceled_at: datetime?
+  cancellation_effective_date: date?
+}
+
+class Workshop {
+  id: int
+  station_id: int
+  owner_company_id: int
+  type: WorkshopType
+  stands: int
+  built_at: datetime
+}
+
+' ========= Relations =========
+User "1" -- "0..*" CompanyUserLink
+Company "1" -- "0..*" CompanyUserLink
+User "0..*" -- "0..*" Company : members
+
+Company "1" -- "0..*" Vehicle
+Company "1" -- "0..*" Loan
+Company "1" -- "0..*" Contract
+
+Company "1" -- "0..1" SubsidiaryDetails
+Company "0..1" -- "0..*" Company : parent/subsidiaries
+
+Vehicle "*" --> "1" VehicleType
+VehicleType "1" -- "0..1" VehicleTypeDetails
+
+VehicleType "1" -- "0..*" VehicleTypeCouplingLink : left
+VehicleTypeCouplingLink "*" --> "1" VehicleType : right
+
+Route "*" --> "1" Station : start
+Route "*" --> "1" Station : end
+Route "1" -- "0..*" RouteStop
+RouteStop "*" --> "1" Station : stop
+Route "1" -- "0..*" Tender
+
+Tender "1" -- "0..*" TenderBid
+Tender "1" -- "0..*" Contract
+TenderBid "*" --> "1" Company
+
+Workshop "*" --> "1" Station
+Workshop "*" --> "1" Company
+
+@enduml
