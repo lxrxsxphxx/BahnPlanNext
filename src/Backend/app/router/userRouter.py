@@ -26,7 +26,7 @@ def login(
     response: Response,
     form_data: OAuth2PasswordRequestForm = Depends(),
     service: UserService = Depends(get_user_service)):
-    
+
     result = service.login(form_data)
     token = result["access_token"]
 
@@ -87,6 +87,6 @@ def check_my_company(
     claims: dict = Depends(auth.check_active),
     service: UserService = Depends(get_user_service),
 ):
-    return service.is_user_in_company_by_username(claims["username"])  
+    return service.is_user_in_company_by_username(claims["username"])
 
 
