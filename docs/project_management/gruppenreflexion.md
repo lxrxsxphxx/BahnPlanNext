@@ -64,3 +64,57 @@ Das interdisziplinäre Potenzial entfaltete sich daher vor allem in Detailfragen
 Dennoch führten die unterschiedlichen Denkweisen zu wertvollen Rückfragen und Präzisierungen.
 Anforderungen wurden nicht einfach übernommen, sondern hinterfragt und aus verschiedenen Perspektiven betrachtet.
 Auch wenn nicht jede Entscheidung neu ausgehandelt wurde, trug die fachliche Breite des Teams zur Qualitätssicherung und zur Absicherung technischer wie gestalterischer Aspekte bei.
+
+### Herausforderungen durch ungleiche Wissensverteilung
+
+Neben den genannten Vorteilen brachte die ungleiche Wissensverteilung im Team auch spürbare Herausforderungen mit sich. 
+Vor allem die unterschiedlichen Erfahrungsstände im Umgang mit den eingesetzten Technologien und methodischen Ansätzen machten sich früh bemerkbar.
+
+Für einige bedeutete das Projekt einen erheblichen Einarbeitungsaufwand, da sowohl bestimmte Technologien als auch architektonische Konzepte neu waren.
+Besonders deutlich wurde das bei der Diskussion zur Systemarchitektur.
+Während manche Entscheidungen schnell einordnen und bewerten konnten, benötigten andere mehr Zeit, um die Hintergründe vollständig zu verstehen.
+Das führte teilweise zu langwierigen Entscheidungsprozessen und gelegentlicher Unsicherheit in der gemeinsamen Entscheidung.
+
+Auch das Arbeiten mit Scrum war nicht für alle selbstverständlich.
+Einige hatten bereits Erfahrung mit agilen Projekten, für andere war das iterative Vorgehen neu.
+Planung, Selbstorganisation und klare Verantwortungsübernahme mussten daher erst eingeübt werden.
+Das erforderte zusätzliche Abstimmung und sorgte gerade zu Beginn für Orientierungsschwierigkeiten.
+
+Im Projektalltag zeigte sich das Wissensgefälle vor allem in unterschiedlich hohen Arbeitsgeschwindigkeiten.
+Aufgaben konnten nicht immer parallel oder gleichmäßig bearbeitet werden.
+Dadurch entstanden Abhängigkeiten und einzelne Arbeitspakete wirkten zeitweise als Blocker.
+Diese Verzögerungen waren jedoch weniger eine Frage des Engagements, sondern oft vielmehr Ausdruck unterschiedlicher Lernkurven und Erfahrungsstände.
+
+Der Abstimmungsbedarf war entsprechend hoch. 
+Zwar versuchten wir, diesen in regelmäßigen Meetings, insbesondere in den Weekly-Terminen aufzufangen doch stießen wir dabei auch an organisatorische Grenzen. 
+Schwankende Anwesenheit und nicht immer vollständig weitergegebene Informationen erschwerten eine kontinuierliche Synchronisation. 
+Spätestens hier wurde deutlich, dass Wissensunterschiede in größeren Teams nicht nur fachliche, sondern auch organisatorische Auswirkungen haben.
+
+
+## Methodisches Vorgehen: Scrum
+
+### Entscheidung für Scrum
+
+### Umsetzung der Scrum-Elemente
+
+### Herausforderungen Teamgröße
+
+### Rollenverständnis
+
+
+## Kommunikation und Zusammenarbeit
+
+### Interne Kommunikationsstrukturen
+
+### Transparenz und Informationsfluss
+
+### Konfliktkultur
+
+### Verantwortungsübernahme
+
+
+## Entscheidungsprozesse und Gruppen­dynamik
+
+### Entscheidungsfindung
+
+### Arbeitsbelastung und Engagement
