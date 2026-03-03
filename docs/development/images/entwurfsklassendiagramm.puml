@@ -1,0 +1,286 @@
+@startuml
+title BahnPlan – Entwurfsklassendiagramm (Router/Service/Models)
+
+hide circle
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+' =========================
+' Routers
+' =========================
+package "router" {
+  class RouteRouter <<Router>>
+  class TenderRouter <<Router>>
+  class UserRouter <<Router>>
+  class ShopRouter <<Router>>
+  class CompanyRouter <<Router>>
+  class VehicleRouter <<Router>>
+}
+
+' =========================
+' Services
+' =========================
+package "services" {
+  class RouteService <<Service>>
+  class TenderService <<Service>>
+  class UserService <<Service>>
+  class ShopService <<Service>>
+  class CompanyService <<Service>>
+  class VehicleService <<Service>>
+}
+
+' Router -> Service (DI via Depends)
+RouteRouter ..> RouteService : uses
+TenderRouter ..> TenderService : uses
+UserRouter ..> UserService : uses
+ShopRouter ..> ShopService : uses
+ShopRouter ..> UserService : uses
+CompanyRouter ..> CompanyService : uses
+CompanyRouter ..> VehicleService : uses
+CompanyRouter ..> UserService : uses
+VehicleRouter ..> VehicleService : uses
+
+' =========================
+' Models
+' =========================
+package "models" {
+
+  class User <<Model>> {
+    +id: int
+    +email: EmailStr
+    +username: str
+    +is_active: bool
+    +role: Roles
+    +hashed_password: str
+  }
+
+  class Company <<Model>> {
+    +id: int
+    +name: str
+    +capital: int
+    +created_at: datetime
+    +last_active_at: datetime
+    +parent_company_id: int?
+  }
+
+  class CompanyUserLink <<Model>> {
+    +user_id: int
+    +company_id: int
+    +is_owner: bool
+    +joined_at: datetime
+  }
+
+  class SubsidiaryDetails <<Model>> {
+    +company_id: int
+    +internal_code: str?
+    +risk_category: str?
+    +notes: str?
+  }
+
+  class Loan <<Model>> {
+    +id: int
+    +company_id: int
+    +principal: int
+    +remaining_principal: int
+    +interest_rate_weekly: float
+    +created_at: datetime
+    +due_date: date?
+    +is_overdraft: bool
+  }
+
+  class VehicleType <<Model>> {
+    +id: int
+    +name: str
+    +kind: VehicleKind
+    +new_price: int
+    +km_cost: float
+    +energy_cost_base: float
+  }
+
+  class VehicleTypeDetails <<Model>> {
+    +vehicle_type_id: int
+    +traction_type: str?
+    +max_speed_kmh: int?
+    +image_key: str?
+    +total_stock: int?
+    +available_stock: int?
+  }
+
+  class Vehicle <<Model>> {
+    +id: int
+    +vehicle_number: str
+    +type_id: int
+    +owner_company_id: int
+    +delivery_status: VehicleDeliveryStatus
+    +delivery_end_at: datetime?
+    +delivered_at: datetime?
+    +condition_percent: float
+    +acquired_at: datetime
+    +is_leased: bool
+    +leasing_model: int?
+    +lease_start: date?
+    +lease_annual_rate_percent: float?
+    +lease_weekly_rate_percent: float?
+  }
+
+  class VehicleTypeCouplingLink <<Model>> {
+    +left_type_id: int
+    +right_type_id: int
+  }
+
+  class Station <<Model>> {
+    +id: int
+    +name: str
+  }
+
+  class Route <<Model>> {
+    +uuid: UUID
+    +name: str
+    +start_station_id: int
+    +end_station_id: int
+    +distance_km: float
+    +allow_ir: bool
+    +allow_ic: bool
+    +allow_ice: bool
+  }
+
+  class RouteStop <<Model>> {
+    +id: int
+    +route_id: UUID
+    +station_id: int
+    +seq: int
+    +km: float
+    +arr_a: time?
+    +dep_a: time?
+    +arr_b: time?
+    +dep_b: time?
+  }
+
+  class Tender <<Model>> {
+    +id: int
+    +name: str
+    +description: str?
+    +difficulty: Difficulty
+    +route_id: UUID
+    +contract_start_monday: date?
+    +contract_duration_weeks: int
+  }
+
+  class TenderBid <<Model>> {
+    +id: int
+    +tender_id: int
+    +company_id: int
+    +submitted_at: datetime
+    +weekly_subsidy_request: int
+    +schedule_file_path: str?
+  }
+
+  class Contract <<Model>> {
+    +id: int
+    +tender_id: int
+    +company_id: int
+    +rank: int
+    +subsidy_percentage: float
+    +subsidy_weekly_amount: int
+    +valid_from: date
+    +valid_until: date
+    +auto_renew: bool
+    +canceled_at: datetime?
+    +cancellation_effective_date: date?
+  }
+
+  class Workshop <<Model>> {
+    +id: int
+    +station_id: int
+    +owner_company_id: int
+    +type: WorkshopType
+    +stands: int
+    +built_at: datetime
+  }
+}
+
+' =========================
+' Service -> Models (Queries/Business Logic)
+' =========================
+RouteService ..> Route
+RouteService ..> Station
+RouteService ..> RouteStop
+
+TenderService ..> Tender
+TenderService ..> Contract
+TenderService ..> Route
+
+UserService ..> User
+UserService ..> Company
+
+CompanyService ..> Company
+CompanyService ..> CompanyUserLink
+CompanyService ..> User
+CompanyService ..> Vehicle
+
+ShopService ..> VehicleType
+ShopService ..> VehicleTypeDetails
+ShopService ..> VehicleTypeCouplingLink
+ShopService ..> Vehicle
+ShopService ..> Company
+
+VehicleService ..> Vehicle
+VehicleService ..> VehicleType
+VehicleService ..> VehicleTypeDetails
+
+' =========================
+' Model Relations (SQLModel Relationships)
+' =========================
+
+' User <-> Company via Link (M:N)
+User "0..*" -- "0..*" Company : companies/members
+CompanyUserLink "0..*" -- "1" User
+CompanyUserLink "0..*" -- "1" Company
+
+' Company self-relation (parent/subsidiary)
+Company "0..1" <-- "0..*" Company : parent/subsidiaries
+
+' Company 1:1 SubsidiaryDetails
+Company "1" -- "0..1" SubsidiaryDetails : subsidiary_details
+
+' Company 1:N Loan
+Company "1" -- "0..*" Loan : loans
+
+' Company 1:N Vehicle (owner)
+Company "1" -- "0..*" Vehicle : vehicles
+
+' VehicleType 1:N Vehicle
+VehicleType "1" -- "0..*" Vehicle : type
+
+' VehicleType 1:1 Details
+VehicleType "1" -- "0..1" VehicleTypeDetails : details
+
+' VehicleTypeCouplingLink relates VehicleType to VehicleType (compatibility)
+VehicleTypeCouplingLink "0..*" -- "1" VehicleType : left_type
+VehicleTypeCouplingLink "0..*" -- "1" VehicleType : right_type
+
+' Station <-> Route (start/end)
+Station "1" <-- "0..*" Route : start_station
+Station "1" <-- "0..*" Route : end_station
+
+' Route 1:N Tender
+Route "1" -- "0..*" Tender : tenders
+
+' Tender 1:N TenderBid
+Tender "1" -- "0..*" TenderBid : bids
+Company "1" -- "0..*" TenderBid : bids (company)
+
+' Tender 1:N Contract
+Tender "1" -- "0..*" Contract : contracts
+Company "1" -- "0..*" Contract : contracts
+
+' RouteStop association between Route and Station
+Route "1" -- "0..*" RouteStop : stops
+Station "1" -- "0..*" RouteStop : stop_at
+
+' Station 1:N Workshop
+Station "1" -- "0..*" Workshop : workshops
+Company "1" -- "0..*" Workshop : owns
+
+@enduml
