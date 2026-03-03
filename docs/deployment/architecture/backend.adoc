@@ -543,8 +543,6 @@ NOT EXISTS (
 
 == Zusammenfassung
 
-image::images/backend-domain.png[Backend UML, width=1000]
-
 Das Backend implementiert eine klar strukturierte REST-API mit:
 
 - Rollenbasierter Sicherheit
