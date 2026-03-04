@@ -334,6 +334,49 @@ Gleichzeitig wirkte sich die ungleichmäßige Selbstorganisation auf die Projekt
 
 ## Projektverlauf und Entwicklung
 
+### Anfangsphase – Iteration 1
+
+Zu Beginn des Projekts stand vor allem die Architekturfindung im Vordergrund. 
+Wir diskutierten ausführlich über Frameworks und technische Konzepte für Backend und Frontend, diese Phase dauerte deutlich länger als geplant. 
+Parallel wurden die ersten Strukturen aufgebaut.
+Backend und Frontend erhielten ihre Grundimplementierungen, die Navigationsleiste wurde erstellt, erste grobe User Stories definiert und Low-Fidelity-Wireframes angelegt.
+Außerdem wurden Miro-Boards und Git-Repositories organisiert und vorbereitet.
+
+Positiv war die klare Kommunikation im Team, die gut strukturierten Meetings und die gründliche Ausarbeitung der Architekturszenarien. 
+Gleichzeitig traten erste Herausforderungen auf.
+Unklarheiten über Aufgaben und Projektumfang, lange Pull-Request-Zeiten, schwer nachvollziehbarer Sprintfortschritt, unübersichtliche Miro-Boards und zu knappe Backend-Ressourcen. 
+Um dem entgegenzuwirken, führten wir Maßnahmen wie mehr Transparenz in Git, eine Visualisierung des Sprintfortschritts und Benachrichtigungen zu Sprintbeginn ein.
+
+### Arbeitsphase – Iteration 2
+
+Mit der zweiten Iteration arbeiteten wir erstmals in den beiden funktionalen Teams.
+Jedes Team (ca. sechs Personen) übernahm ein eigenes Feature und hatte einen Product-Owner-Vertreter sowie einen technischen Ansprechpartner (Tech Lead). Innerhalb der Teams fanden Sprint-Plannings, interne Reviews und Retrospektiven statt. 
+Ergänzt wurde das durch wöchentliche gemeinsame Meetings sowie ein externes Review.
+
+Inhaltlich konzentrierten wir uns auf die Weiterentwicklung von Registrierung und Login, die Lok-Shop-Seite, die Trassenübersicht (Frontend) sowie Trassendetails und Grundsteine der Gesellschaft (Backend).
+Die Arbeitsweise brachte jedoch neue Herausforderungen.
+Die Teams arbeiteten stark autonom an Komponenten, wodurch das Gesamtprojektbild zeitweise verloren ging. 
+Backend-Blocker verzögerten den Fortschritt, und die Kommunikation zwischen Frontend- und Backend-Mitgliedern innerhalb der Teams war teilweise schwierig. 
+Pull Requests lagen oft länger unbearbeitet.
+
+Als Reaktion führten wir Full-Stack-Aufgaben ein, um Abhängigkeiten zu reduzieren, und kündigten Pull Requests aktiv an, um schnelleres Feedback zu erhalten.
+Dies verbesserte Abstimmung und Workflow deutlich.
+
+### Arbeitsphase – Iteration 3
+
+In der dritten Iteration lag der Fokus auf der Umsetzung zentraler Funktionen z.B. Lok-Shop-Endpunkte wurden implementiert, der Lok-Shop im Frontend aufgebaut, ein Wagenleasing-Modal erstellt, Gesellschafts-Endpunkte entwickelt, die Ausschreibungsseite umgesetzt und Backend-Funktionen für Leasing ergänzt. 
+Besonders positiv wirkte sich die Einführung von Docker aus, wodurch die Entwicklungsumgebung stabiler wurde.
+
+Es zeigte sich, dass ein tieferes Verständnis der Prozessabläufe wünschenswert gewesen wäre. 
+Maßnahmen wie mehr Präsenzarbeit oder Gespräche in kleineren Gruppen oder nur zu zweit hätten hilfreich sein können, konnten aber aufgrund der begrenzten Zeit nicht umgesetzt werden. 
+Praktisch umgesetzt wurden allerdings regelmäßige Kontrollen des Git-Status in den Weekly Meetings und das Aufräumen überflüssiger Branches.
+
+### Abschlussphase – Iteration 4
+
+In der vierten und letzten Iteration lag der Fokus auf dem Abschluss offener Aufgaben damit bestehende Features fertiggestellt wurden, Bugs behoben, Ergebnisse zusammengeführt und die notwendigen Dokumentationen erstellt werden. 
+Da es keine größeren neuen Entwicklungen gab, fanden weder Retros noch umfangreiche Anpassungen statt. 
+Die Iteration diente primär dazu, ein konsistentes, lauffähiges Endprodukt zu liefern und die Projektinhalte für Präsentation und Abgabe final vorzubereiten.
+
 
 ## Erfolgsfaktoren
 
