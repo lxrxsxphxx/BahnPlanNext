@@ -19,7 +19,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet der
 
 | Besucher
 | Eine Person, die BahnPlan aufruft und erkundet ohne sich anzumelden.
-| User
+| 
 
 | Betriebswerk
 | Ein Betriebswerk ist eine betriebsnahe Einrichtung, in der Züge für den täglichen Einsatz vorbereitet werden. Dazu gehören Reinigung, Versorgung, Entsorgung, kleine Wartungen und schnelle Störungsbehebungen, um Fahrzeuge kurzfristig wieder einsatzbereit zu machen.
@@ -67,7 +67,7 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet der
 
 | ew | eigenwirtschaftlich | Wird in Verbindung mit den Trassen benutzt, um diese als eigenwirtschaftlich betrieben zu kennzeichen.
 
-| Kat | Kategorie | Die Kategorie teilt die Ausschreibungen in drei Schwierigkeitsgerade ein.
+| Kat | Kategorie | Die Kategorie teilt die Ausschreibungen in drei Schwierigkeitsgrade ein.
 
 | sv | subventioniert | Wird in Verbindung mit den Trassen benutzt, um diese als durch BahnPlan subventioniert zu kennzeichen.
 
