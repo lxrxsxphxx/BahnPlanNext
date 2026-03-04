@@ -67,19 +67,19 @@ Gemeinsame Erwartungen, Regeln und Praktiken zur Sicherstellung von lesbarem, wa
 
 ## 4. Dokumentation & Kommentare
 
-### 4.2 Kommentarregeln
+### 4.1 Kommentarregeln
 
 * Kommentare erklären präzise und verständlich
   * warum, wenn die Intention nicht sofort klar ist
   * was, wenn der Codeblock länger ist
   * was, in jedem abgegrenzten logischen abschnitt
 * keine doppelten Kommentare
-* Workcomments klar markieren: (vor pushen auf main löschen)
+* Workcomments klar markieren: (vor merge löschen)
 
   * `// TODO:`
   * `// FIXME:`
 
-### 4.1 DocStringregeln 
+### 4.2 DocStringregeln 
 
 * am Anfang einer Datei:
   * Zweck der Datei
@@ -104,7 +104,7 @@ Gemeinsame Erwartungen, Regeln und Praktiken zur Sicherstellung von lesbarem, wa
   * Args/Parameters: Typ + Beschreibung
   * Returns: Typ + Bedeutung
 
-### 4.2 Python Docstrings
+### 4.3 Python Docstrings
 
 ```python
 
@@ -140,12 +140,12 @@ def load_user(id: int) -> User:
     """
 ```
 
-### 4.3 JavaScript JSDoc
+### 4.4 Typescript JSDoc
 
-```js
+```ts
 /**
  * @description describing
- * @param {int} name - Description of arg1
+ * @param {type} name - Description of arg1
  * @returns {(Object|null)} Description of Returncases
  */
 function parseJSON(jsonString) {
@@ -159,10 +159,15 @@ function parseJSON(jsonString) {
 
 Beispiel:
 
-```js
+```ts
 /**
- * Loads a user by ID.
- * @param {number} id - Unique id of the user
- * @returns {Promise<User>}
+ * Normalizes a value to the range 0–1.
+ *
+ * @param value - Input value
+ * @param min - Lower bound
+ * @param max - Upper bound
  */
+export function normalize(value: number, min: number, max: number): number {
+  return (value - min) / (max - min)
+}
 ```
