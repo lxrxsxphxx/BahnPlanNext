@@ -23,9 +23,31 @@ export const API_ENDPOINTS = {
   // no refresh endpoint when using only long-lived access cookie
 } as const;
 
-// Zentraler Fetch-Wrapper für alle API-Aufrufe.
-// - sendet standardmäßig `credentials: 'include'`
-// - verwendet Cookie-basierte Auth (keine Authorization-Header vom Client)
+/**
+ * **API-Konfiguration & Fetch-Wrapper**
+ * * Verwaltung der API-Endpunkte und Basis-URLs für Client- und Server-seitiges Rendering (SSR).
+ * * ### Funktionalitäten
+ * - **SSR-Awareness**: Unterscheidet automatisch zwischen internen Server-URLs und öffentlichen Client-URLs.
+ * - **Zentrales Endpoint-Mapping**: Verwaltet alle Routen (Auth, Shop, Company) an einem Ort (`API_ENDPOINTS`).
+ * - **Cookie-basierte Auth**: Der `apiFetch`-Wrapper sorgt dafür, dass Anmeldedaten (`credentials: 'include'`) bei jedem Aufruf mitgesendet werden.
+ * * ### Konstanten & Endpunkte
+ * - `API_BASE_URL`: Die dynamisch ermittelte Basis für alle Anfragen.
+ * - `API_ENDPOINTS`: Typisierter Katalog aller verfügbaren Routen (z. B. `login`, `fetchLoks`).
+ * * ### Logik-Details
+ * - **Credentials**: Es wird bewusst auf manuelle `Authorization`-Header verzichtet, da die Authentifizierung rein über HttpOnly-Cookies gesteuert wird.
+ * - **SSR-Fallback**: Verwendet `INTERNAL_API_URL` für Server-zu-Server Kommunikation, um Latenzen zu minimieren.
+ * * @module Infrastructure/API
+ */
+
+/**
+ * Ein zentraler Wrapper um die native `fetch`-API.
+ * Erweitert jede Anfrage automatisch um `credentials: 'include'`, um Cookie-Auth zu ermöglichen.
+ * * @async
+ * @param input - Die Ziel-URL oder ein Request-Objekt.
+ * @param init - Zusätzliche Fetch-Optionen (Method, Body, Headers).
+ * @returns {Promise<Response>} Das Response-Objekt des Servers.
+ */
+
 export async function apiFetch(
   input: RequestInfo,
   init: RequestInit = {},

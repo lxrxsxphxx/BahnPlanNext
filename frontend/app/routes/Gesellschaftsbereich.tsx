@@ -15,6 +15,40 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+/**
+ * **Gesellschaftsbereich**
+ * * Unternehmensverwaltung: Sie steuert den Zugriff auf Finanzdaten, Fahrzeuge und Fahrpläne oder leitet den Nutzer zum 
+ * Erstellungsprozess weiter, falls noch keine Gesellschaft existiert.
+ *
+ * ### Hauptkomponenten
+ * 1. **Gesellschaftsbereich (Default Export)**: 
+ * - Prüft beim Laden den Status des Nutzers (`fetchCompanyInfo2`).
+ * - Zeigt bei Erfolg ein Dashboard mit Kategorien (Finanzen, Fahrzeuge, Fahrpläne) an.
+ * - Rendert bei Fehlen einer Gesellschaft den `gesellschaftErstellenHinweis`.
+ * 
+* 2. **CreateCompanyForm**:
+ * - Ein spezialisiertes Formular zur Neuanlage einer Eisenbahngesellschaft.
+ * - Beinhaltet eine strikte Namensvalidierung (Regex) und Fehlerbehandlung.
+ * - Führt nach Erfolg eine automatische Weiterleitung nach 2 Sekunden durch.
+ *
+ * 3. **gesellschaftErstellenHinweis**:
+ * - Eine informative Ansicht, die rechtliche Hinweise (Namensrechte) und Spielregeln 
+ * (Startguthaben von 4 Mio. €) erläutert.
+ *
+ * ### Funktionalitäten & Logik
+ * - **Authentifizierungs-Check**: Nutzt `useEffect`, um sicherzustellen, dass nur Nutzer mit einer gültigen `userCompany` das Dashboard sehen.
+ * - **Validierungs-Regeln**: Erlaubt für Firmennamen nur Alphanumerische Zeichen und Standard-Satzzeichen, um SQL-Injections oder unleserliche Namen zu verhindern.
+ * - **UX-Feedback**: Implementiert Ladezustände (`loading`) und visuelle Rückmeldungen für Erfolg oder Fehler bei der API-Kommunikation.
+ * - **Navigation**: Nutzt `NavLink` für aktives Styling der Unterbereiche und `useNavigate` für den Flow nach der Erstellung.
+ *
+ * @category Pages / Management
+ * @example
+ * ```tsx
+ * // Die Route wird in der Regel über das Hauptmenü angesteuert:
+ * <Route path="gesellschaftsbereich" element={<Gesellschaftsbereich />} />
+ * ```
+ */
+
 export default function Gesellschaftsbereich() {
   const categories = [
     { name: 'Finanzen', path: '/gesellschaftsbereich/finanzen' },

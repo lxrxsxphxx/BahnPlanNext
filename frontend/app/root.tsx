@@ -26,6 +26,50 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+/**
+ * **Root Layout & App-Konfiguration**
+ *
+ * Die zentrale Einstiegsdatei der Anwendung "BahnPlanNext". Sie definiert das globale HTML-Gerüst,
+ * verwaltet den Authentifizierungsstatus und implementiert das hybride Navigationskonzept.
+ *
+ * ### Design-Philosophie: Navbar vs. Sidebar
+ * Um die User Experience eines Management-Spiels zu optimieren, nutzt die App zwei Navigationsebenen:
+ * - **Horizontale Navbar (Top)**: Fungiert als "Meta-Ebene". Sie ist zuständig für globale 
+ * Aktionen wie Login, Logout und Profilverwaltung. Dies hält den Kopfbereich für systemweite 
+ * Informationen sauber.
+ * - **Vertikale Sidebar (Links, via `ml-56`)**: Fungiert als "Operative Ebene". Sie ermöglicht 
+ * den schnellen Wechsel zwischen den Kernmodulen des Spiels (Fahrzeuge, Finanzen, Shop). 
+ * Der feste linke Abstand (`ml-56`) reserviert den Platz für diese dauerhaft präsente Navigation.
+ *
+ * ### Funktionalitäten
+ * - **Zentrales Auth-Management**: Verwaltet den `isLoggedIn`-Status und stellt Handler für 
+ * Login-Erfolg und Logout bereit, die an die Navbar delegiert werden.
+ * - **Scroll-Restoration**: Stellt sicher, dass die Scrollposition beim Navigieren zwischen 
+ * den Spielmodulen erhalten bleibt.
+ * - **Error Boundary**: Ein robustes Sicherheitsnetz, das 404-Fehler und Laufzeitfehler abfängt 
+ * und im Entwicklungsmodus detaillierte Stack-Traces zur Fehlersuche anzeigt.
+ *
+ * ### Logik & State-Management
+ * - **checkLoggedIn (Effect)**: Validiert beim Initialisieren der App die bestehende Sitzung 
+ * über den `auth`-Service. Nutzt ein `isMounted`-Flag, um Memory Leaks zu vermeiden.
+ * - **Responsive Layout**: Der Inhaltsbereich (`children`) ist durch `ml-56` nach rechts 
+ * verschoben, um eine Überlagerung durch die fixierte Sidebar zu verhindern.
+ *
+ * ### Fehlerbehandlung (ErrorBoundary)
+ * Unterscheidet zwischen:
+ * 1. **Routing-Fehlern**: Anzeige von 404-Meldungen, falls eine Strecke nicht existiert.
+ * 2. **System-Fehlern**: Anzeige von Fehlermeldungen und Code-Ausschnitten für Entwickler.
+ *
+ * @category Core / Layout
+ * @example
+ * ```tsx
+ * // Das Layout umschließt alle Routen automatisch über das <Outlet />.
+ * <Layout>
+ * <Dashboard />
+ * </Layout>
+ * ```
+ */
+
 export function Layout({ children }: { children: React.ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
