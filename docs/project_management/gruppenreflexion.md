@@ -382,20 +382,94 @@ Die Iteration diente primär dazu, ein konsistentes, lauffähiges Endprodukt zu 
 
 ### Fachliche Kompetenz mit Interdisziplinäre Perspektiven
 
+Ein entscheidender Erfolgsfaktor war die fachliche Kompetenz im Team. 
+Die Mitglieder brachten unterschiedliche Perspektiven aus Frontend- und Backend-Entwicklung, Architekturplanung, UX-Konzeption und Projektorganisation mit. Diese Vielfalt hat uns spürbar geholfen. 
+Technische Fragestellungen wurden nicht nur funktional gelöst, sondern auch strukturell durchdacht und aus Nutzersicht bewertet.
+
+Gerade in der Architekturphase und bei komplexeren Backend-Implementierungen zeigte sich, dass solides technisches Verständnis vorhanden war.
+Gleichzeitig wurde nicht rein technisch gedacht. 
+UX-Aspekte, Strukturierungsfragen und organisatorische Überlegungen flossen regelmäßig in Entscheidungen ein und sorgten dafür, dass Lösungen ganzheitlicher entstanden.
+
+Natürlich waren die Kompetenzniveaus unterschiedlich, was sich auch bemerkbar machte.
+Dort, wo aktiver Austausch stattfand, konnten wir voneinander lernen und Perspektiven produktiv verbinden. 
+In diesen Momenten sind nachweislich bessere Ergebnisse entstanden.
+
 ### Iteratives Vorgehen
 
+Ein weiterer wichtiger Erfolgsfaktor war das iterative Arbeiten in Sprints. Durch klar abgegrenzte Iterationen konnten wir das Projekt schrittweise weiterentwickeln. Nicht jeder Sprint verlief reibungslos aber Probleme wurden sichtbar gemacht.
+
+Probleme wurden nicht vollständig vermieden, und regelmäßig sichtbar gemacht. 
+Anpassungen etwa die Einführung von Full-Stack-Aufgaben, die Nutzung von Planning Poker oder die stärkere Fokussierung auf Git-Transparenz entstanden direkt aus gemachten Erfahrungen.
+Wir haben also nicht nur entwickelt, sondern auch unsere Arbeitsweise kontinuierlich hinterfragt.
+
+Methoden wurden nicht als feststehend betrachtet. 
+Wenn etwas nicht funktionierte, wurde es angepasst oder ergänzt. 
+Diese Bereitschaft zur schrittweisen Optimierung hat größere strukturelle Stillstände verhindert.
+
 ### Lernbereitschaft und Anpassungsfähigkeit
+
+Trotz wiederkehrender Herausforderungen zeigte das Team insgesamt Lernbereitschaft und Anpassungsfähigkeit. 
+Schwierigkeiten etwa in Kommunikation, Entscheidungsprozessen oder Aufgabenverteilung wurden angesprochen und in Retrospektiven thematisiert. 
+Nicht jede Maßnahme wirkte nachhaltig, aber es bestand grundsätzlich die Bereitschaft zur Reflexion.
+
+Beispiele dafür sind die Einführung strukturierterer Entscheidungsmechanismen, die Umorganisation in zwei funktionale Teams, die stärkere Nutzung von Git zur Transparenz sowie die Integration von Docker zur Stabilisierung der Entwicklungsumgebung. 
+Diese Schritte zeigen, dass das Projekt kein starrer Ablauf war, sondern von kontinuierlicher Anpassung begleitet wurde.
+
+Darüber hinaus bot das Projekt vielen Teammitgliedern die Möglichkeit, neue Technologien, Werkzeuge und Arbeitsweisen kennenzulernen. 
+Selbst dort, wo Prozesse nicht ideal liefen, entstand ein deutlicher individueller Lernzuwachs sowohl technisch als auch im Hinblick auf Teamdynamik und Selbstorganisation.
 
 
 ## Herausforderungen und Verbesserungspotenziale
 
 ### Optimierung der Teamgröße
 
+Eine der größten Herausforderungen im Projekt war die Teamgröße. 
+Mit zwölf Personen entstand eine hohe organisatorische Komplexität. 
+Entscheidungen dauerten länger, Abstimmungen wurden aufwendiger und Verantwortlichkeiten waren nicht immer eindeutig. 
+Gerade bei technischen Grundsatzfragen zeigte sich, viele Perspektiven sind wertvoll aber sie verlangsamen auch die Entscheidungsfindung erheblich.
+
+Zudem gingen individuelle Beiträge in der Gruppengröße teilweise unter. 
+Unterschiede im Engagement oder in der Verlässlichkeit fielen zwar auf, wurden aber nicht immer direkt adressiert. 
+In kleineren Teams wären Verantwortlichkeiten transparenter gewesen, Kommunikationswege kürzer und Entscheidungen vermutlich strukturierter getroffen worden.
+
+Für zukünftige Projekte erscheint eine kleinere Teamgröße sinnvoll, um Abstimmungsaufwand zu reduzieren und Eigenverantwortung stärker zu fördern.
+
 ### Strukturiertere Kommunikationsprozesse
+
+Obwohl wir regelmäßig Meetings abhielten und Tools wie Discord, Miro und Git intensiv nutzten, waren unsere Kommunikationsprozesse nicht durchgehend klar strukturiert. 
+Informationen wurden teilweise nicht zentral dokumentiert, Statusänderungen in Git nicht konsequent gepflegt und Pull Requests blieben stellenweise zu lange unbearbeitet.
+
+Auch die Qualität von Anfragen oder Problembeschreibungen war sehr unterschiedlich. 
+Unklare oder unvollständige Formulierungen führten zu Missverständnissen und verzögerten die Problemlösung. 
+Zudem fehlten klare Eskalations- oder Klärungsmechanismen, wenn es zu Konflikten oder festgefahrenen Diskussionen kam.
+
+Verbesserungspotenzial liegt vor allem in verbindlicherer Statuspflege, klaren Kommunikationsstandards (z. B. strukturierte Problembeschreibungen) und einer stärkeren Moderation bei technischen Abstimmungen. 
+Eine deutlichere Trennung zwischen Diskussions- und Entscheidungsraum hätte zusätzlich für mehr Effizienz gesorgt.
 
 ### Gleichmäßigere Verantwortungen
 
+Die Verteilung von Aufgaben und Verantwortung war eine der anspruchsvollsten Herausforderungen. 
+Das Engagement im Team war spürbar unterschiedlich, wodurch sich die Arbeitsbelastung zunehmend auf einzelne Personen konzentrierte. 
+Während einige eigenständig Probleme lösten, Abhängigkeiten mitdachten und zusätzliche Aufgaben übernahmen, arbeiteten andere stärker innerhalb klar abgegrenzter Zuständigkeiten.
+
+Diese Ungleichverteilung führte nicht nur zu erhöhter Belastung einzelner Teammitglieder, sondern auch zu Verzögerungen im Projektverlauf. 
+Aufgaben aus früheren Iterationen blieben teilweise über mehrere Sprints hinweg offen, ohne dass Blocker vorlagen.
+
+Für zukünftige Projekte wäre es wichtig, Erwartungshaltungen hinsichtlich Eigeninitiative, Verlässlichkeit und Mitverantwortung frühzeitig klar zu formulieren.
+Regelmäßige individuelle Feedbackgespräche oder definierte Mindestverantwortlichkeiten könnten helfen, eine ausgewogenere Beteiligung sicherzustellen.
+
+
 ### Frühzeitigere Klärung von Erwartungen
+
+Ein weiterer zentraler Verbesserungspunkt war die frühzeitige und explizite Klärung gemeinsamer Erwartungen. 
+Zwar gab es eine formale Rollenverteilung, doch war nicht immer eindeutig, welches Maß an Eigeninitiative, Kommunikationsbereitschaft und Verbindlichkeit tatsächlich erwartet wurde. 
+Unterschiedliche Vorstellungen über Arbeitsintensität, Prioritäten und Verantwortungsübernahme führten im Projektverlauf zu Spannungen.
+
+Besonders bei Themen wie Verfügbarkeit, Meeting-Teilnahme und proaktiver Problemlösung hätten klare Teamregeln von Beginn an Orientierung geben können. 
+Nicht ausgesprochene Erwartungen begünstigten Missverständnisse.
+
+Für zukünftige Projekte empfiehlt sich daher ein verbindliches „Team-Agreement“ zum Start, in dem Kommunikationsstandards, Umgang mit Abwesenheiten, Entscheidungswege und Eskalationsmechanismen festgelegt werden. 
+Eine solche Grundlage verhindert nicht jeden Konflikt, schafft aber Transparenz und klare Bezugspunkte für spätere Diskussionen.
 
 
 ## Zentrale Lernerfahrungen
