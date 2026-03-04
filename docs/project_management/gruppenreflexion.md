@@ -476,12 +476,69 @@ Eine solche Grundlage verhindert nicht jeden Konflikt, schafft aber Transparenz 
 
 ### Erkenntnisse zur Teamarbeit
 
+Im Projektverlauf wurde uns klar, dass Teamarbeit weit mehr ist als eine saubere Aufgabenverteilung. 
+Rollen, Meetings und Tools sind wichtig aber sie ersetzen kein gemeinsames Verantwortungsgefühl. 
+Entscheidend war nicht, wer formal wofür zuständig war, sondern wie sehr sich jede Person für das Gesamtergebnis mitverantwortlich fühlte.
+
+Unterschiede im Engagement, in der Selbstorganisation und in der Kommunikationsbereitschaft hatten direkte Auswirkungen auf den Projektverlauf. 
+Fehlende Eigeninitiative betrifft nie nur eine einzelne Aufgabe. 
+Sie erzeugt Abhängigkeiten, Verzögerungen und zusätzliche Arbeit für andere, oft schleichend und erst über mehrere Iterationen hinweg spürbar.
+
+Gleichzeitig haben wir erlebt, wie stark positives Engagement wirken kann. 
+Initiative, lösungsorientiertes Denken und konstruktives Feedback hatten einen spürbar stabilisierenden Effekt auf das Team. 
+Diese Dynamik hat gezeigt, dass Teamarbeit nicht nur Zusammenarbeit bedeutet, sondern aktive Mitverantwortung für das große Ganze.
+
+Eine wichtige Erkenntnis war daher, dass Erwartungen offen angesprochen werden müssen. 
+Nicht kommunizierte Unklarheiten führen langfristig zu Spannungen. 
+
 ### Erkenntnisse zur Anwendung agiler Methoden
+
+Die Arbeit im agilen Rahmen machte deutlich, dass Methoden wie Sprints, Planning Poker oder Retrospektiven keine automatischen Garantien für Effizienz sind.
+Agile Prozesse entfalten ihre Wirkung nur dann, wenn sie konsequent angewendet und mit einer gemeinsamen Haltung getragen werden. 
+
+Insbesondere zeigte sich, dass Transparenz etwa durch gepflegte Git-Status, zeitnahe Pull-Request-Reviews und klare Sprintziele eine Grundvoraussetzung für funktionierende Iterationen ist. 
+Werden diese Elemente vernachlässigt, verlieren agile Strukturen ihre steuernde Funktion und verlieren ihre Orientierung. 
+
+Gleichzeitig wurde deutlich, wie wertvoll Iterationen als Lernzyklen sind. 
+Anpassungen wie die Einführung von Full-Stack-Aufgaben entstanden direkt aus vorherigen Problemen. 
+Agilität bedeutete somit nicht nur ein Framework, sondern die Bereitschaft, Prozesse kontinuierlich zu hinterfragen und anzupassen. 
+
+Eine weitere Erkenntnis war, dass agile Methoden klare Moderation benötigen. 
+Ohne Zeitboxen, Entscheidungsregeln oder klare Verantwortlichkeiten können Diskussionen trotz agiler Struktur ineffizient verlaufen.
 
 ### Erkenntnisse zur interdisziplinären Zusammenarbeit
 
-### Übertragbarkeit auf zukünftige Projekte
+Die Zusammenarbeit zwischen Backend-, Frontend- und organisatorischen Rollen machte deutlich, wie unterschiedlich Perspektiven auf dasselbe Problem sein können.
+Technische Umsetzung, Nutzerfreundlichkeit, Architekturqualität und Projektorganisation verfolgen teilweise unterschiedliche Logiken, die bewusst miteinander in Einklang gebracht werden müssen.
+
+Insbesondere zeigte sich, dass fehlende Abstimmung zwischen Backend- und Frontend-Entwicklung zu Blockern führen kann, selbst wenn beide Seiten produktiv arbeiten. 
+Schnittstellen, Datenmodelle und API-Definitionen benötigen frühzeitige gemeinsame Planung.
+
+Eine wesentliche Lernerfahrung war daher, dass Zusammenarbeit aktive Koordination erfordert. 
+Sie funktioniert nicht automatisch durch parallele Arbeit, sondern durch bewusste Abstimmung, gegenseitiges Verständnis und transparente Kommunikation über Anforderungen und Einschränkungen.
 
 ---
 
 ## Gesamtfazit
+
+Das Projekt war in vielerlei Hinsicht herausfordernd, fachlich, organisatorisch und zwischenmenschlich. 
+Es lief nicht reibungslos. 
+Gerade in der Zusammenarbeit wurden Spannungen sichtbar, unterschiedliche Erwartungen, ungleich verteiltes Engagement, lange Entscheidungswege und strukturelle Reibungsverluste. 
+Rückblickend liegt jedoch genau in diesen schwierigen Momenten der größte Lernwert.
+
+Technische Probleme erwiesen sich meist als lösbar, sobald sie klar strukturiert angegangen wurden. 
+Deutlich komplexer waren hingegen Fragen der Verantwortung, der Kommunikation und der Selbstorganisation. 
+Hier gab es keine schnellen Lösungen und keine klaren „richtigen“ Antworten. 
+
+Das Projekt hat uns gezeigt, dass funktionierende Softwareentwicklung nicht allein auf technischem Können basiert. 
+Verlässlichkeit, Transparenz und eine gemeinsame Zielorientierung sind mindestens genauso entscheidend.
+
+Gleichzeitig wurde sichtbar, welches Potenzial in einer engagierten, interdisziplinären Zusammenarbeit steckt.
+Dort, wo Verantwortung übernommen, offen kommuniziert und lösungsorientiert gehandelt wurde, entstanden qualitativ hochwertige Ergebnisse.
+Iterative Anpassungen, methodische Veränderungen und technische Fortschritte zeigen, dass das Team grundsätzlich lernbereit war auch wenn dieser Lernprozess nicht immer geradlinig verlief.
+
+Unterschiedliche Motivationen, Kompetenzniveaus und Arbeitsweisen gehören dazu. 
+Entscheidend ist nicht ihre Existenz, sondern der Umgang mit ihnen.
+
+Neben fachlichem Wissen wurden vor allem Fähigkeiten in Kommunikation, Konfliktbewältigung, Entscheidungsfindung und Selbstorganisation geschärft. 
+Das Ergebnis ist daher nicht nur ein technisches Produkt, sondern auch eine Erfahrung im Umgang mit realer Teamdynamik, mit ihren Stärken ebenso wie mit ihren Herausforderungen.
