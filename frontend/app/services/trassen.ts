@@ -11,6 +11,7 @@ export class UserFacingError extends Error {
 }
 
 export interface Trasse {
+  uuid: string;
   name: string;
   zugart: string;
   zugnummer: string;
