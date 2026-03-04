@@ -169,3 +169,9 @@ In diesem Dokument werden die wesentlichen Begriffe aus dem Anwendungsgebiet der
 | Muss einer Station und einer Gesellschaft zugeordnet sein.
 | workshops
 |===
+
+== Domänenmodell
+[%header]
+
+//Abbildung
+image::images/BahnPlanDomänenmodell.png[alt="Domänenmodell BahnPlan", width=100%]
