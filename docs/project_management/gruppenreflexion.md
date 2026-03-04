@@ -203,12 +203,86 @@ Trotz der Herausforderungen durch Teamgröße und unterschiedliche Hintergründe
 
 ### Interne Kommunikationsstrukturen
 
+Unsere interne Kommunikation setzte sich aus regelmäßigen Meetings und verschiedenen asynchronen Austauschformaten zusammen. 
+Ziel war es, trotz der Teamgröße und unterschiedlicher Verfügbarkeiten einen möglichst transparenten Informationsfluss sicherzustellen.
+
+Die regelmäßigen Meetings bildeten dabei das organisatorische Rückgrat. 
+Ergebnisse und Diskussionspunkte hielten wir vor allem in Miro fest, insbesondere in den Weekly-Terminen um Fortschritte, offene Fragen und nächste Schritte sichtbar zu machen.
+Zusätzlich versuchten wir, den Entwicklungsstand über Git Projects abzubilden, sodass Aufgabenstatus und Bearbeitungsstände zentral einsehbar waren.
+
+Für kurzfristige und informelle Abstimmungen nutzten wir hauptsächlich Discord.
+Dort lief ein Großteil der alltäglichen Kommunikation von technischen Rückfragen bis zu organisatorischen Absprachen.
+Das ermöglichte schnelle und unkomplizierte Interaktion, führte aber auch dazu, dass Informationen teilweise in Chats verteilt und nicht immer dauerhaft strukturiert dokumentiert waren.
+
+Zwar wurden in Meetings Notizen angefertigt, diese wurden jedoch nicht konsequent zentral veröffentlicht, sondern meist nur auf Nachfrage an abwesende Teammitglieder weitergegeben.
+Das funktionierte im Einzelfall, führte jedoch dazu, dass Informationen nicht jederzeit für alle zugänglich waren.
+Gerade bei wechselnder Anwesenheit erhöhte sich dadurch der individuelle Aufwand, den aktuellen Stand nachzuvollziehen.
+
+Insgesamt war unsere Kommunikationsstruktur klar darauf ausgelegt, Transparenz über mehrere Kanäle hinweg herzustellen.
+Gleichzeitig zeigte sich, dass Dokumentation allein nicht automatisch zu einem gemeinsamen Wissensstand führt.
+Die Kombination aus Meetings, visueller Dokumentation und digitalen Tools bot zwar eine solide Grundlage, funktionierte aber nur dann gut, wenn alle aktiv mitarbeiteten und Informationen bewusst weitergaben.
+
 ### Transparenz und Informationsfluss
+
+Um Transparenz im Entwicklungsprozess zu schaffen, nutzten wir Git Projects mit einer klaren Aufgabenverteilung. 
+Jede Task war verantwortlichen Personen zugeordnet, sodass Zuständigkeiten grundsätzlich nachvollziehbar waren. 
+Die Idee dahinter war, Verantwortlichkeiten und Fortschritt für alle sichtbar zu machen.
+
+Die vorgesehenen Statusangaben wie „Ready“, „In Progress“, „In Review“ oder „Done“ wurden allerdings nicht immer konsequent aktualisiert. 
+Dadurch stimmte der dokumentierte Stand nicht in allen Fällen mit dem tatsächlichen Arbeitsfortschritt überein. 
+Technisch war die Infrastruktur für Transparenz vorhanden, in der Praxis hing es jedoch stark davon ab, wie sorgfältig sie gepflegt wurde.
+
+Ein zentraler Bestandteil unseres Workflows waren Pull Requests.
+Änderungen wurden nicht direkt in den Main Branch übernommen, sondern durchliefen einen strukturierten Review-Prozess.
+Einheitliche Templates für Tasks halfen dabei, Anforderungen, Beschreibungen und Akzeptanzkriterien nachvollziehbar festzuhalten.
+Diese Standardisierung machte technische Entscheidungen transparenter.
+
+Trotzdem zeigte sich, dass formale Sichtbarkeit nicht automatisch zu echtem Überblick führt.
+Aufgaben waren zwar im erfasst, doch um Zusammenhänge, Abhängigkeiten und Prioritäten wirklich zu verstehen, brauchte es zusätzliche Abstimmung. 
+Gerade bei paralleler Entwicklung in zwei funktionalen Teams war es nicht immer einfach, den Gesamtfortschritt im Blick zu behalten.
 
 ### Konfliktkultur
 
+Der Umgangston im Team war insgesamt respektvoll und sachlich.
+Gleichzeitig blieben Spannungen bei einer Gruppe dieser Größe und mit unterschiedlichen fachlichen Hintergründen nicht aus.
+
+Ein wiederkehrendes Thema war die Qualität der Kommunikation, besonders bei fachlichen Rückfragen oder Problembeschreibungen. 
+Manche Anfragen wurden als zu knapp oder unklar empfunden, was zusätzlichen Klärungsaufwand verursachte.
+Umgekehrt führte die Erwartung sehr detaillierter Problembeschreibungen teilweise zu Frustration, wenn diese nicht sofort geliefert wurden.
+Solche Situationen wurden zwar angesprochen, aber nicht immer konsequent moderiert oder gemeinsam reflektiert.
+Einzelne Missverständnisse konnten so geklärt werden, grundsätzliche Verbesserungen im Kommunikationsstil ergaben sich jedoch nur begrenzt.
+
+Daneben gab es kleinere Konflikte, die nicht offen im Gesamtteam diskutiert wurden, sondern eher im Hintergrund blieben.
+Kurzfristig verhinderte das eine Eskalation, langfristig wurden Spannungen dadurch jedoch nicht immer vollständig aufgelöst.
+Es gab zwar Versuche zur Moderation, diese führten aber nicht in allen Fällen zu nachhaltigen Lösungen.
+
+Im Verlauf des Projekts wurde der Wunsch nach stärkerer individueller Moderation geäußert, etwa durch Einzelgespräche oder moderierte Kleingruppengespräche.
+Solche Formate hätten vermutlich geholfen, Missverständnisse früher zu klären und Erwartungen offener zu besprechen.
+
+Belastend wirkte sich außerdem die teilweise fehlende Verbindlichkeit einzelner Teammitglieder aus.
+Unregelmäßige Teilnahme oder verzögerte Rückmeldungen beeinflussten nicht nur den Arbeitsfortschritt, sondern auch die Teamdynamik.
+In einem größeren Team verstärken sich solche Effekte schnell, da Abhängigkeiten steigen und Ausfälle schwerer kompensiert werden können.
+
 ### Verantwortungsübernahme
 
+Im Bereich der Verantwortungsübernahme zeigten sich deutliche Unterschiede im Team.
+Einige Mitglieder übernahmen Aufgaben proaktiv, entwickelten eigenständig Lösungen und dachten auch über ihren direkten Zuständigkeitsbereich hinaus mit.
+Andere konzentrierten sich stärker auf klar abgegrenzte Teilaufgaben und übernahmen wenig Verantwortung für das Gesamtprodukt.
+
+Diese Unterschiede machten sich besonders im iterativen Entwicklungsprozess bemerkbar.
+Manche Aufgaben wurden zuverlässig und fristgerecht abgeschlossen und aktiv zur Integration vorbereitet.
+Andere blieben hingegen über mehrere Sprints hinweg offen obwohl es keine externen Blocker gab. 
+Die Verzögerungen lagen dabei weniger an technischer Komplexität, sondern häufiger an individueller Organisation, Priorisierung oder fehlender Verbindlichkeit.
+
+Die ungleichmäßige Beteiligung verstärkte zudem die strukturellen Herausforderungen der Teamgröße.
+Unregelmäßige Teilnahme an Meetings oder verzögerte Rückmeldungen erschwerten Abstimmungen und führten zu Informationslücken.
+Dadurch entstanden zusätzliche Blocker, weil Rückfragen nicht zeitnah geklärt werden konnten oder Abhängigkeiten zu spät auffielen.
+
+Als Reaktion darauf versuchten wir, Abwesenheiten stärker einzuplanen etwa indem Aufgaben breiter zugeschnitten oder mögliche Ausfälle vorab berücksichtigt wurden.
+Das entlastete punktuell, löste jedoch nicht das grundlegende Problem unterschiedlicher Verbindlichkeit und Verantwortungsübernahme.
+
+Insgesamt wurde deutlich, dass ein agiles Vorgehen wie Scrum stark auf Eigeninitiative, Transparenz und Selbstorganisation angewiesen ist. 
+In einem größeren Team mit unterschiedlichen Verpflichtungen außerhalb des Projekts war es jedoch schwierig, ein durchgehend einheitliches Verantwortungsniveau sicherzustellen. 
 
 ## Entscheidungsprozesse und Gruppen­dynamik
 
