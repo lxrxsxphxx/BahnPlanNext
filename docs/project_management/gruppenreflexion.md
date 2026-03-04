@@ -330,3 +330,41 @@ Andere konzentrierten sich dagegen überwiegend auf kleinere, klar abgegrenzte A
 Diese Unterschiede führten zu einer ungleichmäßigen Arbeitsverteilung. 
 Für die engagierteren Mitglieder bedeutete das eine spürbare Mehrbelastung: Sie erledigten nicht nur ihre eigenen Aufgaben, sondern mussten oft auch Lücken und Abhängigkeiten anderer ausgleichen.
 Gleichzeitig wirkte sich die ungleichmäßige Selbstorganisation auf die Projektplanung aus.
+
+
+## Projektverlauf und Entwicklung
+
+
+## Erfolgsfaktoren
+
+### Fachliche Kompetenz mit Interdisziplinäre Perspektiven
+
+### Iteratives Vorgehen
+
+### Lernbereitschaft und Anpassungsfähigkeit
+
+
+## Herausforderungen und Verbesserungspotenziale
+
+### Optimierung der Teamgröße
+
+### Strukturiertere Kommunikationsprozesse
+
+### Gleichmäßigere Verantwortungen
+
+### Frühzeitigere Klärung von Erwartungen
+
+
+## Zentrale Lernerfahrungen
+
+### Erkenntnisse zur Teamarbeit
+
+### Erkenntnisse zur Anwendung agiler Methoden
+
+### Erkenntnisse zur interdisziplinären Zusammenarbeit
+
+### Übertragbarkeit auf zukünftige Projekte
+
+---
+
+## Gesamtfazit
