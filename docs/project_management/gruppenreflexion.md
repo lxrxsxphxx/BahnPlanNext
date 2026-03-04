@@ -284,8 +284,49 @@ Das entlastete punktuell, löste jedoch nicht das grundlegende Problem unterschi
 Insgesamt wurde deutlich, dass ein agiles Vorgehen wie Scrum stark auf Eigeninitiative, Transparenz und Selbstorganisation angewiesen ist. 
 In einem größeren Team mit unterschiedlichen Verpflichtungen außerhalb des Projekts war es jedoch schwierig, ein durchgehend einheitliches Verantwortungsniveau sicherzustellen. 
 
-## Entscheidungsprozesse und Gruppen­dynamik
+## Entscheidungsprozesse
 
 ### Entscheidungsfindung
 
+Die Entscheidungsprozesse im Team waren insgesamt ambivalent. 
+Einerseits bestand der Anspruch, wichtige Entscheidungen möglichst gemeinsam zu treffen und alle einzubinden. 
+Andererseits führte genau dieser Anspruch in der Praxis häufig zu langen und teilweise ineffizienten Diskussionen vor allem bei grundlegenden Themen wie der Architekturwahl.
+
+#### Architekturentscheidungen
+
+Gerade die Architekturentscheidung zog sich über einen längeren Zeitraum. 
+Ziel war es, eine fachlich solide Lösung zu finden, die von einer breiten Mehrheit getragen wird.
+In der Praxis zeigte sich jedoch schnell, dass nicht alle über denselben fachlichen Hintergrund oder die gleiche Vorbereitung verfügten. 
+Diskussionen wurden daher teilweise auf sehr unterschiedlichen Wissensniveaus geführt.
+
+Hinzu kam, dass einzelne Positionen sehr konsequent vertreten wurden, was Kompromisse erschwerte. 
+Manche Entscheidungsrunden wiederholten sich, ohne dass ein klarer Fortschritt erkennbar war. 
+Das führte spürbar zu Effizienzverlusten und sorgte im Team zunehmend für Frustration.
+
+#### Einführung strukturierter Entscheidungsmechanismen
+
+Als Reaktion auf diese langwierigen Diskussionen führten wir bei Refinements und Komplexitätsschätzungen Planning Poker ein. 
+Ziel war es, Einschätzungen transparenter zu machen, Diskussionen stärker auf konkrete Unterschiede zu fokussieren und Entscheidungsprozesse zu beschleunigen.
+
+In vielen Fällen funktionierte das auch gut und brachte mehr Struktur in die Abstimmung. 
+Gleichzeitig zeigte sich jedoch, dass einzelne Einschätzungen sehr starr vertreten wurden und Diskussionen nicht immer als gemeinsamer Abwägungsprozess verstanden wurden. 
+Zudem war das Verständnis davon, was eine „Schätzung“ eigentlich bedeutet, nicht bei allen identisch.
+
+Die Qualität und Geschwindigkeit von Entscheidungen hing daher stark davon ab, wer gerade anwesend war und wie gut die Beteiligten vorbereitet waren.
+
+#### Mehrheitsentscheidungen
+
+Letztlich wurden die meisten Entscheidungen per Mehrheitsprinzip getroffen. Das sorgte für formale Klarheit und eine eindeutige Richtung. 
+Allerdings bedeutete eine Mehrheit nicht automatisch, dass alle Beteiligten mit der Entscheidung zufrieden waren.
+
+Mehrheitsentscheidungen können effizient sein, bringen jedoch das Risiko, dass Minderheitsmeinungen sich nicht ausreichend gehört fühlen, Kompromisse nur oberflächlich ausgearbeitet werden oder Entscheidungen zwar akzeptiert, aber nicht wirklich mitgetragen werden.
+
 ### Arbeitsbelastung und Engagement
+
+Im Projektverlauf zeigte sich schnell, dass sich Arbeitsbelastung und Engagement im Team sehr unterschiedlich verteilten. 
+Einige Teammitglieder investierten viel Zeit und Initiative, übernahmen komplexere oder zusätzliche Aufgaben und trugen so maßgeblich zum Fortschritt bei.
+Andere konzentrierten sich dagegen überwiegend auf kleinere, klar abgegrenzte Aufgaben und beteiligten sich weniger an übergreifenden Arbeiten.
+
+Diese Unterschiede führten zu einer ungleichmäßigen Arbeitsverteilung. 
+Für die engagierteren Mitglieder bedeutete das eine spürbare Mehrbelastung: Sie erledigten nicht nur ihre eigenen Aufgaben, sondern mussten oft auch Lücken und Abhängigkeiten anderer ausgleichen.
+Gleichzeitig wirkte sich die ungleichmäßige Selbstorganisation auf die Projektplanung aus.
