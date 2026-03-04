@@ -95,12 +95,109 @@ Spätestens hier wurde deutlich, dass Wissensunterschiede in größeren Teams ni
 
 ### Entscheidung für Scrum
 
+Die Entscheidung für Scrum entstand vor allem daraus, dass ein Teil des Teams bereits Erfahrung mit agilen Vorgehensmodellen hatte. 
+Besonders Studierende der Allgemeinen Informatik und Wirtschaftsinformatik kannten Scrum aus den Modulen Software Engineering I und II. 
+Dadurch konnten wir auf einer bekannten Struktur aufbauen, anstatt ein völlig neues Vorgehensmodell einführen zu müssen.
+
+Auch unabhängig davon sprach einiges für Scrum. 
+Das Projekt war auf 21 Wochen begrenzt und erforderte eine enge Abstimmung zwischen Konzeption, Implementierung und Evaluation.
+Ein iteratives Vorgehen mit regelmäßigen Feedbackschleifen erschien sinnvoll, um Fortschritte sichtbar zu machen und bei Bedarf frühzeitig nachzusteuern.
+
+Zudem bot Scrum eine Mischung aus klarer Struktur und ausreichender Flexibilität. 
+Die definierten Rollen, Events und Artefakte gaben Orientierung, was gerade in einem relativ großen und fachlich gemischten Team hilfreich war, ohne die konkrete Umsetzung zu stark einzuengen.
+Vor dem Hintergrund der unterschiedlichen Erfahrungsstände sollte der methodische Rahmen Transparenz schaffen und Arbeitsprozesse nachvollziehbarer machen.
+
+Ein weiterer Punkt waren die projektbezogenen Vorgaben.
+Viele Anforderungen waren durch bereits klar formuliert. 
+Die Product Owner übernahmen hauptsächlich die Aufgabe, diese in konkrete Backlog-Einträge zu überführen und zu priorisieren.
+Scrum passte gut zu diesem Setting, da es eine strukturierte Verwaltung von Anforderungen und deren schrittweise Umsetzung in Sprints ermöglicht.
+
+Rückblickend war die Wahl von Scrum weniger eine experimentelle Entscheidung als vielmehr eine pragmatische. 
+Sie verband vorhandene Vorerfahrung mit einem klaren organisatorischen Rahmen und schien geeignet, sowohl Struktur als auch Anpassungsfähigkeit im Projektverlauf zu gewährleisten.
+
 ### Umsetzung der Scrum-Elemente
+
+Die praktische Umsetzung von Scrum wurde an die Rahmenbedingungen unseres Projekts angepasst. 
+Mit zwölf Personen war das Team für klassisches Scrum eigentlich zu groß. 
+Deshalb teilten wir uns in zwei funktionale Teams mit jeweils etwa sechs Mitgliedern auf, die schwerpunktmäßig an unterschiedlichen Features arbeiteten. 
+Ziel war es, die Komplexität zu reduzieren, Kommunikationswege zu verkürzen und im kleineren Rahmen arbeitsfähiger zu sein.
+
+Jedes Team hatte eine interne Struktur mit einem Product-Owner-Vertreter und einem technischen Ansprechpartner (Tech Lead). 
+Die Product-Owner-Vertreter konkretisierten die fachlichen Anforderungen innerhalb des Teams, während die Tech Leads technische Entscheidungen koordinierten und bei architektonischen Fragen unterstützten. 
+Zusätzlich führten beide Teams eigene Sprint-Plannings, Reviews und Retrospektiven durch, um näher an ihrem jeweiligen Arbeitskontext zu bleiben.
+
+Ergänzend dazu gab es gemeinsame Termine zur Synchronisation beider Teams. 
+Dazu gehörten regelmäßige Weekly-Meetings, ein externes Review zur Vorstellung des Gesamtfortschritts.
+
+Für die Sprintorganisation nutzten wir Planning- und Refinement-Meetings, um Aufgaben zu klären und zu priorisieren. 
+Die Aufwandsabschätzung erfolgte mit Planning Poker, um unterschiedliche Einschätzungen sichtbar zu machen und ein gemeinsames Verständnis zu entwickeln. 
+Zur Koordination von Terminen setzten wir ein digitales Planungstool ein. 
+Da das Projekt nicht in Vollzeit lief, ersetzten Weekly-Meetings die klassischen Daily Scrums, eine pragmatische Anpassung an den Studienalltag.
+
+Das Backlog-Management lag hauptsächlich bei den Product Ownern. 
+Sie übersetzten die vorgegebenen Anforderungen in konkrete Arbeitspakete und priorisierten diese entlang der Projektziele.
+
+Auch technisch versuchten wir, klare Strukturen zu schaffen. 
+Die Versionsverwaltung lief über GitHub, ergänzt durch ein definiertes Branching-Modell. 
+Pull Requests wurden angekündigt, um Reviews besser planbar zu machen und Transparenz über laufende Änderungen zu gewährleisten.
+Ziel war es, Codequalität zu sichern und paralleles Arbeiten zu ermöglichen.
+
+Im Verlauf des Projekts merkten wir zudem, dass isolierte Komponentenentwicklung häufig zu Abhängigkeiten und Blockern führte. Deshalb formulierten wir Aufgaben stärker als funktionsübergreifende „Full-Stack“-Aufgaben. 
+Das half, Schnittstellenprobleme zu reduzieren und machte Fortschritte sichtbarer, da funktionierende Teilresultate klarer erkennbar waren.
+
+Insgesamt war unsere Scrum-Umsetzung von pragmatischen Anpassungen geprägt.
+Wir übernahmen die Grundidee des Frameworks, passten es jedoch an Teamgröße, Zeit und Projektkontext an.
+Dadurch entstand kein reines Scrum, sondern ein hybrides Vorgehen, das Struktur geben sollte, ohne zu starr zu sein mit gemischtem, aber insgesamt tragfähigem Ergebnis.
 
 ### Herausforderungen Teamgröße
 
+Die Teamgröße von zwölf Personen stellte im Rahmen eines agilen Vorgehensmodells eine echte organisatorische Herausforderung dar. Scrum ist ursprünglich für kleinere, eng abgestimmte Teams gedacht. 
+Mit wachsender Gruppengröße steigt jedoch der Kommunikations- und Koordinationsaufwand spürbar und das haben wir deutlich gemerkt.
+
+Besonders schwierig war die Abstimmung unterschiedlicher Verfügbarkeiten. 
+Da das Projekt neben dem Studium lief und individuelle Stundenpläne stark variierten, war es oft aufwendig, gemeinsame Termine zu finden. 
+Das erhöhte nicht nur den Planungsaufwand, sondern erschwerte auch die schnelle Klärung von Abhängigkeiten oder Blockern. 
+Verzögerungen konnten nicht immer direkt aufgefangen werden, was sich teilweise auf Transparenz und Dynamik im Projekt auswirkte.
+
+Auch der Überblick über parallele Entwicklungen war anspruchsvoll.
+Zwei funktionale Teams und mehrere gleichzeitig bearbeitete Features machten es nicht leicht, jederzeit ein konsistentes Gesamtbild zu behalten. 
+Direkte, spontane Abstimmungen wie sie in kleineren Teams möglich sind ließen sich bei uns nur begrenzt  über Discord realisieren.
+
+Die Effizienz der Meetings litt ebenfalls unter der Teamgröße.
+Trotz klarer Struktur führten viele Beteiligte teilweise zu längeren Diskussionen, Wiederholungen oder verzögerten Rückmeldungen.
+Da ein Großteil der Abstimmung digital stattfand, war es zusätzlich schwieriger, eine wirklich fokussierte und verbindliche Gesprächsatmosphäre zu schaffen.
+
+Hinzu kam, dass in größeren Gruppen die Beteiligung naturgemäß schwankt.
+Unterschiedliche zeitliche Ressourcen und individuelles Engagement führten dazu, dass nicht alle kontinuierlich im gleichen Maß eingebunden waren.
+Das wirkte sich auf Verantwortungsübernahme, Informationsfluss und die Teamdynamik aus.
+
+Zusammenfassend lässt sich festhalten, dass die Teamgröße in Verbindung mit einem Teilzeitkontext erhebliche strukturelle Anforderungen an Organisation, Kommunikation und Selbstdisziplin stellte. 
+Die Anwendung von Scrum bot zwar einen Rahmen zur Strukturierung, konnte jedoch die durch die Gruppengröße bedingten Komplexitäten nicht vollständig kompensieren.
+
 ### Rollenverständnis
 
+Beim Rollenverständnis zeigte sich insgesamt eine recht klare Struktur.
+Die Product Owner arbeiteten eng zusammen und übernahmen vor allem die Verantwortung für die Ausarbeitung und Priorisierung der Anforderungen.
+Sie übersetzten die vorgegebenen Ziele in konkrete Features und strukturierten das Backlog entsprechend der Projektprioritäten. 
+Dadurch entstand eine konsistente fachliche Ausrichtung über beide funktionalen Teams hinweg.
+
+Die Rolle des Scrum Masters war für beide Teams gleichzeitig angelegt.
+Das bedeutete eine hohe Koordinationsverantwortung, da Moderation, methodische Begleitung und das Nachhalten von Blockern teamübergreifend erfolgen mussten.
+In der Praxis führte das zu einer spürbaren Belastung, weil Abstimmungen und Unterstützungsaufgaben nicht einfach aufgeteilt werden konnten.
+
+Das Entwicklungsteam bestand aus den Mitgliedern der beiden funktionalen Gruppen und war für die Umsetzung verantwortlich.
+Dazu gehörten nicht nur Implementierungsaufgaben, sondern auch die Abstimmung an technischen Schnittstellen zwischen den Teams.
+
+Unklarheiten in der Rollenabgrenzung traten nur vereinzelt auf.
+Zu Beginn war kurzfristig nicht ganz eindeutig, wer für die konkrete Formulierung und Dokumentation der Tasks zuständig ist.
+Diese Aufgabe wurde im weiteren Verlauf klar den Product Ownern zugeordnet, wodurch die Schnittstelle zwischen fachlicher Beschreibung und technischer Umsetzung sauberer definiert war.
+
+Darüber hinaus entwickelten sich unterstützende Strukturen im Team.
+So wurden die Product Owner bei der Erstellung von Wireframes durch ein weiteres Teammitgliede entlastet.
+Diese Zusammenarbeit entstand eher informell, funktionierte aber gut und ergänzte die formale Rollenverteilung sinnvoll.
+
+Insgesamt war das Rollenverständnis stabil und transparent.
+Trotz der Herausforderungen durch Teamgröße und unterschiedliche Hintergründe halfen klare Zuständigkeiten und regelmäßige Abstimmung zwischen den zentralen Rollen dabei, Orientierung und Struktur im Projekt aufrechtzuerhalten.
 
 ## Kommunikation und Zusammenarbeit
 
