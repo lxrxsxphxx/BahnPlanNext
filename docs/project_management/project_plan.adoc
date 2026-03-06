@@ -14,8 +14,8 @@ Der Projektplan bietet Überblick darüber, wie unser Projekt aufgebaut ist und 
 | **Name** | **Rolle** | **Zuständigkeitsbereiche**
 |Florian    |   Architektur | Entwicklung, technische Umsetzung, Qualitätssicherung, Architekturkonzept 
 |Moritz     |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung, 
-|Pierre     |   User Stories + Product Owner typische Aufgaben | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
-|Nicola     |   User Stories + Product Owner typische Aufgaben + Stellvertretende Projektleitung | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
+|Pierre     |   User Stories + Product Owner typische Aufgaben + Stellvertretende Projektleitung | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
+|Nicola     |   User Stories + Product Owner typische Aufgaben | Pflege des Backlogs, Anforderungsmanagement, Stakeholder-Kommunikation 
 |Matthias   |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
 |Patrick    |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
 |Han        |   Frontend | Entwicklung, technische Umsetzung, Qualitätssicherung 
