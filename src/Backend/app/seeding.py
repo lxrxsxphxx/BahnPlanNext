@@ -1,6 +1,8 @@
 import logging
 from datetime import date, time
 
+from distro import name
+
 from sqlmodel import Session, select
 
 from app.enums.difficulty import Difficulty
@@ -22,11 +24,13 @@ def seed_demo_data(db_generator) -> None:
 
         session = next(db_generator)
 
-        # Add a company
-        company = Company(name="RailCorp")
-        session.add(company)
-        session.commit()
-        session.refresh(company)
+        company = session.exec(select(Company).where(Company.name == name)).first()
+        if not company:
+            # Add a company
+            company = Company(name="RailCorp")
+            session.add(company)
+            session.commit()
+            session.refresh(company)
 
         # Add vehicle type (wagon)
         wagon_type = VehicleType(
