@@ -29,8 +29,8 @@ Die MVP-Version fokussiert auf Fahrzeugleasing, Verwaltung von Loks und Wagen so
 
 * Docker ≥ 24.x  
 * Docker Compose ≥ 2.x  
-* Node.js ≥ 20.x (für Frontend Builds lokal)  
-* Python ≥ 3.x (Backend lokal, falls nötig)  
+* Node.js ≥ 22.20.0 (Frontend lokal, falls nötig)  
+* Python ≥ 3.10+ (Backend lokal, falls nötig)  
 
 **Netzwerk / Ports:**  
 
@@ -47,7 +47,7 @@ git clone https://github.com/lxrxsxphxx/BahnPlanNext.git
 cd bahnplan/src
 ```
 
-2. `.env` Datei erstellen (Beispiel siehe unten):
+2. `.env` Datei erstellen in src/Backend (Beispiel siehe unten):
 
 ```env
 # Backend
@@ -60,7 +60,7 @@ BACKEND_PORT=8000
 FRONTEND_PORT=3000
 ```
 
-3. Docker-Container bauen:
+3. Docker-Container bauen: (alles im src/docker-setup)
 
 ```bash
 docker-compose build
