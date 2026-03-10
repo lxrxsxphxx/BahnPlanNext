@@ -7,11 +7,339 @@ include::../_includes/default-attributes.inc.adoc[]
 
 == Zweck
 Dieses Dokument beschreibt wesentliche Entwurfsentscheidungen auf Ebene der Komponenten und Module. Diese dienen als Vorgabe für die Implementierung und erleichtern das Systemverständnis.
- 
-== Ausgewählte Sichten
-//Entwurfsklassendiagramme, Sequenzdiagramme
 
-== Schnittstellen
-//Dokumentation oder Verweise auf Schnittstellen, z.B. REST-APIs
+== Ausgewählte Sichten
+
+== Schnittstellen (Mit KI vervollständigt)
+:toc:
+:toclevels: 3
+
+=== User (userRouter)
+
+==== POST /register
+* *Summary:* Register User
+* *Beschreibung:* Registriert einen neuen Benutzer.
+* *Request Body:* `application/json` (<<schema-UserSchema,UserSchema>>)
+* *Antworten:*
+** `200 OK` – Registrierung erfolgreich (Message + user_id)
+** `400 Bad Request` – z.B. Passwort leer / Duplicate Email/Username
+** `422 Unprocessable Entity` – Validierungsfehler
+
+==== POST /login
+* *Summary:* Login
+* *Beschreibung:* OAuth2 Password Login; setzt Cookie `access_token` und liefert Token zurück.
+* *Request Body:* `application/x-www-form-urlencoded` (OAuth2PasswordRequestForm)
+* *Antworten:*
+** `200 OK` – `{ message, access_token, token_type }`
+** `401 Unauthorized` – falsche Daten / User nicht aktiv
+
+==== GET /users
+* *Summary:* Get All Users
+* *Beschreibung:* Liefert alle Benutzer.
+* *Antworten:* `200 OK`
+
+==== GET /users/me
+* *Summary:* Get Current User
+* *Security:* `Bearer` (active user) via `check_active`
+* *Beschreibung:* Gibt `{username,email,role}` des eingeloggten Users zurück.
+* *Antworten:* `200 OK`, `401 Unauthorized`
+
+==== POST /logout
+* *Summary:* Logout
+* *Beschreibung:* Löscht Cookie `access_token`.
+* *Antworten:* `200 OK`
+
+==== GET /verify/{token}
+* *Summary:* Verify User
+* *Beschreibung:* Verifiziert Account anhand Verify-Token.
+* *Pfadparameter:* `token` (string)
+* *Antworten:* `200 OK`, `400 Bad Request`, `404 Not Found`, `409 Conflict`, `422 Unprocessable Entity`
+
+==== GET /secured
+* *Summary:* Get Users (secured)
+* *Security:* `Bearer` (active user) via `check_active`
+* *Beschreibung:* Liefert User-Liste (gesichert).
+* *Antworten:* `200 OK`
+
+==== GET /adminsonly
+* *Summary:* Get Users (admin only)
+* *Security:* `Bearer` (admin) via `check_admin`
+* *Beschreibung:* Liefert User-Liste (nur Admin).
+* *Antworten:* `200 OK`
+
+==== GET /users/me/company
+* *Summary:* Check my company
+* *Security:* `Bearer` (active user) via `check_active`
+* *Beschreibung:* Gibt zurück, ob User in einer Gesellschaft ist und IDs der Companies.
+* *Antworten:* `200 OK`, `401 Unauthorized`
+
+
+=== Company (companyRouter)
+
+==== GET /users/company
+* *Summary:* Get company info
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Liefert die Company des Users (erste Company, falls mehrere).
+* *Antworten:* `200 OK`, `404 Not Found`
+
+==== POST /users/company
+* *Summary:* Create company
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Erstellt eine Gesellschaft und verlinkt den User als Owner.
+* *Request Body:* `CompanyCreateRequest`
+* *Antworten:* `200 OK`, `400 Bad Request`
+
+==== POST /users/company/vehicles
+* *Summary:* Get company vehicles
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Liefert alle Vehicles der Company des Users (aktuell: erste Company).
+* *Antworten:* `200 OK`, `400 Bad Request`, `401 Unauthorized`
+
+
+=== Fahrzeuge (vehicleRouter)
+
+==== GET /vehicles
+* *Summary:* Get all vehicles
+* *Beschreibung:* Liefert alle Vehicles gruppiert; aktualisiert ggf. Lieferstatus (in_delivery -> ready) serverseitig.
+* *Antworten:* `200 OK`
+
+
+=== Trassen (routeRouter)
+
+==== GET /trasse/{route_uuid}
+* *Summary:* Get route detail
+* *Beschreibung:* Liefert Detailinfos einer Trasse inkl. Stops.
+* *Pfadparameter:* `route_uuid` (UUID)
+* *Antworten:* `200 OK`, `404 Not Found`
+
+==== GET /trassen
+* *Summary:* Get routes
+* *Beschreibung:* Liefert alle Trassen (aggregiert + Stop-Infos).
+* *Antworten:* `200 OK`
+
+
+=== Ausschreibungen (tenderRouter)
+
+==== GET /tender/open
+* *Summary:* Get open tenders
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Liefert offene Ausschreibungen (ohne Contract).
+* *Antworten:* `200 OK`, `500 Internal Server Error`
+
+
+=== Shop (shopRouter, Prefix /shop)
+
+==== GET /shop/vehicle-types
+* *Summary:* List vehicle types
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Liefert Fahrzeugtypen im Shop, optional gefiltert.
+* *Query-Parameter:*
+** `kind` (optional, VehicleKind)
+** `q` (optional, string Suche)
+* *Antworten:* `200 OK`
+
+==== GET /shop/vehicle-types/{type_id}
+* *Summary:* Vehicle type details
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Liefert Details + Kompatibilitäten (via CouplingLink).
+* *Pfadparameter:* `type_id` (int)
+* *Antworten:* `200 OK`, `404 Not Found`
+
+==== POST /shop/vehicle-types/{type_id}/lease
+* *Summary:* Lease vehicle type
+* *Security:* `Bearer` (active user)
+* *Beschreibung:* Leased ein Vehicle für die (erste) Company des Users; reduziert Kapital + Bestand; setzt Lieferstatus.
+* *Pfadparameter:* `type_id` (int)
+* *Request Body:* `LeaseRequest` (enthält `leasing_model`)
+* *Antworten:*
+** `200 OK`
+** `400 Bad Request` – z.B. keine Company, ungültiges Leasingmodell, nicht genug Kapital, keine passende Lok
+** `404 Not Found` – Fahrzeugtyp nicht gefunden
+** `409 Conflict` – Bestand = 0
+** `500 Internal Server Error` – Details/Bestand fehlen oder DB-Fehler
+
+== Schemas
+
+=== [[schema-Roles]] Roles (Enum)
+
+* *Typ:* `string`
+
+* Mögliche Werte:
+
+** `user`
+** `admin`
+
+
+=== [[schema-User]] User
+
+* *Typ:* `object`
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `id`
+| `integer` \| `null`
+| Interne ID des Benutzers.
+
+| `email` (*required*)
+| `string` (E-Mail)
+| E-Mail-Adresse des Benutzers.
+
+| `username` (*required*)
+| `string`
+| Anzeigename / Benutzername.
+
+| `is_active`
+| `boolean` (default: `false`)
+| Gibt an, ob der Benutzer bereits aktiv ist.
+
+| `role` (*required*)
+| <<schema-Roles,Roles>>
+| Rolle des Benutzers (`user` oder `admin`).
+
+| `hashed_password` (*required*)
+| `string`
+| Passwort-Hash des Benutzers.
+|===
+
+
+=== [[schema-UserSchema]] UserSchema (Registration)
+
+* *Typ:* `object`
+
+* Wird für `/register` als Request-Body verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `email` (*required*)
+| `string` (E-Mail)
+| E-Mail-Adresse.
+
+| `username` (*required*)
+| `string`
+| Benutzername.
+
+| `password` (*required*)
+| `string`
+| Klartext-Passwort (wird serverseitig gehasht).
+
+| `role` (*required*)
+| <<schema-Roles,Roles>>
+| Rolle des Benutzers.
+
+| `is_active`
+| `boolean` (default: `false`)
+| Ob der neue Benutzer direkt aktiv sein soll.
+|===
+
+
+=== [[schema-Body_login_login_post]] Body_login_login_post (Login-Form)
+
+* *Typ:* `object`
+
+* Wird für `/login` als Form-Body verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `username` (*required*)
+| `string`
+| Benutzername für den Login.
+
+| `password` (*required*)
+| `string` (password)
+| Passwort für den Login.
+
+| `grant_type`
+| `string` \| `null` (Pattern: `^password$`)
+| Sollte im Normalfall `"password"` sein.
+
+| `scope`
+| `string` (default: `""`)
+| Scopes, z. B. `"read write"`.
+
+| `client_id`
+| `string` \| `null`
+| Optional, Client-ID (falls verwendet).
+
+| `client_secret`
+| `string` \| `null`
+| Optional, Client-Secret (falls verwendet).
+|===
+
+
+=== [[schema-ValidationError]] ValidationError
+
+* *Typ:* `object`
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `loc` (*required*)
+| `array` von `string` \| `integer`
+| Ort des Fehlers (z. B. `["body", "email"]`).
+
+| `msg` (*required*)
+| `string`
+| Fehlermeldung.
+
+| `type` (*required*)
+| `string`
+| Fehler-Typ (z. B. `"value_error"`).
+|===
+
+
+=== [[schema-HTTPValidationError]] HTTPValidationError
+
+* *Typ:* `object`
+
+* Wird bei `422 Unprocessable Entity` als Fehlerantwort verwendet.
+
+[cols="1,1,2",options="header"]
+|===
+| Feld
+| Typ
+| Beschreibung
+
+| `detail`
+| array von <<schema-ValidationError,ValidationError>>
+| Liste detaillierter Validierungsfehler.
+|===
+
+
+== Security-Schemes
+
+=== OAuth2PasswordBearer
+
+* *Typ:* `oauth2` (Password Flow)
+
+* *Token-URL:* `POST /login`
+
+* *Scopes:* keine vordefiniert (leeres Objekt `{}` im Schema)
+
+* Wird von folgenden Endpunkten verwendet:
+
+** `GET /secured`
+** `GET /adminsonly`
+
 
 == Datenmodell
+
+=== Entwurfsklassendiagramm (Mit KI generiert)
+[plantuml, backend-domain-model, png]
+----
+!include ./images/entwurfsklassendiagramm.puml
+----
