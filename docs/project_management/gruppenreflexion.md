@@ -1,0 +1,544 @@
+# Gruppenreflexion
+
+Im Rahmen eines 21-wöchigen Forschungsprojekts (07. Oktober bis 08. März) arbeiteten wir als interdisziplinäres Team aus zwölf Studierenden der Wirtschaftsinformatik, Medieninformatik und Allgemeinen Informatik zusammen.
+Unser gemeinsames Ziel war die Konzeption und Umsetzung des Softwareprojekts „Bahnplan“.
+
+Durch die unterschiedlichen Studiengänge entstand eine spürbare Vielfalt an fachlichen Vorkenntnissen, methodischen Erfahrungen und technischen Schwerpunkten.
+Die Modulinhalte überschnitten sich nur teilweise, sodass das Wissen im Team unterschiedlich stark ausgeprägt war.
+Dadurch trafen verschiedene Erfahrungsniveaus sowohl im Projektmanagement als auch in der Softwareentwicklung direkt aufeinander.
+
+Als methodischen Rahmen entschieden wir uns für Scrum. 
+Uns war bewusst, dass Scrum in der Regel für kleinere, fokussierte Teams konzipiert ist und eine Gruppengröße von zwölf Personen organisatorisch anspruchsvoll sein kann.
+Dennoch nutzten wir das Framework als strukturierende Grundlage für Planung, Abstimmung und iterative Entwicklung, da es inhaltlich an die Module Software Engineering I (I152) und Software Engineering II (I151) anknüpft.
+
+## Interdisziplinarität und Wissensverteilung
+
+### Heterogenität der fachlichen Vorkenntnisse
+
+Die Zusammensetzung unseres Teams aus Studierenden der Allgemeinen Informatik, Medieninformatik und Wirtschaftsinformatik führte von Beginn an zu einer deutlich heterogenen Ausgangssituation.
+Zwar gibt es inhaltliche Überschneidungen insbesondere im Bereich Programmierung und Softwareentwicklung, doch unterscheiden sich die Studiengänge spürbar in ihrer Schwerpunktsetzung, methodischen Ausrichtung und praktischen Erfahrung.
+
+Studierende der Allgemeinen Informatik verfügten meist über eine solide theoretische und technische Grundlage, vor allem in Implementierung und Systemarchitektur.
+Wirtschaftsinformatik-Studierende brachten zusätzlich eine stärkere Perspektive auf Prozesse, Strukturierung und Anforderungsanalyse ein.
+Zwischen diesen beiden Gruppen bestand zudem bereits Projekterfahrung aus vergleichbaren Lehrveranstaltungen, insbesondere aus Software Engineering I und II.
+Dadurch waren grundlegende Arbeitsweisen und Projektstrukturen zumindest teilweise vertraut.
+
+Für Studierende der Medieninformatik stellte die Projektmethodik hingegen in Teilen als Neuheit raus. Zwar war Programmiererfahrung vorhanden, jedoch wurde Software Engineering im Studium anders gewichtet.
+Auch Scrum war nicht in gleicher Tiefe oder gar nicht bekannt.
+Gleichzeitig brachten sie eine ausgeprägte gestalterische und nutzerzentrierte Sichtweise ein, die insbesondere bei Design- und Usability-Fragen einen klaren Mehrwert bot.
+
+Diese unterschiedlichen Hintergründe führten zu spürbaren Unterschieden in methodischer Sicherheit, technischer Tiefe und praktischer Projekterfahrung.
+Während einige Teammitglieder in bestimmten Bereichen sehr routiniert waren, befanden sich andere noch stärker in einer Lernphase.
+Das eröffnete zwar Raum für Wissensaustausch, verlangsamte jedoch stellenweise Entscheidungsprozesse und erhöhte den Abstimmungsaufwand.
+Auch bei der Aufgabenverteilung zeigte sich, dass nicht alle Mitglieder gleichermaßen auf dieselbe Komplexität vorbereitet waren.
+
+### Auswirkungen auf die Aufgabenverteilung
+
+Die unterschiedlichen Vorkenntnisse im Team führten zu Beginn zu verschiedenen Vorstellungen davon, wie ein agiles Projekt organisiert sein sollte.
+Vor allem das gemeinsame Definieren von Aufgaben im Voraus und das bewusste Übernehmen klarer Verantwortlichkeiten war nicht für alle gleichermaßen selbstverständlich.
+
+Einige Teammitglieder wollten möglichst in viele Bereiche intigriert sein, während andere eher komponentenorientiert arbeiteten und ihre Teilbereiche weitgehend unabhängig entwickelten.
+Diese abweichenden Arbeitsweisen führten gerade in der Anfangsphase zu erhöhtem Abstimmungsbedarf und gelegentlich zu Unklarheiten bei Schnittstellen.
+
+Im Verlauf des Projekts wurde deutlich, dass wir unsere Aufgaben klarer organisieren mussten, um mehr Transparenz und Nachvollziehbarkeit im Entwicklungsprozess zu schaffen.
+Aufgaben wurden zunehmend als umfassendere, funktionsorientierte Arbeitspakete definiert, anstatt isolierte Komponenten getrennt zu entwickeln.
+Durch diese stärker „fullstack“-orientierte Herangehensweise sollte gewährleistet werden, dass Zusammenhänge zwischen Frontend-, Backend- und Logikanteilen sichtbarer wurden und Wissen nicht ausschließlich in einzelnen Teilbereichen blieb.
+
+Nicht nur die technische Konsistenz des Produkts wurde durch die Anpassung verbessert, sondern auch das gegenseitige Verständnis im Team.
+Gleichzeitig wurde klar, wie wichtig eine eindeutige Aufgabenverteilung und bewusste Delegation gerade in einem großen Team sind, um effizient arbeiten und Verantwortung tatsächlich übernehmen zu können.
+
+### Chancen durch Vielfalt
+
+Trotz der unterschiedlichen fachlichen Vorkenntnisse brachte die interdisziplinäre Zusammensetzung unseres Teams klare Vorteile mit sich. 
+Durch die verschiedenen Studienschwerpunkte entwickelten sich schnell thematische Ansprechpersonen für bestimmte Fragestellungen. 
+Bei technischen Implementierungen, gestalterischen Fragen oder konzeptionellen Überlegungen war meist klar, wer in welchem Bereich über vertiefte Kenntnisse verfügte. Dadurch konnten Unsicherheiten schneller geklärt und Abstimmungswege verkürzt werden.
+
+Diese Verteilung von Kompetenzen sorgte dafür, dass Wissen nicht komplett isoliert blieb, sondern bei Bedarf gezielt geteilt wurde. 
+Gleichzeitig entstand eine gewisse Orientierung im Team, da bei spezifischen Problemen klar war, an wen man sich wenden konnte.
+
+Allerdings zeigte sich auch, dass der Raum für grundlegende konzeptionelle Entscheidungen teilweise begrenzt war. 
+Viele funktionale Anforderungen waren im Vorfeld durch die Product Owner definiert. 
+Dadurch lag der Schwerpunkt stärker auf der Umsetzung als auf der Entwicklung alternativer Lösungsansätze. 
+Das interdisziplinäre Potenzial entfaltete sich daher vor allem in Detailfragen, Optimierungen und konkreten Ausgestaltungen, weniger auf strategischer oder richtungsweisender Ebene.
+
+Dennoch führten die unterschiedlichen Denkweisen zu wertvollen Rückfragen und Präzisierungen.
+Anforderungen wurden nicht einfach übernommen, sondern hinterfragt und aus verschiedenen Perspektiven betrachtet.
+Auch wenn nicht jede Entscheidung neu ausgehandelt wurde, trug die fachliche Breite des Teams zur Qualitätssicherung und zur Absicherung technischer wie gestalterischer Aspekte bei.
+
+### Herausforderungen durch ungleiche Wissensverteilung
+
+Neben den genannten Vorteilen brachte die ungleiche Wissensverteilung im Team auch spürbare Herausforderungen mit sich. 
+Vor allem die unterschiedlichen Erfahrungsstände im Umgang mit den eingesetzten Technologien und methodischen Ansätzen machten sich früh bemerkbar.
+
+Für einige bedeutete das Projekt einen erheblichen Einarbeitungsaufwand, da sowohl bestimmte Technologien als auch architektonische Konzepte neu waren.
+Besonders deutlich wurde das bei der Diskussion zur Systemarchitektur.
+Während manche Entscheidungen schnell einordnen und bewerten konnten, benötigten andere mehr Zeit, um die Hintergründe vollständig zu verstehen.
+Das führte teilweise zu langwierigen Entscheidungsprozessen und gelegentlicher Unsicherheit in der gemeinsamen Entscheidung.
+
+Auch das Arbeiten mit Scrum war nicht für alle selbstverständlich.
+Einige hatten bereits Erfahrung mit agilen Projekten, für andere war das iterative Vorgehen neu.
+Planung, Selbstorganisation und klare Verantwortungsübernahme mussten daher erst eingeübt werden.
+Das erforderte zusätzliche Abstimmung und sorgte gerade zu Beginn für Orientierungsschwierigkeiten.
+
+Im Projektalltag zeigte sich das Wissensgefälle vor allem in unterschiedlich hohen Arbeitsgeschwindigkeiten.
+Aufgaben konnten nicht immer parallel oder gleichmäßig bearbeitet werden.
+Dadurch entstanden Abhängigkeiten und einzelne Arbeitspakete wirkten zeitweise als Blocker.
+Diese Verzögerungen waren jedoch weniger eine Frage des Engagements, sondern oft vielmehr Ausdruck unterschiedlicher Lernkurven und Erfahrungsstände.
+
+Der Abstimmungsbedarf war entsprechend hoch. 
+Zwar versuchten wir, diesen in regelmäßigen Meetings, insbesondere in den Weekly-Terminen aufzufangen doch stießen wir dabei auch an organisatorische Grenzen. 
+Schwankende Anwesenheit und nicht immer vollständig weitergegebene Informationen erschwerten eine kontinuierliche Synchronisation. 
+Spätestens hier wurde deutlich, dass Wissensunterschiede in größeren Teams nicht nur fachliche, sondern auch organisatorische Auswirkungen haben.
+
+
+## Methodisches Vorgehen: Scrum
+
+### Entscheidung für Scrum
+
+Die Entscheidung für Scrum entstand vor allem daraus, dass ein Teil des Teams bereits Erfahrung mit agilen Vorgehensmodellen hatte. 
+Besonders Studierende der Allgemeinen Informatik und Wirtschaftsinformatik kannten Scrum aus den Modulen Software Engineering I und II. 
+Dadurch konnten wir auf einer bekannten Struktur aufbauen, anstatt ein völlig neues Vorgehensmodell einführen zu müssen.
+
+Auch unabhängig davon sprach einiges für Scrum. 
+Das Projekt war auf 21 Wochen begrenzt und erforderte eine enge Abstimmung zwischen Konzeption, Implementierung und Evaluation.
+Ein iteratives Vorgehen mit regelmäßigen Feedbackschleifen erschien sinnvoll, um Fortschritte sichtbar zu machen und bei Bedarf frühzeitig nachzusteuern.
+
+Zudem bot Scrum eine Mischung aus klarer Struktur und ausreichender Flexibilität. 
+Die definierten Rollen, Events und Artefakte gaben Orientierung, was gerade in einem relativ großen und fachlich gemischten Team hilfreich war, ohne die konkrete Umsetzung zu stark einzuengen.
+Vor dem Hintergrund der unterschiedlichen Erfahrungsstände sollte der methodische Rahmen Transparenz schaffen und Arbeitsprozesse nachvollziehbarer machen.
+
+Ein weiterer Punkt waren die projektbezogenen Vorgaben.
+Viele Anforderungen waren durch bereits klar formuliert. 
+Die Product Owner übernahmen hauptsächlich die Aufgabe, diese in konkrete Backlog-Einträge zu überführen und zu priorisieren.
+Scrum passte gut zu diesem Setting, da es eine strukturierte Verwaltung von Anforderungen und deren schrittweise Umsetzung in Sprints ermöglicht.
+
+Rückblickend war die Wahl von Scrum weniger eine experimentelle Entscheidung als vielmehr eine pragmatische. 
+Sie verband vorhandene Vorerfahrung mit einem klaren organisatorischen Rahmen und schien geeignet, sowohl Struktur als auch Anpassungsfähigkeit im Projektverlauf zu gewährleisten.
+
+### Umsetzung der Scrum-Elemente
+
+Die praktische Umsetzung von Scrum wurde an die Rahmenbedingungen unseres Projekts angepasst. 
+Mit zwölf Personen war das Team für klassisches Scrum eigentlich zu groß. 
+Deshalb teilten wir uns in zwei funktionale Teams mit jeweils etwa sechs Mitgliedern auf, die schwerpunktmäßig an unterschiedlichen Features arbeiteten. 
+Ziel war es, die Komplexität zu reduzieren, Kommunikationswege zu verkürzen und im kleineren Rahmen arbeitsfähiger zu sein.
+
+Jedes Team hatte eine interne Struktur mit einem Product-Owner-Vertreter und einem technischen Ansprechpartner (Tech Lead). 
+Die Product-Owner-Vertreter konkretisierten die fachlichen Anforderungen innerhalb des Teams, während die Tech Leads technische Entscheidungen koordinierten und bei architektonischen Fragen unterstützten. 
+Zusätzlich führten beide Teams eigene Sprint-Plannings, Reviews und Retrospektiven durch, um näher an ihrem jeweiligen Arbeitskontext zu bleiben.
+
+Ergänzend dazu gab es gemeinsame Termine zur Synchronisation beider Teams. 
+Dazu gehörten regelmäßige Weekly-Meetings, ein externes Review zur Vorstellung des Gesamtfortschritts.
+
+Für die Sprintorganisation nutzten wir Planning- und Refinement-Meetings, um Aufgaben zu klären und zu priorisieren. 
+Die Aufwandsabschätzung erfolgte mit Planning Poker, um unterschiedliche Einschätzungen sichtbar zu machen und ein gemeinsames Verständnis zu entwickeln. 
+Zur Koordination von Terminen setzten wir ein digitales Planungstool ein. 
+Da das Projekt nicht in Vollzeit lief, ersetzten Weekly-Meetings die klassischen Daily Scrums, eine pragmatische Anpassung an den Studienalltag.
+
+Das Backlog-Management lag hauptsächlich bei den Product Ownern. 
+Sie übersetzten die vorgegebenen Anforderungen in konkrete Arbeitspakete und priorisierten diese entlang der Projektziele.
+
+Auch technisch versuchten wir, klare Strukturen zu schaffen. 
+Die Versionsverwaltung lief über GitHub, ergänzt durch ein definiertes Branching-Modell. 
+Pull Requests wurden angekündigt, um Reviews besser planbar zu machen und Transparenz über laufende Änderungen zu gewährleisten.
+Ziel war es, Codequalität zu sichern und paralleles Arbeiten zu ermöglichen.
+
+Im Verlauf des Projekts merkten wir zudem, dass isolierte Komponentenentwicklung häufig zu Abhängigkeiten und Blockern führte. Deshalb formulierten wir Aufgaben stärker als funktionsübergreifende „Full-Stack“-Aufgaben. 
+Das half, Schnittstellenprobleme zu reduzieren und machte Fortschritte sichtbarer, da funktionierende Teilresultate klarer erkennbar waren.
+
+Insgesamt war unsere Scrum-Umsetzung von pragmatischen Anpassungen geprägt.
+Wir übernahmen die Grundidee des Frameworks, passten es jedoch an Teamgröße, Zeit und Projektkontext an.
+Dadurch entstand kein reines Scrum, sondern ein hybrides Vorgehen, das Struktur geben sollte, ohne zu starr zu sein mit gemischtem, aber insgesamt tragfähigem Ergebnis.
+
+### Herausforderungen Teamgröße
+
+Die Teamgröße von zwölf Personen stellte im Rahmen eines agilen Vorgehensmodells eine echte organisatorische Herausforderung dar. Scrum ist ursprünglich für kleinere, eng abgestimmte Teams gedacht. 
+Mit wachsender Gruppengröße steigt jedoch der Kommunikations- und Koordinationsaufwand spürbar und das haben wir deutlich gemerkt.
+
+Besonders schwierig war die Abstimmung unterschiedlicher Verfügbarkeiten. 
+Da das Projekt neben dem Studium lief und individuelle Stundenpläne stark variierten, war es oft aufwendig, gemeinsame Termine zu finden. 
+Das erhöhte nicht nur den Planungsaufwand, sondern erschwerte auch die schnelle Klärung von Abhängigkeiten oder Blockern. 
+Verzögerungen konnten nicht immer direkt aufgefangen werden, was sich teilweise auf Transparenz und Dynamik im Projekt auswirkte.
+
+Auch der Überblick über parallele Entwicklungen war anspruchsvoll.
+Zwei funktionale Teams und mehrere gleichzeitig bearbeitete Features machten es nicht leicht, jederzeit ein konsistentes Gesamtbild zu behalten. 
+Direkte, spontane Abstimmungen wie sie in kleineren Teams möglich sind ließen sich bei uns nur begrenzt  über Discord realisieren.
+
+Die Effizienz der Meetings litt ebenfalls unter der Teamgröße.
+Trotz klarer Struktur führten viele Beteiligte teilweise zu längeren Diskussionen, Wiederholungen oder verzögerten Rückmeldungen.
+Da ein Großteil der Abstimmung digital stattfand, war es zusätzlich schwieriger, eine wirklich fokussierte und verbindliche Gesprächsatmosphäre zu schaffen.
+
+Hinzu kam, dass in größeren Gruppen die Beteiligung naturgemäß schwankt.
+Unterschiedliche zeitliche Ressourcen und individuelles Engagement führten dazu, dass nicht alle kontinuierlich im gleichen Maß eingebunden waren.
+Das wirkte sich auf Verantwortungsübernahme, Informationsfluss und die Teamdynamik aus.
+
+Zusammenfassend lässt sich festhalten, dass die Teamgröße in Verbindung mit einem Teilzeitkontext erhebliche strukturelle Anforderungen an Organisation, Kommunikation und Selbstdisziplin stellte. 
+Die Anwendung von Scrum bot zwar einen Rahmen zur Strukturierung, konnte jedoch die durch die Gruppengröße bedingten Komplexitäten nicht vollständig kompensieren.
+
+### Rollenverständnis
+
+Beim Rollenverständnis zeigte sich insgesamt eine recht klare Struktur.
+Die Product Owner arbeiteten eng zusammen und übernahmen vor allem die Verantwortung für die Ausarbeitung und Priorisierung der Anforderungen.
+Sie übersetzten die vorgegebenen Ziele in konkrete Features und strukturierten das Backlog entsprechend der Projektprioritäten. 
+Dadurch entstand eine konsistente fachliche Ausrichtung über beide funktionalen Teams hinweg.
+
+Die Rolle des Scrum Masters war für beide Teams gleichzeitig angelegt.
+Das bedeutete eine hohe Koordinationsverantwortung, da Moderation, methodische Begleitung und das Nachhalten von Blockern teamübergreifend erfolgen mussten.
+In der Praxis führte das zu einer spürbaren Belastung, weil Abstimmungen und Unterstützungsaufgaben nicht einfach aufgeteilt werden konnten.
+
+Das Entwicklungsteam bestand aus den Mitgliedern der beiden funktionalen Gruppen und war für die Umsetzung verantwortlich.
+Dazu gehörten nicht nur Implementierungsaufgaben, sondern auch die Abstimmung an technischen Schnittstellen zwischen den Teams.
+
+Unklarheiten in der Rollenabgrenzung traten nur vereinzelt auf.
+Zu Beginn war kurzfristig nicht ganz eindeutig, wer für die konkrete Formulierung und Dokumentation der Tasks zuständig ist.
+Diese Aufgabe wurde im weiteren Verlauf klar den Product Ownern zugeordnet, wodurch die Schnittstelle zwischen fachlicher Beschreibung und technischer Umsetzung sauberer definiert war.
+
+Darüber hinaus entwickelten sich unterstützende Strukturen im Team.
+So wurden die Product Owner bei der Erstellung von Wireframes durch ein weiteres Teammitgliede entlastet.
+Diese Zusammenarbeit entstand eher informell, funktionierte aber gut und ergänzte die formale Rollenverteilung sinnvoll.
+
+Insgesamt war das Rollenverständnis stabil und transparent.
+Trotz der Herausforderungen durch Teamgröße und unterschiedliche Hintergründe halfen klare Zuständigkeiten und regelmäßige Abstimmung zwischen den zentralen Rollen dabei, Orientierung und Struktur im Projekt aufrechtzuerhalten.
+
+## Kommunikation und Zusammenarbeit
+
+### Interne Kommunikationsstrukturen
+
+Unsere interne Kommunikation setzte sich aus regelmäßigen Meetings und verschiedenen asynchronen Austauschformaten zusammen. 
+Ziel war es, trotz der Teamgröße und unterschiedlicher Verfügbarkeiten einen möglichst transparenten Informationsfluss sicherzustellen.
+
+Die regelmäßigen Meetings bildeten dabei das organisatorische Rückgrat. 
+Ergebnisse und Diskussionspunkte hielten wir vor allem in Miro fest, insbesondere in den Weekly-Terminen um Fortschritte, offene Fragen und nächste Schritte sichtbar zu machen.
+Zusätzlich versuchten wir, den Entwicklungsstand über Git Projects abzubilden, sodass Aufgabenstatus und Bearbeitungsstände zentral einsehbar waren.
+
+Für kurzfristige und informelle Abstimmungen nutzten wir hauptsächlich Discord.
+Dort lief ein Großteil der alltäglichen Kommunikation von technischen Rückfragen bis zu organisatorischen Absprachen.
+Das ermöglichte schnelle und unkomplizierte Interaktion, führte aber auch dazu, dass Informationen teilweise in Chats verteilt und nicht immer dauerhaft strukturiert dokumentiert waren.
+
+Zwar wurden in Meetings Notizen angefertigt, diese wurden jedoch nicht konsequent zentral veröffentlicht, sondern meist nur auf Nachfrage an abwesende Teammitglieder weitergegeben.
+Das funktionierte im Einzelfall, führte jedoch dazu, dass Informationen nicht jederzeit für alle zugänglich waren.
+Gerade bei wechselnder Anwesenheit erhöhte sich dadurch der individuelle Aufwand, den aktuellen Stand nachzuvollziehen.
+
+Insgesamt war unsere Kommunikationsstruktur klar darauf ausgelegt, Transparenz über mehrere Kanäle hinweg herzustellen.
+Gleichzeitig zeigte sich, dass Dokumentation allein nicht automatisch zu einem gemeinsamen Wissensstand führt.
+Die Kombination aus Meetings, visueller Dokumentation und digitalen Tools bot zwar eine solide Grundlage, funktionierte aber nur dann gut, wenn alle aktiv mitarbeiteten und Informationen bewusst weitergaben.
+
+### Transparenz und Informationsfluss
+
+Um Transparenz im Entwicklungsprozess zu schaffen, nutzten wir Git Projects mit einer klaren Aufgabenverteilung. 
+Jede Task war verantwortlichen Personen zugeordnet, sodass Zuständigkeiten grundsätzlich nachvollziehbar waren. 
+Die Idee dahinter war, Verantwortlichkeiten und Fortschritt für alle sichtbar zu machen.
+
+Die vorgesehenen Statusangaben wie „Ready“, „In Progress“, „In Review“ oder „Done“ wurden allerdings nicht immer konsequent aktualisiert. 
+Dadurch stimmte der dokumentierte Stand nicht in allen Fällen mit dem tatsächlichen Arbeitsfortschritt überein. 
+Technisch war die Infrastruktur für Transparenz vorhanden, in der Praxis hing es jedoch stark davon ab, wie sorgfältig sie gepflegt wurde.
+
+Ein zentraler Bestandteil unseres Workflows waren Pull Requests.
+Änderungen wurden nicht direkt in den Main Branch übernommen, sondern durchliefen einen strukturierten Review-Prozess.
+Einheitliche Templates für Tasks halfen dabei, Anforderungen, Beschreibungen und Akzeptanzkriterien nachvollziehbar festzuhalten.
+Diese Standardisierung machte technische Entscheidungen transparenter.
+
+Trotzdem zeigte sich, dass formale Sichtbarkeit nicht automatisch zu echtem Überblick führt.
+Aufgaben waren zwar im erfasst, doch um Zusammenhänge, Abhängigkeiten und Prioritäten wirklich zu verstehen, brauchte es zusätzliche Abstimmung. 
+Gerade bei paralleler Entwicklung in zwei funktionalen Teams war es nicht immer einfach, den Gesamtfortschritt im Blick zu behalten.
+
+### Konfliktkultur
+
+Der Umgangston im Team war insgesamt respektvoll und sachlich.
+Gleichzeitig blieben Spannungen bei einer Gruppe dieser Größe und mit unterschiedlichen fachlichen Hintergründen nicht aus.
+
+Ein wiederkehrendes Thema war die Qualität der Kommunikation, besonders bei fachlichen Rückfragen oder Problembeschreibungen. 
+Manche Anfragen wurden als zu knapp oder unklar empfunden, was zusätzlichen Klärungsaufwand verursachte.
+Umgekehrt führte die Erwartung sehr detaillierter Problembeschreibungen teilweise zu Frustration, wenn diese nicht sofort geliefert wurden.
+Solche Situationen wurden zwar angesprochen, aber nicht immer konsequent moderiert oder gemeinsam reflektiert.
+Einzelne Missverständnisse konnten so geklärt werden, grundsätzliche Verbesserungen im Kommunikationsstil ergaben sich jedoch nur begrenzt.
+
+Daneben gab es kleinere Konflikte, die nicht offen im Gesamtteam diskutiert wurden, sondern eher im Hintergrund blieben.
+Kurzfristig verhinderte das eine Eskalation, langfristig wurden Spannungen dadurch jedoch nicht immer vollständig aufgelöst.
+Es gab zwar Versuche zur Moderation, diese führten aber nicht in allen Fällen zu nachhaltigen Lösungen.
+
+Im Verlauf des Projekts wurde der Wunsch nach stärkerer individueller Moderation geäußert, etwa durch Einzelgespräche oder moderierte Kleingruppengespräche.
+Solche Formate hätten vermutlich geholfen, Missverständnisse früher zu klären und Erwartungen offener zu besprechen.
+
+Belastend wirkte sich außerdem die teilweise fehlende Verbindlichkeit einzelner Teammitglieder aus.
+Unregelmäßige Teilnahme oder verzögerte Rückmeldungen beeinflussten nicht nur den Arbeitsfortschritt, sondern auch die Teamdynamik.
+In einem größeren Team verstärken sich solche Effekte schnell, da Abhängigkeiten steigen und Ausfälle schwerer kompensiert werden können.
+
+### Verantwortungsübernahme
+
+Im Bereich der Verantwortungsübernahme zeigten sich deutliche Unterschiede im Team.
+Einige Mitglieder übernahmen Aufgaben proaktiv, entwickelten eigenständig Lösungen und dachten auch über ihren direkten Zuständigkeitsbereich hinaus mit.
+Andere konzentrierten sich stärker auf klar abgegrenzte Teilaufgaben und übernahmen wenig Verantwortung für das Gesamtprodukt.
+
+Diese Unterschiede machten sich besonders im iterativen Entwicklungsprozess bemerkbar.
+Manche Aufgaben wurden zuverlässig und fristgerecht abgeschlossen und aktiv zur Integration vorbereitet.
+Andere blieben hingegen über mehrere Sprints hinweg offen obwohl es keine externen Blocker gab. 
+Die Verzögerungen lagen dabei weniger an technischer Komplexität, sondern häufiger an individueller Organisation, Priorisierung oder fehlender Verbindlichkeit.
+
+Die ungleichmäßige Beteiligung verstärkte zudem die strukturellen Herausforderungen der Teamgröße.
+Unregelmäßige Teilnahme an Meetings oder verzögerte Rückmeldungen erschwerten Abstimmungen und führten zu Informationslücken.
+Dadurch entstanden zusätzliche Blocker, weil Rückfragen nicht zeitnah geklärt werden konnten oder Abhängigkeiten zu spät auffielen.
+
+Als Reaktion darauf versuchten wir, Abwesenheiten stärker einzuplanen etwa indem Aufgaben breiter zugeschnitten oder mögliche Ausfälle vorab berücksichtigt wurden.
+Das entlastete punktuell, löste jedoch nicht das grundlegende Problem unterschiedlicher Verbindlichkeit und Verantwortungsübernahme.
+
+Insgesamt wurde deutlich, dass ein agiles Vorgehen wie Scrum stark auf Eigeninitiative, Transparenz und Selbstorganisation angewiesen ist. 
+In einem größeren Team mit unterschiedlichen Verpflichtungen außerhalb des Projekts war es jedoch schwierig, ein durchgehend einheitliches Verantwortungsniveau sicherzustellen. 
+
+## Entscheidungsprozesse
+
+### Entscheidungsfindung
+
+Die Entscheidungsprozesse im Team waren insgesamt ambivalent. 
+Einerseits bestand der Anspruch, wichtige Entscheidungen möglichst gemeinsam zu treffen und alle einzubinden. 
+Andererseits führte genau dieser Anspruch in der Praxis häufig zu langen und teilweise ineffizienten Diskussionen vor allem bei grundlegenden Themen wie der Architekturwahl.
+
+#### Architekturentscheidungen
+
+Gerade die Architekturentscheidung zog sich über einen längeren Zeitraum. 
+Ziel war es, eine fachlich solide Lösung zu finden, die von einer breiten Mehrheit getragen wird.
+In der Praxis zeigte sich jedoch schnell, dass nicht alle über denselben fachlichen Hintergrund oder die gleiche Vorbereitung verfügten. 
+Diskussionen wurden daher teilweise auf sehr unterschiedlichen Wissensniveaus geführt.
+
+Hinzu kam, dass einzelne Positionen sehr konsequent vertreten wurden, was Kompromisse erschwerte. 
+Manche Entscheidungsrunden wiederholten sich, ohne dass ein klarer Fortschritt erkennbar war. 
+Das führte spürbar zu Effizienzverlusten und sorgte im Team zunehmend für Frustration.
+
+#### Einführung strukturierter Entscheidungsmechanismen
+
+Als Reaktion auf diese langwierigen Diskussionen führten wir bei Refinements und Komplexitätsschätzungen Planning Poker ein. 
+Ziel war es, Einschätzungen transparenter zu machen, Diskussionen stärker auf konkrete Unterschiede zu fokussieren und Entscheidungsprozesse zu beschleunigen.
+
+In vielen Fällen funktionierte das auch gut und brachte mehr Struktur in die Abstimmung. 
+Gleichzeitig zeigte sich jedoch, dass einzelne Einschätzungen sehr starr vertreten wurden und Diskussionen nicht immer als gemeinsamer Abwägungsprozess verstanden wurden. 
+Zudem war das Verständnis davon, was eine „Schätzung“ eigentlich bedeutet, nicht bei allen identisch.
+
+Die Qualität und Geschwindigkeit von Entscheidungen hing daher stark davon ab, wer gerade anwesend war und wie gut die Beteiligten vorbereitet waren.
+
+#### Mehrheitsentscheidungen
+
+Letztlich wurden die meisten Entscheidungen per Mehrheitsprinzip getroffen. Das sorgte für formale Klarheit und eine eindeutige Richtung. 
+Allerdings bedeutete eine Mehrheit nicht automatisch, dass alle Beteiligten mit der Entscheidung zufrieden waren.
+
+Mehrheitsentscheidungen können effizient sein, bringen jedoch das Risiko, dass Minderheitsmeinungen sich nicht ausreichend gehört fühlen, Kompromisse nur oberflächlich ausgearbeitet werden oder Entscheidungen zwar akzeptiert, aber nicht wirklich mitgetragen werden.
+
+### Arbeitsbelastung und Engagement
+
+Im Projektverlauf zeigte sich schnell, dass sich Arbeitsbelastung und Engagement im Team sehr unterschiedlich verteilten. 
+Einige Teammitglieder investierten viel Zeit und Initiative, übernahmen komplexere oder zusätzliche Aufgaben und trugen so maßgeblich zum Fortschritt bei.
+Andere konzentrierten sich dagegen überwiegend auf kleinere, klar abgegrenzte Aufgaben und beteiligten sich weniger an übergreifenden Arbeiten.
+
+Diese Unterschiede führten zu einer ungleichmäßigen Arbeitsverteilung. 
+Für die engagierteren Mitglieder bedeutete das eine spürbare Mehrbelastung: Sie erledigten nicht nur ihre eigenen Aufgaben, sondern mussten oft auch Lücken und Abhängigkeiten anderer ausgleichen.
+Gleichzeitig wirkte sich die ungleichmäßige Selbstorganisation auf die Projektplanung aus.
+
+
+## Projektverlauf und Entwicklung
+
+### Anfangsphase – Iteration 1
+
+Zu Beginn des Projekts stand vor allem die Architekturfindung im Vordergrund. 
+Wir diskutierten ausführlich über Frameworks und technische Konzepte für Backend und Frontend, diese Phase dauerte deutlich länger als geplant. 
+Parallel wurden die ersten Strukturen aufgebaut.
+Backend und Frontend erhielten ihre Grundimplementierungen, die Navigationsleiste wurde erstellt, erste grobe User Stories definiert und Low-Fidelity-Wireframes angelegt.
+Außerdem wurden Miro-Boards und Git-Repositories organisiert und vorbereitet.
+
+Positiv war die klare Kommunikation im Team, die gut strukturierten Meetings und die gründliche Ausarbeitung der Architekturszenarien. 
+Gleichzeitig traten erste Herausforderungen auf.
+Unklarheiten über Aufgaben und Projektumfang, lange Pull-Request-Zeiten, schwer nachvollziehbarer Sprintfortschritt, unübersichtliche Miro-Boards und zu knappe Backend-Ressourcen. 
+Um dem entgegenzuwirken, führten wir Maßnahmen wie mehr Transparenz in Git, eine Visualisierung des Sprintfortschritts und Benachrichtigungen zu Sprintbeginn ein.
+
+### Arbeitsphase – Iteration 2
+
+Mit der zweiten Iteration arbeiteten wir erstmals in den beiden funktionalen Teams.
+Jedes Team (ca. sechs Personen) übernahm ein eigenes Feature und hatte einen Product-Owner-Vertreter sowie einen technischen Ansprechpartner (Tech Lead). Innerhalb der Teams fanden Sprint-Plannings, interne Reviews und Retrospektiven statt. 
+Ergänzt wurde das durch wöchentliche gemeinsame Meetings sowie ein externes Review.
+
+Inhaltlich konzentrierten wir uns auf die Weiterentwicklung von Registrierung und Login, die Lok-Shop-Seite, die Trassenübersicht (Frontend) sowie Trassendetails und Grundsteine der Gesellschaft (Backend).
+Die Arbeitsweise brachte jedoch neue Herausforderungen.
+Die Teams arbeiteten stark autonom an Komponenten, wodurch das Gesamtprojektbild zeitweise verloren ging. 
+Backend-Blocker verzögerten den Fortschritt, und die Kommunikation zwischen Frontend- und Backend-Mitgliedern innerhalb der Teams war teilweise schwierig. 
+Pull Requests lagen oft länger unbearbeitet.
+
+Als Reaktion führten wir Full-Stack-Aufgaben ein, um Abhängigkeiten zu reduzieren, und kündigten Pull Requests aktiv an, um schnelleres Feedback zu erhalten.
+Dies verbesserte Abstimmung und Workflow deutlich.
+
+### Arbeitsphase – Iteration 3
+
+In der dritten Iteration lag der Fokus auf der Umsetzung zentraler Funktionen z.B. Lok-Shop-Endpunkte wurden implementiert, der Lok-Shop im Frontend aufgebaut, ein Wagenleasing-Modal erstellt, Gesellschafts-Endpunkte entwickelt, die Ausschreibungsseite umgesetzt und Backend-Funktionen für Leasing ergänzt. 
+Besonders positiv wirkte sich die Einführung von Docker aus, wodurch die Entwicklungsumgebung stabiler wurde.
+
+Es zeigte sich, dass ein tieferes Verständnis der Prozessabläufe wünschenswert gewesen wäre. 
+Maßnahmen wie mehr Präsenzarbeit oder Gespräche in kleineren Gruppen oder nur zu zweit hätten hilfreich sein können, konnten aber aufgrund der begrenzten Zeit nicht umgesetzt werden. 
+Praktisch umgesetzt wurden allerdings regelmäßige Kontrollen des Git-Status in den Weekly Meetings und das Aufräumen überflüssiger Branches.
+
+### Abschlussphase – Iteration 4
+
+In der vierten und letzten Iteration lag der Fokus auf dem Abschluss offener Aufgaben damit bestehende Features fertiggestellt wurden, Bugs behoben, Ergebnisse zusammengeführt und die notwendigen Dokumentationen erstellt werden. 
+Da es keine größeren neuen Entwicklungen gab, fanden weder Retros noch umfangreiche Anpassungen statt. 
+Die Iteration diente primär dazu, ein konsistentes, lauffähiges Endprodukt zu liefern und die Projektinhalte für Präsentation und Abgabe final vorzubereiten.
+
+
+## Erfolgsfaktoren
+
+### Fachliche Kompetenz mit Interdisziplinäre Perspektiven
+
+Ein entscheidender Erfolgsfaktor war die fachliche Kompetenz im Team. 
+Die Mitglieder brachten unterschiedliche Perspektiven aus Frontend- und Backend-Entwicklung, Architekturplanung, UX-Konzeption und Projektorganisation mit. Diese Vielfalt hat uns spürbar geholfen. 
+Technische Fragestellungen wurden nicht nur funktional gelöst, sondern auch strukturell durchdacht und aus Nutzersicht bewertet.
+
+Gerade in der Architekturphase und bei komplexeren Backend-Implementierungen zeigte sich, dass solides technisches Verständnis vorhanden war.
+Gleichzeitig wurde nicht rein technisch gedacht. 
+UX-Aspekte, Strukturierungsfragen und organisatorische Überlegungen flossen regelmäßig in Entscheidungen ein und sorgten dafür, dass Lösungen ganzheitlicher entstanden.
+
+Natürlich waren die Kompetenzniveaus unterschiedlich, was sich auch bemerkbar machte.
+Dort, wo aktiver Austausch stattfand, konnten wir voneinander lernen und Perspektiven produktiv verbinden. 
+In diesen Momenten sind nachweislich bessere Ergebnisse entstanden.
+
+### Iteratives Vorgehen
+
+Ein weiterer wichtiger Erfolgsfaktor war das iterative Arbeiten in Sprints. Durch klar abgegrenzte Iterationen konnten wir das Projekt schrittweise weiterentwickeln. Nicht jeder Sprint verlief reibungslos aber Probleme wurden sichtbar gemacht.
+
+Probleme wurden nicht vollständig vermieden, und regelmäßig sichtbar gemacht. 
+Anpassungen etwa die Einführung von Full-Stack-Aufgaben, die Nutzung von Planning Poker oder die stärkere Fokussierung auf Git-Transparenz entstanden direkt aus gemachten Erfahrungen.
+Wir haben also nicht nur entwickelt, sondern auch unsere Arbeitsweise kontinuierlich hinterfragt.
+
+Methoden wurden nicht als feststehend betrachtet. 
+Wenn etwas nicht funktionierte, wurde es angepasst oder ergänzt. 
+Diese Bereitschaft zur schrittweisen Optimierung hat größere strukturelle Stillstände verhindert.
+
+### Lernbereitschaft und Anpassungsfähigkeit
+
+Trotz wiederkehrender Herausforderungen zeigte das Team insgesamt Lernbereitschaft und Anpassungsfähigkeit. 
+Schwierigkeiten etwa in Kommunikation, Entscheidungsprozessen oder Aufgabenverteilung wurden angesprochen und in Retrospektiven thematisiert. 
+Nicht jede Maßnahme wirkte nachhaltig, aber es bestand grundsätzlich die Bereitschaft zur Reflexion.
+
+Beispiele dafür sind die Einführung strukturierterer Entscheidungsmechanismen, die Umorganisation in zwei funktionale Teams, die stärkere Nutzung von Git zur Transparenz sowie die Integration von Docker zur Stabilisierung der Entwicklungsumgebung. 
+Diese Schritte zeigen, dass das Projekt kein starrer Ablauf war, sondern von kontinuierlicher Anpassung begleitet wurde.
+
+Darüber hinaus bot das Projekt vielen Teammitgliedern die Möglichkeit, neue Technologien, Werkzeuge und Arbeitsweisen kennenzulernen. 
+Selbst dort, wo Prozesse nicht ideal liefen, entstand ein deutlicher individueller Lernzuwachs sowohl technisch als auch im Hinblick auf Teamdynamik und Selbstorganisation.
+
+
+## Herausforderungen und Verbesserungspotenziale
+
+### Optimierung der Teamgröße
+
+Eine der größten Herausforderungen im Projekt war die Teamgröße. 
+Mit zwölf Personen entstand eine hohe organisatorische Komplexität. 
+Entscheidungen dauerten länger, Abstimmungen wurden aufwendiger und Verantwortlichkeiten waren nicht immer eindeutig. 
+Gerade bei technischen Grundsatzfragen zeigte sich, viele Perspektiven sind wertvoll aber sie verlangsamen auch die Entscheidungsfindung erheblich.
+
+Zudem gingen individuelle Beiträge in der Gruppengröße teilweise unter. 
+Unterschiede im Engagement oder in der Verlässlichkeit fielen zwar auf, wurden aber nicht immer direkt adressiert. 
+In kleineren Teams wären Verantwortlichkeiten transparenter gewesen, Kommunikationswege kürzer und Entscheidungen vermutlich strukturierter getroffen worden.
+
+Für zukünftige Projekte erscheint eine kleinere Teamgröße sinnvoll, um Abstimmungsaufwand zu reduzieren und Eigenverantwortung stärker zu fördern.
+
+### Strukturiertere Kommunikationsprozesse
+
+Obwohl wir regelmäßig Meetings abhielten und Tools wie Discord, Miro und Git intensiv nutzten, waren unsere Kommunikationsprozesse nicht durchgehend klar strukturiert. 
+Informationen wurden teilweise nicht zentral dokumentiert, Statusänderungen in Git nicht konsequent gepflegt und Pull Requests blieben stellenweise zu lange unbearbeitet.
+
+Auch die Qualität von Anfragen oder Problembeschreibungen war sehr unterschiedlich. 
+Unklare oder unvollständige Formulierungen führten zu Missverständnissen und verzögerten die Problemlösung. 
+Zudem fehlten klare Eskalations- oder Klärungsmechanismen, wenn es zu Konflikten oder festgefahrenen Diskussionen kam.
+
+Verbesserungspotenzial liegt vor allem in verbindlicherer Statuspflege, klaren Kommunikationsstandards (z. B. strukturierte Problembeschreibungen) und einer stärkeren Moderation bei technischen Abstimmungen. 
+Eine deutlichere Trennung zwischen Diskussions- und Entscheidungsraum hätte zusätzlich für mehr Effizienz gesorgt.
+
+### Gleichmäßigere Verantwortungen
+
+Die Verteilung von Aufgaben und Verantwortung war eine der anspruchsvollsten Herausforderungen. 
+Das Engagement im Team war spürbar unterschiedlich, wodurch sich die Arbeitsbelastung zunehmend auf einzelne Personen konzentrierte. 
+Während einige eigenständig Probleme lösten, Abhängigkeiten mitdachten und zusätzliche Aufgaben übernahmen, arbeiteten andere stärker innerhalb klar abgegrenzter Zuständigkeiten.
+
+Diese Ungleichverteilung führte nicht nur zu erhöhter Belastung einzelner Teammitglieder, sondern auch zu Verzögerungen im Projektverlauf. 
+Aufgaben aus früheren Iterationen blieben teilweise über mehrere Sprints hinweg offen, ohne dass Blocker vorlagen.
+
+Für zukünftige Projekte wäre es wichtig, Erwartungshaltungen hinsichtlich Eigeninitiative, Verlässlichkeit und Mitverantwortung frühzeitig klar zu formulieren.
+Regelmäßige individuelle Feedbackgespräche oder definierte Mindestverantwortlichkeiten könnten helfen, eine ausgewogenere Beteiligung sicherzustellen.
+
+
+### Frühzeitigere Klärung von Erwartungen
+
+Ein weiterer zentraler Verbesserungspunkt war die frühzeitige und explizite Klärung gemeinsamer Erwartungen. 
+Zwar gab es eine formale Rollenverteilung, doch war nicht immer eindeutig, welches Maß an Eigeninitiative, Kommunikationsbereitschaft und Verbindlichkeit tatsächlich erwartet wurde. 
+Unterschiedliche Vorstellungen über Arbeitsintensität, Prioritäten und Verantwortungsübernahme führten im Projektverlauf zu Spannungen.
+
+Besonders bei Themen wie Verfügbarkeit, Meeting-Teilnahme und proaktiver Problemlösung hätten klare Teamregeln von Beginn an Orientierung geben können. 
+Nicht ausgesprochene Erwartungen begünstigten Missverständnisse.
+
+Für zukünftige Projekte empfiehlt sich daher ein verbindliches „Team-Agreement“ zum Start, in dem Kommunikationsstandards, Umgang mit Abwesenheiten, Entscheidungswege und Eskalationsmechanismen festgelegt werden. 
+Eine solche Grundlage verhindert nicht jeden Konflikt, schafft aber Transparenz und klare Bezugspunkte für spätere Diskussionen.
+
+
+## Zentrale Lernerfahrungen
+
+### Erkenntnisse zur Teamarbeit
+
+Im Projektverlauf wurde uns klar, dass Teamarbeit weit mehr ist als eine saubere Aufgabenverteilung. 
+Rollen, Meetings und Tools sind wichtig aber sie ersetzen kein gemeinsames Verantwortungsgefühl. 
+Entscheidend war nicht, wer formal wofür zuständig war, sondern wie sehr sich jede Person für das Gesamtergebnis mitverantwortlich fühlte.
+
+Unterschiede im Engagement, in der Selbstorganisation und in der Kommunikationsbereitschaft hatten direkte Auswirkungen auf den Projektverlauf. 
+Fehlende Eigeninitiative betrifft nie nur eine einzelne Aufgabe. 
+Sie erzeugt Abhängigkeiten, Verzögerungen und zusätzliche Arbeit für andere, oft schleichend und erst über mehrere Iterationen hinweg spürbar.
+
+Gleichzeitig haben wir erlebt, wie stark positives Engagement wirken kann. 
+Initiative, lösungsorientiertes Denken und konstruktives Feedback hatten einen spürbar stabilisierenden Effekt auf das Team. 
+Diese Dynamik hat gezeigt, dass Teamarbeit nicht nur Zusammenarbeit bedeutet, sondern aktive Mitverantwortung für das große Ganze.
+
+Eine wichtige Erkenntnis war daher, dass Erwartungen offen angesprochen werden müssen. 
+Nicht kommunizierte Unklarheiten führen langfristig zu Spannungen. 
+
+### Erkenntnisse zur Anwendung agiler Methoden
+
+Die Arbeit im agilen Rahmen machte deutlich, dass Methoden wie Sprints, Planning Poker oder Retrospektiven keine automatischen Garantien für Effizienz sind.
+Agile Prozesse entfalten ihre Wirkung nur dann, wenn sie konsequent angewendet und mit einer gemeinsamen Haltung getragen werden. 
+
+Insbesondere zeigte sich, dass Transparenz etwa durch gepflegte Git-Status, zeitnahe Pull-Request-Reviews und klare Sprintziele eine Grundvoraussetzung für funktionierende Iterationen ist. 
+Werden diese Elemente vernachlässigt, verlieren agile Strukturen ihre steuernde Funktion und verlieren ihre Orientierung. 
+
+Gleichzeitig wurde deutlich, wie wertvoll Iterationen als Lernzyklen sind. 
+Anpassungen wie die Einführung von Full-Stack-Aufgaben entstanden direkt aus vorherigen Problemen. 
+Agilität bedeutete somit nicht nur ein Framework, sondern die Bereitschaft, Prozesse kontinuierlich zu hinterfragen und anzupassen. 
+
+Eine weitere Erkenntnis war, dass agile Methoden klare Moderation benötigen. 
+Ohne Zeitboxen, Entscheidungsregeln oder klare Verantwortlichkeiten können Diskussionen trotz agiler Struktur ineffizient verlaufen.
+
+### Erkenntnisse zur interdisziplinären Zusammenarbeit
+
+Die Zusammenarbeit zwischen Backend-, Frontend- und organisatorischen Rollen machte deutlich, wie unterschiedlich Perspektiven auf dasselbe Problem sein können.
+Technische Umsetzung, Nutzerfreundlichkeit, Architekturqualität und Projektorganisation verfolgen teilweise unterschiedliche Logiken, die bewusst miteinander in Einklang gebracht werden müssen.
+
+Insbesondere zeigte sich, dass fehlende Abstimmung zwischen Backend- und Frontend-Entwicklung zu Blockern führen kann, selbst wenn beide Seiten produktiv arbeiten. 
+Schnittstellen, Datenmodelle und API-Definitionen benötigen frühzeitige gemeinsame Planung.
+
+Eine wesentliche Lernerfahrung war daher, dass Zusammenarbeit aktive Koordination erfordert. 
+Sie funktioniert nicht automatisch durch parallele Arbeit, sondern durch bewusste Abstimmung, gegenseitiges Verständnis und transparente Kommunikation über Anforderungen und Einschränkungen.
+
+---
+
+## Gesamtfazit
+
+Das Projekt war in vielerlei Hinsicht herausfordernd, fachlich, organisatorisch und zwischenmenschlich. 
+Es lief nicht reibungslos. 
+Gerade in der Zusammenarbeit wurden Spannungen sichtbar, unterschiedliche Erwartungen, ungleich verteiltes Engagement, lange Entscheidungswege und strukturelle Reibungsverluste. 
+Rückblickend liegt jedoch genau in diesen schwierigen Momenten der größte Lernwert.
+
+Technische Probleme erwiesen sich meist als lösbar, sobald sie klar strukturiert angegangen wurden. 
+Deutlich komplexer waren hingegen Fragen der Verantwortung, der Kommunikation und der Selbstorganisation. 
+Hier gab es keine schnellen Lösungen und keine klaren „richtigen“ Antworten. 
+
+Das Projekt hat uns gezeigt, dass funktionierende Softwareentwicklung nicht allein auf technischem Können basiert. 
+Verlässlichkeit, Transparenz und eine gemeinsame Zielorientierung sind mindestens genauso entscheidend.
+
+Gleichzeitig wurde sichtbar, welches Potenzial in einer engagierten, interdisziplinären Zusammenarbeit steckt.
+Dort, wo Verantwortung übernommen, offen kommuniziert und lösungsorientiert gehandelt wurde, entstanden qualitativ hochwertige Ergebnisse.
+Iterative Anpassungen, methodische Veränderungen und technische Fortschritte zeigen, dass das Team grundsätzlich lernbereit war auch wenn dieser Lernprozess nicht immer geradlinig verlief.
+
+Unterschiedliche Motivationen, Kompetenzniveaus und Arbeitsweisen gehören dazu. 
+Entscheidend ist nicht ihre Existenz, sondern der Umgang mit ihnen.
+
+Neben fachlichem Wissen wurden vor allem Fähigkeiten in Kommunikation, Konfliktbewältigung, Entscheidungsfindung und Selbstorganisation geschärft. 
+Das Ergebnis ist daher nicht nur ein technisches Produkt, sondern auch eine Erfahrung im Umgang mit realer Teamdynamik, mit ihren Stärken ebenso wie mit ihren Herausforderungen.

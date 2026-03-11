@@ -1,0 +1,79 @@
+= How-To Use Alembic
+:toc:
+:toclevels: 3
+
+== Voraussetzungen
+
+* In `src/Backend/.env` ist `DATABASE_URL` gesetzt.
+
+== Wichtige Verzeichnisse
+
+* `env.py` (lädt `.env`, importiert Models, setzt `target_metadata`)
+* `versions/` (hier landen die Migrationen)
+* `script.py.mako` (Template für Migrationen)
+* `src/Backend/alembic.ini` (Alebmic-Config-Datei)
+
+== How-To Make new Migration
+
+=== Schritt 1: Migration generieren
+
+Wechsle in:
+
+[source,bash]
+----
+cd src/Backend
+----
+
+Dann Migration erzeugen:
+
+[source,bash]
+----
+alembic revision --autogenerate -m "describe change"
+----
+
+Ergebnis:
+
+* Unter `src/Backend/alembic/versions/` wird eine neue Datei erzeugt.
+* Das Template ist dein `script.py.mako`.
+* In `upgrade()` und `downgrade()` stehen die generierten Operationen.
+
+=== Schritt 2: Migration prüfen
+
+Autogenerate ist nicht „blind vertrauenswürdig“. Daher ist es sinnvoll sich die Migration vorher anzuschauen:
+
+* Tabellen-/Spaltennamen (Plural/Singular, Tippfehler)
+* Foreign Keys (richtiges Ziel, `ondelete`, Naming)
+* Constraints/Indizes
+* Defaults (Server-Default vs. Python-Default)
+
+Wenn etwas nicht passt: Migration-Datei manuell korrigieren.
+
+== How-To: Migration in DB übernehmen
+
+=== Schritt 1: Migration anwenden
+
+Im selben Ordner:
+
+[source,bash]
+----
+alembic upgrade head
+----
+
+Das wendet alle ausstehenden Migrationen bis zum neuesten Stand an.
+
+=== Schritt 2: Verify
+
+Durch folgenden Befehl kann man anzeigen lassen welche Revision zurzeit aktuell ist
+bzw. welche Migration zurzeit auf der DB aktiv ist.
+
+[source,bash]
+----
+alembic current
+----
+
+Und für die Historie welche Migrationen die DB hat:
+
+[source,bash]
+----
+alembic history
+----

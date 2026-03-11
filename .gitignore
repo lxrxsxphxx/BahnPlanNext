@@ -4,3 +4,58 @@
 .DS_Store
 *~
 .vscode
+
+
+# -----------------------------
+# PYTHON / FASTAPI / SQLMODEL
+# -----------------------------
+
+# Byte-compiled / optimized Python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# SQLite database files (local only)
+*.db
+*.sqlite3
+
+# Local Uvicorn / Gunicorn logs
+*.log
+
+# -----------------------------
+# EDITOR / IDE SETTINGS
+# -----------------------------
+
+# VS Code settings
+.vscode/
+.history/
+*.code-workspace
+
+# JetBrains (falls jemand PyCharm nutzt)
+.idea/
+
+# -----------------------------
+# OS / SYSTEM FILES
+# -----------------------------
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db

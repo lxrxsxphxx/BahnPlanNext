@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import type { ReactNode } from "react";
+import { useCallback, useEffect, useRef } from 'react';
+import type { ReactNode } from 'react';
 
 interface ModalProps {
   open: boolean;
@@ -7,35 +7,160 @@ interface ModalProps {
   children: ReactNode;
 }
 
+/**
+ * **Modal**
+ *
+ * Eine hochgradig barrierefreie (A11y) Modal-Komponente, die eine Fokus-Falle (Focus Trap) implementiert.
+ *
+ * ### Funktionalitäten
+ * - **Focus Trap**: Verhindert, dass der Fokus das Modal verlässt, während es offen ist.
+ * - **Escape-Key**: Schließt das Modal automatisch beim Drücken der Escape-Taste.
+ * - **Focus Restore**: Stellt den Fokus auf das ursprüngliche Element wieder her, wenn das Modal geschlossen wird.
+ * - **Aria-Inert**: Setzt Geschwisterelemente auf `inert` und `aria-hidden`, um Screenreader-Interaktionen außerhalb des Modals zu unterbinden.
+ * - **Click-Outside**: Schließt das Modal, wenn auf das Overlay geklickt wird.
+ *
+ * ### Referenzen (Refs)
+ * - `modalRef`: Referenz auf den Dialog-Container (notwendig für Fokus-Berechnungen).
+ * - `overlayRef`: Referenz auf das Hintergrund-Overlay.
+ * - `previousActiveElementRef`: Speichert das Element, das vor dem Öffnen den Fokus hatte.
+ *
+ * ### Logik & Effekte
+ * - **Tastatur-Handler**: Überwacht `Tab` (Fokus-Zyklus) und `Escape` (Schließen).
+ * - **A11y-Cleanup**: Stellt sicher, dass das Attribut `inert` beim Unmounten von allen Hintergrundelementen entfernt wird.
+ * - **Fokus-Initialisierung**: Setzt den Fokus nach 50ms Verzögerung automatisch auf das erste interaktive Element im Modal.
+ *
+ * @param props - Die Eigenschaften der Komponente.
+ * @category Components
+ * @example
+ * ```tsx
+ * <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+ * <p>Inhalt des Modals</p>
+ * </Modal>
+ * ```
+ */
 export function Modal({ open, onClose, children }: ModalProps) {
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    };
+  const modalRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const previousActiveElementRef = useRef<HTMLElement | null>(null);
 
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose]);
+  // Hilfsfunktion: Alle fokussierbaren Elemente im Modal finden
+  const getFocusableElements = (container: HTMLElement): HTMLElement[] => {
+    const selector = `
+      button:not([disabled]),
+      [href]:not([disabled]),
+      input:not([disabled]),
+      select:not([disabled]),
+      textarea:not([disabled]),
+      [tabindex]:not([tabindex="-1"])
+    `;
+    return Array.from(container.querySelectorAll(selector)) as HTMLElement[];
+  };
+  // Keydown-Handler für Fokus-Management und Escape-Taste
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!modalRef.current) return;
+
+      if (e.key === 'Escape') {
+        onClose();
+        return;
+      }
+
+      if (e.key !== 'Tab') return;
+      //fokussierbare Elemente im Modal finden
+      const focusableElements = getFocusableElements(modalRef.current);
+
+      if (focusableElements.length === 0) return;
+
+      e.preventDefault();
+
+      if (focusableElements.length === 0) return;
+
+      const activeElement = document.activeElement as HTMLElement;
+      const currentIndex = focusableElements.indexOf(activeElement);
+
+      let nextIndex: number;
+      // Shift + Tab = rückwärts, Tab = vorwärts
+      if (e.shiftKey) {
+        nextIndex =
+          currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1;
+      } else {
+        nextIndex =
+          currentIndex < 0 || currentIndex >= focusableElements.length - 1
+            ? 0
+            : currentIndex + 1;
+      }
+
+      focusableElements[nextIndex].focus();
+    },
+    [onClose],
+  );
+
+  useEffect(() => {
+    if (!open) return;
+
+    previousActiveElementRef.current = document.activeElement as HTMLElement;
+
+    const overlayEl = overlayRef.current;
+    const parent = overlayEl?.parentElement;
+    const siblings = parent
+      ? (Array.from(parent.children) as HTMLElement[])
+      : (Array.from(document.body.children) as HTMLElement[]);
+    const nonModalElements = siblings.filter((el) => el !== overlayEl);
+
+    // Setze inert und aria-hidden auf non-modal elements
+    nonModalElements.forEach((el) => {
+      el.inert = true;
+      el.setAttribute('aria-hidden', 'true');
+    });
+
+    // Event Listener auf document (nicht auf modal!)
+    document.addEventListener('keydown', handleKeyDown, true);
+
+    // Setze Focus auf erstes fokussierbares Element
+    const timer = setTimeout(() => {
+      if (modalRef.current) {
+        const firstFocusable = getFocusableElements(modalRef.current)[0];
+        firstFocusable?.focus();
+      }
+    }, 50); // 50ms statt 0 für bessere Zuverlässigkeit
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('keydown', handleKeyDown, true);
+
+      nonModalElements.forEach((el) => {
+        el.inert = false;
+        el.removeAttribute('aria-hidden');
+      });
+    };
+  }, [open, handleKeyDown]);
+
+  // Focus-Restore wenn Modal geschlossen
+  useEffect(() => {
+    if (open) return;
+
+    const timer = setTimeout(() => {
+      previousActiveElementRef.current?.focus();
+    }, 0);
+
+    return () => clearTimeout(timer);
+  }, [open]);
 
   if (!open) return null;
 
   return (
     <div
+      ref={overlayRef}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
-      onClick={onClose}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
+      role="presentation"
     >
-      <div
-        className="bg-white rounded-2xl shadow-xl p-6 w-full max-w-md animate-scaleIn"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div ref={modalRef} className="" role="dialog" aria-modal="true">
         {children}
-
-        <button
-          className="mt-6 w-full py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition"
-          onClick={onClose}
-        >
-          Close
-        </button>
       </div>
     </div>
   );

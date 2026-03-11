@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Links,
   Meta,
@@ -9,8 +10,8 @@ import {
 
 import type { Route } from './+types/root';
 import './app.css';
-import { useModal } from './components/modal/useModal';
-import { Modal } from './components/modal/modal';
+import Navbar from './components/navbar/Navbar';
+import { checkLoggedIn, logout } from './services/auth';
 
 export const links: Route.LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -25,9 +26,79 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
-export function Layout({ children }: { children: React.ReactNode }) {
+/**
+ * **Root Layout & App-Konfiguration**
+ *
+ * Die zentrale Einstiegsdatei der Anwendung "BahnPlanNext". Sie definiert das globale HTML-Gerüst,
+ * verwaltet den Authentifizierungsstatus und implementiert das hybride Navigationskonzept.
+ *
+ * ### Design-Philosophie: Navbar vs. Sidebar
+ * Um die User Experience eines Management-Spiels zu optimieren, nutzt die App zwei Navigationsebenen:
+ * - **Horizontale Navbar (Top)**: Fungiert als "Meta-Ebene". Sie ist zuständig für globale 
+ * Aktionen wie Login, Logout und Profilverwaltung. Dies hält den Kopfbereich für systemweite 
+ * Informationen sauber.
+ * - **Vertikale Sidebar (Links, via `ml-56`)**: Fungiert als "Operative Ebene". Sie ermöglicht 
+ * den schnellen Wechsel zwischen den Kernmodulen des Spiels (Fahrzeuge, Finanzen, Shop). 
+ * Der feste linke Abstand (`ml-56`) reserviert den Platz für diese dauerhaft präsente Navigation.
+ *
+ * ### Funktionalitäten
+ * - **Zentrales Auth-Management**: Verwaltet den `isLoggedIn`-Status und stellt Handler für 
+ * Login-Erfolg und Logout bereit, die an die Navbar delegiert werden.
+ * - **Scroll-Restoration**: Stellt sicher, dass die Scrollposition beim Navigieren zwischen 
+ * den Spielmodulen erhalten bleibt.
+ * - **Error Boundary**: Ein robustes Sicherheitsnetz, das 404-Fehler und Laufzeitfehler abfängt 
+ * und im Entwicklungsmodus detaillierte Stack-Traces zur Fehlersuche anzeigt.
+ *
+ * ### Logik & State-Management
+ * - **checkLoggedIn (Effect)**: Validiert beim Initialisieren der App die bestehende Sitzung 
+ * über den `auth`-Service. Nutzt ein `isMounted`-Flag, um Memory Leaks zu vermeiden.
+ * - **Responsive Layout**: Der Inhaltsbereich (`children`) ist durch `ml-56` nach rechts 
+ * verschoben, um eine Überlagerung durch die fixierte Sidebar zu verhindern.
+ *
+ * ### Fehlerbehandlung (ErrorBoundary)
+ * Unterscheidet zwischen:
+ * 1. **Routing-Fehlern**: Anzeige von 404-Meldungen, falls eine Strecke nicht existiert.
+ * 2. **System-Fehlern**: Anzeige von Fehlermeldungen und Code-Ausschnitten für Entwickler.
+ *
+ * @category Core / Layout
+ * @example
+ * ```tsx
+ * // Das Layout umschließt alle Routen automatisch über das <Outlet />.
+ * <Layout>
+ * <Dashboard />
+ * </Layout>
+ * ```
+ */
 
-  const {open, show, hide, close} = useModal();
+export function Layout({ children }: { children: React.ReactNode }) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    checkLoggedIn().then((loggedIn) => {
+      if (!isMounted) return;
+      setIsLoggedIn(loggedIn);
+    });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const handleLoginSuccess = async () => {
+    const loggedIn = await checkLoggedIn();
+    setIsLoggedIn(loggedIn);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } finally {
+      setIsLoggedIn(false);
+    }
+  };
+
   return (
     <html lang="en">
       <head>
@@ -36,23 +107,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="overflow-x-hidden">
+        <Navbar
+          isLoggedIn={isLoggedIn}
+          onLoginSuccess={handleLoginSuccess}
+          onLogout={handleLogout}
+        />
+        <div className="ml-56">{children}</div>
         <ScrollRestoration />
         <Scripts />
-
-        <button
-          className="px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700"
-          onClick={() => show()}>
-          Open Modal
-        </button>
-
-        <Modal open={open} onClose={() => close()}>
-          <div className='text-black'>
-            modal content here
-          </div>
-        </Modal>
-
       </body>
     </html>
   );
