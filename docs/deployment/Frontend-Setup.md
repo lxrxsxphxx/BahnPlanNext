@@ -52,5 +52,5 @@ pnpm -v
 Beide Befehle sollten eine Versionsnummer ausgeben.
 Falls einer der Befehle nicht gefunden wird, prüfe bitte deine Pfadkonfiguration oder folge erneut der Installationsanleitung des jeweiligen Tools.
 
-Wenn beide Tools korrekt installiert sind, kehre zum [**Frontend README**](../../frontend/README.md#installation) zurück,
+Wenn beide Tools korrekt installiert sind, kehre zum [**Frontend README**](../../src/frontend/README.md#installation) zurück,
 um mit dem Projekt Setup fortzufahren und der Entwicklung beginnen zu können.
