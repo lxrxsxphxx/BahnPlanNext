@@ -4,9 +4,11 @@ load_dotenv(find_dotenv())
 
 import os
 from contextlib import asynccontextmanager
-
+from app.router import userRouter, routeRouter, vehicleRouter, shopRouter, companyRouter, wagonRouter
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 
 from app import database
 from app.router import (
@@ -28,8 +30,9 @@ async def lifespan(app: FastAPI):
 
     # Generating test data
     if os.getenv("SEED_DEMO_DATA", "false").lower() == "true":
-        seed_demo_data(database.engine)  # engine aus database.py
+        seed_demo_data(database.get_db())  # pass session generator
 
+    # continue to application
     yield
 
     # Shutdown
@@ -37,6 +40,7 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(lifespan=lifespan)
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
 # Cors Middleware
 app.add_middleware(
     CORSMiddleware,
@@ -56,4 +60,6 @@ app.include_router(shopRouter.router)
 app.include_router(vehicleRouter.router)
 app.include_router(routeRouter.router)
 app.include_router(companyRouter.router)
+app.include_router(wagonRouter.router)
 app.include_router(tenderRouter.router)
+

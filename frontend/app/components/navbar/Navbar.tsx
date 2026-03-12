@@ -48,6 +48,7 @@ const LINKS: LinkEntry[] = [
     isParent: true,
     visibleOnFrontpage: true,
   },
+  { to: '/wagons', label: 'Wagons' },
   { to: '/fahrplaene', label: 'Umlauf / Fahrpläne', parentLink: 'Betrieb' },
   { to: '/beschaffung', label: 'Beschaffung', parentLink: 'Betrieb' },
   { to: '/betriebswerke', label: 'Betriebswerke', parentLink: 'Betrieb' },

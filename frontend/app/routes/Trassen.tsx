@@ -9,6 +9,24 @@ import {
   getTrassen,
 } from '@/services/trassen';
 
+export async function clientLoader({}: Route.ClientLoaderArgs) {
+  const trassen = await getTrassen();
+  return { trassen };
+}
+
+function sortStops(stops: TrassenStops[]): TrassenStops[] {
+  return [...stops].sort((a, b) => a.seq - b.seq);
+}
+
+function getFirstAndLast(stops: TrassenStops[]) {
+  const sorted = sortStops(stops);
+  return {
+    first: sorted.at(0),
+    last: sorted.at(sorted.length - 1),
+    sorted,
+  };
+}
+
 /**
  * **TrassenComponent**
  * * Eine tabellarische Übersicht aller verfügbaren Trassen (Fahrwegkapazitäten),
@@ -27,28 +45,6 @@ import {
  * 3. `useMemo` (implizit durch Mapping) transformiert die Stops für die Anzeige.
  * * @category Pages
  */
-export async function loader({}: Route.LoaderArgs) {
-  return { trassen: [] };
-}
-
-export async function clientLoader({}: Route.ClientLoaderArgs) {
-  const trassen = await getTrassen();
-  return { trassen };
-}
-clientLoader.hydrate = true as const;
-
-function sortStops(stops: TrassenStops[]): TrassenStops[] {
-  return [...stops].sort((a, b) => a.seq - b.seq);
-}
-function getFirstAndLast(stops: TrassenStops[]) {
-  const sorted = sortStops(stops);
-  return {
-    first: sorted.at(0),
-    last: sorted.at(sorted.length - 1),
-    sorted,
-  };
-}
-
 export default function TrassenComponent() {
   const { trassen } = useLoaderData<typeof clientLoader>();
 

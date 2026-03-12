@@ -28,6 +28,7 @@ export default [
   route('trassen/:id', 'routes/route_details.tsx'),
   route('beschaffung', 'routes/Beschaffung.tsx'),
   route('beschaffung/loks', 'routes/beschaffung.loks.tsx'),
+  route('wagons', 'routes/Wagons.tsx'),
   route('gesellschaftsbereich', 'routes/Gesellschaftsbereich.tsx'),
   route(
     'gesellschaftsbereich/fahrzeuge',
